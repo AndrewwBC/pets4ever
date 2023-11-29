@@ -43,6 +43,7 @@ export default function Home() {
               </Intro>
             </Content>
           </Container>
+
           <Features />
         </motion.div>
       </AnimatePresence>

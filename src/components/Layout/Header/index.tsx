@@ -8,7 +8,6 @@ export default function () {
         <a href="./">
           <h1>Pets4Ever</h1>
         </a>
-
         <nav>
           <ul className="menuItems">
             <li>

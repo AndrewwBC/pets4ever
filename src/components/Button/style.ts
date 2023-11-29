@@ -1,10 +1,16 @@
 import styled from "styled-components";
 
+const buttonSizes = {
+  big: "16px 64px",
+  medium: "12px 64px",
+  low: "8px 64px",
+};
+
 export const MyButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 64px;
+  padding: ${({ size }) => buttonSizes[size]};
 
   border: none;
   border-radius: 4px;
@@ -18,7 +24,7 @@ export const MyButton = styled.button`
   }
 
   span {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.6;
@@ -26,7 +32,12 @@ export const MyButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    padding: 8px 64px;
-    margin: 64px 0px;
+    padding: ${buttonSizes.medium};
+    margin: 48px 0px;
+  }
+
+  @media (max-width: 500px) {
+    padding: ${buttonSizes.low};
+    margin: 32px 0px;
   }
 `;

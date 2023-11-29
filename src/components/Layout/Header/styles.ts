@@ -20,6 +20,10 @@ export const Content = styled.div`
   h1 {
     color: ${({ theme }) => theme.neutral.c8};
     font-weight: 600;
+
+    @media (max-width: 768px) {
+      font-size: 24px;
+    }
   }
 
   nav ul {
@@ -32,13 +36,15 @@ export const Content = styled.div`
   .menuItems li {
     cursor: pointer;
     font-size: 18px;
-    padding: 8px 18px;
+    padding: 8px 16px;
     border-radius: 8px;
     background-color: #e6bb52;
     color: #222;
 
     @media (max-width: 768px) {
       font-size: 14px;
+      padding: 8px 12px;
+      font-size: 12px;
     }
   }
 

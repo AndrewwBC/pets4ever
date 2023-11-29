@@ -9,8 +9,13 @@ import { isEmailValid } from "../../../utils/isEmailValid";
 import axios from "axios";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { Toast } from "../../Toast";
 
 export default function Login() {
+  const [toast, setToast] = useState({
+    message: "",
+    status: "",
+  });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([
@@ -69,6 +74,10 @@ export default function Login() {
   }
 
   async function Login(event: FormEvent) {
+    setToast({
+      message: "Sucesso!",
+      status: "success",
+    });
     event.preventDefault();
     try {
       const response = await axios.post("http://localhost:3001/login", {
@@ -76,9 +85,20 @@ export default function Login() {
         password: password,
       });
 
+      if (true) {
+        setToast({
+          message: "Sucesso!",
+          status: "success",
+        });
+      }
+
       console.log(response);
     } catch (err) {
       console.log(err);
+      setToast({
+        message: "Erro no login",
+        status: "error",
+      });
     }
   }
 
@@ -123,11 +143,12 @@ export default function Login() {
             </label>
           </FormGroup>
 
-          <Button label="Login" />
+          <Button size={"low"} label="Login" />
         </Form>
 
         <span className="forgotPassword">Esqueceu a senha?</span>
       </Content>
+      {toast && <Toast toast={toast} setToast={setToast}></Toast>}
     </Container>
   );
 }

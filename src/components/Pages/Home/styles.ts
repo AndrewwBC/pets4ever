@@ -25,12 +25,14 @@ export const Content = styled.section`
 
 const textAnimation = keyframes`
   from {
-    
+    transform: translate3d(0px, -32px, 0px);
+  } to {
+    transform: translate3d(0px, 0px, 0px);
   }
 `;
 
 export const Intro = styled.div`
-  padding: 80px;
+  padding: 80px 48px;
 
   div {
     h1 {
@@ -39,6 +41,10 @@ export const Intro = styled.div`
       font-weight: 600;
       line-height: 1.2;
       transition: all 0.6s;
+      animation-name: ${textAnimation};
+      animation-duration: 0.6s;
+      animation-delay: 0.3s;
+      animation-iteration-count: linear;
 
       @media (max-width: 1200px) {
         font-size: 32px;
@@ -48,8 +54,8 @@ export const Intro = styled.div`
     p {
       margin-top: 72px;
       font-weight: 500;
-      color: ${({ theme }) => theme.primary.p4};
-      font-size: 18px;
+      color: ${({ theme }) => theme.neutral.c6};
+      font-size: 20px;
 
       @media (max-width: 1000px) {
         margin-top: 24px;

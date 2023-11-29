@@ -2,12 +2,13 @@ import { MyButton } from "./style";
 
 interface ButtonProps {
   label: string;
-  type: string;
+  size?: string;
+  type?: string;
 }
 
-export function Button({ label, type = "submit" }: ButtonProps) {
+export function Button({ size = "big", label, type = "submit" }: ButtonProps) {
   return (
-    <MyButton type={type}>
+    <MyButton size={size} type={type}>
       <span>{label}</span>
     </MyButton>
   );
