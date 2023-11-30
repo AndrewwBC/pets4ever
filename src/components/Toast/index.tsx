@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Content, Modal } from "./styles";
 
 interface ToastProps {
@@ -9,11 +10,23 @@ interface ToastProps {
 }
 
 export function Toast({ toast, setToast }: ToastProps) {
+  useEffect(() => {
+    setTimeout(() => {
+      setToast({
+        message: "",
+        status: "",
+      });
+      console.log("Primeiro");
+    }, 3000);
+
+    console.log("Segundo");
+    return;
+  });
+
   return (
     <Modal>
       <Content messageStatus={toast.status}>
         <span>{toast.message}</span>
-        <button onClick={() => setToast("")}>X</button>
       </Content>
     </Modal>
   );

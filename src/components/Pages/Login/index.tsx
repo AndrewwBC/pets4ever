@@ -74,10 +74,6 @@ export default function Login() {
   }
 
   async function Login(event: FormEvent) {
-    setToast({
-      message: "Sucesso!",
-      status: "success",
-    });
     event.preventDefault();
     try {
       const response = await axios.post("http://localhost:3001/login", {
@@ -148,7 +144,7 @@ export default function Login() {
 
         <span className="forgotPassword">Esqueceu a senha?</span>
       </Content>
-      {toast && <Toast toast={toast} setToast={setToast}></Toast>}
+      {toast.message && <Toast toast={toast} setToast={setToast}></Toast>}
     </Container>
   );
 }

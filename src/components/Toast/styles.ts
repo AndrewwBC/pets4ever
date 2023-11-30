@@ -10,6 +10,17 @@ const anime = keyframes`
     }
 `;
 
+const animeOut = keyframes`
+from {
+        transform: translate3d(0,0,0);
+        opacity: 1;
+    }
+   to {
+      transform: translate3d(0,48px,0);
+      opacity: 0;
+    }
+`;
+
 const backgroundColorsOfMessages = {
   error: "#990f02",
   success: " #4CBB17",
@@ -23,14 +34,19 @@ export const Modal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: ${anime} 0.6s ease-in-out;
+  animation: ${anime} 0.6s ease-in-out, ${animeOut} 0.6s ease-in-out 2.5s;
 `;
+
+interface MessageStatus {
+  error?: string;
+  success?: string;
+}
 
 export const Content = styled.div`
   padding: 12px 24px;
   border-radius: 4px;
   color: #f9f9f9;
-  background-color: ${({ messageStatus }) =>
+  background-color: ${({ messageStatus }: MessageStatus) =>
     backgroundColorsOfMessages[messageStatus]};
   display: flex;
   align-items: end;
