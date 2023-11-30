@@ -9,13 +9,17 @@ export default function () {
           <h1>Pets4Ever</h1>
         </a>
         <nav>
-          <ul className="menuItems">
+          <menu className="menuItems">
             <li>
               <a href="./about">Sobre</a>
             </li>
-            <li>Contato</li>
-            <li>Acesso</li>
-          </ul>
+            <li>
+              <a href="./contact">Contato</a>
+            </li>
+            <li>
+              <a href="./login">Acesso</a>
+            </li>
+          </menu>
         </nav>
       </Content>
     </Container>

@@ -26,7 +26,7 @@ export const Content = styled.div`
     }
   }
 
-  nav ul {
+  nav menu {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,10 +36,20 @@ export const Content = styled.div`
   .menuItems li {
     cursor: pointer;
     font-size: 18px;
-    padding: 8px 16px;
     border-radius: 8px;
     background-color: #e6bb52;
     color: #222;
+
+    a {
+      display: block;
+      padding: 8px 16px;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: #e6cc22;
+        transition: all 0.3s;
+      }
+    }
 
     @media (max-width: 768px) {
       font-size: 14px;

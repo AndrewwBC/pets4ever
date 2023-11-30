@@ -10,7 +10,7 @@ interface GlobalStorageProps {
 
 export function GlobalStorage({ children }: GlobalStorageProps) {
   const [data, setData] = useState({
-    name: ""
+    name: "",
   });
 
   return (
