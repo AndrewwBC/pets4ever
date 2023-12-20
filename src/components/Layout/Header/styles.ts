@@ -44,6 +44,10 @@ export const Content = styled.div`
       display: block;
       padding: 8px 16px;
       border-radius: 8px;
+      
+      @media (max-width: 1400px) {
+        font-size: 16px;
+      }
 
       &:hover {
         background-color: #e6cc22;
