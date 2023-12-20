@@ -17,6 +17,7 @@ export default function Home() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
+          
           <Container>
             <Content>
               <div>
@@ -44,7 +45,6 @@ export default function Home() {
             </Content>
           </Container>
 
-          <Features />
         </motion.div>
       </AnimatePresence>
     </>

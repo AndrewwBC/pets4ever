@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 export const Container = styled.main`
   background: ${({ theme }) => theme.primary.p5};
-  height: 100vh;
+  //height: 100vh;
 `;
 
 export const Content = styled.section`
@@ -34,6 +34,10 @@ const textAnimation = keyframes`
 export const Intro = styled.div`
   padding: 80px 48px;
 
+  @media (max-width: 1400px) {
+    padding: 12px 48px;
+      }
+
   div {
     h1 {
       color: ${({ theme }) => theme.neutral.c8};
@@ -46,7 +50,7 @@ export const Intro = styled.div`
       animation-delay: 0.3s;
       animation-iteration-count: linear;
 
-      @media (max-width: 1200px) {
+      @media (max-width: 1400px) {
         font-size: 32px;
       }
     }
@@ -57,7 +61,7 @@ export const Intro = styled.div`
       color: ${({ theme }) => theme.neutral.c6};
       font-size: 20px;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 1400px) {
         margin-top: 24px;
         font-size: 16px;
       }

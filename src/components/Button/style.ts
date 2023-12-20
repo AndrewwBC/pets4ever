@@ -31,6 +31,11 @@ export const MyButton = styled.button`
     color: ${({ theme }) => theme.primary.p4};
   }
 
+  @media (max-width: 1400px) {
+    padding: ${buttonSizes.low};
+    margin: 48px 0px;
+  }
+
   @media (max-width: 768px) {
     padding: ${buttonSizes.medium};
     margin: 48px 0px;
