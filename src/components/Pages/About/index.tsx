@@ -22,8 +22,7 @@ export default function About() {
               <Intro>
                 <div>
                   <h1>
-                    Leia abaixo para mais{" "}
-                    <span>informações mudar header link</span>!
+                    Leia abaixo para mais <span>informações</span>!
                   </h1>
                 </div>
 

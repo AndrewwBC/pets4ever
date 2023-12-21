@@ -115,6 +115,8 @@ export default function Login() {
       <Content>
         <h1>Log In</h1>
 
+        <p>Faça login para começar a interagir.</p>
+
         <Form onSubmit={Login}>
           <FormGroup error={getErrorMessageByFieldName("Email")}>
             <label>
@@ -138,11 +140,10 @@ export default function Login() {
               />
             </label>
           </FormGroup>
+          <span className="forgotPassword">Esqueceu a senha?</span>
 
           <Button size={"low"} label="Login" />
         </Form>
-
-        <span className="forgotPassword">Esqueceu a senha?</span>
       </Content>
       {toast.message && <Toast toast={toast} setToast={setToast}></Toast>}
     </Container>

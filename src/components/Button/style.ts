@@ -20,7 +20,8 @@ export const MyButton = styled.button`
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.neutral.c3};
+    animation-play-state: paused;
+    scale: 1.05;
   }
 
   span {

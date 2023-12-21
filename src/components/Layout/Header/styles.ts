@@ -9,7 +9,11 @@ export const Content = styled.div`
   grid-template-columns: 1fr 1fr;
   justify-content: center;
   align-items: center;
-  padding: 8px 0px;
+  padding: 4px 0px;
+
+  @media (max-width: 1400) {
+    padding: 0px 0px;
+  }
 
   a {
     display: block;
@@ -44,7 +48,7 @@ export const Content = styled.div`
       display: block;
       padding: 8px 16px;
       border-radius: 8px;
-      
+
       @media (max-width: 1400px) {
         font-size: 16px;
       }

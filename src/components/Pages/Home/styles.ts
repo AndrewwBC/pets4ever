@@ -2,7 +2,6 @@ import styled, { keyframes } from "styled-components";
 
 export const Container = styled.main`
   background: ${({ theme }) => theme.primary.p5};
-  //height: 100vh;
 `;
 
 export const Content = styled.section`
@@ -36,7 +35,7 @@ export const Intro = styled.div`
 
   @media (max-width: 1400px) {
     padding: 12px 48px;
-      }
+  }
 
   div {
     h1 {
@@ -77,7 +76,33 @@ export const Intro = styled.div`
   }
 `;
 
+const buttonColorAnimation = keyframes`
+  from {
+    background-color: #e6bb52;
+  } to {
+    background-color: #e6bb00;
+    scale: 1.01;
+  }
+`;
+
+const buttonTextColorAnimation = keyframes`
+  from {
+    color: #562D1D;
+  } to {
+    color: #222;
+  }
+`;
+
 export const ButtonContainer = styled.div`
   max-width: max-content;
   border-bottom: 1px solid ${({ theme }) => theme.primary.p4};
+
+  button {
+    animation: ${buttonColorAnimation} 1s alternate infinite ease-in-out;
+
+    span {
+      color: red;
+      animation: ${buttonTextColorAnimation} 1s alternate infinite ease-in-out;
+    }
+  }
 `;

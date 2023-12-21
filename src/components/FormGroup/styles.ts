@@ -13,6 +13,12 @@ export const Content = styled.div`
       }
     `}
 
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+  }
+
   small {
     margin-top: 4px;
     font-size: 14px;

@@ -5,7 +5,6 @@ export const Input = styled.input`
   background-color: ${({ theme }) => theme.neutral.c3};
   border: 2px solid transparent;
   border-radius: 2px;
-  width: 100%;
   transition: 0.2s;
   cursor: auto;
 
