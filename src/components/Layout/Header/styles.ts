@@ -51,6 +51,7 @@ export const Content = styled.div`
 
       @media (max-width: 1400px) {
         font-size: 16px;
+        padding: 8px 12px;
       }
 
       &:hover {
@@ -60,8 +61,6 @@ export const Content = styled.div`
     }
 
     @media (max-width: 768px) {
-      font-size: 14px;
-      padding: 8px 12px;
       font-size: 12px;
     }
   }

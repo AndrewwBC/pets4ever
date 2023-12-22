@@ -14,7 +14,7 @@ export const MyButton = styled.button`
 
   border: none;
   border-radius: 4px;
-  background-color: #e6bb52;
+  background-color: ${({ theme }) => theme.primary.p4};
   max-width: max-content;
   transition: 0.3s;
 
@@ -29,7 +29,7 @@ export const MyButton = styled.button`
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.6;
-    color: ${({ theme }) => theme.primary.p4};
+    color: ${({ theme }) => theme.neutral.p1};
   }
 
   @media (max-width: 1400px) {

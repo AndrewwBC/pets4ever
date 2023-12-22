@@ -10,6 +10,7 @@ import axios from "axios";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Toast } from "../../Toast";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [toast, setToast] = useState({
@@ -113,36 +114,30 @@ export default function Login() {
   return (
     <Container>
       <Content>
-        <h1>Log In</h1>
-
-        <p>Faça login para começar a interagir.</p>
+        <h1>Pets4Ever</h1>
 
         <Form onSubmit={Login}>
           <FormGroup error={getErrorMessageByFieldName("Email")}>
-            <label>
-              Email
-              <Input
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                onBlur={handleEmailBlur}
-                placeholder="Insira o seu email..."
-              />
-            </label>
+            <Input
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              onBlur={handleEmailBlur}
+              placeholder="Email ou nome de usuário."
+            />
           </FormGroup>
           <FormGroup error={getErrorMessageByFieldName("Password")}>
-            <label>
-              Senha
-              <Input
-                value={password}
-                type="password"
-                onChange={handlePasswordChange}
-                placeholder="Insira a sua senha..."
-              />
-            </label>
+            <Input
+              value={password}
+              type="password"
+              onChange={handlePasswordChange}
+              placeholder="Insira a sua senha."
+            />
           </FormGroup>
-          <span className="forgotPassword">Esqueceu a senha?</span>
+          <Link to="/forgotpassword">
+            <span className="forgotPassword">Esqueceu a senha?</span>
+          </Link>
 
-          <Button size={"low"} label="Login" />
+          <Button size={"low"} label="Entrar" />
         </Form>
       </Content>
       {toast.message && <Toast toast={toast} setToast={setToast}></Toast>}

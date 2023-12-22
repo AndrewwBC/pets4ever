@@ -37,7 +37,7 @@ export default function Home() {
 
                 <ButtonContainer>
                   <Link to="/login">
-                    <Button label="Acessar" />
+                    <Button label="LOGIN" />
                   </Link>
                 </ButtonContainer>
               </Intro>
