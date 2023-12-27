@@ -52,7 +52,7 @@ export const Intro = styled.div`
       animation-duration: 0.6s;
       animation-iteration-count: linear;
 
-      @media (max-width: 1200px) {
+      @media (max-width: 1400px) {
         font-size: 32px;
       }
     }

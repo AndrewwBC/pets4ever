@@ -1,6 +1,6 @@
 import { ArrowContainer, Container, Content, Intro } from "./styles";
 
-import homeImage from "../../../assets/images/catAbout.jpg";
+import aboutImage from "../../../assets/images/catAbout.jpg";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -17,7 +17,7 @@ export default function About() {
           <Container>
             <Content>
               <div>
-                <img src={homeImage} alt="cachorro e gato" />
+                <img src={aboutImage} alt="cachorro e gato" />
               </div>
               <Intro>
                 <div>

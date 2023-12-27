@@ -78,10 +78,10 @@ export const Intro = styled.div`
 
 const buttonColorAnimation = keyframes`
   from {
-    background-color: #e6bb52;
+    background-color: #eee;
   } to {
     background-color: #e6bb00;
-    scale: 1.01;
+    scale: 1.02;
   }
 `;
 

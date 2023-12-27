@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const Input = styled.input`
   padding: 4px 18px 4px 6px;
-  background-color: ${({ theme }) => theme.neutral.c3};
+  background-color: #eee;
   border: 2px solid transparent;
   border-radius: 2px;
   transition: 0.2s;
