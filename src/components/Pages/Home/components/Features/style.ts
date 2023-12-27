@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   height: 100vh;
-  background: ${({ theme }) => theme.primary.p2};
+  background: ${({ theme }) => theme.neutral.c1};
 `;
 
 export const Content = styled.div`
@@ -18,18 +18,18 @@ export const Text = styled.div`
   grid-column: 2/4;
   margin-top: 80px;
   padding-bottom: 64px;
-  border-bottom: 1px solid ${({ theme }) => theme.primary.p4};
+  border-bottom: 1px solid ${({ theme }) => theme.neutral.c1};
 
   h1 {
     font-size: 48px;
-    color: ${({ theme }) => theme.primary.p6};
+    color: ${({ theme }) => theme.neutral.c1};
   }
 
   p {
     font-size: 20px;
     font-weight: 500;
     margin-top: 24px;
-    color: ${({ theme }) => theme.primary.p4};
+    color: ${({ theme }) => theme.neutral.c1};
   }
 `;
 
@@ -41,7 +41,7 @@ export const Infos = styled.div`
   justify-content: center;
   margin-top: 100px;
   padding-bottom: 80px;
-  border-bottom: 1px solid ${({ theme }) => theme.primary.p4};
+  border-bottom: 1px solid ${({ theme }) => theme.neutral.c1};
 
   .infoContent {
     display: flex;
@@ -53,7 +53,7 @@ export const Infos = styled.div`
       margin-bottom: 32px;
       font-size: 32px;
       font-weight: 500;
-      color: ${({ theme }) => theme.primary.p6};
+      color: ${({ theme }) => theme.neutral.c1};
     }
   }
   .iconContainer {
@@ -64,13 +64,13 @@ export const Infos = styled.div`
     text-align: center;
     padding: 12px 24px;
     border-radius: 8px;
-    background-color: ${({ theme }) => theme.primary.p1};
+    background-color: ${({ theme }) => theme.neutral.c1};
 
     p {
       font-size: 18px;
       margin-top: 32px;
       font-weight: 500;
-      color: ${({ theme }) => theme.primary.p5};
+      color: ${({ theme }) => theme.neutral.c1};
     }
   }
 `;

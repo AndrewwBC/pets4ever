@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 export const Container = styled.main`
-  background: ${({ theme }) => theme.primary.p5};
+  background: ${({ theme }) => theme.neutral.c2};
 `;
 
 export const Content = styled.section`
@@ -95,7 +95,7 @@ const buttonTextColorAnimation = keyframes`
 
 export const ButtonContainer = styled.div`
   max-width: max-content;
-  border-bottom: 1px solid ${({ theme }) => theme.primary.p4};
+  border-bottom: 1px solid ${({ theme }) => theme.neutral.c2};
 
   button {
     animation: ${buttonColorAnimation} 1s alternate infinite ease-in-out;

@@ -8,7 +8,6 @@ import { Button } from "../../Button";
 import { isEmailValid } from "../../../utils/isEmailValid";
 import axios from "axios";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { Toast } from "../../Toast";
 import { Link } from "react-router-dom";
 
@@ -76,15 +75,22 @@ export default function Login() {
 
   async function Login(event: FormEvent) {
     event.preventDefault();
+    if (!email && !password) {
+      alert("Preencha os campos!");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:3001/login", {
         email: email,
         password: password,
       });
 
-      if (true) {
+      console.log(response);
+
+      if (response) {
         setToast({
-          message: "Sucesso!",
+          message: response.data.message,
           status: "success",
         });
       }
@@ -111,6 +117,7 @@ export default function Login() {
     return errors.find((error) => error.field === fieldName)?.message;
   }
 
+  console.log(errors.find((erro) => erro.message));
   return (
     <Container>
       <Content>
@@ -137,9 +144,14 @@ export default function Login() {
             <span className="forgotPassword">Esqueceu a senha?</span>
           </Link>
 
-          <Button size={"low"} label="Entrar" />
+          <Button
+            disabled={errors.find((erro) => (erro.message ? true : false))}
+            size={"low"}
+            label="Entrar"
+          />
         </Form>
       </Content>
+
       {toast.message && <Toast toast={toast} setToast={setToast}></Toast>}
     </Container>
   );

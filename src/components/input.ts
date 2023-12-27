@@ -6,6 +6,7 @@ export const Input = styled.input`
   border: 2px solid transparent;
   border-radius: 2px;
   transition: 0.2s;
+  text-align: left;
   cursor: auto;
 
   &::placeholder {
@@ -14,11 +15,11 @@ export const Input = styled.input`
   }
 
   &:focus {
-    border: 2px solid ${({ theme }) => theme.primary.p1} !important;
+    border: 2px solid ${({ theme }) => theme.purple.light} !important;
   }
 
   &:active {
-    border: 2px solid ${({ theme }) => theme.primary.p3} !important;
+    border: 2px solid ${({ theme }) => theme.purple.medium} !important;
   }
 
   ${({ error }) =>

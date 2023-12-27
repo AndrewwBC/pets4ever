@@ -14,7 +14,7 @@ export const MyButton = styled.button`
 
   border: none;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.primary.p4};
+  background-color: ${({ theme }) => theme.yellow.light};
   max-width: max-content;
   transition: 0.3s;
 
@@ -24,12 +24,17 @@ export const MyButton = styled.button`
     scale: 1.05;
   }
 
+  &:disabled {
+    color: ${({ theme }) => theme.neutral.c8};
+    background-color: ${({ theme }) => theme.neutral.c4};
+  }
+
   span {
-    font-size: 18px;
+    font-size: 18px !important;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.6;
-    color: ${({ theme }) => theme.neutral.p1};
+    color: ${({ theme }) => theme.neutral.p1} !important;
   }
 
   @media (max-width: 1400px) {

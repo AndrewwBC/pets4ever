@@ -10,13 +10,14 @@ export const theme = {
     c8: "#101010",
     c9: "#000000",
   },
-  primary: {
-    p1: "#7b44ff",
-    p2: "#d6bb52",
-    p3: "#e6bb20",
-    p4: "#f6bb00",
-    p5: "#F9F9F9",
-    p6: "#1A0E0B",
-    p7: "#0D0604",
+  purple: {
+    light: "#b89ff4",
+    medium: "#7b44ff",
+    dark: "#581de6",
+  },
+  yellow: {
+    light: "#f6bb00",
+    medium: "#e6bb52",
+    dark: "#ffa500",
   },
 };

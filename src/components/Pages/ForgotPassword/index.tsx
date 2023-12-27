@@ -34,7 +34,9 @@ export default function ForgotPassword() {
   return (
     <Container>
       <Content>
-        <h1>Pets4Ever</h1>
+        <span>Problemas com o Login?</span>
+
+        <p>Insira o seu email para que possamos redefinir a sua senha.</p>
 
         <Form onSubmit={sendEmailToUser}>
           <FormGroup error={error}>

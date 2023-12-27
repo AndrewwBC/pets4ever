@@ -60,11 +60,11 @@ export const Content = styled.div`
     margin: 0px 0px;
     font-size: 16px;
     align-self: flex-end;
-    color: #7b44ff;
+    color: ${({ theme }) => theme.purple.medium};
     font-family: "Roboto", sans-serif;
 
     &:hover {
-      color: ${({ theme }) => theme.neutral.c6};
+      color: ${({ theme }) => theme.purple.dark};
       cursor: pointer;
     }
   }

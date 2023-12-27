@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { theme } from "../../../assets/styles/theme";
 
 export const Container = styled.header`
-  background: ${({ theme }) => theme.primary.p5};
+  background: ${({ theme }) => theme.neutral.c2};
 `;
 
 export const Content = styled.div`
@@ -41,7 +42,7 @@ export const Content = styled.div`
     cursor: pointer;
     font-size: 18px;
     border-radius: 8px;
-    background-color: #e6bb52;
+    background-color: ${({ theme }) => theme.yellow.light};
     color: #222;
 
     a {
@@ -55,7 +56,7 @@ export const Content = styled.div`
       }
 
       &:hover {
-        background-color: #e6cc22;
+        background-color: ${({ theme }) => theme.yellow.dark};
         transition: all 0.3s;
       }
     }

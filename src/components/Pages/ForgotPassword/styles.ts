@@ -28,18 +28,22 @@ const borderAnimation = keyframes`
   `;
 
 export const Content = styled.div`
+  max-width: 320px;
   display: flex;
   align-items: center;
+  text-align: center;
   justify-content: center;
   flex-direction: column;
   margin: 160px 0px 80px;
   padding: 8px;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  padding: 16px 12px;
+  padding: 32px 12px;
 
-  h1 {
-    font-size: 42px;
+  span {
+    font-size: 24px;
+    font-weight: 500;
+    font-family: "Poppins";
+    color: red;
   }
 
   p {
