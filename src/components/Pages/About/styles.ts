@@ -33,6 +33,9 @@ const textAnimation = keyframes`
 
 export const Intro = styled.div`
   padding: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   span {
     color: #7b55fa;
@@ -42,7 +45,6 @@ export const Intro = styled.div`
     h1 {
       color: ${({ theme }) => theme.neutral.c8};
       font-size: 48px;
-      margin-top: -72px;
       font-weight: 600;
       line-height: 1.2;
       transition: all 0.6s;
