@@ -12,7 +12,7 @@ export default function About() {
           key="home"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          exit={{ opacity: 0.5 }}
         >
           <Container>
             <Content>
