@@ -2,7 +2,7 @@ import { MyButton } from "./style";
 
 interface ButtonProps {
   label: string;
-  size?: string;
+  size?: "big" | "medium" | "low";
   type?: string;
   disabled?: boolean;
 }
