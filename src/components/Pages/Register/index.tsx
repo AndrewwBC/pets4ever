@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import FormGroup from "../../FormGroup";
 import { Input } from "../../input";
 import { Button } from "../../Button";
@@ -18,7 +18,24 @@ export function Register() {
     },
   ]);
 
-  function handleEmailChange({ target }) {
+  function handleUsername(event: FocusEvent) {
+    const target = event.target as HTMLInputElement;
+    const usernameField = "username";
+
+    if (target.value.length == 0)
+      setErrors((prevState) => [
+        ...prevState,
+        {
+          field: usernameField,
+          message: "Este campo não pode estar vazio",
+        },
+      ]);
+    else setErrors(errors.filter((erro) => erro.field !== usernameField));
+  }
+
+  function handleEmailChange(event: ChangeEvent) {
+    const target = event.target as HTMLInputElement;
+
     const emailField = "email";
 
     const errorAlreadyExists = errors.find((erro) => erro.field === emailField);
@@ -39,7 +56,8 @@ export function Register() {
       setErrors(errors.filter((erro) => erro.field !== emailField));
   }
   console.log(errors);
-  function handlePassword({ target }) {
+  function handlePassword(event: ChangeEvent) {
+    const target = event.target as HTMLInputElement;
     const passwordField = "password";
 
     if (target.value.length < 6)
@@ -59,7 +77,8 @@ export function Register() {
     }
   }
 
-  function handleConfirmPassword({ target }) {
+  function handleConfirmPassword(event: FocusEvent) {
+    const target = event.target as HTMLInputElement;
     const fieldConfirmPass = "confirmPass";
 
     const errorAlreadyExists = errors.find(
@@ -87,7 +106,7 @@ export function Register() {
     const errorMessage = errors.find(
       (erro) => erro.field === fieldName
     )?.message;
-    console.log(errorMessage);
+
     return errorMessage;
   }
 
@@ -103,9 +122,10 @@ export function Register() {
 
       <div>
         <form>
-          <FormGroup>
+          <FormGroup error={getErrorMessageByFieldName("username")}>
             <Input
               placeholder="Nome de usuário"
+              onBlur={handleUsername}
               onChange={({ target }) =>
                 setRegisterData((prevState) => ({
                   ...prevState,

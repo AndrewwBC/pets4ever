@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components";
 
-export const Content = styled.div`
+interface ContentInterface {
+  error: OnErrorEventHandler;
+  children?: JSX.Element | JSX.Element[];
+}
+
+export const Content = styled.div<ContentInterface>`
   display: flex;
   align-items: flex-start;
   flex-direction: column;

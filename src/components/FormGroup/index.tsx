@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Content } from "./styles";
 
 interface FormGroupProps {
-  error?: () => string | undefined;
+  error?: string;
   children: ReactNode;
 }
 
