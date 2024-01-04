@@ -5,13 +5,10 @@
   font-family: "Poppins";
 }
 
-
 li {
   list-style: none;
 }
-body {
-  background-color: #888;
-}
+
 a {
   text-decoration: none;
 }

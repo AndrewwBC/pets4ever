@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const Input = styled.input`
   padding: 4px 18px 4px 6px;
-  background-color: #eee;
+  background-color: ${({ theme }) => theme.neutral.c3};
   border: 2px solid transparent;
   border-radius: 2px;
   transition: 0.2s;
@@ -15,11 +15,11 @@ export const Input = styled.input`
   }
 
   &:focus {
-    border: 2px solid ${({ theme }) => theme.purple.light} !important;
+    border: 2px solid ${({ theme }) => theme.purple.light};
   }
 
   &:active {
-    border: 2px solid ${({ theme }) => theme.purple.medium} !important;
+    border: 2px solid ${({ theme }) => theme.purple.medium};
   }
 
   ${({ error }) =>

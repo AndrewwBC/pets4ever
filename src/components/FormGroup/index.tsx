@@ -9,8 +9,8 @@ interface FormGroupProps {
 export default function FormGroup({ error, children }: FormGroupProps) {
   return (
     <Content error={error}>
-      {children}
       <small>{error}</small>
+      {children}
     </Content>
   );
 }

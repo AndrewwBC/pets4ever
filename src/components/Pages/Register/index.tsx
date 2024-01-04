@@ -1,8 +1,10 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import FormGroup from "../../FormGroup";
 import { Input } from "../../input";
 import { Button } from "../../Button";
 import { isEmailValid } from "../../../utils/isEmailValid";
+import { Container, Content } from "./styles";
+import axios from "axios";
 
 export function Register() {
   const [registerData, setRegisterData] = useState({
@@ -52,8 +54,10 @@ export function Register() {
           message: "Email inválido!",
         },
       ]);
-    if (isEmailValid(target.value))
+    if (isEmailValid(target.value)) {
       setErrors(errors.filter((erro) => erro.field !== emailField));
+      registerData.email = event.target.value;
+    }
   }
   console.log(errors);
   function handlePassword(event: ChangeEvent) {
@@ -110,51 +114,70 @@ export function Register() {
     return errorMessage;
   }
 
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    if (errors.find((erro) => erro.message)) return;
+
+    const request = await axios.post("http://localhost:3001/register", {
+      name: registerData.name,
+      email: registerData.email,
+      password: registerData.senha,
+    });
+
+    const response = request.data;
+    console.log(response);
+  }
+
   console.log(getErrorMessageByFieldName("email"));
 
   return (
-    <main>
-      <h1>Cadastre-se!</h1>
+    <Container>
+      <Content>
+        <div className="text">
+          <h1>Cadastre-se!</h1>
 
-      <p>
-        Apenas quatro informações para iniciar uma <span>conta</span>.
-      </p>
+          <p>
+            Apenas quatro informações para iniciar uma <span>conta</span>.
+          </p>
+        </div>
 
-      <div>
-        <form>
-          <FormGroup error={getErrorMessageByFieldName("username")}>
-            <Input
-              placeholder="Nome de usuário"
-              onBlur={handleUsername}
-              onChange={({ target }) =>
-                setRegisterData((prevState) => ({
-                  ...prevState,
-                  name: target.value,
-                }))
-              }
-            />
-          </FormGroup>
-          <FormGroup error={getErrorMessageByFieldName("email")}>
-            <Input placeholder="Email" onChange={handleEmailChange} />
-          </FormGroup>
-          <FormGroup error={getErrorMessageByFieldName("password")}>
-            <Input
-              placeholder="Senha"
-              onChange={handlePassword}
-              type="password"
-            />
-          </FormGroup>
-          <FormGroup error={getErrorMessageByFieldName("confirmPass")}>
-            <Input
-              placeholder="Confirme sua senha"
-              onBlur={handleConfirmPassword}
-              type="password"
-            />
-          </FormGroup>
+        <div className="formContainer">
+          <form onSubmit={handleSubmit}>
+            <FormGroup error={getErrorMessageByFieldName("username")}>
+              <Input
+                placeholder="Nome de usuário"
+                onBlur={handleUsername}
+                onChange={({ target }) =>
+                  setRegisterData((prevState) => ({
+                    ...prevState,
+                    name: target.value,
+                  }))
+                }
+              />
+            </FormGroup>
+            <FormGroup error={getErrorMessageByFieldName("email")}>
+              <Input placeholder="Email" onChange={handleEmailChange} />
+            </FormGroup>
+            <FormGroup error={getErrorMessageByFieldName("password")}>
+              <Input
+                placeholder="Senha"
+                onChange={handlePassword}
+                type="password"
+              />
+            </FormGroup>
+            <FormGroup error={getErrorMessageByFieldName("confirmPass")}>
+              <Input
+                placeholder="Confirme sua senha"
+                onChange={handleConfirmPassword}
+                type="password"
+              />
+            </FormGroup>
 
-          <Button type="submit" size="medium" label="Registrar" />
-        </form>
-      </div>
-    </main>
+            <Button type="submit" size="medium" label="Registrar" />
+          </form>
+        </div>
+      </Content>
+    </Container>
   );
 }

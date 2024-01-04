@@ -7,8 +7,8 @@ interface ContentInterface {
 
 export const Content = styled.div<ContentInterface>`
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
+  position: relative;
 
   ${({ error }) =>
     error &&
