@@ -4,7 +4,7 @@ import { Input } from "../../input";
 import { Button } from "../../Button";
 import { isEmailValid } from "../../../utils/isEmailValid";
 import { Container, Content } from "./styles";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export function Register() {
   const [registerData, setRegisterData] = useState({
@@ -118,15 +118,17 @@ export function Register() {
     event.preventDefault();
 
     if (errors.find((erro) => erro.message)) return;
-
-    const request = await axios.post("http://localhost:3001/register", {
-      name: registerData.name,
-      email: registerData.email,
-      password: registerData.senha,
-    });
-
-    const response = request.data;
-    console.log(response);
+    try {
+      const request = await axios.post("http://localhost:3001/register", {
+        name: registerData.name,
+        email: registerData.email,
+        password: registerData.senha,
+      });
+      const response = request.data;
+      console.log(response);
+    } catch (err) {
+      if (err instanceof AxiosError) console.log(err);
+    }
   }
 
   console.log(getErrorMessageByFieldName("email"));

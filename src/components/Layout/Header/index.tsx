@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Container, Content } from "./styles";
 
-export default function () {
+export function Header() {
   return (
     <Container>
       <Content>
@@ -25,3 +25,5 @@ export default function () {
     </Container>
   );
 }
+
+export default Header;

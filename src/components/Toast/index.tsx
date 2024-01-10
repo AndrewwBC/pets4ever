@@ -16,10 +16,8 @@ export function Toast({ toast, setToast }: ToastProps) {
         message: "",
         status: "",
       });
-      console.log("Primeiro");
     }, 3000);
 
-    console.log("Segundo");
     return;
   });
 

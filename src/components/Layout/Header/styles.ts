@@ -54,15 +54,15 @@ export const Content = styled.div`
         font-size: 16px;
         padding: 8px 12px;
       }
+      @media (max-width: 768px) {
+        font-size: 14px;
+        padding: 8px 10px;
+      }
 
       &:hover {
         background-color: ${({ theme }) => theme.yellow.dark};
         transition: all 0.3s;
       }
-    }
-
-    @media (max-width: 768px) {
-      font-size: 12px;
     }
   }
 

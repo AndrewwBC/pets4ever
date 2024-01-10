@@ -17,9 +17,6 @@ export const Content = styled.section`
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    @media (max-width: 768px) {
-      display: none;
-    }
   }
 `;
 

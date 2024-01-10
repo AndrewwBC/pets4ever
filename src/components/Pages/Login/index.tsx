@@ -6,7 +6,7 @@ import { Container, Content, Form } from "./style";
 import { Input } from "../../input";
 import { Button } from "../../Button";
 import { isEmailValid } from "../../../utils/isEmailValid";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 import { Toast } from "../../Toast";
 import { Link } from "react-router-dom";
@@ -98,10 +98,11 @@ export default function Login() {
       console.log(response);
     } catch (err) {
       console.log(err);
-      setToast({
-        message: "Erro no login",
-        status: "error",
-      });
+      if (err instanceof AxiosError)
+        setToast({
+          message: err.response?.data.error,
+          status: "error",
+        });
     }
   }
 

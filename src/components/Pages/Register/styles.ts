@@ -3,10 +3,10 @@ import styled from "styled-components";
 export const Container = styled.main``;
 
 export const Content = styled.section`
-  max-width: 1000px;
+  max-width: 660px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
   justify-content: center;
   text-align: center;

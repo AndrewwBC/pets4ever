@@ -12,6 +12,10 @@ export const Content = styled.section`
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
   img {
     display: block;
     width: 100vw;
