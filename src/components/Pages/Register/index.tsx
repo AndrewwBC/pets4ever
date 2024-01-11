@@ -5,6 +5,7 @@ import { Button } from "../../Button";
 import { isEmailValid } from "../../../utils/isEmailValid";
 import { Container, Content } from "./styles";
 import axios, { AxiosError } from "axios";
+import { Toast } from "../../Toast";
 
 export function Register() {
   const [registerData, setRegisterData] = useState({
@@ -12,13 +13,22 @@ export function Register() {
     email: "",
     senha: "",
   });
-
   const [errors, setErrors] = useState([
     {
       field: "",
       message: "",
     },
   ]);
+  const [registerErrors, setRegisterErrors] = useState([
+    {
+      field: "",
+      message: "",
+    },
+  ]);
+  const [toast, setToast] = useState({
+    message: "",
+    status: "",
+  });
 
   function handleUsername(event: FocusEvent) {
     const target = event.target as HTMLInputElement;
@@ -111,11 +121,22 @@ export function Register() {
       (erro) => erro.field === fieldName
     )?.message;
 
-    return errorMessage;
+    const registerErrorMessage = registerErrors.find(
+      (erro) => erro.field === fieldName
+    )?.message;
+
+    return errorMessage ? errorMessage : registerErrorMessage;
   }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+
+    setRegisterErrors([
+      {
+        field: "",
+        message: "",
+      },
+    ]);
 
     if (errors.find((erro) => erro.message)) return;
     try {
@@ -125,9 +146,29 @@ export function Register() {
         password: registerData.senha,
       });
       const response = request.data;
-      console.log(response);
+
+      if (response)
+        setToast({
+          message: "Registrado com sucesso!",
+          status: "success",
+        });
     } catch (err) {
-      if (err instanceof AxiosError) console.log(err);
+      if (err instanceof AxiosError) {
+        console.log(err.response?.data);
+        setToast({
+          message: "Verifique os dados!",
+          status: "error",
+        });
+        err.response?.data.map((erro) =>
+          setRegisterErrors((prevState) => [
+            ...prevState,
+            {
+              field: erro.field,
+              message: erro.message,
+            },
+          ])
+        );
+      }
     }
   }
 
@@ -179,6 +220,7 @@ export function Register() {
             <Button type="submit" size="medium" label="Registrar" />
           </form>
         </div>
+        {toast.message && <Toast toast={toast} setToast={setToast}></Toast>}
       </Content>
     </Container>
   );

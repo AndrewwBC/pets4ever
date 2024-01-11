@@ -27,8 +27,19 @@ export default function ForgotPassword() {
     console.log(event.target.value);
   }
 
-  function sendEmailToUser(event: FormEvent) {
+  async function sendEmailToUser(event: FormEvent) {
     event.preventDefault();
+
+    try {
+      const request = await axios.post("http://localhost:3001/forgotpassword", {
+        email: email,
+      });
+
+      const response = request.data;
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
