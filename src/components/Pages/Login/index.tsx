@@ -9,7 +9,7 @@ import { isEmailValid } from "../../../utils/isEmailValid";
 import axios, { AxiosError } from "axios";
 
 import { Toast } from "../../Toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [toast, setToast] = useState({
@@ -24,9 +24,9 @@ export default function Login() {
       message: "",
     },
   ]);
-  console.log(errors);
 
   const { setData } = useContext(GlobalContext);
+  const navigate = useNavigate();
 
   function handleEmailBlur({ target }) {
     const errorAlreadyExist = errors.find((error) => error.field === "Email");
@@ -87,15 +87,13 @@ export default function Login() {
       });
 
       console.log(response);
-
       if (response) {
         setToast({
           message: response.data.message,
           status: "success",
         });
+        navigate("/register");
       }
-
-      console.log(response);
     } catch (err) {
       console.log(err);
       if (err instanceof AxiosError)
@@ -105,14 +103,6 @@ export default function Login() {
         });
     }
   }
-
-  // function handleSubmit(event: FormEvent) {
-  //   event.preventDefault();
-
-  //   if (!errors.find((item) => item.field !== "")) {
-  //     Login();
-  //   }
-  // }
 
   function getErrorMessageByFieldName(fieldName: string): string | undefined {
     return errors.find((error) => error.field === fieldName)?.message;

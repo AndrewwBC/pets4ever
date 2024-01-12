@@ -6,6 +6,7 @@ import { isEmailValid } from "../../../utils/isEmailValid";
 import { Container, Content } from "./styles";
 import axios, { AxiosError } from "axios";
 import { Toast } from "../../Toast";
+import useToast from "../../Toast/useToast";
 
 export function Register() {
   const [registerData, setRegisterData] = useState({
@@ -25,10 +26,8 @@ export function Register() {
       message: "",
     },
   ]);
-  const [toast, setToast] = useState({
-    message: "",
-    status: "",
-  });
+
+  const { toast, setToast } = useToast();
 
   function handleUsername(event: FocusEvent) {
     const target = event.target as HTMLInputElement;
@@ -69,7 +68,6 @@ export function Register() {
       registerData.email = event.target.value;
     }
   }
-  console.log(errors);
   function handlePassword(event: ChangeEvent) {
     const target = event.target as HTMLInputElement;
     const passwordField = "password";
@@ -139,6 +137,21 @@ export function Register() {
     ]);
 
     if (errors.find((erro) => erro.message)) return;
+
+    const userFormData = Object.values(registerData);
+    console.log(
+      registerData,
+      userFormData,
+      userFormData.some((data) => data.length === 0)
+    );
+    if (userFormData.some((data) => data.length === 0)) {
+      setToast({
+        message: "Preencha todos os campos!",
+        status: "error",
+      });
+      return;
+    }
+
     try {
       const request = await axios.post("http://localhost:3001/register", {
         name: registerData.name,
@@ -171,8 +184,6 @@ export function Register() {
       }
     }
   }
-
-  console.log(getErrorMessageByFieldName("email"));
 
   return (
     <Container>
