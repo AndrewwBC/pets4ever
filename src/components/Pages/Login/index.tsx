@@ -92,7 +92,7 @@ export default function Login() {
           message: response.data.message,
           status: "success",
         });
-        navigate("/register");
+        navigate("www.google.com");
       }
     } catch (err) {
       console.log(err);

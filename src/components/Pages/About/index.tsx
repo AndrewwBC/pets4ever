@@ -1,4 +1,10 @@
-import { ArrowContainer, Container, Content, Intro } from "./styles";
+import {
+  ArrowContainer,
+  Container,
+  Content,
+  Intro,
+  SectionText,
+} from "./styles";
 
 import aboutImage from "../../../assets/images/catAbout.jpg";
 
@@ -43,6 +49,27 @@ export default function About() {
                   </div>
                 </ArrowContainer>
               </Intro>
+              <SectionText>
+                <div className="motivation">
+                  <h1>MOTIVAÇÕES</h1>
+                </div>
+                <div className="listContainer">
+                  <ul>
+                    <li>
+                      Compartilhar informações úteis e confiáveis sobre cuidados
+                      com animais de estimação.
+                    </li>
+                    <li>
+                      Inspirar amor e dedicação pelos animais, promovendo a
+                      adoção responsável.
+                    </li>
+                    <li>
+                      Criar uma comunidade de amantes de animais para
+                      compartilhar experiências e conhecimentos.
+                    </li>
+                  </ul>
+                </div>
+              </SectionText>
             </Content>
           </Container>
         </motion.div>
