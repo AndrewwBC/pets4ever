@@ -1,3 +1,4 @@
+import React, { Factory, ProviderProps, ReactNode } from "react";
 import styled, { keyframes } from "styled-components";
 
 const anime = keyframes`
@@ -37,16 +38,16 @@ export const Modal = styled.div`
   animation: ${anime} 0.6s ease-in-out, ${animeOut} 0.6s ease-in-out 2.5s;
 `;
 
-interface MessageStatus {
-  error?: string;
-  success?: string;
+interface ContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  messageStatus: string;
+  children: ReactNode;
 }
 
-export const Content = styled.div`
+export const Content: React.FC<ContentProps> = styled.div`
   padding: 12px 24px;
   border-radius: 4px;
   color: #f9f9f9;
-  background-color: ${({ messageStatus }: MessageStatus) =>
+  background-color: ${({ messageStatus }) =>
     backgroundColorsOfMessages[messageStatus]};
   display: flex;
   align-items: end;

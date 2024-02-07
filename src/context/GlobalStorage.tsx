@@ -1,15 +1,39 @@
-import { ReactNode, createContext, useState } from "react";
-
-export const GlobalContext = createContext("");
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useState,
+} from "react";
 
 interface GlobalStorageProps {
   children: ReactNode;
 }
 
-// GlobalStorage é só uma facilitação para usar o contexto
+interface StateProps {
+  name: string;
+}
+
+interface ContextProps {
+  data: {
+    name: string;
+  };
+  setData: Dispatch<SetStateAction<StateProps>>;
+}
+
+export const GlobalContext = createContext<ContextProps>({
+  data: {
+    name: "",
+  },
+  setData: useState,
+});
+
+interface GlobalStorageProps {
+  children: ReactNode;
+}
 
 export function GlobalStorage({ children }: GlobalStorageProps) {
-  const [data, setData] = useState({
+  const [data, setData] = useState<StateProps>({
     name: "",
   });
 

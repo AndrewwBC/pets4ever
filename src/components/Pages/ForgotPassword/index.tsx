@@ -45,7 +45,7 @@ export default function ForgotPassword() {
   return (
     <Container>
       <Content>
-        <span>Problemas com o Login?</span>
+        <p>Problemas com o Login?</p>
 
         <p>Insira o seu email para que possamos redefinir a sua senha.</p>
 

@@ -39,7 +39,7 @@ export const Content = styled.div`
   border-radius: 8px;
   padding: 32px 12px;
 
-  span {
+  p:first-child {
     font-size: 24px;
     font-weight: 500;
     font-family: "Poppins";

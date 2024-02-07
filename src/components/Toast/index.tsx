@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { Content, Modal } from "./styles";
 
 interface ToastProps {
-  setToast: () => void;
+  setToast: Dispatch<SetStateAction<{ message: string; status: string }>>;
   toast: {
     message: string;
     status: string;

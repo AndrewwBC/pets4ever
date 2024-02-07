@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { GlobalContext } from "../../../context/GlobalStorage";
 
 import FormGroup from "../../FormGroup";
@@ -27,8 +27,7 @@ export default function Login() {
 
   const { setData } = useContext(GlobalContext);
   const navigate = useNavigate();
-
-  function handleEmailBlur({ target }) {
+  function handleEmailBlur({ target }: ChangeEvent<HTMLInputElement>) {
     const errorAlreadyExist = errors.find((error) => error.field === "Email");
 
     if (
@@ -49,7 +48,16 @@ export default function Login() {
     }
   }
 
-  function handlePasswordChange({ target }) {
+  function handleEmailChange({ target }: ChangeEvent<HTMLInputElement>) {
+    setEmail(target.value);
+
+    const thereIsAnError = errors.find((erro) => erro.field === "Email");
+    if (thereIsAnError && isEmailValid(target.value)) {
+      setErrors(errors.filter((errors) => errors.field !== "Email"));
+    }
+  }
+
+  function handlePasswordChange({ target }: ChangeEvent<HTMLInputElement>) {
     setPassword(target.value);
 
     const valueLength = target.value.length;
@@ -86,7 +94,6 @@ export default function Login() {
         password: password,
       });
 
-      console.log(response);
       if (response) {
         setToast({
           message: response.data.message,
@@ -95,12 +102,23 @@ export default function Login() {
         navigate("www.google.com");
       }
     } catch (err) {
-      console.log(err);
-      if (err instanceof AxiosError)
+      if (err instanceof AxiosError) {
+        console.log(err.code);
+
+        if (err.code === "ERR_NETWORK") {
+          setToast({
+            message: err.message,
+            status: "error",
+          });
+
+          return;
+        }
+
         setToast({
           message: err.response?.data.error,
           status: "error",
         });
+      }
     }
   }
 
@@ -108,7 +126,6 @@ export default function Login() {
     return errors.find((error) => error.field === fieldName)?.message;
   }
 
-  console.log(errors.find((erro) => erro.message));
   return (
     <Container>
       <Content>
@@ -117,8 +134,10 @@ export default function Login() {
         <Form onSubmit={Login}>
           <FormGroup error={getErrorMessageByFieldName("Email")}>
             <Input
+              type="email"
+              required
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={handleEmailChange}
               onBlur={handleEmailBlur}
               placeholder="Email ou nome de usuário."
             />
@@ -136,7 +155,7 @@ export default function Login() {
           </Link>
 
           <Button
-            disabled={errors.find((erro) => (erro.message ? true : false))}
+            disabled={Boolean(errors.find((erro) => erro.message))}
             size={"low"}
             label="Entrar"
           />

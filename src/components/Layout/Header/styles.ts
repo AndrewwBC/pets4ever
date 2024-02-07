@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../../assets/styles/theme";
 
 export const Container = styled.header`
   background: ${({ theme }) => theme.neutral.c2};
@@ -43,31 +42,35 @@ export const Content = styled.div`
     font-size: 18px;
     border-radius: 8px;
     background-color: ${({ theme }) => theme.yellow.light};
-    color: #222;
 
     a {
       display: block;
       padding: 8px 16px;
       border-radius: 8px;
+      color: inherit;
+
+      &:active {
+        color: red;
+      }
+
+      &:visited {
+        color: green;
+      }
+
+      &:hover {
+        background-color: ${({ theme }) => theme.yellow.dark};
+        transition: all 0.2s;
+      }
 
       @media (max-width: 1400px) {
         font-size: 16px;
         padding: 8px 12px;
       }
+
       @media (max-width: 768px) {
         font-size: 14px;
         padding: 8px 10px;
       }
-
-      &:hover {
-        background-color: ${({ theme }) => theme.yellow.dark};
-        transition: all 0.3s;
-      }
     }
-  }
-
-  .menuItems li:hover {
-    transition: 0.3s;
-    color: ${({ theme }) => theme.neutral.c1};
   }
 `;
