@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled.main`
   display: flex;
@@ -7,25 +7,25 @@ export const Container = styled.main`
   background-color: ${({ theme }) => theme.neutral.c1};
 `;
 
-const borderAnimation = keyframes`
-  
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-  }
-  25% {
-    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.7);
-  }
-  50% {
-    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.7);
-  }
-  75% {
-    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.7);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-  }
-  
-  `;
+// const borderAnimation = keyframes`
+
+//   0% {
+//     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+//   }
+//   25% {
+//     box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.7);
+//   }
+//   50% {
+//     box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.7);
+//   }
+//   75% {
+//     box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.7);
+//   }
+//   100% {
+//     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+//   }
+
+//   `;
 
 export const Content = styled.div`
   display: flex;

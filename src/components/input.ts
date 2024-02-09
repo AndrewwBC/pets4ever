@@ -27,7 +27,7 @@ export const Input: React.FC<MyInputProps> = styled.input`
     border: 2px solid ${({ theme }) => theme.purple.medium};
   }
 
-  ${({ error }) =>
+  ${({ error }: { error: string }) =>
     error
       ? css`
           border-color: #d40f3c;

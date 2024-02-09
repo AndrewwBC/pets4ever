@@ -1,4 +1,4 @@
-import { HTMLAttributes, HTMLProps } from "react";
+import { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
 interface ContentProps extends HTMLAttributes<HTMLDivElement> {
