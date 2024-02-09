@@ -28,7 +28,6 @@ function App() {
             <Route path="/forgotpassword" element={<ForgotPassword />} />
           </Routes>
         </Router>
-        {/* <Footer /> */}
       </GlobalStorage>
     </ThemeProvider>
   );

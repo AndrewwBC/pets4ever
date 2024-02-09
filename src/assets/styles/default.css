@@ -3,7 +3,10 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins";
-  overflow-y: scroll;
+}
+
+html {
+  scrollbar-gutter: stable;
 }
 
 li {
