@@ -1,5 +1,4 @@
-import { FormEvent, useContext, useState } from "react";
-import { GlobalContext } from "../../../context/GlobalStorage";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 import FormGroup from "../../FormGroup";
 import { Container, Content, Form } from "./styles";
@@ -8,7 +7,6 @@ import { Button } from "../../Button";
 import { isEmailValid } from "../../../utils/isEmailValid";
 import axios from "axios";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { Toast } from "../../Toast";
 
 export default function ForgotPassword() {
@@ -20,10 +18,12 @@ export default function ForgotPassword() {
   const [error, setError] = useState("");
   console.log(error);
 
-  function validarEmail(event: FormEvent) {
+  function handleEmailBlur(event: ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
 
-    isEmailValid(event.target.value);
+    if (!isEmailValid(event.target.value)) setError("Email inválido");
+
+    if (isEmailValid(event.target.value)) setError("");
     console.log(event.target.value);
   }
 
@@ -54,7 +54,7 @@ export default function ForgotPassword() {
             <Input
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              onBlur={(event) => validarEmail(event)}
+              onBlur={(event) => handleEmailBlur(event)}
               placeholder="Email ou nome de usuário."
             />
           </FormGroup>

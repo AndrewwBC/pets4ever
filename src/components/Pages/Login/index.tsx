@@ -1,5 +1,5 @@
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
-import { GlobalContext } from "../../../context/GlobalStorage";
+import { ChangeEvent, FormEvent, useState } from "react";
+//import { GlobalContext } from "../../../context/GlobalStorage";
 
 import FormGroup from "../../FormGroup";
 import { Container, Content, Form } from "./style";
@@ -25,7 +25,7 @@ export default function Login() {
     },
   ]);
 
-  const { setData } = useContext(GlobalContext);
+  // const { setData } = useContext(GlobalContext);
   const navigate = useNavigate();
   function handleEmailBlur({ target }: ChangeEvent<HTMLInputElement>) {
     const errorAlreadyExist = errors.find((error) => error.field === "Email");

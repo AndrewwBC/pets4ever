@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
-interface ToastProperties {
-  message: string;
-  status: "error" | "success";
-}
-
-const useToast = () => {
-  const [toast, setToast] = useState<ToastProperties>({
+const useToast = (): {
+  toast: {
+    message: string;
+    status: string;
+  };
+  setToast: Dispatch<SetStateAction<{ message: string; status: string }>>;
+} => {
+  const [toast, setToast] = useState({
     message: "",
     status: "",
   });

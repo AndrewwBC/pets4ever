@@ -29,8 +29,7 @@ export function Register() {
 
   const { toast, setToast } = useToast();
 
-  function handleUsername(event: FocusEvent) {
-    const target = event.target as HTMLInputElement;
+  function handleUsername({ target }: ChangeEvent<HTMLInputElement>) {
     const usernameField = "username";
 
     if (target.value.length == 0)
@@ -44,9 +43,7 @@ export function Register() {
     else setErrors(errors.filter((erro) => erro.field !== usernameField));
   }
 
-  function handleEmailChange(event: ChangeEvent) {
-    const target = event.target as HTMLInputElement;
-
+  function handleEmailChange({ target }: ChangeEvent<HTMLInputElement>) {
     const emailField = "email";
 
     const errorAlreadyExists = errors.find((erro) => erro.field === emailField);
@@ -65,11 +62,10 @@ export function Register() {
       ]);
     if (isEmailValid(target.value)) {
       setErrors(errors.filter((erro) => erro.field !== emailField));
-      registerData.email = event.target.value;
+      registerData.email = target.value;
     }
   }
-  function handlePassword(event: ChangeEvent) {
-    const target = event.target as HTMLInputElement;
+  function handlePassword({ target }: ChangeEvent<HTMLInputElement>) {
     const passwordField = "password";
 
     if (target.value.length < 6)
@@ -89,8 +85,7 @@ export function Register() {
     }
   }
 
-  function handleConfirmPassword(event: FocusEvent) {
-    const target = event.target as HTMLInputElement;
+  function handleConfirmPassword({ target }: ChangeEvent<HTMLInputElement>) {
     const fieldConfirmPass = "confirmPass";
 
     const errorAlreadyExists = errors.find(
@@ -172,7 +167,7 @@ export function Register() {
           message: "Verifique os dados!",
           status: "error",
         });
-        err.response?.data.map((erro) =>
+        err.response?.data.map((erro: { field: string; message: string }) =>
           setRegisterErrors((prevState) => [
             ...prevState,
             {
@@ -202,7 +197,7 @@ export function Register() {
               <Input
                 placeholder="Nome de usuário"
                 onBlur={handleUsername}
-                onChange={({ target }) =>
+                onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
                   setRegisterData((prevState) => ({
                     ...prevState,
                     name: target.value,
