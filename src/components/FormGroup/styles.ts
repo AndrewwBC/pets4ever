@@ -1,16 +1,16 @@
+import { HTMLAttributes, HTMLProps } from "react";
 import styled, { css } from "styled-components";
 
-interface ContentInterface {
-  error: OnErrorEventHandler;
-  children?: JSX.Element | JSX.Element[];
+interface ContentProps extends HTMLAttributes<HTMLDivElement> {
+  error: string | undefined;
 }
 
-export const Content = styled.div<ContentInterface>`
+export const Content: React.FC<ContentProps> = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
 
-  ${({ error }) =>
+  ${({ error }: { error: string }) =>
     error &&
     css`
       input {

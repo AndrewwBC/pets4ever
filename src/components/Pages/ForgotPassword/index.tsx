@@ -53,7 +53,9 @@ export default function ForgotPassword() {
           <FormGroup error={error}>
             <Input
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setEmail(event.target.value)
+              }
               onBlur={(event) => handleEmailBlur(event)}
               placeholder="Email ou nome de usuário."
             />
