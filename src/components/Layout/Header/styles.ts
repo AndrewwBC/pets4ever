@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-  background: ${({ theme }) => theme.neutral.c2};
+  background: ${({ theme }) => theme.neutral.c1};
 `;
 
 export const Content = styled.div`
@@ -50,11 +50,7 @@ export const Content = styled.div`
       color: inherit;
 
       &:active {
-        color: red;
-      }
-
-      &:visited {
-        color: green;
+        color: ${({ theme }) => theme.neutral.c1};
       }
 
       &:hover {

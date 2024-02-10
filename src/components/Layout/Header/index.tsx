@@ -8,7 +8,7 @@ export function Header() {
           <h1>Pets4Ever</h1>
         </a>
         <nav>
-          <menu className="menuItems">
+          <menu className="menuItems gradient-border">
             <li>
               <a href="./about">Sobre</a>
             </li>
