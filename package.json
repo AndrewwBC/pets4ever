@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "sync": "aws s3 --profile drew-pc --region us-east-1 sync ./dist s3://pets-terra/",
+    "sync": "aws s3 --profile drew-pc --region us-east-1 sync ./dist s3://my-site-pets4ever/",
     "invalidate": "aws cloudfront --profile drew-pc --region us-east-1 create-invalidation --distribution-id E1KNQUI3JBEDFS --paths /*",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
