@@ -50,7 +50,6 @@ export const Intro = styled.div`
       transition: all 0.6s;
       animation-name: ${textAnimation};
       animation-duration: 0.6s;
-      animation-delay: 0.3s;
       animation-iteration-count: linear;
 
       @media (max-width: 1400px) {
