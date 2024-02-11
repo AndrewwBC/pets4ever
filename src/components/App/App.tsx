@@ -17,8 +17,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStorage>
-        <Header />
         <Router>
+          <Header />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
