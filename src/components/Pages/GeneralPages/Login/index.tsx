@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import FormGroup from "../../FormGroup";
-import { Container, Content, Form } from "./style";
-import { Input } from "../../input";
-import { Button } from "../../Button";
-import { isEmailValid } from "../../../utils/isEmailValid";
+import FormGroup from "../../../FormGroup";
+import { Container, Content, Form } from "./styles";
+import { Input } from "../../../input";
+import { Button } from "../../../Button";
+import { isEmailValid } from "../../../../utils/isEmailValid";
 import axios, { AxiosError } from "axios";
 
-import { Toast } from "../../Toast";
+import { Toast } from "../../../Toast";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {

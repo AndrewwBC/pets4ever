@@ -1,4 +1,4 @@
-import { Container, Content, Infos, Text } from "./style";
+import { Container, Content, Infos, Text } from "./styles";
 
 import vetIcon from "../../../../../assets/images/icons/veterinario.svg";
 import toyIcon from "../../../../../assets/images/icons/brinquedo.svg";

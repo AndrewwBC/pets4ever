@@ -4,7 +4,7 @@ export const Container = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.neutral.c1};
+  background-color: ${({ theme }) => theme.bg};
 `;
 
 // const borderAnimation = keyframes`
@@ -28,22 +28,18 @@ export const Container = styled.main`
 //   `;
 
 export const Content = styled.div`
-  max-width: 320px;
   display: flex;
   align-items: center;
-  text-align: center;
   justify-content: center;
   flex-direction: column;
   margin: 160px 0px 80px;
   padding: 8px;
   border-radius: 8px;
-  padding: 32px 12px;
+  border: 1px solid #ccc;
+  padding: 16px 12px;
 
-  p:first-child {
-    font-size: 24px;
-    font-weight: 500;
-    font-family: "Poppins";
-    color: red;
+  h1 {
+    font-size: 42px;
   }
 
   p {
@@ -64,11 +60,11 @@ export const Content = styled.div`
     margin: 0px 0px;
     font-size: 16px;
     align-self: flex-end;
-    color: #7b44ff;
+    color: ${({ theme }) => theme.purple.medium};
     font-family: "Roboto", sans-serif;
 
     &:hover {
-      color: ${({ theme }) => theme.neutral.c6};
+      color: ${({ theme }) => theme.purple.dark};
       cursor: pointer;
     }
   }

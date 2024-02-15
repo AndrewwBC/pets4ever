@@ -7,11 +7,11 @@ import { theme } from "../../assets/styles/theme";
 
 import Header from "../Layout/Header";
 import Home from "../Pages/Home";
-import Login from "../Pages/Login";
-import About from "../Pages/About/index";
-import Contact from "../Pages/Contact";
-import ForgotPassword from "../Pages/ForgotPassword";
-import { Register } from "../Pages/Register";
+import Login from "../Pages/GeneralPages/Login";
+import About from "../Pages/GeneralPages/About/index";
+import Contact from "../Pages/GeneralPages/Contact";
+import ForgotPassword from "../Pages/GeneralPages/ForgotPassword";
+import { Register } from "../Pages/GeneralPages/Register";
 
 function App() {
   return (

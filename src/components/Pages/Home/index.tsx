@@ -12,7 +12,7 @@ export default function Home() {
       <AnimatePresence>
         <motion.div
           key="home"
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 0.5 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0.5 }}
         >

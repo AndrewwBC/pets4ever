@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 export const Container = styled.main`
-  background: ${({ theme }) => theme.neutral.c2};
+  background: ${({ theme }) => theme.bg};
 `;
 
 export const Content = styled.section`
