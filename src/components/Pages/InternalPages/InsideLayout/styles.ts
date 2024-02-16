@@ -16,23 +16,66 @@ export const Content = styled.section`
   .outletContainer {
     grid-column: 2/-1;
     margin-top: 80px;
-    margin-left: 120px;
   }
 `;
 
 export const MenuContainer = styled.div`
-  background: #f2f2f2;
-  box-shadow: 6px 6px 12px #bfbfbf, -6px -6px 12px #f2f2f2;
+  display: flex;
+  justify-content: center;
+  background: ${({ theme }) => theme.bg};
+  box-shadow: 1px 6px 12px #bfbfbf, -1px -6px 12px ${({ theme }) => theme.bg};
+  border-bottom-right-radius: 16px;
+  border-top-right-radius: 16px;
+  grid-column: 1/1;
   position: fixed;
   top: 0;
-  right: 66%;
+  right: 75%;
   bottom: 0;
   left: 0;
   min-width: max-content;
   z-index: 1;
 
   .menuContent {
+    display: flex;
+    align-items: self-start;
+    flex-direction: column;
+    gap: 12px;
     margin-top: 80px;
-    margin-left: 40px;
+
+    li:nth-child(1) {
+      margin-bottom: 20px;
+    }
+
+    li {
+      width: 100%;
+    }
+    a {
+      display: flex;
+      //  background-color: ${({ theme }) => theme.yellow.medium};
+      background-color: #222;
+      border-radius: 16px;
+      padding: 8px 80px 8px 8px;
+      align-items: center;
+      gap: 12px;
+      color: ${({ theme }) => theme.neutral.c2};
+      font-size: 16px;
+      transition: all 0.3s;
+
+      @media (max-width: 1000px) {
+        padding-right: 32px;
+      }
+
+      * {
+        color: #f9f9f9;
+      }
+
+      &:hover {
+        color: #fff;
+        background-color: #000;
+        * {
+          transition: all 0.1s;
+        }
+      }
+    }
   }
 `;

@@ -1,6 +1,10 @@
 import { Link, Outlet } from "react-router-dom";
 import { Container, Content, MenuContainer } from "./styles";
 
+import { CgProfile } from "react-icons/cg";
+import { CgFeed } from "react-icons/cg";
+import { TiMessages } from "react-icons/ti";
+
 const InsideLayout = () => {
   return (
     <Container>
@@ -8,10 +12,23 @@ const InsideLayout = () => {
         <MenuContainer>
           <nav className="menuContent">
             <li>
-              <Link to={"/me"}>Perfil BTN</Link>
+              <Link to={"/me"}>
+                <CgProfile size={24} color="#222" />
+                Meu Perfil
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/me/feed"}>
+                <CgFeed size={24} color="#222" />
+                Feed
+              </Link>
             </li>
             <li>
-              <Link to={"/me/feed"}>Feed BTN</Link>
+              <Link to={"/me/feed"}>
+                <TiMessages size={24} color="#222" />
+                Mensagens
+              </Link>
             </li>
           </nav>
         </MenuContainer>
