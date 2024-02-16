@@ -1,4 +1,3 @@
-import { Button } from "../../../Button";
 import { Container, FeedFeatures } from "./styles";
 
 export const Feed = () => {
