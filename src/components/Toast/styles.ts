@@ -1,4 +1,4 @@
-import React, { Factory, ProviderProps, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import styled, { keyframes } from "styled-components";
 
 const anime = keyframes`
@@ -47,8 +47,11 @@ export const Content: React.FC<ContentProps> = styled.div`
   padding: 12px 24px;
   border-radius: 4px;
   color: #f9f9f9;
-  background-color: ${({ messageStatus }) =>
-    backgroundColorsOfMessages[messageStatus]};
+  background-color: ${({
+    messageStatus,
+  }: {
+    messageStatus: "error" | "success";
+  }) => backgroundColorsOfMessages[messageStatus]};
   display: flex;
   align-items: end;
   justify-content: space-between;

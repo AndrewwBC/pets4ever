@@ -1,6 +1,6 @@
 import { Container, Content, Intro } from "./styles";
 
-import contactImage from "../../../assets/images/contact.jpg";
+import contactImage from "../../../../assets/images/contact.jpg";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -10,7 +10,7 @@ export default function About() {
       <AnimatePresence>
         <motion.div
           key="home"
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 0.5 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0.5 }}
         >

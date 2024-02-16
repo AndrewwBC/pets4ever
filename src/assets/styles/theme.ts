@@ -1,4 +1,5 @@
 export const theme = {
+  bg: "#F9F9F9",
   neutral: {
     c1: "#FFFFFF",
     c2: "#F9F9F9",

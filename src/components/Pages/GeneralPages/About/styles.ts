@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 export const Container = styled.main`
-  background: ${({ theme }) => theme.neutral.c1};
+  background: ${({ theme }) => theme.bg};
   height: 100vh;
 `;
 
@@ -67,7 +67,8 @@ export const ArrowContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 32px;
+  margin-top: 80px;
+  cursor: pointer;
 
   #arrowAnim {
     display: flex;

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const Container = styled.main``;
+export const Container = styled.main`
+  background-color: ${({ theme }) => theme.bg};
+`;
 
 export const Content = styled.section`
   max-width: 660px;

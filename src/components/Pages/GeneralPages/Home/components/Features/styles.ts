@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   height: 100vh;
-  background: ${({ theme }) => theme.neutral.c1};
+  background: ${({ theme }) => theme.bg};
 `;
 
 export const Content = styled.div`

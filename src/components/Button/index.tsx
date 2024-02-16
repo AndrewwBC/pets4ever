@@ -3,8 +3,8 @@ import { MyButton } from "./style";
 interface ButtonProps {
   label: string;
   size?: "big" | "medium" | "low";
-  type?: string;
   disabled?: boolean;
+  type?: "submit" | "reset" | "button" | undefined;
 }
 
 export function Button({

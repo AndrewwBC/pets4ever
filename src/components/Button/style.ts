@@ -1,3 +1,4 @@
+import { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 
 const buttonSizes = {
@@ -6,11 +7,16 @@ const buttonSizes = {
   low: "8px 64px",
 };
 
-export const MyButton = styled.button`
+interface MyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  size: "big" | "medium" | "low";
+}
+
+export const MyButton: React.FC<MyButtonProps> = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${({ size }) => buttonSizes[size]};
+  padding: ${({ size }: { size: "big" | "medium" | "low" }) =>
+    buttonSizes[size]};
 
   border: none;
   border-radius: 4px;

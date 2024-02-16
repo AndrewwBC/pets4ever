@@ -1,12 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import FormGroup from "../../FormGroup";
-import { Input } from "../../input";
-import { Button } from "../../Button";
-import { isEmailValid } from "../../../utils/isEmailValid";
+import FormGroup from "../../../FormGroup";
+import { Input } from "../../../input";
+import { Button } from "../../../Button";
+import { isEmailValid } from "../../../../utils/isEmailValid";
 import { Container, Content } from "./styles";
 import axios, { AxiosError } from "axios";
-import { Toast } from "../../Toast";
-import useToast from "../../Toast/useToast";
+import { Toast } from "../../../Toast";
+import useToast from "../../../Toast/useToast";
 
 export function Register() {
   const [registerData, setRegisterData] = useState({

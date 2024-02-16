@@ -1,4 +1,4 @@
-import { Container, Content, Infos, Text } from "./style";
+import { Container, Content, Infos, Text } from "./styles";
 
 import vetIcon from "../../../../../assets/images/icons/veterinario.svg";
 import toyIcon from "../../../../../assets/images/icons/brinquedo.svg";
@@ -9,18 +9,18 @@ export default function () {
     {
       title: "Veterinários.",
       text: "Encontre veterinários capacitados para tratar o seu animal de estimação da melhor maneira possível.",
-      icon: vetIcon
+      icon: vetIcon,
     },
     {
       title: "Cuidadores.",
       text: "Cuidadores dispostos a dar todo amor e carinho ao seu animal de estimação, em casa ou ao livre.",
-      icon: toyIcon
+      icon: toyIcon,
     },
     {
       title: "Interações.",
       text: "Compartilhe momentos únicos do seu animal de estimação e faça novas amizades.",
-      icon: likeIcon
-    }
+      icon: likeIcon,
+    },
   ];
 
   return (

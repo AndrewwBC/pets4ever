@@ -1,22 +1,23 @@
+import { Link } from "react-router-dom";
 import { Container, Content } from "./styles";
 
 export function Header() {
   return (
     <Container>
       <Content>
-        <a href="./">
+        <Link to="/">
           <h1>Pets4Ever</h1>
-        </a>
+        </Link>
         <nav>
-          <menu className="menuItems">
+          <menu className="menuItems gradient-border">
             <li>
-              <a href="./about">Sobre</a>
+              <Link to="/about">Sobre</Link>
             </li>
             <li>
-              <a href="./contact">Contato</a>
+              <Link to="/contact">Contato</Link>
             </li>
             <li>
-              <a href="./login">Acesso</a>
+              <Link to="/login">Acesso</Link>
             </li>
           </menu>
         </nav>
