@@ -1,6 +1,6 @@
 import { Container, Content, Intro } from "./styles";
 
-import contactImage from "../../../assets/images/contact.jpg";
+import contactImage from "../../../../assets/images/contact.jpg";
 
 import { motion, AnimatePresence } from "framer-motion";
 

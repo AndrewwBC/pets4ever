@@ -6,7 +6,7 @@ import {
   SectionText,
 } from "./styles";
 
-import aboutImage from "../../../assets/images/catAbout.jpg";
+import aboutImage from "../../../../assets/images/catAbout.jpg";
 
 import { motion, AnimatePresence } from "framer-motion";
 
