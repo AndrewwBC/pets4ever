@@ -7,7 +7,6 @@ import { theme } from "../../assets/styles/theme";
 
 import Header from "../Layout/Header";
 import Home from "../Pages/Home";
-import Footer from "../Layout/Footer";
 import Login from "../Pages/Login";
 import About from "../Pages/About/index";
 import Contact from "../Pages/Contact";
