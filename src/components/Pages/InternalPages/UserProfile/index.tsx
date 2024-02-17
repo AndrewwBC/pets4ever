@@ -1,6 +1,30 @@
+import { useEffect } from "react";
 import { Container } from "./styles";
+import axios, { AxiosError } from "axios";
 
 const UserProfile = () => {
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  async function getUserData() {
+    try {
+      const request = await axios.get(
+        "http://localhost:3001/userDataAfterLogin",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const response = request.data;
+      console.log(response);
+    } catch (error) {
+      if (error instanceof AxiosError) console.log(error.message);
+    }
+  }
+
   return (
     <Container>
       <div className="userContent">

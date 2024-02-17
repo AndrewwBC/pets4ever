@@ -92,17 +92,18 @@ export default function Login() {
         password: password,
       });
 
+      console.log(response.data.token);
+
       if (response) {
+        localStorage.setItem("token", response.data.token);
+
         setToast({
-          message: response.data.message,
+          message: "LOGADO!",
           status: "success",
         });
-        navigate("www.google.com");
       }
     } catch (err) {
       if (err instanceof AxiosError) {
-        console.log(err.code);
-
         if (err.code === "ERR_NETWORK") {
           setToast({
             message: err.message,
@@ -127,7 +128,7 @@ export default function Login() {
   return (
     <Container>
       <Content>
-        <h1>Pets4Ever</h1>
+        <h1>Login</h1>
 
         <Form onSubmit={Login}>
           <FormGroup error={getErrorMessageByFieldName("Email")}>

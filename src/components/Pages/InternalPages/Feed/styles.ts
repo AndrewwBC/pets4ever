@@ -6,7 +6,7 @@ export const Container = styled.main`
   grid-template-columns: 2fr 1fr;
   gap: 48px;
   align-items: start;
-  max-width: 1000px;
+  max-width: 1400px;
 
   .header {
     display: flex;
@@ -35,7 +35,7 @@ export const FeedFeatures = styled.div`
     margin-top: 20px;
     img {
       flex-grow: 1;
-      height: 180px;
+      height: 280px;
       object-fit: cover;
       border-radius: 16px;
       cursor: pointer;

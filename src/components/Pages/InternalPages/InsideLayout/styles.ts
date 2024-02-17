@@ -8,7 +8,7 @@ export const Container = styled.main`
 
 export const Content = styled.section`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr;
   justify-content: center;
   height: 100vh;
   position: relative;
@@ -29,7 +29,7 @@ export const MenuContainer = styled.div`
   grid-column: 1/1;
   position: fixed;
   top: 0;
-  right: 75%;
+  right: 80%;
   bottom: 0;
   left: 0;
   min-width: max-content;

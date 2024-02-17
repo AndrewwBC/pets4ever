@@ -31,9 +31,18 @@ export default function ForgotPassword() {
     event.preventDefault();
 
     try {
-      const request = await axios.post("http://localhost:3001/forgotpassword", {
-        email: email,
-      });
+      const request = await axios.post(
+        "http://localhost:3001/forgotpassword",
+        {
+          email: email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       const response = request.data;
       console.log(response);
