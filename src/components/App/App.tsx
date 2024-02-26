@@ -14,13 +14,14 @@ import { Register } from "../Pages/GeneralPages/Register";
 import UserProfile from "../Pages/InternalPages/UserProfile";
 import InsideLayout from "../Pages/InternalPages/InsideLayout";
 import Feed from "../Pages/InternalPages/Feed";
+import Header from "../Layout/Header";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStorage>
         <Router>
-          {/* <Header /> */}
+          <Header />
 
           <Routes>
             <Route path="/" element={<Home />} />
