@@ -18,7 +18,7 @@ const UserProfile = () => {
     }
 
     try {
-      const request = await axios.get("http://localhost:3001/me", {
+      const request = await axios.get("http://localhost:8080/me", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

@@ -23,18 +23,93 @@ export const Container = styled.main`
   }
 `;
 
+export const HeaderAndPhoto = styled.section`
+  background: ${({ theme }) => theme.bg};
+
+  .imagesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    margin-top: 32px;
+    justify-content: start;
+
+    img {
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+      object-fit: cover;
+    }
+
+    .userInfo {
+      .iconsContainerAndCreatedAt {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .icons {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          justify-content: flex-start;
+          color: #222;
+        }
+
+        .createdAt {
+          small {
+            color: ${({ theme }) => theme.neutral.c6};
+            letter-spacing: 0.4px;
+          }
+        }
+      }
+
+      .nameAndDescription {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        margin-top: 32px;
+        margin-left: 16px;
+        gap: 32px;
+
+        p {
+          color: ${({ theme }) => theme.neutral.c6};
+        }
+
+        small {
+          font-size: 16px;
+          color: ${({ theme }) => theme.neutral.c9};
+        }
+      }
+
+      padding: 12px;
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+      background: ${({ theme }) => theme.bg};
+      box-shadow: 1px 6px 12px #bfbfbf,
+        -1px -6px 12px ${({ theme }) => theme.bg};
+    }
+  }
+`;
+
 export const FeedFeatures = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+
+  h1 {
+    color: ${({ theme }) => theme.purple.dark};
+  }
 
   .storiesContent {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     gap: 20px;
     margin-top: 20px;
+    max-width: 400px;
+    overflow-x: scroll;
+
     img {
-      flex-grow: 1;
       height: 280px;
       object-fit: cover;
       border-radius: 16px;
@@ -46,5 +121,22 @@ export const FeedFeatures = styled.div`
         border: 2px solid black;
       }
     }
+  }
+`;
+
+export const SuggestionContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .userSuggestedPictureAndName {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
   }
 `;

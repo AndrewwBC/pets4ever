@@ -148,7 +148,7 @@ export function Register() {
     }
 
     try {
-      const request = await axios.post("http://localhost:3001/register", {
+      const request = await axios.post("http://localhost:8080/auth/register", {
         name: registerData.name,
         email: registerData.email,
         password: registerData.senha,
@@ -163,19 +163,22 @@ export function Register() {
     } catch (err) {
       if (err instanceof AxiosError) {
         console.log(err.response?.data);
+
         setToast({
           message: "Verifique os dados!",
           status: "error",
         });
-        err.response?.data.map((erro: { field: string; message: string }) =>
+
+        err.response?.data.map((erro: { fieldName: string; message: string }) =>
           setRegisterErrors((prevState) => [
             ...prevState,
             {
-              field: erro.field,
+              field: erro.fieldName,
               message: erro.message,
             },
           ])
         );
+
       }
     }
   }
