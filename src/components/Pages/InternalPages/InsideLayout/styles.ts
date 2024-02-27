@@ -21,9 +21,11 @@ export const Content = styled.section`
 
 export const MenuContainer = styled.div`
   display: flex;
-  justify-content: center;
-  background: ${({ theme }) => theme.bg};
-  box-shadow: 1px 6px 12px #bfbfbf, -1px -6px 12px ${({ theme }) => theme.bg};
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: ${({ theme }) => theme.yellow.light};
+  box-shadow: 1px 6px 12px #888, -1px -6px 12px ${({ theme }) => theme.bg};
   border-bottom-right-radius: 16px;
   border-top-right-radius: 16px;
   grid-column: 1/1;
@@ -34,6 +36,11 @@ export const MenuContainer = styled.div`
   left: 0;
   min-width: max-content;
   z-index: 1;
+
+  .pets4EverTitle {
+    margin-top: 80px;
+    justify-self: center;
+  }
 
   .menuContent {
     display: flex;

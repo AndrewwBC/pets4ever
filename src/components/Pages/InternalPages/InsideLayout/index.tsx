@@ -10,6 +10,10 @@ const InsideLayout = () => {
     <Container>
       <Content>
         <MenuContainer>
+          <div className="pets4EverTitle">
+            <h1>Pets4Ever</h1>
+          </div>
+
           <nav className="menuContent">
             <li>
               <Link to={"/me"}>
