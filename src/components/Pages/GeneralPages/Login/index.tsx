@@ -8,7 +8,7 @@ import { isEmailValid } from "../../../../utils/isEmailValid";
 import axios, { AxiosError } from "axios";
 
 import { Toast } from "../../../Toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [toast, setToast] = useState({
@@ -24,7 +24,6 @@ export default function Login() {
     },
   ]);
 
-  const navigate = useNavigate();
   function handleEmailBlur({ target }: ChangeEvent<HTMLInputElement>) {
     const errorAlreadyExist = errors.find((error) => error.field === "Email");
 
