@@ -34,6 +34,16 @@ export const HeaderAndPhoto = styled.section`
     margin-top: 32px;
     justify-content: start;
 
+    .feedPhoto {
+      height: 620px;
+      width: 500px;
+
+      @media (max-width: 1400px) {
+        height: 420px;
+        width: 380px;
+      }
+    }
+
     img {
       border-top-right-radius: 8px;
       border-top-left-radius: 8px;
@@ -93,8 +103,10 @@ export const HeaderAndPhoto = styled.section`
 
 export const FeedFeatures = styled.div`
   display: grid;
+  gap: 32px;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+  max-height: 100vh;
 
   h1 {
     color: ${({ theme }) => theme.purple.dark};
@@ -104,10 +116,9 @@ export const FeedFeatures = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
     margin-top: 20px;
     max-width: 400px;
-    overflow-x: scroll;
 
     img {
       height: 280px;
@@ -116,6 +127,10 @@ export const FeedFeatures = styled.div`
       cursor: pointer;
       transition: 0.3s;
       border: 2px solid transparent;
+
+      @media (max-width: 1400px) {
+        height: 200px;
+      }
 
       &:hover {
         border: 2px solid black;

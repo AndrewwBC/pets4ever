@@ -21,15 +21,15 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStorage>
         <Router>
-          <Header />
-
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/" element={<Header />}>
+              <Route index element={<Home />} />
+              <Route path="login" element={<Login />} />
+              <Route path="about" element={<About />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="register" element={<Register />} />
+              <Route path="forgotpassword" element={<ForgotPassword />} />
+            </Route>
 
             <Route path="/me" element={<InsideLayout />}>
               <Route index element={<UserProfile />} />

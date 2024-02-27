@@ -72,7 +72,7 @@ export const Feed = () => {
           {data.map(({ url, userName, description, created_at }) => {
             return (
               <div>
-                <img height={620} width={500} src={url} alt="" />
+                <img className="feedPhoto" src={url} alt="" />
                 <div className="userInfo">
                   <div className="iconsContainerAndCreatedAt">
                     <div className="icons">
