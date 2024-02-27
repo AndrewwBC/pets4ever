@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container } from "./styles";
-import axios, { AxiosError } from "axios";
+//import axios, { AxiosError } from "axios";
 
 const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,35 +10,49 @@ const UserProfile = () => {
     getUserData();
   }, []);
 
+  // async function getUserData() {
+  //   const token = localStorage.getItem("token");
+
+  //   if (!token) {
+  //     return "Token não encontrado";
+  //   }
+
+  //   try {
+  //     const request = await axios.get("http://localhost:8080/me", {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     if (request) {
+  //       console.log(request);
+  //       setUserName(request.data.userName);
+  //     }
+  //   } catch (error) {
+  //     if (error instanceof AxiosError) {
+  //       console.log(error.message);
+  //       return error;
+  //     }
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
+
   async function getUserData() {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      return "Token não encontrado";
-    }
-
-    try {
-      const request = await axios.get("http://localhost:8080/me", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (request) {
-        console.log(request);
-        setUserName(request.data.userName);
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error.message);
-        return error;
-      }
-    } finally {
+    setTimeout(() => {
+      setUserName("Andrew");
       setIsLoading(false);
-    }
+    }, 1000);
+
+    return;
   }
 
-  if (isLoading) return null;
+  if (isLoading)
+    return (
+      <Container>
+        <h1>Simulando Fetch ... Loading</h1>
+      </Container>
+    );
   else
     return (
       <Container>
