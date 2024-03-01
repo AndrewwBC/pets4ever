@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   background: ${({ theme }) => theme.bg};
-  height: 100%;
-  width: 100%;
+  height: 100vh;
 `;
 
 export const Content = styled.section`
@@ -24,7 +23,7 @@ export const MenuContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background: ${({ theme }) => theme.yellow.light};
+  background: ${({ theme }) => theme.neutral.c2};
   box-shadow: 1px 6px 12px #888, -1px -6px 12px ${({ theme }) => theme.bg};
   border-bottom-right-radius: 16px;
   border-top-right-radius: 16px;

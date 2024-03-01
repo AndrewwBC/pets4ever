@@ -33,6 +33,11 @@ export const HeaderAndPhoto = styled.section`
     gap: 48px;
     margin-top: 32px;
     justify-content: start;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-align: calc(50vh);
+    max-height: calc(100vh - 180px);
+    padding-bottom: 12px;
 
     .feedPhoto {
       height: 620px;
@@ -105,7 +110,7 @@ export const FeedFeatures = styled.div`
   display: grid;
   gap: 32px;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr auto auto;
   max-height: 100vh;
 
   h1 {
