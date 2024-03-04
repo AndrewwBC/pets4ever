@@ -15,6 +15,7 @@ import UserProfile from "../Pages/InternalPages/UserProfile";
 import InsideLayout from "../Pages/InternalPages/InsideLayout";
 import Feed from "../Pages/InternalPages/Feed";
 import Header from "../Layout/Header";
+import Error404 from "../Pages/Error404";
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
               <Route index element={<UserProfile />} />
               <Route path="feed" element={<Feed />} />
             </Route>
+
+            <Route path="*" element={<Error404 />} />
           </Routes>
         </Router>
       </GlobalStorage>

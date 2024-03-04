@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Container,
   FeedFeatures,
@@ -8,6 +9,8 @@ import { VscHeart } from "react-icons/vsc";
 //import { VscHeartFilled } from "react-icons/vsc";
 import { VscComment } from "react-icons/vsc";
 import { VscSend } from "react-icons/vsc";
+import StoriesModal from "../components/StoriesModal";
+import PostModal from "../components/PostModal";
 
 export const Feed = () => {
   const data = [
@@ -54,9 +57,18 @@ export const Feed = () => {
       created_at: "02/05/2023",
     },
   ];
+  const [storiesModal, setStoriesModal] = useState(false);
+  const [feedPostModal, setFeedPostModal] = useState(false);
+
+  function handleStoriesClick() {
+    setStoriesModal(!storiesModal);
+  }
 
   return (
     <Container>
+      {storiesModal && <StoriesModal />}
+      {feedPostModal && <PostModal />}
+
       <HeaderAndPhoto>
         <div className="header">
           <h1>Feeds</h1>
@@ -71,7 +83,7 @@ export const Feed = () => {
         <div className="imagesContainer">
           {data.map(({ url, userName, description, created_at }) => {
             return (
-              <div>
+              <div onClick={() => setFeedPostModal(true)}>
                 <img className="feedPhoto" src={url} alt="" />
                 <div className="userInfo">
                   <div className="iconsContainerAndCreatedAt">
@@ -102,7 +114,7 @@ export const Feed = () => {
           <h1>Stories</h1>
 
           <div className="storiesContent">
-            <div>
+            <div onClick={handleStoriesClick}>
               <img
                 src="https://i.pinimg.com/originals/61/e7/8b/61e78b08a8dd18779132812218a9f2a8.jpg"
                 alt=""
