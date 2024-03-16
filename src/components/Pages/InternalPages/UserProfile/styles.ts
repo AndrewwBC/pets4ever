@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.main`
   background-color: ${({ theme }) => theme.bg};
   max-width: 1000px;
-  margin-right: 80px;
+  margin: 0 auto;
 
   .userImageAndName {
     gap: 8px;
