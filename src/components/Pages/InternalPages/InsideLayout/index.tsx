@@ -2,7 +2,6 @@ import { Link, Outlet } from "react-router-dom";
 import { Container, Content, MenuContainer } from "./styles";
 
 import { CgProfile, CgFeed, CgToolbox } from "react-icons/cg";
-import { TiMessages } from "react-icons/ti";
 
 const InsideLayout = () => {
   return (

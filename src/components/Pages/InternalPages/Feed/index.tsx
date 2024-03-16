@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container, HeaderAndPhoto } from "./styles";
 
-import { VscHeart, VscComment, VscSend, VscHeartFilled } from "react-icons/vsc";
+import { VscHeart, VscComment, VscSend } from "react-icons/vsc";
 
 import PostModal from "../components/PostModal";
 import FeedFeatures from "./components/FeedFeatures";
