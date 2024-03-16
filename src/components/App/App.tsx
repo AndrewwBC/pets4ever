@@ -16,6 +16,7 @@ import InsideLayout from "../Pages/InternalPages/InsideLayout";
 import Feed from "../Pages/InternalPages/Feed";
 import Header from "../Layout/Header";
 import Error404 from "../Pages/Error404";
+import Footer from "../Layout/Footer";
 
 function App() {
   return (

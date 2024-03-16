@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   background: ${({ theme }) => theme.bg};
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   gap: 48px;
-  align-items: start;
-  max-width: 1400px;
 
   .header {
     display: flex;
@@ -30,22 +30,36 @@ export const HeaderAndPhoto = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 48px;
-    margin-top: 32px;
     justify-content: start;
+    gap: 48px;
+    margin-top: 24px;
     overflow-y: scroll;
     scroll-behavior: smooth;
     scroll-snap-align: calc(50vh);
     max-height: calc(100vh - 180px);
-    padding-bottom: 12px;
+    padding: 0px 32px 0px 0px;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #f9f9f9;
+      border-radius: 20px;
+      border: 3px solid #a9a9a9;
+    }
 
     .feedPhoto {
       height: 620px;
       width: 500px;
 
-      @media (max-width: 1400px) {
+      @media (max-width: 1600px) {
         height: 420px;
-        width: 380px;
+        width: 400px;
       }
     }
 
@@ -100,63 +114,7 @@ export const HeaderAndPhoto = styled.section`
       border-bottom-right-radius: 8px;
       border-bottom-left-radius: 8px;
       background: ${({ theme }) => theme.bg};
-      box-shadow: 1px 6px 12px #bfbfbf,
-        -1px -6px 12px ${({ theme }) => theme.bg};
+      box-shadow: 1px 6px 6px #bfbfbf, -1px -6px 12px ${({ theme }) => theme.bg};
     }
-  }
-`;
-
-export const FeedFeatures = styled.div`
-  display: grid;
-  gap: 32px;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto auto;
-  max-height: 100vh;
-
-  h1 {
-    color: ${({ theme }) => theme.purple.dark};
-  }
-
-  .storiesContent {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    gap: 12px;
-    margin-top: 20px;
-    max-width: 400px;
-
-    img {
-      height: 280px;
-      object-fit: cover;
-      border-radius: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-      border: 2px solid transparent;
-
-      @media (max-width: 1400px) {
-        height: 200px;
-      }
-
-      &:hover {
-        border: 2px solid black;
-      }
-    }
-  }
-`;
-
-export const SuggestionContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
-  h1 {
-    font-size: 24px;
-  }
-
-  .userSuggestedPictureAndName {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 18px;
   }
 `;
