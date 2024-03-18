@@ -26,8 +26,8 @@ const UserProfile = () => {
         },
       });
       if (request) {
-        console.log(request);
-        setUserName(request.data.userName);
+        console.log(request.data);
+        setUserName(request.data.username);
       }
     } catch (error) {
       if (error instanceof AxiosError) {
