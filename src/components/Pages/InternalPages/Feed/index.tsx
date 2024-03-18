@@ -69,10 +69,15 @@ export const Feed = () => {
         </div>
 
         <div className="imagesContainer">
-          {data.map(({ url, userName, description, created_at }) => {
+          {data.map(({ url, userName, description, created_at }, index) => {
             return (
               <div onClick={() => setFeedPostModal(true)}>
-                <img className="feedPhoto" src={url} alt="" />
+                <img
+                  className="feedPhoto"
+                  src={url}
+                  alt=""
+                  id={index.toString()}
+                />
                 <div className="userInfo">
                   <div className="iconsContainerAndCreatedAt">
                     <div className="icons">
