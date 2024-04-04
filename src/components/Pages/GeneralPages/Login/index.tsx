@@ -1,7 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import FormGroup from "../../../FormGroup";
-import { Container, Content, Form } from "./styles";
+import {
+  AuthContainer,
+  Container,
+  Content,
+  Form,
+  RegisterContent,
+} from "./styles";
 import { Input } from "../../../input";
 import { Button } from "../../../Button";
 import { isEmailValid } from "../../../../utils/isEmailValid";
@@ -9,6 +15,7 @@ import axios, { AxiosError } from "axios";
 
 import { Toast } from "../../../Toast";
 import { Link, useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
   const [toast, setToast] = useState({
@@ -131,7 +138,14 @@ export default function Login() {
   return (
     <Container>
       <Content>
-        <h1>Login</h1>
+        <h1>Log in</h1>
+
+        <AuthContainer>
+          <div className="loginWithGoogle">
+            <FcGoogle size={22} />
+            <span>Continue com Google</span>
+          </div>
+        </AuthContainer>
 
         <Form onSubmit={Login}>
           <FormGroup error={getErrorMessageByFieldName("Email")}>
@@ -152,7 +166,7 @@ export default function Login() {
               placeholder="Insira a sua senha."
             />
           </FormGroup>
-          <Link to="/forgotpassword">
+          <Link style={{ placeSelf: "flex-end" }} to="/forgotpassword">
             <span className="forgotPassword">Esqueceu a senha?</span>
           </Link>
 
@@ -161,6 +175,15 @@ export default function Login() {
             size={"low"}
             label="Entrar"
           />
+
+          <RegisterContent>
+            <p>
+              Não possui uma conta?
+              <Link to="/register">
+                <span className="registerLink"> Registre-se</span>
+              </Link>
+            </p>
+          </RegisterContent>
         </Form>
       </Content>
 

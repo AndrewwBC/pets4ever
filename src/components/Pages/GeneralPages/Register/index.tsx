@@ -178,7 +178,6 @@ export function Register() {
             },
           ])
         );
-
       }
     }
   }

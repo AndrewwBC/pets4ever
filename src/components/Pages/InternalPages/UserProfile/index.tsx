@@ -25,6 +25,7 @@ const UserProfile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (request) {
         console.log(request.data);
         setUserName(request.data.username);
