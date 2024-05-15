@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Container } from "./styles";
 import axios, { AxiosError } from "axios";
+import { GlobalContext } from "../../../../context/GlobalStorage";
 //import axios, { AxiosError } from "axios";
 
 const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [userName, setUserName] = useState("");
+
+  const { setData } = useContext(GlobalContext);
 
   useEffect(() => {
     getUserData();
@@ -13,13 +16,14 @@ const UserProfile = () => {
 
   async function getUserData() {
     const token = localStorage.getItem("token");
+    console.log("Token no profile" + token);
 
     if (!token) {
       return "Token não encontrado";
     }
 
     try {
-      const request = await axios.get("http://localhost:8080/me/profile", {
+      const request = await axios.get("http://localhost:8080/auth/profile", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -29,9 +33,11 @@ const UserProfile = () => {
       if (request) {
         console.log(request.data);
         setUserName(request.data.username);
+        setData({ name: request.data.username, email: request.data.email });
       }
     } catch (error) {
       if (error instanceof AxiosError) {
+        alert(error.message);
         console.log(error.message);
         return error;
       }

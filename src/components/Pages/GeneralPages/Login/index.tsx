@@ -100,7 +100,7 @@ export default function Login() {
         password: password,
       });
 
-      console.log(response.data.token);
+      console.log(response);
 
       if (response) {
         localStorage.setItem("token", response.data.token);
@@ -114,6 +114,25 @@ export default function Login() {
       }
     } catch (err) {
       if (err instanceof AxiosError) {
+        console.log(err.response?.data);
+
+        interface ErrorProps {
+          fieldName: string;
+          message: string;
+        }
+
+        const errorData: ErrorProps[] = err.response?.data;
+
+        errorData.map(({ fieldName, message }) => {
+          setErrors((prevState) => [
+            {
+              ...prevState,
+              field: fieldName,
+              message,
+            },
+          ]);
+        });
+
         if (err.code === "ERR_NETWORK") {
           setToast({
             message: err.message,

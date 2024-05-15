@@ -15,6 +15,7 @@ export const MyButton: React.FC<MyButtonProps> = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  place-self: center;
   padding: ${({ size }: { size: "big" | "medium" | "low" }) =>
     buttonSizes[size]};
 
@@ -27,7 +28,7 @@ export const MyButton: React.FC<MyButtonProps> = styled.button`
   &:hover {
     cursor: pointer;
     animation-play-state: paused;
-    scale: 1.05;
+    background-color: ${({ theme }) => theme.yellow.dark};
   }
 
   &:disabled {

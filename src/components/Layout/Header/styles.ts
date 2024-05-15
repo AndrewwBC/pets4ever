@@ -41,13 +41,12 @@ export const Content = styled.div`
   .menuItems li {
     cursor: pointer;
     font-size: 18px;
-    border-radius: 8px;
-    background-color: ${({ theme }) => theme.yellow.light};
 
     a {
       display: block;
-      padding: 8px 16px;
-      border-radius: 8px;
+      padding: 6px 16px;
+      border-radius: 4px;
+
       color: inherit;
 
       &:active {

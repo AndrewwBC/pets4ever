@@ -1,39 +1,41 @@
+import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { Container, Content, MenuContainer } from "./styles";
 
-import { CgProfile, CgFeed, CgToolbox } from "react-icons/cg";
+import { Container, Content, Header, HeaderContent } from "./styles";
+
+import CreatePostModal from "../components/CreatePostModal";
 
 const InsideLayout = () => {
+  const [createPostModal, setCreatePostModal] = useState(false);
+
   return (
     <Container>
+      {createPostModal && <CreatePostModal />}
       <Content>
-        <MenuContainer>
-          <div className="pets4EverTitle">
-            <h1>Pets4Ever</h1>
-          </div>
+        <Header>
+          <HeaderContent>
+            <div className="pets4EverTitle">
+              <h1>Pets4Ever</h1>
+            </div>
 
-          <nav className="menuContent">
-            <li>
-              <Link to={"/me"}>
-                <CgProfile size={24} color="#222" />
-                Meu Perfil
-              </Link>
-            </li>
+            <nav className="menuContent">
+              <li>
+                <Link to={"/me"}>Meu Perfil</Link>
+              </li>
 
-            <li>
-              <Link to={"/me/feed"}>
-                <CgFeed size={24} color="#222" />
-                Feed
-              </Link>
-            </li>
-            <li>
-              <Link to={"/me/feed"}>
-                <CgToolbox size={24} color="#222" />
-                Configurações
-              </Link>
-            </li>
-          </nav>
-        </MenuContainer>
+              <li>
+                <Link to={"/me/feed"}>Feed</Link>
+              </li>
+              <li>
+                <Link to={"/me/config"}>Configurações</Link>
+              </li>
+
+              <li>
+                <button onClick={() => setCreatePostModal(true)}>Postar</button>
+              </li>
+            </nav>
+          </HeaderContent>
+        </Header>
 
         <div className="outletContainer">
           <Outlet />

@@ -2,8 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   background-color: ${({ theme }) => theme.bg};
-  max-width: 1000px;
-  margin: 0 auto;
+
+  .userContent {
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   .userImageAndName {
     gap: 8px;
@@ -32,11 +39,5 @@ export const Container = styled.main`
       flex-direction: column;
       font-size: 16px;
     }
-  }
-
-  .userContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 `;

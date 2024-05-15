@@ -3,15 +3,22 @@ import styled from "styled-components";
 export const Container = styled.main`
   background: ${({ theme }) => theme.bg};
   display: flex;
+  flex-direction: column;
   align-items: center;
-  flex-direction: row;
-  justify-content: space-evenly;
-  gap: 48px;
+
+  gap: 16px;
 
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid gray;
+    padding-bottom: 12px;
+
+    span {
+      font-weight: 700;
+      font-size: 18px;
+    }
 
     .menuHeader {
       display: flex;
@@ -25,6 +32,21 @@ export const Container = styled.main`
 
 export const HeaderAndPhoto = styled.section`
   background: ${({ theme }) => theme.bg};
+  grid-column: 2/3;
+  .postHeader div {
+    display: flex;
+    align-items: center;
+    padding: 8px 4px;
+    gap: 8px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    background: ${({ theme }) => theme.neutral.c1};
+    box-shadow: 1px 6px 6px #bfbfbf, -1px -6px 12px ${({ theme }) => theme.bg};
+
+    img {
+      border-radius: 9999px;
+    }
+  }
 
   .imagesContainer {
     display: flex;
@@ -32,12 +54,10 @@ export const HeaderAndPhoto = styled.section`
     align-items: center;
     justify-content: start;
     gap: 48px;
-    margin-top: 24px;
-    overflow-y: scroll;
+    margin-top: 6px;
     scroll-behavior: smooth;
     scroll-snap-align: calc(50vh);
     max-height: calc(100vh - 180px);
-    padding: 0px 32px 0px 0px;
 
     &::-webkit-scrollbar {
       width: 4px;
@@ -54,18 +74,15 @@ export const HeaderAndPhoto = styled.section`
     }
 
     .feedPhoto {
-      height: 620px;
-      width: 500px;
+      height: 600px;
+      width: 520px;
 
       @media (max-width: 1600px) {
         height: 420px;
-        width: 400px;
       }
     }
 
     img {
-      border-top-right-radius: 8px;
-      border-top-left-radius: 8px;
       object-fit: cover;
     }
 
@@ -113,7 +130,7 @@ export const HeaderAndPhoto = styled.section`
       padding: 12px;
       border-bottom-right-radius: 8px;
       border-bottom-left-radius: 8px;
-      background: ${({ theme }) => theme.bg};
+      background: ${({ theme }) => theme.neutral.c1};
       box-shadow: 1px 6px 6px #bfbfbf, -1px -6px 12px ${({ theme }) => theme.bg};
     }
   }

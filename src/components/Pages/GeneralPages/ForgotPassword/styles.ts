@@ -7,26 +7,6 @@ export const Container = styled.main`
   background: ${({ theme }) => theme.bg};
 `;
 
-// const borderAnimation = keyframes`
-
-//   0% {
-//     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-//   }
-//   25% {
-//     box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.7);
-//   }
-//   50% {
-//     box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.7);
-//   }
-//   75% {
-//     box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.7);
-//   }
-//   100% {
-//     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-//   }
-
-//   `;
-
 export const Content = styled.div`
   max-width: 320px;
   display: flex;
@@ -76,8 +56,8 @@ export const Content = styled.div`
 
 export const Form = styled.form`
   display: flex;
-  align-items: center;
   flex-direction: column;
+  width: 100%;
   margin-top: 42px;
 
   input {

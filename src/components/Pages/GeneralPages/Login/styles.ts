@@ -53,6 +53,7 @@ export const Content = styled.div`
   .forgotPassword,
   .registerLink {
     margin: 0px 0px;
+    font-weight: 700;
     font-size: 16px;
     color: ${({ theme }) => theme.purple.medium};
     font-family: "Roboto", sans-serif;
@@ -67,11 +68,12 @@ export const Content = styled.div`
 export const AuthContainer = styled.div`
   width: 100%;
   padding: 32px 0;
-  margin: 16px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 24px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   .loginWithGoogle {
     display: flex;
@@ -79,9 +81,13 @@ export const AuthContainer = styled.div`
     justify-content: center;
     gap: 12px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 4px 8px;
     width: 100%;
+    transition: 0.3s;
+    &:hover {
+      border: 1px solid rgba(0, 0, 0, 0.8);
+    }
   }
 `;
 
@@ -96,14 +102,15 @@ export const Form = styled.form`
   }
 
   button {
-    margin-top: 38px;
+    margin-top: 36px;
     max-width: 100%;
   }
 `;
 
 export const RegisterContent = styled.div`
-  margin-top: 24px;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -21,6 +21,10 @@ export default function ForgotPassword() {
   function handleEmailBlur(event: ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
 
+    if (email.length < 1) {
+      return;
+    }
+
     if (!isEmailValid(event.target.value)) setError("Email inválido");
 
     if (isEmailValid(event.target.value)) setError("");

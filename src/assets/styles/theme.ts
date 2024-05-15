@@ -1,5 +1,30 @@
+export interface MyThemeProps {
+  bg: string;
+  neutral: {
+    c1: string;
+    c2: string;
+    c3: string;
+    c4: string;
+    c5: string;
+    c6: string;
+    c7: string;
+    c8: string;
+    c9: string;
+  };
+  purple: {
+    light: string;
+    medium: string;
+    dark: string;
+  };
+  yellow: {
+    light: string;
+    medium: string;
+    dark: string;
+  };
+}
+
 export const theme = {
-  bg: "#F9F9F9",
+  bg: "#F4f4f4",
   neutral: {
     c1: "#FFFFFF",
     c2: "#F9F9F9",

@@ -153,8 +153,9 @@ export function Register() {
         email: registerData.email,
         password: registerData.senha,
       });
-      const response = request.data;
 
+      const response = request.data;
+      console.log(response);
       if (response)
         setToast({
           message: "Registrado com sucesso!",

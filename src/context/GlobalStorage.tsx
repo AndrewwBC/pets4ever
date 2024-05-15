@@ -12,11 +12,13 @@ interface GlobalStorageProps {
 
 interface StateProps {
   name: string;
+  email: string;
 }
 
 interface ContextProps {
   data: {
     name: string;
+    email: string;
   };
   setData: Dispatch<SetStateAction<StateProps>>;
 }
@@ -24,6 +26,7 @@ interface ContextProps {
 export const GlobalContext = createContext<ContextProps>({
   data: {
     name: "",
+    email: "",
   },
   setData: useState,
 });
@@ -35,6 +38,7 @@ interface GlobalStorageProps {
 export function GlobalStorage({ children }: GlobalStorageProps) {
   const [data, setData] = useState<StateProps>({
     name: "",
+    email: "",
   });
 
   return (

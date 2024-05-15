@@ -4,7 +4,8 @@ import { Container, HeaderAndPhoto } from "./styles";
 import { VscHeart, VscComment, VscSend } from "react-icons/vsc";
 
 import PostModal from "../components/PostModal";
-import FeedFeatures from "./components/FeedFeatures";
+import Stories from "./components/Stories";
+import Sugestions from "./components/Sugestions";
 
 export const Feed = () => {
   const data = [
@@ -57,9 +58,10 @@ export const Feed = () => {
     <Container>
       {feedPostModal && <PostModal />}
 
+      <Stories />
       <HeaderAndPhoto>
         <div className="header">
-          <h1>Feeds</h1>
+          <span>Feeds</span>
 
           <div className="menuHeader">
             <p>Recentes</p>
@@ -71,7 +73,18 @@ export const Feed = () => {
         <div className="imagesContainer">
           {data.map(({ url, userName, description, created_at }, index) => {
             return (
-              <div onClick={() => setFeedPostModal(true)}>
+              <div key={index} onClick={() => setFeedPostModal(true)}>
+                <header className="postHeader">
+                  <div>
+                    <img
+                      src="https://images.unsplash.com/photo-1608096299210-db7e38487075?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      alt=""
+                      height={48}
+                      width={48}
+                    />
+                    <p>Andrew</p>
+                  </div>
+                </header>
                 <img
                   className="feedPhoto"
                   src={url}
@@ -101,8 +114,6 @@ export const Feed = () => {
           })}
         </div>
       </HeaderAndPhoto>
-
-      <FeedFeatures />
     </Container>
   );
 };
