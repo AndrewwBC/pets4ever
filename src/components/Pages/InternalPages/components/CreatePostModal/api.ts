@@ -6,13 +6,16 @@ export async function uploadFile(file: any, postDescription: string) {
 
   const token = localStorage.getItem("token");
 
-  const createdAt = `${now.getFullYear()}/${
+  const createdAt = `${now.getDate()}/${
     now.getMonth() + 1
-  }/${now.getDate()}`;
+  }/${now.getFullYear()}`;
+
+  console.log(now.getDate());
 
   formData.append("file", file);
   formData.append("description", postDescription);
   formData.append("creationDate", createdAt);
+  formData.append("isStorie", "Storie");
 
   try {
     const r = await axios({

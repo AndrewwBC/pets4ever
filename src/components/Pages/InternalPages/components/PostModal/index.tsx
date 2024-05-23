@@ -3,28 +3,31 @@ import { VscComment, VscHeart, VscSend } from "react-icons/vsc";
 import { Content, Modal } from "./styles";
 import { Input } from "../../../../input";
 
-const PostModal = () => {
-  const { url, userName, description, created_at } = {
-    url: "https://images.unsplash.com/photo-1608096299210-db7e38487075?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    userName: "Andrew",
-    description: "É um bom garoto, ou não é?!?",
-    created_at: "02/05/2023",
-  };
+const PostModal = ({ post, setModal, setModalPost }) => {
+  function handleCloseModal() {
+    console.log(post);
+    setModal(false);
+    setModalPost(false);
+  }
 
   return createPortal(
-    <Modal>
+    <Modal onClick={handleCloseModal}>
       <Content>
-        <img className="feedPhoto" src={url} alt="" />
+        <img
+          className="feedPhoto"
+          src={`https://pets4ever.s3.us-east-2.amazonaws.com/${post.imageUrl}`}
+          alt=""
+        />
 
         <div className="postInfo">
           <div className="nameDescriptionAndCreatedAt">
             <div className="nameAndCreatedAt">
-              <p>@{userName.toLowerCase()}</p>
-              <small>{created_at}</small>
+              <p>@{post.name.toLowerCase()}</p>
+              <small>{post.creationDate}</small>
             </div>
 
             <div>
-              <small className="description">{description}</small>
+              <small className="description">{post.description}</small>
             </div>
           </div>
 

@@ -1,121 +1,118 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, HeaderAndPhoto } from "./styles";
 
 import { VscHeart, VscComment, VscSend } from "react-icons/vsc";
 
 import PostModal from "../components/PostModal";
 import Stories from "./components/Stories";
-import Sugestions from "./components/Sugestions";
+import { getPosts } from "./api";
 
 export const Feed = () => {
-  const data = [
-    {
-      url: "https://images.unsplash.com/photo-1608096299210-db7e38487075?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      userName: "Andrew",
-      description: "É um bom garoto, ou não é?!?",
-      created_at: "02/05/2023",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1616781296073-65d3f087de41?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D",
-      userName: "Andrew",
-      description: "É um bom garoto, ou não é?!?",
-      created_at: "02/05/2023",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1616781296073-65d3f087de41?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D",
-      userName: "Andrew",
-      description: "É um bom garoto, ou não é?!?",
-      created_at: "02/05/2023",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1616781296073-65d3f087de41?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D",
-      userName: "Andrew",
-      description: "É um bom garoto, ou não é?!?",
-      created_at: "02/05/2023",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1616781296073-65d3f087de41?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D",
-      userName: "Andrew",
-      description: "É um bom garoto, ou não é?!?",
-      created_at: "02/05/2023",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1616781296073-65d3f087de41?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D",
-      userName: "Andrew",
-      description: "É um bom garoto, ou não é?!?",
-      created_at: "02/05/2023",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1616781296073-65d3f087de41?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D",
-      userName: "Andrew",
-      description: "É um bom garoto, ou não é?!?",
-      created_at: "02/05/2023",
-    },
-  ];
   const [feedPostModal, setFeedPostModal] = useState(false);
+  const [modalPost, setModalPost] = useState();
+  const [posts, setPosts] = useState();
 
-  return (
-    <Container>
-      {feedPostModal && <PostModal />}
+  useEffect(() => {
+    api();
+  }, []);
 
-      <Stories />
-      <HeaderAndPhoto>
-        <div className="header">
-          <span>Feeds</span>
+  async function api() {
+    const posts = await getPosts();
+    setPosts(posts);
+  }
 
-          <div className="menuHeader">
-            <p>Recentes</p>
-            <p>Amigos</p>
-            <p>Popular</p>
+  function handlePostModal(postId: string) {
+    setFeedPostModal(true);
+    console.log(postId);
+
+    setModalPost(posts.find((post) => post.postId === postId));
+  }
+
+  if (!posts) return <div></div>;
+  else
+    return (
+      <Container>
+        {feedPostModal && (
+          <PostModal
+            post={modalPost}
+            setModalPost={setModalPost}
+            setModal={setFeedPostModal}
+          />
+        )}
+
+        <Stories />
+        <HeaderAndPhoto>
+          <div className="header">
+            <span>Feeds</span>
+
+            <div className="menuHeader">
+              <p>Recentes</p>
+              <p>Amigos</p>
+              <p>Popular</p>
+            </div>
           </div>
-        </div>
 
-        <div className="imagesContainer">
-          {data.map(({ url, userName, description, created_at }, index) => {
-            return (
-              <div key={index} onClick={() => setFeedPostModal(true)}>
-                <header className="postHeader">
-                  <div>
+          <div className="imagesContainer">
+            {posts.map(
+              (
+                {
+                  creationDate,
+                  description,
+                  imageUrl,
+                  name,
+                  userProfileImageUrl,
+                  postId,
+                }: any,
+                index
+              ) => {
+                return (
+                  <div
+                    className="eachPost"
+                    key={index}
+                    onClick={() => handlePostModal(postId)}
+                  >
+                    <header className="postHeader">
+                      <div>
+                        <img
+                          src={`https://pets4ever.s3.us-east-2.amazonaws.com/${userProfileImageUrl}`}
+                          alt=""
+                          height={48}
+                          width={48}
+                        />
+                        <p>{name}</p>
+                      </div>
+                    </header>
                     <img
-                      src="https://images.unsplash.com/photo-1608096299210-db7e38487075?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      className="feedPhoto"
+                      src={`https://pets4ever.s3.us-east-2.amazonaws.com/${imageUrl}`}
                       alt=""
-                      height={48}
-                      width={48}
                     />
-                    <p>Andrew</p>
-                  </div>
-                </header>
-                <img
-                  className="feedPhoto"
-                  src={url}
-                  alt=""
-                  id={index.toString()}
-                />
-                <div className="userInfo">
-                  <div className="iconsContainerAndCreatedAt">
-                    <div className="icons">
-                      <VscHeart style={{ cursor: "pointer" }} size={26} />
-                      <VscComment style={{ cursor: "pointer" }} size={26} />
-                      <VscSend style={{ cursor: "pointer" }} size={26} />
-                    </div>
+                    <div className="userInfo">
+                      <div className="iconsContainerAndCreatedAt">
+                        <div className="icons">
+                          <VscHeart style={{ cursor: "pointer" }} size={26} />
+                          <VscComment style={{ cursor: "pointer" }} size={26} />
+                          <VscSend style={{ cursor: "pointer" }} size={26} />
+                        </div>
 
-                    <div className="createdAt">
-                      <small>{created_at}</small>
+                        <div className="createdAt">
+                          <small>{creationDate}</small>
+                        </div>
+                      </div>
+
+                      <div className="nameAndDescription">
+                        <p>@{name.toLowerCase()}</p>
+                        <small>{description}</small>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="nameAndDescription">
-                    <p>@{userName.toLowerCase()}</p>
-                    <small>{description}</small>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </HeaderAndPhoto>
-    </Container>
-  );
+                );
+              }
+            )}
+          </div>
+        </HeaderAndPhoto>
+      </Container>
+    );
 };
 
 export default Feed;

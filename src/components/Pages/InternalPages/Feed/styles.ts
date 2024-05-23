@@ -5,6 +5,7 @@ export const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 120px;
 
   gap: 16px;
 
@@ -55,9 +56,6 @@ export const HeaderAndPhoto = styled.section`
     justify-content: start;
     gap: 48px;
     margin-top: 6px;
-    scroll-behavior: smooth;
-    scroll-snap-align: calc(50vh);
-    max-height: calc(100vh - 180px);
 
     &::-webkit-scrollbar {
       width: 4px;

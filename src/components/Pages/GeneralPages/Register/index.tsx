@@ -30,7 +30,7 @@ export function Register() {
   const { toast, setToast } = useToast();
 
   function handleUsername({ target }: ChangeEvent<HTMLInputElement>) {
-    const usernameField = "username";
+    const usernameField = "Username";
 
     if (target.value.length == 0)
       setErrors((prevState) => [
@@ -44,7 +44,7 @@ export function Register() {
   }
 
   function handleEmailChange({ target }: ChangeEvent<HTMLInputElement>) {
-    const emailField = "email";
+    const emailField = "Email";
 
     const errorAlreadyExists = errors.find((erro) => erro.field === emailField);
 
@@ -66,7 +66,7 @@ export function Register() {
     }
   }
   function handlePassword({ target }: ChangeEvent<HTMLInputElement>) {
-    const passwordField = "password";
+    const passwordField = "Password";
 
     if (target.value.length < 6)
       setErrors((prevState) => [
@@ -86,7 +86,7 @@ export function Register() {
   }
 
   function handleConfirmPassword({ target }: ChangeEvent<HTMLInputElement>) {
-    const fieldConfirmPass = "confirmPass";
+    const fieldConfirmPass = "ConfirmPass";
 
     const errorAlreadyExists = errors.find(
       (erro) => erro.field === fieldConfirmPass
@@ -196,7 +196,7 @@ export function Register() {
 
         <div className="formContainer">
           <form onSubmit={handleSubmit}>
-            <FormGroup error={getErrorMessageByFieldName("username")}>
+            <FormGroup error={getErrorMessageByFieldName("Username")}>
               <Input
                 placeholder="Nome de usuário"
                 onBlur={handleUsername}
@@ -208,17 +208,17 @@ export function Register() {
                 }
               />
             </FormGroup>
-            <FormGroup error={getErrorMessageByFieldName("email")}>
+            <FormGroup error={getErrorMessageByFieldName("Email")}>
               <Input placeholder="Email" onChange={handleEmailChange} />
             </FormGroup>
-            <FormGroup error={getErrorMessageByFieldName("password")}>
+            <FormGroup error={getErrorMessageByFieldName("Password")}>
               <Input
                 placeholder="Senha"
                 onChange={handlePassword}
                 type="password"
               />
             </FormGroup>
-            <FormGroup error={getErrorMessageByFieldName("confirmPass")}>
+            <FormGroup error={getErrorMessageByFieldName("ConfirmPass")}>
               <Input
                 placeholder="Confirme sua senha"
                 onChange={handleConfirmPassword}
