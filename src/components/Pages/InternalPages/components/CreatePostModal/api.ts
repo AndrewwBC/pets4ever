@@ -10,35 +10,38 @@ export async function uploadFile(file: any, postDescription: string) {
     now.getMonth() + 1
   }/${now.getFullYear()}`;
 
-  console.log(now.getDate());
-
   formData.append("file", file);
   formData.append("description", postDescription);
   formData.append("creationDate", createdAt);
   formData.append("isStorie", "Storie");
 
   try {
-    const r = await axios({
-      url: "http://localhost:8080/post/create",
-      method: "post",
-      data: formData,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const request = await fetch("http://localhost:8080/post/create", {
+    const requestPy = await axios({
+      url: "http://127.0.0.1:5000/getPredction",
       method: "POST",
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      data: formData,
     });
 
-    const response = await r.data;
-
-    console.log(response);
+    const previsao = await requestPy.data.previsao;
+    return previsao;
   } catch (err) {
     console.log(err);
   }
+
+  // try {
+  //   const r = await axios({
+  //     url: "http://localhost:8080/post/create",
+  //     method: "post",
+  //     data: formData,
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+
+  //   const response = await r.data;
+
+  //   console.log(response);
+  // } catch (err) {
+  //   console.log(err);
+  // }
 }

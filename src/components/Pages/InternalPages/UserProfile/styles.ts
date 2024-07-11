@@ -5,6 +5,7 @@ export const Container = styled.main`
 
   max-width: 1000px;
   margin: 0 auto;
+  margin-bottom: 64px;
   .userContent {
     margin-top: 32px;
     display: flex;
@@ -20,6 +21,7 @@ export const Container = styled.main`
 
     img {
       border-radius: 9999px;
+      object-fit: cover;
     }
   }
 

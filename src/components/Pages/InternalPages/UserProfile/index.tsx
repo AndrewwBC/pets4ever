@@ -50,6 +50,10 @@ const UserProfile = () => {
     }
   }
 
+  function updateProfileImg() {
+    setPostProfilePictureModal(!postProfilePictureModal);
+  }
+
   if (isLoading)
     return (
       <Container>
@@ -59,7 +63,12 @@ const UserProfile = () => {
   else
     return (
       <Container>
-        {postProfilePictureModal && <PostProfilePicture />}
+        {postProfilePictureModal && (
+          <PostProfilePicture
+            setModal={setPostProfilePictureModal}
+            isActive={postProfilePictureModal}
+          />
+        )}
 
         <div className="userContent">
           <div className="userImageAndName">
@@ -69,6 +78,7 @@ const UserProfile = () => {
                 height={64}
                 src={`https://pets4ever.s3.us-east-2.amazonaws.com/${data.profileImg}`}
                 alt="sua foto de perfil"
+                onClick={updateProfileImg}
               />
             </div>
 

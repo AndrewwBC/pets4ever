@@ -23,7 +23,6 @@ export const Feed = () => {
 
   function handlePostModal(postId: string) {
     setFeedPostModal(true);
-    console.log(postId);
 
     setModalPost(posts.find((post) => post.postId === postId));
   }

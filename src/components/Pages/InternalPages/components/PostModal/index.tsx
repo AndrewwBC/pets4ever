@@ -5,13 +5,12 @@ import { Input } from "../../../../input";
 
 const PostModal = ({ post, setModal, setModalPost }) => {
   function handleCloseModal() {
-    console.log(post);
     setModal(false);
     setModalPost(false);
   }
 
   return createPortal(
-    <Modal onClick={handleCloseModal}>
+    <Modal>
       <Content>
         <img
           className="feedPhoto"
@@ -20,6 +19,10 @@ const PostModal = ({ post, setModal, setModalPost }) => {
         />
 
         <div className="postInfo">
+          <div className="closeModal" onClick={handleCloseModal}>
+            <p className="x">x</p>
+            <p className="fechar">Fechar</p>
+          </div>
           <div className="nameDescriptionAndCreatedAt">
             <div className="nameAndCreatedAt">
               <p>@{post.name.toLowerCase()}</p>

@@ -10,7 +10,7 @@ export const Modal = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 10px;
 `;
 
 export const Content = styled.section`
@@ -35,8 +35,38 @@ export const Content = styled.section`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
     padding: 16px;
+    padding-top: 28px;
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
+    position: relative;
+
+    .closeModal {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      background-color: red;
+      font-size: 14px;
+      font-weight: 700;
+      color: #f9f9f9;
+      right: 0;
+      left: 0;
+      cursor: pointer;
+
+      .fechar {
+        display: none;
+      }
+
+      &:hover {
+        .x {
+          display: none;
+        }
+
+        .fechar {
+          display: block;
+          font-size: 16px;
+        }
+      }
+    }
   }
 
   .nameDescriptionAndCreatedAt {
@@ -55,6 +85,7 @@ export const Content = styled.section`
 
       p {
         color: ${({ theme }) => theme.neutral.c6};
+        font-weight: 700;
       }
 
       small {

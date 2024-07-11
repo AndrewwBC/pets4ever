@@ -65,7 +65,11 @@ const Stories = () => {
 
       <div className="storiesContent">
         {stories.map((item) => (
-          <div key={Math.random()} className="eachStorie">
+          <div
+            onClick={() => handleStoriesClick}
+            key={Math.random()}
+            className="eachStorie"
+          >
             <img src={item.img} alt="" />
             <span>{item.user}</span>
           </div>
