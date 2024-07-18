@@ -2,12 +2,42 @@ import { createPortal } from "react-dom";
 import { VscComment, VscHeart, VscSend } from "react-icons/vsc";
 import { Content, Modal } from "./styles";
 import { Input } from "../../../../input";
+import { ChangeEvent, useState } from "react";
+import axios, { AxiosError } from "axios";
 
-const PostModal = ({ post, setModal, setModalPost }) => {
+const PostModal = ({ post, setModal, setModalPost }: any) => {
+  const [commentData, setCommentData] = useState({
+    comment: "",
+    postId: post.postId,
+  });
+
   function handleCloseModal() {
     setModal(false);
     setModalPost(false);
   }
+
+  async function handleSendComment() {
+    const token = localStorage.getItem("token");
+
+    try {
+      const request = await axios({
+        url: "http://localhost:8080/comment/store",
+        method: "post",
+        data: commentData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(request);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+      }
+    }
+  }
+
+  console.log(post);
 
   return createPortal(
     <Modal>
@@ -34,6 +64,14 @@ const PostModal = ({ post, setModal, setModalPost }) => {
             </div>
           </div>
 
+          <div>
+            {post.comments.map(({ comment, userId }) => (
+              <div key={userId + Math.random()}>
+                <p>{comment}</p>
+              </div>
+            ))}
+          </div>
+
           <div className="icons">
             <VscHeart style={{ cursor: "pointer" }} size={26} />
             <VscComment style={{ cursor: "pointer" }} size={26} />
@@ -41,8 +79,20 @@ const PostModal = ({ post, setModal, setModalPost }) => {
           </div>
 
           <div className="commentContainer">
-            <Input placeholder="Insira um comentário..." />
-            <VscSend style={{ cursor: "pointer" }} size={26} />
+            <Input
+              placeholder="Insira um comentário..."
+              onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
+                setCommentData((prevState) => ({
+                  ...prevState,
+                  comment: target.value,
+                }))
+              }
+            />
+            <VscSend
+              onClick={handleSendComment}
+              style={{ cursor: "pointer" }}
+              size={26}
+            />
           </div>
         </div>
       </Content>

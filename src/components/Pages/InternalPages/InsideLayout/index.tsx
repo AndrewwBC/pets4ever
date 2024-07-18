@@ -14,10 +14,10 @@ const InsideLayout = () => {
       <Content>
         <Header>
           <HeaderContent>
-            <div className="pets4EverTitle">
-              <h1>
-                <Link to={"/"}>Pets4Ever</Link>
-              </h1>
+            <div>
+              <Link className="pets4EverTitle" to={"/"}>
+                Pets4Ever
+              </Link>
             </div>
 
             <nav className="menuContent">

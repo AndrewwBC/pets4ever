@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-  background: ${({ theme }) => theme.bg};
+  background: ${({ theme }) => theme.neutral.c2};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +32,7 @@ export const Container = styled.main`
 `;
 
 export const HeaderAndPhoto = styled.section`
-  background: ${({ theme }) => theme.bg};
+  background: inherit;
   grid-column: 2/3;
   .postHeader div {
     display: flex;
@@ -84,12 +84,12 @@ export const HeaderAndPhoto = styled.section`
       object-fit: cover;
     }
 
-    .userInfo {
+    .postInfoAndStatus {
       .iconsContainerAndCreatedAt {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
 
         .icons {
           display: flex;
@@ -107,11 +107,18 @@ export const HeaderAndPhoto = styled.section`
         }
       }
 
+      .quantityOfLikesContainer {
+        small {
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+
       .nameAndDescription {
         display: flex;
         align-items: center;
         justify-content: start;
-        margin-top: 32px;
+        margin-top: 18px;
         margin-left: 16px;
         gap: 32px;
 

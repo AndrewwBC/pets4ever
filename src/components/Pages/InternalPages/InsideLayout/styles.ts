@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-  background: ${({ theme }) => theme.bg};
+  background: ${({ theme }) => theme.neutral.c2};
   height: 100vh;
+  width: calc(100vw - 18px);
 `;
 
 export const Content = styled.section`
@@ -19,7 +20,7 @@ export const Content = styled.section`
 
 export const Header = styled.div`
   background: ${({ theme }) => theme.neutral.c2};
-  box-shadow: 1px 2px 6px #888, -1px -6px 12px ${({ theme }) => theme.bg};
+
   grid-column: 1/-1;
   padding: 8px 0px;
 `;
@@ -34,6 +35,9 @@ export const HeaderContent = styled.div`
 
   .pets4EverTitle {
     justify-self: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;
   }
 
   .menuContent {
@@ -49,7 +53,8 @@ export const HeaderContent = styled.div`
       align-items: center;
       gap: 12px;
       color: ${({ theme }) => theme.neutral.c9};
-      font-size: 14px;
+      font-size: 16px;
+      font-weight: 500;
       transition: all 0.3s;
 
       @media (max-width: 1000px) {

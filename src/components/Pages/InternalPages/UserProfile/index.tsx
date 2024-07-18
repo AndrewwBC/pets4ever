@@ -1,23 +1,26 @@
 import { useContext, useEffect, useState } from "react";
-import { Container, ProfileFeed } from "./styles";
+import { Container } from "./styles";
 import axios, { AxiosError } from "axios";
 import { GlobalContext } from "../../../../context/GlobalStorage";
 import PostProfilePicture from "./PostProfilePicture";
+import ProfileFeed from "./components/ProfileFeed";
+import { ProfileFeedProps } from "./components/ProfileFeed/types";
+import UserStatus from "./components/UserStats";
 
 const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState<ProfileFeedProps[] | undefined>();
   const [postProfilePictureModal, setPostProfilePictureModal] = useState(false);
-
+  console.log(posts);
   const { data, setData } = useContext(GlobalContext);
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [data.name]);
 
   async function getUserData() {
     const token = localStorage.getItem("token");
-
+    console.log("Chamou a API");
     if (!token) {
       return "Token não encontrado";
     }
@@ -36,13 +39,13 @@ const UserProfile = () => {
         setData({
           name: request.data.username,
           email: request.data.email,
-          profileImg: request.data.profileImageUrl,
+          profileImg: request.data.imageProfileUrl,
         });
+        return;
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        alert(error.message);
-        console.log(error.message);
+        console.log(error);
         return error;
       }
     } finally {
@@ -85,44 +88,10 @@ const UserProfile = () => {
             <h1>{data.name}</h1>
           </div>
 
-          <div className="userStats">
-            <div>
-              <p>0</p>
-              <small>Posts</small>
-            </div>
-
-            <div>
-              <p>0</p>
-              <small>Seguindo</small>
-            </div>
-
-            <div>
-              <p>0</p>
-              <small>Seguidores</small>
-            </div>
-          </div>
+          <UserStatus />
         </div>
 
-        <ProfileFeed>
-          <div className="profileFeedContent">
-            {posts.map(
-              (
-                { creationDate, description, imageUrl, name, postId }: any,
-                index
-              ) => {
-                return (
-                  <div key={index} onClick={() => handlePostModal(postId)}>
-                    <img
-                      className="feedPhoto"
-                      src={`https://pets4ever.s3.us-east-2.amazonaws.com/${imageUrl}`}
-                      alt=""
-                    />
-                  </div>
-                );
-              }
-            )}
-          </div>
-        </ProfileFeed>
+        <ProfileFeed posts={posts}></ProfileFeed>
       </Container>
     );
 };

@@ -77,7 +77,7 @@ const CreatePostModal = () => {
             <p className="fechar">cancelar</p>
           </div>
 
-          <div className="post">
+          <div onClick={handleSubmit} className="post">
             <p>Postar</p>
           </div>
 

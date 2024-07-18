@@ -23,25 +23,26 @@ export async function uploadFile(file: any, postDescription: string) {
     });
 
     const previsao = await requestPy.data.previsao;
+    alert(previsao);
     return previsao;
   } catch (err) {
     console.log(err);
   }
 
-  // try {
-  //   const r = await axios({
-  //     url: "http://localhost:8080/post/create",
-  //     method: "post",
-  //     data: formData,
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
+  try {
+    const r = await axios({
+      url: "http://localhost:8080/post/create",
+      method: "post",
+      data: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  //   const response = await r.data;
+    const response = await r.data;
 
-  //   console.log(response);
-  // } catch (err) {
-  //   console.log(err);
-  // }
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+  }
 }
