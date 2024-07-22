@@ -1,6 +1,10 @@
 import axios from "axios";
 
-export async function uploadFile(file: any, postDescription: string) {
+export async function uploadFile(
+  file: any,
+  postDescription: string,
+  setIsLoading
+) {
   const formData = new FormData();
   const now = new Date();
 
@@ -16,6 +20,10 @@ export async function uploadFile(file: any, postDescription: string) {
   formData.append("isStorie", "Storie");
 
   try {
+    setIsLoading({
+      step: "Validating",
+      isLoading: true,
+    });
     const requestPy = await axios({
       url: "http://127.0.0.1:5000/getPredction",
       method: "POST",
@@ -23,13 +31,24 @@ export async function uploadFile(file: any, postDescription: string) {
     });
 
     const previsao = await requestPy.data.previsao;
-    alert(previsao);
-    return previsao;
+    console.log(previsao);
   } catch (err) {
     console.log(err);
+  } finally {
+    console.log("Passou pelo python");
+    setIsLoading({
+      step: "",
+      isLoading: true,
+    });
   }
 
   try {
+    setIsLoading({
+      step: "Posting",
+      isLoading: true,
+    });
+    console.log("Entrou Java");
+
     const r = await axios({
       url: "http://localhost:8080/post/create",
       method: "post",
@@ -44,5 +63,12 @@ export async function uploadFile(file: any, postDescription: string) {
     console.log(response);
   } catch (err) {
     console.log(err);
+  } finally {
+    console.log("Saiu Java");
+
+    setIsLoading({
+      step: "Posted",
+      isLoading: true,
+    });
   }
 }

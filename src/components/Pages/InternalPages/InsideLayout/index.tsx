@@ -10,7 +10,9 @@ const InsideLayout = () => {
 
   return (
     <Container>
-      {createPostModal && <CreatePostModal />}
+      {createPostModal && (
+        <CreatePostModal setCreatePostModal={setCreatePostModal} />
+      )}
       <Content>
         <Header>
           <HeaderContent>

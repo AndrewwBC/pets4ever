@@ -6,11 +6,16 @@ import { VscComment, VscHeart, VscSend } from "react-icons/vsc";
 import { Content, InputFileModal, Modal } from "./styles";
 import { Input } from "../../../../input";
 import { GlobalContext } from "../../../../../context/GlobalStorage";
+import ValidatingImageModal from "./ValidatingImageModal";
 
-const CreatePostModal = () => {
+const CreatePostModal = ({ setCreatePostModal }) => {
   const [file, setFile] = useState();
+  const [description, setDescription] = useState("");
   const [response, setUploadResponse] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({
+    step: "",
+    isLoading: false,
+  });
   const [preview, setPreview] = useState("");
 
   const { data } = useContext(GlobalContext);
@@ -33,19 +38,22 @@ const CreatePostModal = () => {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const uploadResponse = await uploadFile(file, "Minha postagem");
+    const uploadResponse = await uploadFile(file, description, setIsLoading);
     setUploadResponse(uploadResponse);
     console.log(uploadResponse);
-  }
-
-  function handleFileInput(e) {
-    setFile(e.target.files[0]);
   }
 
   return createPortal(
     <Modal>
       <Content>
         <div>
+          {isLoading.isLoading && (
+            <ValidatingImageModal
+              setModal={setIsLoading}
+              isLoadingData={isLoading}
+            />
+          )}
+
           {!preview ? (
             <InputFileModal>
               <div>
@@ -72,7 +80,7 @@ const CreatePostModal = () => {
         </div>
 
         <div className="postInfo">
-          <div className="closeModal">
+          <div onClick={() => setCreatePostModal(false)} className="closeModal">
             <p className="x">x</p>
             <p className="fechar">cancelar</p>
           </div>
@@ -88,7 +96,11 @@ const CreatePostModal = () => {
             </div>
 
             <div className="descriptionContainer">
-              <textarea placeholder="Digite aqui a descrição da postagem." />
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Digite aqui a descrição da postagem."
+              />
             </div>
           </div>
 

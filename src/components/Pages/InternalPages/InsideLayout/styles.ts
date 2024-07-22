@@ -4,6 +4,10 @@ export const Container = styled.main`
   background: ${({ theme }) => theme.neutral.c2};
   height: 100vh;
   width: calc(100vw - 18px);
+
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
 `;
 
 export const Content = styled.section`
@@ -32,12 +36,17 @@ export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   .pets4EverTitle {
     justify-self: center;
     font-size: 28px;
     font-weight: 600;
     color: #222;
+
+    @media (max-width: 600px) {
+      font-size: 16px;
+    }
   }
 
   .menuContent {
@@ -45,6 +54,11 @@ export const HeaderContent = styled.div`
     align-items: center;
     flex-direction: row;
     gap: 12px;
+    flex-wrap: wrap;
+
+    li {
+      display: block;
+    }
 
     a {
       display: flex;
@@ -59,6 +73,10 @@ export const HeaderContent = styled.div`
 
       @media (max-width: 1000px) {
         padding-right: 12px;
+      }
+
+      @media (max-width: 500px) {
+        font-size: 12px;
       }
 
       * {

@@ -2,12 +2,17 @@ import styled from "styled-components";
 
 export const StoriesContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: start;
   flex-direction: column;
   overflow-x: scroll;
   scroll-behavior: smooth;
   margin-left: 8px;
   max-width: 520px;
+
+  @media (max-width: 520px) {
+    max-width: 340px;
+  }
 
   &::-webkit-scrollbar {
     width: 1px;

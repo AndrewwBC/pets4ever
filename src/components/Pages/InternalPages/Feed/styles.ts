@@ -13,7 +13,7 @@ export const Container = styled.main`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid gray;
+    padding: 0px 32px;
     padding-bottom: 12px;
 
     span {
@@ -24,6 +24,10 @@ export const Container = styled.main`
     .menuHeader {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      align-items: end;
+      justify-content: end;
       gap: 16px;
       font-size: 14px;
       font-weight: 500;
@@ -37,12 +41,18 @@ export const HeaderAndPhoto = styled.section`
   .postHeader div {
     display: flex;
     align-items: center;
-    padding: 8px 4px;
+    padding: 4px;
     gap: 8px;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
     background: ${({ theme }) => theme.neutral.c1};
     box-shadow: 1px 6px 6px #bfbfbf, -1px -6px 12px ${({ theme }) => theme.bg};
+
+    p {
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
 
     img {
       border-radius: 9999px;
@@ -77,7 +87,12 @@ export const HeaderAndPhoto = styled.section`
       width: 520px;
 
       @media (max-width: 1600px) {
-        height: 420px;
+        height: 400px;
+      }
+
+      @media (max-width: 500px) {
+        height: 340px;
+        width: 360px;
       }
     }
 
@@ -105,6 +120,10 @@ export const HeaderAndPhoto = styled.section`
           small {
             color: ${({ theme }) => theme.neutral.c6};
             letter-spacing: 0.4px;
+
+            @media (max-width: 600px) {
+              font-size: 14px;
+            }
           }
         }
       }

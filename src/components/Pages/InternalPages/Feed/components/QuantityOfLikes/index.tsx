@@ -1,16 +1,24 @@
 export default function QuantityOfLikes({
   quantityOfLikes,
   userLikedThisPost,
+  setListOfLikesModal,
+  listOfLikes,
 }: any) {
   const spanText = quantityOfLikes > 1 ? "curtiram" : "curtiu";
   const userOsUsers = quantityOfLikes === 1 ? "usuário" : "usuários";
+
+  function handleQuantityOfLikesClick() {
+    setListOfLikesModal({
+      modalState: true,
+      data: listOfLikes,
+    });
+  }
 
   if (quantityOfLikes === 0)
     return (
       <div className="quantityOfLikesContainer">
         <small>
-          Seja o <span style={{ color: "green" }}>primeiro </span>a curtir este
-          post!
+          Seja o <span>primeiro </span>a curtir este post!
         </small>
       </div>
     );
@@ -18,7 +26,14 @@ export default function QuantityOfLikes({
     return (
       <div className="quantityOfLikesContainer">
         <small>
-          Você <span style={{ color: "green" }}>{spanText} </span> este post!
+          Você{" "}
+          <span
+            onClick={() => handleQuantityOfLikesClick()}
+            style={{ color: "green", cursor: "pointer" }}
+          >
+            {spanText}{" "}
+          </span>{" "}
+          este post!
         </small>
       </div>
     );
@@ -28,7 +43,14 @@ export default function QuantityOfLikes({
         <small>
           Você e {quantityOfLikes - 1}{" "}
           {quantityOfLikes - 1 === 1 ? "usuário" : "usuários"}
-          <span style={{ color: "green" }}> curtiram </span> este post!
+          <span
+            onClick={() => handleQuantityOfLikesClick()}
+            style={{ color: "green", cursor: "pointer" }}
+          >
+            {" "}
+            curtiram{" "}
+          </span>{" "}
+          este post!
         </small>
       </div>
     );
@@ -37,7 +59,14 @@ export default function QuantityOfLikes({
       <div className="quantityOfLikesContainer">
         <small>
           {quantityOfLikes} {userOsUsers}
-          <span style={{ color: "green" }}> {spanText} </span> este post!
+          <span
+            onClick={() => handleQuantityOfLikesClick()}
+            style={{ color: "green", cursor: "pointer" }}
+          >
+            {" "}
+            {spanText}{" "}
+          </span>{" "}
+          este post!
         </small>
       </div>
     );

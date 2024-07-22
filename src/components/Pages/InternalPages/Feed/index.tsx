@@ -9,12 +9,17 @@ import IconsToLikeCommentAndShare from "./components/IconsToLikeCommentAndShare"
 import { spread } from "axios";
 import QuantityOfLikes from "./components/QuantityOfLikes";
 import LastComment from "./components/LastComment";
+import ListOfLikes from "./components/ListOfLikes";
 
 export const Feed = () => {
   const [feedPostModal, setFeedPostModal] = useState(false);
   const [modalPost, setModalPost] = useState();
   const [posts, setPosts] = useState();
   const [likeLoading, setLikeLoading] = useState(false);
+  const [listOfLikes, setListOfLikesModal] = useState({
+    modalState: false,
+    data: "",
+  });
 
   useEffect(() => {
     api();
@@ -49,6 +54,12 @@ export const Feed = () => {
             setModal={setFeedPostModal}
           />
         )}
+        {listOfLikes.data && (
+          <ListOfLikes
+            listOfLikes={listOfLikes}
+            setModal={setListOfLikesModal}
+          />
+        )}
 
         <Stories />
         <HeaderAndPhoto>
@@ -71,8 +82,8 @@ export const Feed = () => {
                       <img
                         src={`https://pets4ever.s3.us-east-2.amazonaws.com/${item.userProfileImageUrl}`}
                         alt=""
-                        height={48}
-                        width={48}
+                        height={40}
+                        width={40}
                       />
                       <p>{item.name}</p>
                     </div>
@@ -96,6 +107,8 @@ export const Feed = () => {
                       </div>
                     </div>
                     <QuantityOfLikes
+                      listOfLikes={item.listOfLikes}
+                      setListOfLikesModal={setListOfLikesModal}
                       quantityOfLikes={item.quantityOfLikes}
                       userLikedThisPost={item.userLikedThisPost}
                     />

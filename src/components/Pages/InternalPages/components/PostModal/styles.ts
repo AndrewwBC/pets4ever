@@ -39,6 +39,7 @@ export const Content = styled.section`
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
     position: relative;
+    max-width: 300px;
 
     .commentContainer {
       background-color: #f1f1f1;
@@ -129,6 +130,7 @@ export const Content = styled.section`
 
     .description {
       font-size: 16px;
+      word-wrap: break-word;
     }
   }
 

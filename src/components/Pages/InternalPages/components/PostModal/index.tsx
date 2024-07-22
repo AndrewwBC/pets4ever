@@ -37,10 +37,12 @@ const PostModal = ({ post, setModal, setModalPost }: any) => {
     }
   }
 
-  console.log(post);
+  window.addEventListener("click", (e) => {
+    if (e.target?.id === "container") handleCloseModal();
+  });
 
   return createPortal(
-    <Modal>
+    <Modal id="container">
       <Content>
         <img
           className="feedPhoto"

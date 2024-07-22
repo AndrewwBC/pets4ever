@@ -14,26 +14,14 @@ export const Container = styled.div`
 
 export const Loader = styled.div`
   border-width: 0.5rem;
-  margin-top: 400px;
   border-style: solid;
-  border-color: purple purple purple purple;
-  width: 3.625rem;
-  height: 3.625rem;
-  border-radius: 50%;
-  -webkit-animation: spin 2s infinite;
+  border-color: #ddd #222;
+  width: 2.625rem;
+  height: 2.625rem;
+  border-radius: 999px;
+  -webkit-animation: spin 4s infinite;
   animation: spin 2s infinite;
   z-index: 99999;
-
-  &:before,
-  &:after {
-    content: "";
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background: purple;
-    position: absolute;
-    left: 0.125rem;
-  }
 
   &:before {
     top: 0.063rem;
