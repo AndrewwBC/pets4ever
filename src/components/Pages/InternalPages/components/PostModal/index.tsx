@@ -64,12 +64,24 @@ const PostModal = ({ post, setModal, setModalPost }: any) => {
             </div>
           </div>
 
-          <div>
-            {post.comments.map(({ comment, userId }) => (
-              <div key={userId + Math.random()}>
-                <p>{comment}</p>
-              </div>
-            ))}
+          <div className="commentContainer">
+            {post.comments.map(
+              ({ comment, userId, username, userProfileImageUrl }) => (
+                <div className="comment" key={userId + Math.random()}>
+                  <div className="usernameAndImage">
+                    <img
+                      src={`https://pets4ever.s3.us-east-2.amazonaws.com/${userProfileImageUrl}`}
+                      height={28}
+                      width={28}
+                      alt=""
+                    />
+                    <p>{username}</p>
+                  </div>
+
+                  <p>{comment}</p>
+                </div>
+              )
+            )}
           </div>
 
           <div className="icons">
@@ -78,7 +90,7 @@ const PostModal = ({ post, setModal, setModalPost }: any) => {
             <VscSend style={{ cursor: "pointer" }} size={26} />
           </div>
 
-          <div className="commentContainer">
+          <div className="insertCommentContainer">
             <Input
               placeholder="Insira um comentário..."
               onChange={({ target }: ChangeEvent<HTMLInputElement>) =>

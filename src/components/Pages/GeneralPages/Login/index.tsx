@@ -95,15 +95,19 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/auth/login", {
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/auth/signin",
+        {
+          email: email,
+          password: password,
+        }
+      );
 
       console.log(response);
 
       if (response) {
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data.userId);
 
         setToast({
           message: "LOGADO!",

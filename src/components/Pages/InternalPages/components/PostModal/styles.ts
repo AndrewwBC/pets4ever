@@ -33,12 +33,45 @@ export const Content = styled.section`
     background-color: #f9f9f9;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto 1fr auto;
     padding: 16px;
     padding-top: 28px;
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
     position: relative;
+
+    .commentContainer {
+      background-color: #f1f1f1;
+      border-radius: 4px;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 12px 0px;
+
+      .comment {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 14px;
+        color: #222;
+
+        .usernameAndImage {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          p {
+            color: #888;
+          }
+
+          img {
+            display: block;
+            border-radius: 999px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
 
     .closeModal {
       position: absolute;
@@ -107,7 +140,7 @@ export const Content = styled.section`
     color: #222;
   }
 
-  .commentContainer {
+  .insertCommentContainer {
     gap: 12px;
     display: flex;
     align-items: center;

@@ -95,18 +95,16 @@ export const Feed = () => {
                         <small>{item.creationDate}</small>
                       </div>
                     </div>
-
                     <QuantityOfLikes
                       quantityOfLikes={item.quantityOfLikes}
                       userLikedThisPost={item.userLikedThisPost}
                     />
-
-                    <LastComment comments={item.comments} />
-
                     <div className="nameAndDescription">
                       <p>@{item.name.toLowerCase()}</p>
                       <small>{item.description}</small>
                     </div>
+
+                    <LastComment comments={item.comments} />
                   </div>
                 </div>
               );

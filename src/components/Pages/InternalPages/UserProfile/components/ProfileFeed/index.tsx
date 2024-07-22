@@ -1,7 +1,7 @@
 import { Container } from "./styles";
 import { ProfileFeedProps } from "./types";
 
-export default function ProfileFeed({ posts }: ProfileFeedProps) {
+function ProfileFeed({ posts }: ProfileFeedProps) {
   function handlePostModal(postId: string) {
     return postId;
   }
@@ -22,3 +22,5 @@ export default function ProfileFeed({ posts }: ProfileFeedProps) {
     </Container>
   );
 }
+
+export default ProfileFeed;

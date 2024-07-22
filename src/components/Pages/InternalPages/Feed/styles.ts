@@ -50,6 +50,7 @@ export const HeaderAndPhoto = styled.section`
   }
 
   .imagesContainer {
+    max-width: 520px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -85,6 +86,7 @@ export const HeaderAndPhoto = styled.section`
     }
 
     .postInfoAndStatus {
+      max-width: 100%;
       .iconsContainerAndCreatedAt {
         display: flex;
         justify-content: space-between;
@@ -115,6 +117,7 @@ export const HeaderAndPhoto = styled.section`
       }
 
       .nameAndDescription {
+        white-space: normal;
         display: flex;
         align-items: center;
         justify-content: start;

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 import { Container } from "./styles";
 import axios, { AxiosError } from "axios";
 import { GlobalContext } from "../../../../context/GlobalStorage";
@@ -13,28 +13,33 @@ const UserProfile = () => {
   const [postProfilePictureModal, setPostProfilePictureModal] = useState(false);
   console.log(posts);
   const { data, setData } = useContext(GlobalContext);
+  const [counter, setCounter] = useState("");
 
   useEffect(() => {
     getUserData();
-  }, [data.name]);
+  }, []);
 
   async function getUserData() {
     const token = localStorage.getItem("token");
+    const id = localStorage.getItem("userId");
+
     console.log("Chamou a API");
     if (!token) {
       return "Token não encontrado";
     }
 
     try {
-      const request = await axios.get("http://localhost:8080/auth/profile", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const request = await axios.get(
+        `http://localhost:8080/api/v1/user/profile/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (request) {
-        console.log(request.data);
         setPosts(request.data.posts);
         setData({
           name: request.data.username,
