@@ -11,14 +11,35 @@ const PostModal = ({ post, setModal, setModalPost }: any) => {
     postId: post.postId,
   });
 
+  const [comments, setComments] = useState(post.comments);
+
+  const token = localStorage.getItem("token");
+
   function handleCloseModal() {
     setModal(false);
     setModalPost(false);
   }
 
-  async function handleSendComment() {
-    const token = localStorage.getItem("token");
+  async function retrieveNewComments() {
+    try {
+      const request = await axios.get(
+        `http://localhost:8080/comment/comments/${commentData.postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
+      if (request) {
+        setComments(request.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function handleSendComment() {
     try {
       const request = await axios({
         url: "http://localhost:8080/comment/store",
@@ -28,6 +49,8 @@ const PostModal = ({ post, setModal, setModalPost }: any) => {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      if (request) retrieveNewComments();
 
       console.log(request);
     } catch (error) {
@@ -67,7 +90,7 @@ const PostModal = ({ post, setModal, setModalPost }: any) => {
           </div>
 
           <div className="commentContainer">
-            {post.comments.map(
+            {comments.map(
               ({ comment, userId, username, userProfileImageUrl }) => (
                 <div className="comment" key={userId + Math.random()}>
                   <div className="usernameAndImage">

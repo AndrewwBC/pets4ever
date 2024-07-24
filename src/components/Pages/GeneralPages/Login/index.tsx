@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 import FormGroup from "../../../FormGroup";
 import {
@@ -18,6 +18,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
+  const nav = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+
+    if (token && userId) {
+      nav("/me");
+    }
+  }, []);
+
   const [toast, setToast] = useState({
     message: "",
     status: "",
@@ -30,8 +40,6 @@ export default function Login() {
       message: "",
     },
   ]);
-
-  const nav = useNavigate();
 
   function handleEmailBlur({ target }: ChangeEvent<HTMLInputElement>) {
     const errorAlreadyExist = errors.find((error) => error.field === "Email");

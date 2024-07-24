@@ -11,26 +11,41 @@ export const Modal = styled.main`
   align-items: center;
   justify-content: center;
   z-index: 10px;
+
+  @media (max-width: 768px) {
+    padding-top: 64px;
+    align-items: start;
+  }
 `;
 
 export const Content = styled.section`
   display: grid;
   grid-template-columns: 1fr auto;
+  max-height: 640px;
+  max-width: 800px;
+  padding: 8px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 
   .feedPhoto {
-    height: 640px;
-    width: 500px;
+    max-height: 100%;
+    max-width: 100%;
     border-bottom-left-radius: 8px;
     border-top-left-radius: 8px;
     object-fit: cover;
-    @media (max-width: 1400px) {
-      height: 420px;
-      width: 380px;
+    @media (max-width: 764px) {
+      max-height: 700px;
+      width: 100%;
+      border-radius: 0px;
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
     }
   }
 
   .postInfo {
-    background-color: #f9f9f9;
+    background-color: #e9e9e9;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
@@ -39,16 +54,23 @@ export const Content = styled.section`
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
     position: relative;
-    max-width: 300px;
 
     .commentContainer {
-      background-color: #f1f1f1;
+      background-color: #f9f9f9;
       border-radius: 4px;
       padding: 4px;
       display: flex;
       flex-direction: column;
       gap: 8px;
       margin: 12px 0px;
+      overflow-y: scroll;
+      max-height: 260px;
+
+      @media (max-width: 768px) {
+        height: 48px;
+        padding-top: 12px;
+        overflow-y: scroll;
+      }
 
       .comment {
         display: flex;
