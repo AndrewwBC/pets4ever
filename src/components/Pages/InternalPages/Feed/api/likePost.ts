@@ -10,7 +10,7 @@ export async function updateLikeInPost(postId: string, setLikeLoading: any) {
   try {
     setLikeLoading(true);
     const r = await axios({
-      url: "http://localhost:8080/post/postlike",
+      url: `${import.meta.env.VITE_API}/post/postlike`,
       method: "post",
       data: formData,
       headers: {

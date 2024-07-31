@@ -28,7 +28,6 @@ export default function ForgotPassword() {
     if (!isEmailValid(event.target.value)) setError("Email inválido");
 
     if (isEmailValid(event.target.value)) setError("");
-    console.log(event.target.value);
   }
 
   async function sendEmailToUser(event: FormEvent) {
@@ -36,16 +35,7 @@ export default function ForgotPassword() {
 
     try {
       const request = await axios.post(
-        "http://localhost:3001/forgotpassword",
-        {
-          email: email,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+        `${import.meta.env.VITE_API}/email/send/${email}`
       );
 
       const response = request.data;

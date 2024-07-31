@@ -24,7 +24,7 @@ export default function Login() {
     const userId = localStorage.getItem("userId");
 
     if (token && userId) {
-      nav("/me");
+      nav(`/profile/${userId}`);
     }
   }, []);
 
@@ -104,7 +104,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/auth/signin",
+        `${import.meta.env.VITE_API}/api/v1/auth/signin`,
         {
           email: email,
           password: password,
@@ -122,7 +122,7 @@ export default function Login() {
           status: "success",
         });
 
-        nav("/me");
+        nav(`/feed`);
       }
     } catch (err) {
       if (err instanceof AxiosError) {

@@ -34,7 +34,7 @@ const PostProfilePicture = ({ setModal }: PostProfilePicture) => {
       setIsLoading(true);
 
       const request = await axios({
-        url: "http://localhost:8080/auth/profileimg",
+        url: `${import.meta.env.VITE_API}/auth/profileimg`,
         data: formData,
         method: "POST",
         headers: {

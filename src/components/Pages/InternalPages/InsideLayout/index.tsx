@@ -8,6 +8,8 @@ import CreatePostModal from "../components/CreatePostModal";
 const InsideLayout = () => {
   const [createPostModal, setCreatePostModal] = useState(false);
 
+  const userId = localStorage.getItem("userId");
+
   return (
     <Container>
       {createPostModal && (
@@ -17,21 +19,21 @@ const InsideLayout = () => {
         <Header>
           <HeaderContent>
             <div>
-              <Link className="pets4EverTitle" to={"/"}>
+              <Link className="pets4EverTitle" to={"/feed"}>
                 Pets4Ever
               </Link>
             </div>
 
             <nav className="menuContent">
               <li>
-                <Link to={"/me"}>Meu Perfil</Link>
+                <Link to={`/profile/${userId}`}>Meu Perfil</Link>
               </li>
 
               <li>
-                <Link to={"/me/feed"}>Feed</Link>
+                <Link to={"/feed"}>Feed</Link>
               </li>
               <li>
-                <Link to={"/me/config"}>Configurações</Link>
+                <Link to={"/config"}>Configurações</Link>
               </li>
 
               <li>

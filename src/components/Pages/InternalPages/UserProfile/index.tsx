@@ -6,31 +6,33 @@ import PostProfilePicture from "./PostProfilePicture";
 import ProfileFeed from "./components/ProfileFeed";
 import { ProfileFeedProps } from "./components/ProfileFeed/types";
 import UserStatus from "./components/UserStats";
+import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState<ProfileFeedProps[] | undefined>();
   const [postProfilePictureModal, setPostProfilePictureModal] = useState(false);
-  console.log(posts);
   const { data, setData } = useContext(GlobalContext);
-  const [counter, setCounter] = useState("");
+
+  const { id } = useParams();
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [id]);
 
   async function getUserData() {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("userId");
+    const storageId = localStorage.getItem("userId");
 
-    console.log("Chamou a API");
+    const userId = id == storageId ? storageId : id;
+
     if (!token) {
       return "Token não encontrado";
     }
 
     try {
       const request = await axios.get(
-        `http://localhost:8080/api/v1/user/profile/${id}`,
+        `${import.meta.env.VITE_API}/api/v1/user/profile/${userId}`,
         {
           headers: {
             "Content-Type": "application/json",

@@ -7,7 +7,7 @@ export async function UpdateAPI(userData: any, setIsLoading: any) {
     setIsLoading(true);
 
     const request = await axios({
-      url: "http://localhost:8080/auth/update",
+      url: "import.meta.env.import.meta.env.VITE_API/auth/update",
       method: "put",
       data: {
         name: userData.name,

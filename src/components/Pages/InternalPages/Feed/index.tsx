@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, HeaderAndPhoto } from "./styles";
 
 import PostModal from "../components/PostModal";
@@ -6,20 +6,21 @@ import Stories from "./components/Stories";
 import { getPosts } from "./api";
 import { updateLikeInPost } from "./api/likePost";
 import IconsToLikeCommentAndShare from "./components/IconsToLikeCommentAndShare";
-import { spread } from "axios";
 import QuantityOfLikes from "./components/QuantityOfLikes";
 import LastComment from "./components/LastComment";
 import ListOfLikes from "./components/ListOfLikes";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Feed = () => {
-  const [feedPostModal, setFeedPostModal] = useState(false);
-  const [modalPost, setModalPost] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const [modalPostData, setModalPostData] = useState();
   const [posts, setPosts] = useState();
   const [likeLoading, setLikeLoading] = useState(false);
   const [listOfLikes, setListOfLikesModal] = useState({
     modalState: false,
     data: "",
   });
+  const nav = useNavigate();
 
   useEffect(() => {
     api();
@@ -31,9 +32,9 @@ export const Feed = () => {
   }
 
   function handlePostModal(postId: string) {
-    setFeedPostModal(true);
-
-    setModalPost(posts.find((post) => post.postId === postId));
+    window.location.replace(`http://localhost:5173/feed/post/${postId}`);
+    setShowModal(true);
+    setModalPostData(posts.find((post) => post.postId === postId));
   }
 
   async function handlePostLikePut(postId: string) {
@@ -47,11 +48,11 @@ export const Feed = () => {
   else
     return (
       <Container>
-        {feedPostModal && (
+        {showModal && (
           <PostModal
-            post={modalPost}
-            setModalPost={setModalPost}
-            setModal={setFeedPostModal}
+            setShowModal={setShowModal}
+            modalPostData={modalPostData}
+            setModalPostData={setModalPostData}
           />
         )}
         {listOfLikes.data && (
@@ -85,7 +86,7 @@ export const Feed = () => {
                         height={40}
                         width={40}
                       />
-                      <p>{item.name}</p>
+                      <Link to={`/profile/${item.userId}`}>{item.name}</Link>
                     </div>
                   </header>
                   <img
@@ -113,7 +114,9 @@ export const Feed = () => {
                       userLikedThisPost={item.userLikedThisPost}
                     />
                     <div className="nameAndDescription">
-                      <p>@{item.name.toLowerCase()}</p>
+                      <Link to={`/profile/${item.userId}`}>
+                        @{item.name.toLowerCase()}
+                      </Link>
                       <small>{item.description}</small>
                     </div>
 

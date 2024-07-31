@@ -6,7 +6,7 @@ export function Header() {
     <>
       <Container>
         <Content>
-          <Link to="/">
+          <Link to="/home">
             <h1>Pets4Ever</h1>
           </Link>
           <nav>
@@ -18,7 +18,7 @@ export function Header() {
                 <Link to="/contact">Contato</Link>
               </li>
               <li>
-                <Link to="/login">Acesso</Link>
+                <Link to="/register">Registre-se</Link>
               </li>
             </menu>
           </nav>

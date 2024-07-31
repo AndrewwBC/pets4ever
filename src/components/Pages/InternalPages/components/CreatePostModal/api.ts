@@ -50,7 +50,7 @@ export async function uploadFile(
     console.log("Entrou Java");
 
     const r = await axios({
-      url: "http://localhost:8080/post/create",
+      url: `${import.meta.env.VITE_API}/post/create`,
       method: "post",
       data: formData,
       headers: {

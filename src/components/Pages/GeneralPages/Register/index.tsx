@@ -148,11 +148,14 @@ export function Register() {
     }
 
     try {
-      const request = await axios.post("http://localhost:8080/auth/register", {
-        name: registerData.name,
-        email: registerData.email,
-        password: registerData.senha,
-      });
+      const request = await axios.post(
+        "import.meta.env.import.meta.env.VITE_API/api/v1/auth/signup",
+        {
+          name: registerData.name,
+          email: registerData.email,
+          password: registerData.senha,
+        }
+      );
 
       const response = request.data;
       console.log(response);
@@ -196,21 +199,47 @@ export function Register() {
 
         <div className="formContainer">
           <form onSubmit={handleSubmit}>
-            <FormGroup error={getErrorMessageByFieldName("Username")}>
-              <Input
-                placeholder="Nome de usuário"
-                onBlur={handleUsername}
-                onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
-                  setRegisterData((prevState) => ({
-                    ...prevState,
-                    name: target.value,
-                  }))
-                }
-              />
-            </FormGroup>
+            <div className="fullname">
+              <FormGroup>
+                <Input
+                  placeholder="Nome"
+                  onChange={handlePassword}
+                  type="password"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  placeholder="Sobrenome"
+                  onChange={handlePassword}
+                  type="password"
+                />
+              </FormGroup>
+            </div>
+            <div className="usernameAndBirthdate">
+              <FormGroup error={getErrorMessageByFieldName("Username")}>
+                <Input
+                  placeholder="Nome de usuário"
+                  onBlur={handleUsername}
+                  onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
+                    setRegisterData((prevState) => ({
+                      ...prevState,
+                      name: target.value,
+                    }))
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  placeholder="Data de nascimento"
+                  onChange={handlePassword}
+                  type="password"
+                />
+              </FormGroup>
+            </div>
             <FormGroup error={getErrorMessageByFieldName("Email")}>
               <Input placeholder="Email" onChange={handleEmailChange} />
             </FormGroup>
+
             <FormGroup error={getErrorMessageByFieldName("Password")}>
               <Input
                 placeholder="Senha"
