@@ -21,11 +21,20 @@ export const Content: React.FC<ContentProps> = styled.div`
   label {
     display: flex;
     flex-direction: column;
-    margin-bottom: 8px;
+
+    p {
+      align-self: self-start;
+      font-size: 14px;
+      margin-bottom: 2px;
+      font-weight: 700;
+      color: #444;
+    }
   }
 
   small {
     font-size: 14px;
     color: red;
+    align-self: self-start;
+    margin-bottom: 2px;
   }
 `;
