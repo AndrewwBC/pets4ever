@@ -12,7 +12,7 @@ export const Content = styled.section`
   height: 100vh;
 
   .formAndText {
-    margin-top: 32px;
+    margin-top: 48px;
     padding: 0 40px;
   }
 
@@ -66,6 +66,7 @@ export const Content = styled.section`
       span {
         display: block;
         margin-left: 12px;
+        font-size: 14px;
       }
     }
   }

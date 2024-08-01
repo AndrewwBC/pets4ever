@@ -15,50 +15,58 @@ interface PasswordValidationsProps {
 export default function PasswordValidations({
   passwordErrors,
 }: PasswordValidationsProps) {
+  const findFalse = Object.values(passwordErrors).find(
+    (error) => error === false
+  );
+  console.log(findFalse);
+  const borderColor = findFalse === false ? "red" : "green";
+
   return (
-    <div className="validationInfo">
+    <div
+      style={{ border: `2px solid ${borderColor}` }}
+      className="validationInfo"
+    >
       <div>
         <div className="validations">
           <div>
             {passwordErrors.numberOfChars ? (
-              <VscError />
-            ) : (
               <FaCheck color="green" />
+            ) : (
+              <VscError />
             )}
             <span>8 a 64 caractéres</span>
           </div>
           <div>
             {passwordErrors.hasNotEmailInPassword ? (
-              <VscError />
-            ) : (
               <FaCheck color="green" />
+            ) : (
+              <VscError />
             )}
             <span>Não use o email na senha</span>
           </div>
-
           <div>
             {passwordErrors.hasNumber ? (
-              <VscError />
-            ) : (
               <FaCheck color="green" />
-            )}{" "}
+            ) : (
+              <VscError />
+            )}
             <span>Pelo menos 1 número</span>
           </div>
           <div>
             {passwordErrors.hasOneUpper ? (
-              <VscError />
-            ) : (
               <FaCheck color="green" />
-            )}{" "}
-            <span> Pelo menos 1 letra maiúscula.</span>
+            ) : (
+              <VscError />
+            )}
+            <span>Pelo menos 1 letra maiúscula.</span>
           </div>
           <div>
             {passwordErrors.hasOneLower ? (
-              <VscError />
-            ) : (
               <FaCheck color="green" />
-            )}{" "}
-            <span> Pelo menos 1 letra minúscula.</span>
+            ) : (
+              <VscError />
+            )}
+            <span>Pelo menos 1 letra minúscula.</span>
           </div>
         </div>
       </div>

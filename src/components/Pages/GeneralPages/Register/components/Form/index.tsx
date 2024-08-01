@@ -30,11 +30,11 @@ export default function Form() {
     },
   ]);
   const [passwordErrors, setPasswordErros] = useState({
-    numberOfChars: true,
+    numberOfChars: false,
     hasNotEmailInPassword: false,
-    hasNumber: true,
-    hasOneUpper: true,
-    hasOneLower: true,
+    hasNumber: false,
+    hasOneUpper: false,
+    hasOneLower: false,
   });
 
   function handleUsername({ target }: ChangeEvent<HTMLInputElement>) {
@@ -54,6 +54,11 @@ export default function Form() {
   function handleEmailChange({ target }: ChangeEvent<HTMLInputElement>) {
     const emailField = "Email";
 
+    setRegisterData((prevState) => ({
+      ...prevState,
+      email: target.value,
+    }));
+
     const errorAlreadyExists = errors.find((erro) => erro.field === emailField);
 
     if (
@@ -70,7 +75,6 @@ export default function Form() {
       ]);
     if (isEmailValid(target.value)) {
       setErrors(errors.filter((erro) => erro.field !== emailField));
-      registerData.email = target.value;
     }
   }
 
@@ -79,31 +83,37 @@ export default function Form() {
       (erro) => erro.field === fieldName
     )?.message;
 
-    const registerErrorMessage = registerErrors.find(
-      (erro) => erro.field === fieldName
-    )?.message;
-
-    return errorMessage ? errorMessage : registerErrorMessage;
+    return errorMessage;
   }
 
   function handlePassword({ target }: ChangeEvent<HTMLInputElement>) {
     const password = target.value;
-    const hasNumberAndUppercaseRegex = /^(?=.*\d)(?=.*[A-Z]).+$/;
+    const hasNotEmailInPassword = !password.includes(registerData.email);
+    const hasNumber = /\d/.test(password);
+    const hasOneLower = /[a-z]/.test(password);
+    const hasOneUpper = /[A-Z]/.test(password);
 
-    if (password.length >= 8)
-      setPasswordErros((prevState) => ({
-        ...prevState,
-        numberOfChars: false,
-      }));
+    setPasswordErros({
+      numberOfChars: password.length >= 8 ? true : false,
+      hasNotEmailInPassword,
+      hasNumber,
+      hasOneLower,
+      hasOneUpper,
+    });
 
-    if (password.includes(registerData.email))
-      setPasswordErros((prevState) => ({
-        ...prevState,
-        hasNotEmailInPassword: false,
-      }));
+    setRegisterData((prevState) => ({
+      ...prevState,
+      senha: password,
+    }));
+  }
 
-    if (hasNumberAndUppercaseRegex.test(password)) {
-    }
+  function findPasswordError() {
+    if (registerData.senha.length > 0) {
+      const findFalse = Object.values(passwordErrors).find(
+        (error) => error === false
+      );
+      return findFalse === false ? "Verifique as condições!" : "";
+    } else return "";
   }
 
   async function handleSubmit(event: FormEvent) {
@@ -134,7 +144,7 @@ export default function Form() {
 
     try {
       const request = await axios.post(
-        "import.meta.env.import.meta.env.VITE_API/api/v1/auth/signup",
+        `${import.meta.env.VITE_API}/api/v1/auth/signup`,
         {
           name: registerData.name,
           email: registerData.email,
@@ -171,6 +181,17 @@ export default function Form() {
     }
   }
 
+  function handleDisableButton() {
+    const oneFieldEmpty = Object.values(registerData).some(
+      (data) => data.length === 0
+    );
+    const passwordError = findPasswordError();
+    const emailOrUsernameErrors = errors.find((error) => error.field != "");
+
+    if (oneFieldEmpty || passwordError || emailOrUsernameErrors) return true;
+    else return false;
+  }
+
   return (
     <div className="formContainer">
       <form onSubmit={handleSubmit}>
@@ -178,6 +199,7 @@ export default function Form() {
           <Input
             placeholder="Insira o seu endereço de e-mail"
             onChange={handleEmailChange}
+            value={registerData.email}
           />
         </FormGroup>
 
@@ -197,19 +219,25 @@ export default function Form() {
           />
         </FormGroup>
 
-        <FormGroup label="SENHA" error={getErrorMessageByFieldName("Password")}>
+        <FormGroup label="SENHA" error={findPasswordError()}>
           <Input
             placeholder="Digite a sua senha"
             onChange={handlePassword}
             type="password"
             onFocus={() => setFocusedPassword(true)}
+            value={registerData.senha}
           />
         </FormGroup>
         {focusedPassword && (
           <PasswordValidations passwordErrors={passwordErrors} />
         )}
 
-        <Button type="submit" size="medium" label="Registrar" />
+        <Button
+          type="submit"
+          disabled={handleDisableButton()}
+          size="medium"
+          label="Registrar"
+        />
       </form>
       {toast.message && <Toast toast={toast} setToast={setToast}></Toast>}
     </div>
