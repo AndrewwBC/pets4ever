@@ -2,12 +2,18 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   background-color: ${({ theme }) => theme.neutral.c2};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
+export const Content = styled.section`
   max-width: 1000px;
-  margin: 0 auto;
-  margin-bottom: 64px;
+  width: 100%;
+  margin-left: 160px;
+  padding-bottom: 24px;
+
   .userContent {
-    margin-top: 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;

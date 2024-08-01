@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
-import { Container, Content, Header, HeaderContent } from "./styles";
+import { Container, Content, SideMenu, SideMenuContent } from "./styles";
 
 import CreatePostModal from "../components/CreatePostModal";
+import { CgProfile } from "react-icons/cg";
+import { GlobalContext } from "../../../../context/GlobalStorage";
+import { IoCreateOutline, IoHomeOutline } from "react-icons/io5";
 
 const InsideLayout = () => {
+  const { data } = useContext(GlobalContext);
+
   const [createPostModal, setCreatePostModal] = useState(false);
 
   const userId = localStorage.getItem("userId");
+
+  function handleClick(e) {
+    e.preventDefault();
+    setCreatePostModal(true);
+  }
 
   return (
     <Container>
@@ -16,32 +26,38 @@ const InsideLayout = () => {
         <CreatePostModal setCreatePostModal={setCreatePostModal} />
       )}
       <Content>
-        <Header>
-          <HeaderContent>
+        <SideMenu>
+          <SideMenuContent>
             <div>
               <Link className="pets4EverTitle" to={"/feed"}>
-                Pets4Ever
+                <p>Pets4Ever</p>
               </Link>
             </div>
 
             <nav className="menuContent">
               <li>
-                <Link to={`/profile/${userId}`}>Meu Perfil</Link>
+                <Link to={"/feed"}>
+                  <IoHomeOutline size={32} />
+                  Postagens
+                </Link>
               </li>
 
               <li>
-                <Link to={"/feed"}>Feed</Link>
-              </li>
-              <li>
-                <Link to={"/config"}>Configurações</Link>
+                <Link to={""} onClick={(e) => handleClick(e)}>
+                  <IoCreateOutline size={32} />
+                  <p>Postar</p>
+                </Link>
               </li>
 
               <li>
-                <button onClick={() => setCreatePostModal(true)}>Postar</button>
+                <Link to={`/profile/${userId}`}>
+                  <CgProfile size={32} />
+                  <p>@{data.name}</p>
+                </Link>
               </li>
             </nav>
-          </HeaderContent>
-        </Header>
+          </SideMenuContent>
+        </SideMenu>
 
         <div className="outletContainer">
           <Outlet />

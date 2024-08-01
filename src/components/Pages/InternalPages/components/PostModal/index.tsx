@@ -31,7 +31,7 @@ const PostModal = ({ setShowModal, modalPostData, setModalPostData }: any) => {
   async function getData() {
     try {
       const request = await axios.get(
-        `import.meta.env.import.meta.env.VITE_API/post/${id}/${userId}`,
+        `${import.meta.env.VITE_API}/post/${id}/${userId}`,
         {
           params: {
             userId: "userId",

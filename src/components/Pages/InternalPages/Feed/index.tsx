@@ -32,7 +32,6 @@ export const Feed = () => {
   }
 
   function handlePostModal(postId: string) {
-    window.location.replace(`http://localhost:5173/feed/post/${postId}`);
     setShowModal(true);
     setModalPostData(posts.find((post) => post.postId === postId));
   }

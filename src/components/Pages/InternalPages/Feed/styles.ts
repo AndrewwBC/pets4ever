@@ -60,7 +60,7 @@ export const HeaderAndPhoto = styled.section`
   }
 
   .imagesContainer {
-    max-width: 520px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -149,8 +149,10 @@ export const HeaderAndPhoto = styled.section`
         }
 
         small {
+          display: block;
           font-size: 16px;
           color: ${({ theme }) => theme.neutral.c9};
+          max-width: 260px;
         }
       }
 

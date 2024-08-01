@@ -1,22 +1,26 @@
 import { memo, useContext, useEffect, useState } from "react";
-import { Container } from "./styles";
+import { Container, Content } from "./styles";
 import axios, { AxiosError } from "axios";
-import { GlobalContext } from "../../../../context/GlobalStorage";
 import PostProfilePicture from "./PostProfilePicture";
 import ProfileFeed from "./components/ProfileFeed";
 import { ProfileFeedProps } from "./components/ProfileFeed/types";
 import UserStatus from "./components/UserStats";
 import { useParams } from "react-router-dom";
+import { FullLoader } from "../../../FullLoader";
 
 const UserProfile = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState<ProfileFeedProps[] | undefined>();
   const [postProfilePictureModal, setPostProfilePictureModal] = useState(false);
-  const { data, setData } = useContext(GlobalContext);
+  const [usernameAndImg, setUsernameAndImg] = useState({
+    username: "",
+    profileImg: "",
+  });
 
   const { id } = useParams();
 
   useEffect(() => {
+    console.log("montou", id);
     getUserData();
   }, [id]);
 
@@ -42,12 +46,11 @@ const UserProfile = () => {
       );
 
       if (request) {
-        setPosts(request.data.posts);
-        setData({
-          name: request.data.username,
-          email: request.data.email,
-          profileImg: request.data.imageProfileUrl,
+        setUsernameAndImg({
+          username: request.data.username,
+          profileImg: request.data.userImageProfileUrl,
         });
+        setPosts(request.data.posts);
         return;
       }
     } catch (error) {
@@ -64,12 +67,7 @@ const UserProfile = () => {
     setPostProfilePictureModal(!postProfilePictureModal);
   }
 
-  if (isLoading)
-    return (
-      <Container>
-        <h1>Loading</h1>
-      </Container>
-    );
+  if (true) return <FullLoader />;
   else
     return (
       <Container>
@@ -80,27 +78,29 @@ const UserProfile = () => {
           />
         )}
 
-        <div className="userContent">
-          <div className="userImageAndName">
-            <div>
-              <img
-                width={64}
-                height={64}
-                src={`https://pets4ever.s3.us-east-2.amazonaws.com/${data.profileImg}`}
-                alt="sua foto de perfil"
-                onClick={updateProfileImg}
-              />
+        <Content>
+          <div className="userContent">
+            <div className="userImageAndName">
+              <div>
+                <img
+                  width={64}
+                  height={64}
+                  src={`https://pets4ever.s3.us-east-2.amazonaws.com/${usernameAndImg.profileImg}`}
+                  alt="sua foto de perfil"
+                  onClick={updateProfileImg}
+                />
+              </div>
+
+              <h1>{usernameAndImg.username}</h1>
             </div>
 
-            <h1>{data.name}</h1>
+            <UserStatus />
           </div>
 
-          <UserStatus />
-        </div>
-
-        <ProfileFeed posts={posts}></ProfileFeed>
+          <ProfileFeed posts={posts}></ProfileFeed>
+        </Content>
       </Container>
     );
 };
 
-export default UserProfile;
+export default memo(UserProfile);

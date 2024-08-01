@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 
 import FormGroup from "../../../FormGroup";
 import {
@@ -16,15 +16,18 @@ import axios, { AxiosError } from "axios";
 import { Toast } from "../../../Toast";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { GlobalContext } from "../../../../context/GlobalStorage";
 
 export default function Login() {
+  const { data, setData } = useContext(GlobalContext);
   const nav = useNavigate();
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
     if (token && userId) {
-      nav(`/profile/${userId}`);
+      loginWithSession();
     }
   }, []);
 
@@ -117,6 +120,80 @@ export default function Login() {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.userId);
 
+        setData({
+          name: response.data.username,
+          email: response.data.email,
+          userProfileImgUrl: response.data.userProfileImgUrl,
+        });
+
+        setToast({
+          message: "LOGADO!",
+          status: "success",
+        });
+
+        nav(`/feed`);
+      }
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        console.log(err.response?.data);
+
+        interface ErrorProps {
+          fieldName: string;
+          message: string;
+        }
+
+        const errorData: ErrorProps[] = err.response?.data;
+
+        errorData.map(({ fieldName, message }) => {
+          setErrors((prevState) => [
+            {
+              ...prevState,
+              field: fieldName,
+              message,
+            },
+          ]);
+        });
+
+        if (err.code === "ERR_NETWORK") {
+          setToast({
+            message: err.message,
+            status: "error",
+          });
+
+          return;
+        }
+
+        setToast({
+          message: err.response?.data.error,
+          status: "error",
+        });
+      }
+    }
+  }
+
+  async function loginWithSession() {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios({
+        url: `${import.meta.env.VITE_API}/api/v1/auth/loginwithsession`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        method: "POST",
+      });
+
+      console.log(response);
+
+      if (response) {
+        localStorage.setItem("userId", response.data.userId);
+
+        setData({
+          name: response.data.username,
+          email: response.data.email,
+          userProfileImgUrl: response.data.userProfileImgUrl,
+        });
+
         setToast({
           message: "LOGADO!",
           status: "success",
@@ -179,17 +256,20 @@ export default function Login() {
         </AuthContainer>
 
         <Form onSubmit={Login}>
-          <FormGroup error={getErrorMessageByFieldName("Email")}>
+          <FormGroup label="E-MAIL" error={getErrorMessageByFieldName("Email")}>
             <Input
               type="email"
               required
               value={email}
               onChange={handleEmailChange}
               onBlur={handleEmailBlur}
-              placeholder="Email ou nome de usuário."
+              placeholder="Insira o seu e-mail."
             />
           </FormGroup>
-          <FormGroup error={getErrorMessageByFieldName("Password")}>
+          <FormGroup
+            label="SENHA"
+            error={getErrorMessageByFieldName("Password")}
+          >
             <Input
               value={password}
               type="password"
