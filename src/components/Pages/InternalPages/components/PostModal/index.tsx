@@ -1,28 +1,38 @@
-import { createPortal } from "react-dom";
-import { VscComment, VscHeart, VscSend } from "react-icons/vsc";
-import { Content, Modal } from "./styles";
-import { Input } from "../../../../input";
-import { ChangeEvent, useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const PostModal = ({ setShowModal, modalPostData, setModalPostData }: any) => {
-  const [post, setPost] = useState();
-  const [comments, setComments] = useState();
+import axios from "axios";
 
+import {
+  Comment,
+  PostProps,
+} from "../../UserProfile/components/ProfileFeed/types";
+import { isPostProps, PostModalProps } from "./types";
+import { createPortal } from "react-dom";
+import { Content, Modal } from "./styles";
+
+import CommentsPostModal from "./components/Comments";
+import IconsLikeCommentSharePostModal from "./components/IconsLikeCommentSharePostModal";
+import InsertCommentPostModal from "./components/InsertCommentContainer";
+
+const PostModal = ({
+  setShowModal,
+  modalPostData,
+  setModalPostData,
+}: PostModalProps) => {
+  const [post, setPost] = useState<PostProps>();
+  const [comments, setComments] = useState<Comment[]>();
+  //Estou tentando implementar uma página e um modal ao mesmo tempo.
+  // Por isso a utilização de alguns hooks a mais
   const { id } = useParams();
 
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
-  const [commentData, setCommentData] = useState({
-    comment: "",
-    postId: id,
-  });
   console.log(modalPostData);
   useEffect(() => {
     if (!modalPostData) getData();
-    else if (modalPostData) {
+    else if (isPostProps(modalPostData)) {
       setPost(modalPostData);
       setComments(modalPostData.comments);
     }
@@ -61,7 +71,7 @@ const PostModal = ({ setShowModal, modalPostData, setModalPostData }: any) => {
   async function retrieveNewComments() {
     try {
       const request = await axios.get(
-        `import.meta.env.import.meta.env.VITE_API/comment/comments/${commentData.postId}`,
+        `import.meta.env.import.meta.env.VITE_API/comment/comments/${post?.postId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -77,35 +87,10 @@ const PostModal = ({ setShowModal, modalPostData, setModalPostData }: any) => {
     }
   }
 
-  async function handleSendComment() {
-    try {
-      const request = await axios({
-        url: "import.meta.env.import.meta.env.VITE_API/comment/store",
-        method: "post",
-        data: commentData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (request) retrieveNewComments();
-
-      console.log(request);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-      }
+  window.addEventListener("click", (e: any) => {
+    if ((e.target as HTMLElement)?.id === "container") {
+      handleCloseModal();
     }
-  }
-
-  function handleCommentFocus() {
-    const input = document.getElementById("inputComment");
-
-    input?.focus();
-  }
-
-  window.addEventListener("click", (e) => {
-    if (e.target?.id === "container") handleCloseModal();
   });
 
   if (post)
@@ -134,53 +119,14 @@ const PostModal = ({ setShowModal, modalPostData, setModalPostData }: any) => {
               </div>
             </div>
 
-            <div className="commentContainer">
-              {comments.map(
-                ({ comment, userId, username, userProfileImageUrl }) => (
-                  <div className="comment" key={userId + Math.random()}>
-                    <div className="usernameAndImage">
-                      <img
-                        src={`https://pets4ever.s3.us-east-2.amazonaws.com/${userProfileImageUrl}`}
-                        height={28}
-                        width={28}
-                        alt=""
-                      />
-                      <p>{username}</p>
-                    </div>
+            <CommentsPostModal comments={comments} />
 
-                    <p>{comment}</p>
-                  </div>
-                )
-              )}
-            </div>
+            <IconsLikeCommentSharePostModal />
 
-            <div className="icons">
-              <VscHeart style={{ cursor: "pointer" }} size={26} />
-              <VscComment
-                onClick={() => handleCommentFocus()}
-                style={{ cursor: "pointer" }}
-                size={26}
-              />
-              <VscSend style={{ cursor: "pointer" }} size={26} />
-            </div>
-
-            <div className="insertCommentContainer">
-              <Input
-                id="inputComment"
-                placeholder="Insira um comentário..."
-                onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
-                  setCommentData((prevState) => ({
-                    ...prevState,
-                    comment: target.value,
-                  }))
-                }
-              />
-              <VscSend
-                onClick={handleSendComment}
-                style={{ cursor: "pointer" }}
-                size={26}
-              />
-            </div>
+            <InsertCommentPostModal
+              postId={post.postId}
+              retrieveNewComments={retrieveNewComments}
+            />
           </div>
         </Content>
       </Modal>,
