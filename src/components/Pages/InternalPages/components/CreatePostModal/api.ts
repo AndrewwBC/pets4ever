@@ -1,9 +1,15 @@
 import axios from "axios";
+import { Dispatch, SetStateAction } from "react";
 
 export async function uploadFile(
-  file: any,
+  file: File,
   postDescription: string,
-  setIsLoading
+  setIsLoading: Dispatch<
+    SetStateAction<{
+      step: string;
+      isLoading: boolean;
+    }>
+  >
 ) {
   const formData = new FormData();
   const now = new Date();

@@ -1,6 +1,14 @@
 import { createPortal } from "react-dom";
 
-import { FormEvent, useContext, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { uploadFile } from "./api";
 import { VscComment, VscHeart, VscSend } from "react-icons/vsc";
 import { Content, InputFileModal, Modal } from "./styles";
@@ -8,11 +16,18 @@ import { Input } from "../../../../input";
 import { GlobalContext } from "../../../../../context/GlobalStorage";
 import ValidatingImageModal from "./ValidatingImageModal";
 
-const CreatePostModal = ({ setCreatePostModal }) => {
-  const [file, setFile] = useState();
+interface CreatePostModalProps {
+  setCreatePostModal: Dispatch<SetStateAction<boolean>>;
+}
+
+const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
+  const [file, setFile] = useState<File | null | undefined>();
   const [description, setDescription] = useState("");
-  const [response, setUploadResponse] = useState("");
-  const [isLoading, setIsLoading] = useState({
+  const [setUploadResponse] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<{
+    step: string;
+    isLoading: boolean;
+  }>({
     step: "",
     isLoading: false,
   });
@@ -38,9 +53,11 @@ const CreatePostModal = ({ setCreatePostModal }) => {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const uploadResponse = await uploadFile(file, description, setIsLoading);
-    setUploadResponse(uploadResponse);
-    console.log(uploadResponse);
+    if (file != undefined) {
+      const uploadResponse = await uploadFile(file, description, setIsLoading);
+      setUploadResponse(uploadResponse);
+      console.log(uploadResponse);
+    }
   }
 
   return createPortal(
@@ -59,7 +76,11 @@ const CreatePostModal = ({ setCreatePostModal }) => {
               <div>
                 <input
                   type="file"
-                  onChange={(e) => setFile(e.target.files[0])}
+                  onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
+                    if (target.files?.length != null) {
+                      setFile(target.files[0]);
+                    }
+                  }}
                 />
 
                 {!file ? (
@@ -72,7 +93,10 @@ const CreatePostModal = ({ setCreatePostModal }) => {
           ) : (
             <div>
               <img className="feedPhoto" src={preview} />
-              <button onClick={() => setFile("")} className="cancelImageButton">
+              <button
+                onClick={() => setFile(null)}
+                className="cancelImageButton"
+              >
                 Selecionar outra imagem?
               </button>
             </div>
