@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 import { Container } from "./styles";
-import { ListOfLikesProps } from "./types";
 import { Link } from "react-router-dom";
+import { ListOfLikesProps } from "./types";
 
 export default function ListOfLikes({
   listOfLikes,
@@ -10,7 +10,7 @@ export default function ListOfLikes({
   window.addEventListener("click", (e) => {
     if (e.target?.id === "container")
       setModal({
-        stateModal: false,
+        modalState: false,
       });
   });
 

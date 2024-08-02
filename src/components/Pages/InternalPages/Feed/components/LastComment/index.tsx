@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { Comment } from "../../../UserProfile/components/ProfileFeed/types";
 import { Container } from "./styles";
 import { Link } from "react-router-dom";
 
-export default function LastComment({ comments }) {
+interface LastCommentProps {
+  comments: Comment[];
+}
+
+export default function LastComment({ comments }: LastCommentProps) {
   const lastComment =
     comments.length > 0 ? comments[comments.length - 1] : comments[0];
 

@@ -9,18 +9,21 @@ import IconsToLikeCommentAndShare from "./components/IconsToLikeCommentAndShare"
 import QuantityOfLikes from "./components/QuantityOfLikes";
 import LastComment from "./components/LastComment";
 import ListOfLikes from "./components/ListOfLikes";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { ListOfLikesStateProps } from "./components/ListOfLikes/types";
+import { FeedPostProps } from "./types";
 
 export const Feed = () => {
   const [showModal, setShowModal] = useState(false);
-  const [modalPostData, setModalPostData] = useState();
-  const [posts, setPosts] = useState();
+  const [modalPostData, setModalPostData] = useState<FeedPostProps | null>(
+    null
+  );
+  const [posts, setPosts] = useState<FeedPostProps[]>();
   const [likeLoading, setLikeLoading] = useState(false);
-  const [listOfLikes, setListOfLikesModal] = useState({
+  const [listOfLikes, setListOfLikesModal] = useState<ListOfLikesStateProps>({
     modalState: false,
-    data: "",
+    data: undefined,
   });
-  const nav = useNavigate();
 
   useEffect(() => {
     api();
@@ -33,7 +36,7 @@ export const Feed = () => {
 
   function handlePostModal(postId: string) {
     setShowModal(true);
-    setModalPostData(posts.find((post) => post.postId === postId));
+    setModalPostData(posts?.find((post) => post.postId === postId)!);
   }
 
   async function handlePostLikePut(postId: string) {

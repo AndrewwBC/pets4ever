@@ -3,10 +3,7 @@ import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
-import {
-  Comment,
-  PostProps,
-} from "../../UserProfile/components/ProfileFeed/types";
+import { Comment } from "../../UserProfile/components/ProfileFeed/types";
 import { isPostProps, PostModalProps } from "./types";
 import { createPortal } from "react-dom";
 import { Content, Modal } from "./styles";
@@ -14,13 +11,14 @@ import { Content, Modal } from "./styles";
 import CommentsPostModal from "./components/Comments";
 import IconsLikeCommentSharePostModal from "./components/IconsLikeCommentSharePostModal";
 import InsertCommentPostModal from "./components/InsertCommentContainer";
+import { FeedPostProps } from "../../Feed/types";
 
 const PostModal = ({
   setShowModal,
   modalPostData,
   setModalPostData,
 }: PostModalProps) => {
-  const [post, setPost] = useState<PostProps>();
+  const [post, setPost] = useState<FeedPostProps>();
   const [comments, setComments] = useState<Comment[]>();
   //Estou tentando implementar uma página e um modal ao mesmo tempo.
   // Por isso a utilização de alguns hooks a mais
@@ -64,7 +62,7 @@ const PostModal = ({
   }
 
   function handleCloseModal() {
-    setModalPostData(false);
+    setModalPostData(null);
     setShowModal(false);
   }
 
