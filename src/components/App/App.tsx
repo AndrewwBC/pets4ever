@@ -17,7 +17,6 @@ import Feed from "../Pages/InternalPages/Feed";
 import Header from "../Layout/Header";
 import Error404 from "../Pages/Error404";
 import Config from "../Pages/InternalPages/Config";
-import PostModal from "../Pages/InternalPages/components/PostModal";
 
 function App() {
   return (
@@ -37,7 +36,6 @@ function App() {
             <Route path="/" element={<InsideLayout />}>
               <Route index path="/profile/:id" element={<UserProfile />} />
               <Route path="feed" element={<Feed />} />
-              <Route path="feed/post/:id" element={<PostModal />} />
               <Route path="config" element={<Config />} />
             </Route>
 

@@ -4,7 +4,7 @@ import { FeedPostProps } from "../../Feed/types";
 
 export interface PostModalProps {
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  modalPostData: PostProps | boolean;
+  modalPostData: PostProps | null;
   setModalPostData: Dispatch<SetStateAction<FeedPostProps | null>>;
 }
 

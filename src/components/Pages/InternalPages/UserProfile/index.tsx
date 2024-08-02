@@ -1,4 +1,4 @@
-import { memo, useContext, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Container, Content } from "./styles";
 import axios, { AxiosError } from "axios";
 import PostProfilePicture from "./PostProfilePicture";
@@ -11,7 +11,8 @@ import { FullLoader } from "../../../FullLoader";
 const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState<PostProps[] | undefined>();
-  const [postProfilePictureModal, setPostProfilePictureModal] = useState<boolean>(false);
+  const [postProfilePictureModal, setPostProfilePictureModal] =
+    useState<boolean>(false);
   const [usernameAndImg, setUsernameAndImg] = useState({
     username: "",
     profileImg: "",
@@ -35,7 +36,7 @@ const UserProfile = () => {
     }
 
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const request = await axios.get(
         `${import.meta.env.VITE_API}/api/v1/user/profile/${userId}`,
         {
@@ -73,9 +74,7 @@ const UserProfile = () => {
     return (
       <Container>
         {postProfilePictureModal && (
-          <PostProfilePicture
-            setModal={setPostProfilePictureModal}
-          />
+          <PostProfilePicture setModal={setPostProfilePictureModal} />
         )}
 
         <Content>

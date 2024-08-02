@@ -7,13 +7,12 @@ import {
   UpdateProfileImgLoader,
 } from "./styles";
 
-
 interface PostProfilePicture {
   setModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const PostProfilePicture = ({ setModal }: PostProfilePicture) => {
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState({
     status: "",
@@ -24,11 +23,10 @@ const PostProfilePicture = ({ setModal }: PostProfilePicture) => {
 
   async function PostPicture() {
     const token = localStorage.getItem("token");
-    formData.append("file", file);
 
-    if (!file) {
-      return;
-    }
+    if (file) {
+      formData.append("file", file);
+    } else return;
 
     try {
       setIsLoading(true);
@@ -72,7 +70,7 @@ const PostProfilePicture = ({ setModal }: PostProfilePicture) => {
     <ModalOpacity>
       <ModalContainer>
         <Modal>
-          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+          <input type="file" onChange={(e) => setFile(e.target.files![0])} />
 
           {!file ? (
             <p>Selecione um arquivo.</p>

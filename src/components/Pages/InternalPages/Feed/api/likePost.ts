@@ -1,5 +1,4 @@
 import axios from "axios";
-import { json } from "react-router-dom";
 
 export async function updateLikeInPost(postId: string, setLikeLoading: any) {
   const token = localStorage.getItem("token");

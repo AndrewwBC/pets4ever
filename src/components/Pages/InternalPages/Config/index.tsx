@@ -13,7 +13,7 @@ const Config = () => {
     password: "",
   });
   const [isDeleteButtonDisable, setIsDeleteButtonDisable] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [setIsLoading] = useState(false);
 
   const { data } = useContext(GlobalContext);
 

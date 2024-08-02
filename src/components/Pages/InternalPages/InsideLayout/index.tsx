@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 import { Container, Content, SideMenu, SideMenuContent } from "./styles";
@@ -15,7 +15,7 @@ const InsideLayout = () => {
 
   const userId = localStorage.getItem("userId");
 
-  function handleClick(e) {
+  function handleClick(e: FormEvent) {
     e.preventDefault();
     setCreatePostModal(true);
   }
