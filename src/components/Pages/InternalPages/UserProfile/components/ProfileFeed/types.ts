@@ -4,7 +4,7 @@ interface Comment {
   userProfileImageUrl: string;
 }
 
-interface Post {
+export interface PostProps {
   creationDate: string;
   description: string;
   imageUrl: string;
@@ -15,6 +15,6 @@ interface Post {
   comments: Comment[];
 }
 
-export interface ProfileFeedProps {
-  posts?: Post[];
+export interface PostArrayProps {
+  posts?: PostProps[];
 }

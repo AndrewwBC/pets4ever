@@ -1,15 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   Modal,
   ModalContainer,
   ModalOpacity,
   UpdateProfileImgLoader,
 } from "./styles";
-import { Loader } from "../../../../Loading/styles";
+
 
 interface PostProfilePicture {
-  setModal: () => boolean;
+  setModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const PostProfilePicture = ({ setModal }: PostProfilePicture) => {

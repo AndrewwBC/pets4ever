@@ -3,15 +3,15 @@ import { Container, Content } from "./styles";
 import axios, { AxiosError } from "axios";
 import PostProfilePicture from "./PostProfilePicture";
 import ProfileFeed from "./components/ProfileFeed";
-import { ProfileFeedProps } from "./components/ProfileFeed/types";
+import { PostProps } from "./components/ProfileFeed/types";
 import UserStatus from "./components/UserStats";
 import { useParams } from "react-router-dom";
 import { FullLoader } from "../../../FullLoader";
 
 const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [posts, setPosts] = useState<ProfileFeedProps[] | undefined>();
-  const [postProfilePictureModal, setPostProfilePictureModal] = useState(false);
+  const [posts, setPosts] = useState<PostProps[] | undefined>();
+  const [postProfilePictureModal, setPostProfilePictureModal] = useState<boolean>(false);
   const [usernameAndImg, setUsernameAndImg] = useState({
     username: "",
     profileImg: "",
@@ -35,6 +35,7 @@ const UserProfile = () => {
     }
 
     try {
+      setIsLoading(true)
       const request = await axios.get(
         `${import.meta.env.VITE_API}/api/v1/user/profile/${userId}`,
         {
@@ -67,14 +68,13 @@ const UserProfile = () => {
     setPostProfilePictureModal(!postProfilePictureModal);
   }
 
-  if (true) return <FullLoader />;
+  if (isLoading) return <FullLoader />;
   else
     return (
       <Container>
         {postProfilePictureModal && (
           <PostProfilePicture
             setModal={setPostProfilePictureModal}
-            isActive={postProfilePictureModal}
           />
         )}
 

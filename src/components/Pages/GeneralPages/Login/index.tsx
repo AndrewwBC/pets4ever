@@ -17,9 +17,10 @@ import { Toast } from "../../../Toast";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { GlobalContext } from "../../../../context/GlobalStorage";
+import { FullLoader } from "../../../FullLoader";
 
 export default function Login() {
-  const { data, setData } = useContext(GlobalContext);
+  const { setData } = useContext(GlobalContext);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function Login() {
       message: "",
     },
   ]);
-
+  const [isLoading, setIsLoading] = useState(false)
   function handleEmailBlur({ target }: ChangeEvent<HTMLInputElement>) {
     const errorAlreadyExist = errors.find((error) => error.field === "Email");
 
@@ -106,6 +107,7 @@ export default function Login() {
     }
 
     try {
+      setIsLoading(true)
       const response = await axios.post(
         `${import.meta.env.VITE_API}/api/v1/auth/signin`,
         {
@@ -168,11 +170,14 @@ export default function Login() {
           status: "error",
         });
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   async function loginWithSession() {
     try {
+      setIsLoading(true)
       const token = localStorage.getItem("token");
 
       const response = await axios({
@@ -236,12 +241,16 @@ export default function Login() {
           status: "error",
         });
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   function getErrorMessageByFieldName(fieldName: string): string | undefined {
     return errors.find((error) => error.field === fieldName)?.message;
   }
+
+  if(isLoading) return <FullLoader/>
 
   return (
     <Container>

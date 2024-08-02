@@ -1,7 +1,7 @@
 import { Container } from "./styles";
-import { ProfileFeedProps } from "./types";
+import { PostArrayProps} from "./types";
 
-function ProfileFeed({ posts }: ProfileFeedProps) {
+function ProfileFeed({ posts }: PostArrayProps) {
   function handlePostModal(postId: string) {
     return postId;
   }
