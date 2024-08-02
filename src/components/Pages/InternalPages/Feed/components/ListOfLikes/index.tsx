@@ -16,7 +16,7 @@ export default function ListOfLikes({
   });
 
   return createPortal(
-    <Container id="container">
+    <Container id="container"> 
       <div className="content">
         {listOfLikes.data!.map((item) => (
           <Link to={`/profile/${item.userId}`} className="user">

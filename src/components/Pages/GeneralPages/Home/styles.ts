@@ -7,12 +7,18 @@ export const Container = styled.main`
 export const Content = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
   }
 
   img {
@@ -20,8 +26,9 @@ export const Content = styled.section`
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    @media (max-width: 768px) {
-      display: none;
+    @media (max-width: 600px) {
+      max-height: 200px;
+      object-fit: cover;
     }
   }
 `;
@@ -35,10 +42,13 @@ const textAnimation = keyframes`
 `;
 
 export const Intro = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
   padding: 80px 48px;
+  height: 100vh;
 
-  @media (max-width: 1400px) {
-    padding: 12px 48px;
+  @media (max-width: 600px) {
+    padding: 24px;
   }
 
   div {
@@ -53,7 +63,12 @@ export const Intro = styled.div`
       animation-iteration-count: linear;
 
       @media (max-width: 1400px) {
-        font-size: 32px;
+        margin-top: 120px;
+        font-size: 48px;
+      }
+
+      @media (max-width: 764px) {
+        font-size: 40px;
       }
     }
 
@@ -62,19 +77,6 @@ export const Intro = styled.div`
       font-weight: 500;
       color: ${({ theme }) => theme.neutral.c6};
       font-size: 20px;
-
-      @media (max-width: 1400px) {
-        margin-top: 24px;
-        font-size: 16px;
-      }
-
-      @media (max-width: 768px) {
-        font-size: 14px;
-      }
-    }
-
-    button {
-      margin: 80px 0px;
     }
   }
 `;
@@ -98,11 +100,16 @@ const buttonTextColorAnimation = keyframes`
 
 export const ButtonContainer = styled.div`
   max-width: max-content;
+
+  @media (max-width: 764px) {
+    place-self: center;
+    align-self: flex-start;
+  }
+
   border-bottom: 1px solid ${({ theme }) => theme.neutral.c2};
 
   button {
     animation: ${buttonColorAnimation} 1s alternate infinite ease-in-out;
-
     span {
       color: red;
       animation: ${buttonTextColorAnimation} 1s alternate infinite ease-in-out;

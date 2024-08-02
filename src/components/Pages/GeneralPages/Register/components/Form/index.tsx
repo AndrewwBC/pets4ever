@@ -83,7 +83,9 @@ export default function Form() {
       (erro) => erro.field === fieldName
     )?.message;
 
-    const registerError = registerErrors.find((erro) => erro.field === fieldName)?.message
+    const registerError = registerErrors.find(
+      (erro) => erro.field === fieldName
+    )?.message;
 
     return errorMessage ? errorMessage : registerError;
   }

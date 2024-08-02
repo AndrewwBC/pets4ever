@@ -11,9 +11,22 @@ export const Content = styled.section`
   text-align: center;
   height: 100vh;
 
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+
   .formAndText {
     margin-top: 48px;
     padding: 0 40px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin-top: 120px;
+      padding: 0 64px;
+    }
   }
 
   h1 {
@@ -25,9 +38,9 @@ export const Content = styled.section`
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    /* @media (max-width: 768px) {
-      display: none;
-    } */
+    @media (max-width: 768px) {
+      max-height: 200px;
+    }
   }
 
   form {
