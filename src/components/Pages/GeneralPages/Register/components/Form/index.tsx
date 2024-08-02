@@ -83,7 +83,9 @@ export default function Form() {
       (erro) => erro.field === fieldName
     )?.message;
 
-    return errorMessage;
+    const registerError = registerErrors.find((erro) => erro.field === fieldName)?.message
+
+    return errorMessage ? errorMessage : registerError;
   }
 
   function handlePassword({ target }: ChangeEvent<HTMLInputElement>) {

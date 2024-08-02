@@ -1,6 +1,4 @@
 import { AuthContainer, Container, Content } from "./styles";
-import { Toast } from "../../../Toast";
-import useToast from "../../../Toast/useToast";
 import homeImage from "../../../../assets/images/dogHome.jpg";
 import { FcGoogle } from "react-icons/fc";
 
