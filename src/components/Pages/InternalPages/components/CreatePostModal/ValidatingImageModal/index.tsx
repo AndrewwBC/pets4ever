@@ -1,12 +1,28 @@
 import { createPortal } from "react-dom";
 import { Container } from "./styles";
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { Loader } from "../../../../../Loading/styles";
 import { ImCheckboxChecked } from "react-icons/im";
 import Confetti from "../../../../../Confetti";
 import { MyButton } from "../../../../../Button/style";
 
-export default function ValidatingImageModal({ isLoadingData, setModal }) {
+interface ValidationImageModalProps {
+  isLoadingData: {
+    step: string;
+    isLoading: boolean;
+  };
+  setModal: Dispatch<
+    SetStateAction<{
+      step: string;
+      isLoading: boolean;
+    }>
+  >;
+}
+
+export default function ValidatingImageModal({
+  isLoadingData,
+  setModal,
+}: ValidationImageModalProps) {
   useEffect(() => {
     console.log("Entrou");
   }, [isLoadingData.step]);
