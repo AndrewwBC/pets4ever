@@ -1,5 +1,5 @@
 import { Button } from "../../../../../components/Button";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Input } from "../../../../../components/input";
 import axios, { AxiosError } from "axios";
 

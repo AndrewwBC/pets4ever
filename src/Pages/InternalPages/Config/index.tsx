@@ -111,7 +111,7 @@ const Config = () => {
                 }
               />
             </label>
-            <Button type="submit" label="Editar" />
+            <Button size="medium" type="submit" label="Editar" />
           </form>
         </section>
       ) : (
@@ -126,6 +126,7 @@ const Config = () => {
           </label>
           <p>Ao clicar no botão, sua conta será deletada imediatamente.</p>
           <Button
+            size="medium"
             label="Deletar"
             disabled={isDeleteButtonDisable}
             type="submit"
