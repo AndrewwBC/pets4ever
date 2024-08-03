@@ -10,6 +10,7 @@ export const Container = styled.div`
   right: 0px;
   left: 0px;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999999;
 `;
 
 export const Loader = styled.div`

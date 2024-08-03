@@ -1,10 +1,10 @@
+import { ButtonHTMLAttributes } from "react";
 import { MyButton } from "./style";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  size: "big" | "medium" | "low";
   label: string;
-  size?: "big" | "medium" | "low";
   disabled?: boolean;
-  type?: "submit" | "reset" | "button" | undefined;
 }
 
 export function Button({
@@ -12,9 +12,10 @@ export function Button({
   label,
   type = "submit",
   disabled = false,
+  onClick,
 }: ButtonProps) {
   return (
-    <MyButton disabled={disabled} size={size} type={type}>
+    <MyButton onClick={onClick} disabled={disabled} size={size} type={type}>
       <span>{label}</span>
     </MyButton>
   );
