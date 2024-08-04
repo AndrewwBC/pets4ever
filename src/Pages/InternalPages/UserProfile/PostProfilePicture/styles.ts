@@ -10,7 +10,7 @@ export const ModalOpacity = styled.main`
   right: 0px;
   left: 0px;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 999;
 `;
 
 export const ModalContainer = styled.section`

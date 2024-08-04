@@ -13,8 +13,11 @@ export const Container = styled.main`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 32px;
     padding-bottom: 12px;
+
+    @media (max-width: 500px) {
+      padding: 0 32px;
+    }
 
     span {
       font-weight: 700;
