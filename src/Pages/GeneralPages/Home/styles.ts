@@ -42,10 +42,10 @@ const textAnimation = keyframes`
 `;
 
 export const Intro = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   padding: 80px 48px;
-  height: 100vh;
 
   @media (max-width: 600px) {
     padding: 24px;
@@ -56,7 +56,7 @@ export const Intro = styled.div`
       color: ${({ theme }) => theme.neutral.c8};
       font-size: 48px;
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.3;
       transition: all 0.6s;
       animation-name: ${textAnimation};
       animation-duration: 0.6s;
@@ -73,7 +73,7 @@ export const Intro = styled.div`
     }
 
     p {
-      margin-top: 72px;
+      margin: 72px 0px;
       font-weight: 500;
       color: ${({ theme }) => theme.neutral.c6};
       font-size: 20px;

@@ -6,9 +6,6 @@ export const Container = styled.header`
   @media (max-width: 768px) {
     width: 100vw;
   }
-  border-radius: 0px;
-  background: #f9f9f9;
-  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
 `;
 
 export const Content = styled.div`
