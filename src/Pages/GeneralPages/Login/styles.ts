@@ -98,7 +98,6 @@ export const Form = styled.form`
   width: 100%;
 
   input {
-    margin-bottom: 4px;
     max-width: 100%;
   }
 

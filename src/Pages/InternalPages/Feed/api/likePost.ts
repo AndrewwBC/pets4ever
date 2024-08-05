@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export async function updateLikeInPost(postId: string, setLikeLoading: any) {
   const token = localStorage.getItem("token");
@@ -22,7 +22,7 @@ export async function updateLikeInPost(postId: string, setLikeLoading: any) {
     console.log(response);
     return response;
   } catch (err) {
-    console.log(err);
+    if (err instanceof AxiosError) console.log(err.message);
   } finally {
     setLikeLoading(false);
   }

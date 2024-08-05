@@ -69,6 +69,10 @@ const UserProfile = () => {
     setPostProfilePictureModal(!postProfilePictureModal);
   }
 
+  const src = usernameAndImg.profileImg
+    ? `https://pets4ever.s3.us-east-2.amazonaws.com/${usernameAndImg.profileImg}`
+    : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg";
+
   if (isLoading) return <FullLoader />;
   else
     return (
@@ -84,7 +88,7 @@ const UserProfile = () => {
                 <img
                   width={64}
                   height={64}
-                  src={`https://pets4ever.s3.us-east-2.amazonaws.com/${usernameAndImg.profileImg}`}
+                  src={src}
                   alt="sua foto de perfil"
                   onClick={updateProfileImg}
                 />

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export async function getPosts() {
   const token = localStorage.getItem("token");
@@ -10,12 +10,19 @@ export async function getPosts() {
         Authorization: `Bearer ${token}`,
       },
     });
-
     const response = await r.data;
 
-    console.log(response);
     return response;
   } catch (err) {
     console.log(err);
+    if (err instanceof AxiosError) {
+      const { data, status } = err.response;
+      if (status == "401") {
+        localStorage.clear();
+        alert(data);
+
+        window.location.pathname = "/";
+      }
+    }
   }
 }

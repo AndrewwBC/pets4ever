@@ -36,7 +36,6 @@ export const Content: React.FC<ContentProps> = styled.div`
     font-size: 14px;
     color: red;
     align-self: self-start;
-    margin-bottom: 2px;
     font-weight: 500;
   }
 `;

@@ -40,13 +40,15 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([
     {
-      field: "",
+      fieldName: "",
       message: "",
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
   function handleEmailBlur({ target }: ChangeEvent<HTMLInputElement>) {
-    const errorAlreadyExist = errors.find((error) => error.field === "Email");
+    const errorAlreadyExist = errors.find(
+      (error) => error.fieldName === "Email"
+    );
 
     if (
       !isEmailValid(target.value) &&
@@ -56,46 +58,59 @@ export default function Login() {
       setErrors((prevState) => [
         ...prevState,
         {
-          field: "Email",
+          fieldName: "Email",
           message: "Email inválido!",
         },
       ]);
     }
     if (isEmailValid(target.value)) {
-      setErrors(errors.filter((error) => error.field !== "Email"));
+      setErrors(errors.filter((error) => error.fieldName !== "Email"));
     }
   }
 
   function handleEmailChange({ target }: ChangeEvent<HTMLInputElement>) {
     setEmail(target.value);
+    const fieldName = "email";
 
-    const thereIsAnError = errors.find((erro) => erro.field === "Email");
+    const thereIsAnError = errors.find((erro) => erro.fieldName === fieldName);
+
+    !isEmailValid(target.value) &&
+      setErrors((prevState) => [
+        ...prevState,
+        {
+          fieldName,
+          message: "Email inválido!",
+        },
+      ]);
+
     if (thereIsAnError && isEmailValid(target.value)) {
-      setErrors(errors.filter((errors) => errors.field !== "Email"));
+      setErrors(errors.filter((error) => error.fieldName !== fieldName));
     }
   }
 
   function handlePasswordChange({ target }: ChangeEvent<HTMLInputElement>) {
     setPassword(target.value);
 
+    const fieldName = "password";
+
     const valueLength = target.value.length;
 
     const errorAlreadyExists = errors.find(
-      (error) => error.field === "Password"
+      (error) => error.fieldName === fieldName
     );
 
     if (valueLength > 0 && valueLength < 6 && !errorAlreadyExists) {
       setErrors((prevState) => [
         ...prevState,
         {
-          field: "Password",
+          fieldName,
           message: "Insira ao menos seis caractéres.",
         },
       ]);
     }
 
     if (valueLength >= 6) {
-      setErrors(errors.filter((error) => error.field !== "Password"));
+      setErrors(errors.filter((error) => error.fieldName !== fieldName));
     }
   }
 
@@ -137,20 +152,18 @@ export default function Login() {
       }
     } catch (err) {
       if (err instanceof AxiosError) {
-        console.log(err.response?.data);
-
         interface ErrorProps {
           fieldName: string;
           message: string;
         }
 
         const errorData: ErrorProps[] = err.response?.data;
-
+        console.log(err.response);
         errorData.map(({ fieldName, message }) => {
           setErrors((prevState) => [
             {
               ...prevState,
-              field: fieldName,
+              fieldName,
               message,
             },
           ]);
@@ -179,7 +192,7 @@ export default function Login() {
     try {
       setIsLoading(true);
       const token = localStorage.getItem("token");
-
+      alert(token);
       const response = await axios({
         url: `${import.meta.env.VITE_API}/api/v1/auth/loginwithsession`,
         headers: {
@@ -208,20 +221,18 @@ export default function Login() {
       }
     } catch (err) {
       if (err instanceof AxiosError) {
-        console.log(err.response?.data);
-
         interface ErrorProps {
           fieldName: string;
           message: string;
         }
 
         const errorData: ErrorProps[] = err.response?.data;
-
+        console.log(errorData);
         errorData.map(({ fieldName, message }) => {
           setErrors((prevState) => [
             {
               ...prevState,
-              field: fieldName,
+              fieldName,
               message,
             },
           ]);
@@ -246,8 +257,15 @@ export default function Login() {
     }
   }
 
+  function handleButtonDisabled() {
+    if (isEmailValid(email) && password.length >= 8) return false;
+
+    return true;
+  }
+
   function getErrorMessageByFieldName(fieldName: string): string | undefined {
-    return errors.find((error) => error.field === fieldName)?.message;
+    return errors.find((error) => error.fieldName?.includes(fieldName))
+      ?.message;
   }
 
   if (isLoading) return <FullLoader />;
@@ -265,7 +283,7 @@ export default function Login() {
         </AuthContainer>
 
         <Form onSubmit={Login}>
-          <FormGroup label="E-MAIL" error={getErrorMessageByFieldName("Email")}>
+          <FormGroup label="E-MAIL" error={getErrorMessageByFieldName("email")}>
             <Input
               type="email"
               required
@@ -277,7 +295,7 @@ export default function Login() {
           </FormGroup>
           <FormGroup
             label="SENHA"
-            error={getErrorMessageByFieldName("Password")}
+            error={getErrorMessageByFieldName("password")}
           >
             <Input
               value={password}
@@ -291,9 +309,10 @@ export default function Login() {
           </Link>
 
           <Button
-            disabled={Boolean(errors.find((erro) => erro.message))}
+            disabled={Boolean(errors.find((erro) => erro.fieldName))}
             size={"low"}
             label="Entrar"
+            type="submit"
           />
 
           <RegisterContent>
