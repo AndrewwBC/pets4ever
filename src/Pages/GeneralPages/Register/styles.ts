@@ -8,6 +8,7 @@ export const Content = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: center;
+  align-items: center;
   text-align: center;
   height: 100vh;
 
@@ -19,8 +20,10 @@ export const Content = styled.section`
   }
 
   .formAndText {
-    margin-top: 48px;
     padding: 0 40px;
+    max-width: 600px;
+    place-self: center;
+    width: 100%;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -31,6 +34,8 @@ export const Content = styled.section`
 
   h1 {
     margin-bottom: 16px;
+
+    font-size: 32px;
   }
 
   img {
