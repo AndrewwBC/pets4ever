@@ -97,7 +97,7 @@ const PostModal = ({
         <Content>
           <img
             className="feedPhoto"
-            src={`https://pets4ever.s3.us-east-2.amazonaws.com/${post.userProfileImageUrl}`}
+            src={`https://pets4ever.s3.us-east-2.amazonaws.com/${post.imageUrl}`}
             alt=""
           />
 

@@ -257,12 +257,6 @@ export default function Login() {
     }
   }
 
-  function handleButtonDisabled() {
-    if (isEmailValid(email) && password.length >= 8) return false;
-
-    return true;
-  }
-
   function getErrorMessageByFieldName(fieldName: string): string | undefined {
     return errors.find((error) => error.fieldName?.includes(fieldName))
       ?.message;

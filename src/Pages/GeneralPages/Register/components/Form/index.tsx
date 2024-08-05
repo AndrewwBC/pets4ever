@@ -40,18 +40,26 @@ export default function Form() {
     hasOneLower: false,
   });
 
-  function handleUsername({ target }: ChangeEvent<HTMLInputElement>) {
-    const usernameField = "Username";
+  function handleName({ target }: ChangeEvent<HTMLInputElement>) {
+    const field = "name";
+    const value = target.value;
 
-    if (target.value.length == 0)
+    setRegisterData((prevState) => ({
+      ...prevState,
+      name: target.value,
+    }));
+
+    if (value.length < 3 || value.length > 32) {
       setErrors((prevState) => [
         ...prevState,
         {
-          field: usernameField,
-          message: "Este campo não pode estar vazio",
+          field,
+          message: "Nome deve ter de 3 a 32 caractéres!",
         },
       ]);
-    else setErrors(errors.filter((erro) => erro.field !== usernameField));
+      return;
+    }
+    setErrors(errors.filter((erro) => erro.field !== field));
   }
 
   function handleEmailChange({ target }: ChangeEvent<HTMLInputElement>) {
@@ -229,18 +237,9 @@ export default function Form() {
 
         <FormGroup
           label="NOME DE USUÁRIO"
-          error={getErrorMessageByFieldName("Username")}
+          error={getErrorMessageByFieldName("name")}
         >
-          <Input
-            placeholder="Insira o nome de usuário"
-            onBlur={handleUsername}
-            onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
-              setRegisterData((prevState) => ({
-                ...prevState,
-                name: target.value,
-              }))
-            }
-          />
+          <Input placeholder="Insira o nome de usuário" onChange={handleName} />
         </FormGroup>
 
         <FormGroup label="SENHA" error={findPasswordError()}>
