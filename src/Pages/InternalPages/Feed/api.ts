@@ -16,10 +16,9 @@ export async function getPosts() {
   } catch (err) {
     console.log(err);
     if (err instanceof AxiosError) {
-      const { data, status } = err.response;
-      if (status == "401") {
+      if (err.response?.status == 401) {
         localStorage.clear();
-        alert(data);
+        alert(err.response.data);
 
         window.location.pathname = "/";
       }
