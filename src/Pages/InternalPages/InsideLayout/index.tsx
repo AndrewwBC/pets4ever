@@ -1,15 +1,18 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 import { Container, Content, SideMenu, SideMenuContent } from "./styles";
 
 import CreatePostModal from "../components/CreatePostModal";
-import { CgProfile } from "react-icons/cg";
+import { CgProfile, CgSun, CgToolbox } from "react-icons/cg";
 import { IoCreateOutline, IoHomeOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
 import LogoutModal from "./LogoutModal";
+import { ThemeContext } from "../../../context/ThemeContext";
 
 const InsideLayout = () => {
+  const { systemTheme, setSystemTheme } = useContext(ThemeContext);
+
   const [logoutModal, setLogoutModal] = useState(false);
   const [createPostModal, setCreatePostModal] = useState(false);
 
@@ -23,6 +26,17 @@ const InsideLayout = () => {
   function handleLogout(e: FormEvent) {
     e.preventDefault();
     setLogoutModal(true);
+  }
+
+  function handleTheme(e: FormEvent) {
+    e.preventDefault();
+    if (systemTheme === "light") {
+      setSystemTheme("darkTheme");
+      localStorage.setItem("color_theme:", "darkTheme");
+      return;
+    }
+    setSystemTheme("light");
+    localStorage.setItem("color_theme:", "light");
   }
 
   return (
@@ -59,6 +73,20 @@ const InsideLayout = () => {
                 <Link to={`/profile/${userId}`}>
                   <CgProfile size={32} />
                   <p>Meu Perfil</p>
+                </Link>
+              </li>
+
+              <li>
+                <Link to={""} onClick={(e) => handleTheme(e)}>
+                  <CgSun size={32} />
+                  <p>Mudar Tema</p>
+                </Link>
+              </li>
+
+              <li>
+                <Link to={`/config`}>
+                  <CgToolbox size={32} />
+                  <p>Configurações</p>
                 </Link>
               </li>
 

@@ -16,9 +16,9 @@ const Config = () => {
   const [setIsLoading] = useState(false);
 
   const { data } = useContext(GlobalContext);
-
+  console.log(data);
   useEffect(() => {
-    if (data) {
+    if (data.name) {
       setUserData((prevState) => ({
         ...prevState,
         name: data.name,

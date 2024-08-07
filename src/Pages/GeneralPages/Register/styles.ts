@@ -25,17 +25,23 @@ export const Content = styled.section`
     place-self: center;
     width: 100%;
 
+    .text {
+      h1 {
+        margin-bottom: 16px;
+        color: ${({ theme }) => theme.neutral.c9};
+        font-size: 32px;
+      }
+
+      p {
+        color: ${({ theme }) => theme.neutral.c5};
+      }
+    }
+
     @media (max-width: 768px) {
       width: 100%;
       margin-top: 120px;
       padding: 0 64px;
     }
-  }
-
-  h1 {
-    margin-bottom: 16px;
-
-    font-size: 32px;
   }
 
   img {
@@ -85,34 +91,8 @@ export const Content = styled.section`
         display: block;
         margin-left: 12px;
         font-size: 14px;
+        color: ${({ theme }) => theme.neutral.c9};
       }
-    }
-  }
-`;
-
-export const AuthContainer = styled.div`
-  width: 100%;
-  padding-bottom: 24px;
-  margin: 24px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-  .loginWithGoogle {
-    display: flex;
-    align-items: "center";
-    justify-content: center;
-    gap: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-weight: 600;
-    width: 100%;
-    transition: 0.3s;
-    &:hover {
-      border: 1px solid rgba(0, 0, 0, 0.8);
     }
   }
 `;

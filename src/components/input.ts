@@ -13,6 +13,7 @@ export const Input: React.FC<MyInputProps> = styled.input`
   transition: 0.2s;
   text-align: left;
   cursor: auto;
+  color: ${({ theme }) => theme.neutral.c9};
 
   &::placeholder {
     font-size: 14px;

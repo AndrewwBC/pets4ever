@@ -1,8 +1,8 @@
-import { AuthContainer, Container, Content } from "./styles";
+import { Container, Content } from "./styles";
 import homeImage from "../../../assets/images/dogHome.jpg";
-import { FcGoogle } from "react-icons/fc";
 
 import Form from "./components/Form";
+import GoogleAuth from "../../../components/GoogleAuth";
 
 export function Register() {
   return (
@@ -17,12 +17,7 @@ export function Register() {
 
             <p>Apenas quatro informações para iniciar.</p>
           </div>
-          <AuthContainer>
-            <div className="loginWithGoogle">
-              <FcGoogle size={22} />
-              <span>Registre-se com Google</span>
-            </div>
-          </AuthContainer>
+          <GoogleAuth />
           <Form />
         </div>
       </Content>

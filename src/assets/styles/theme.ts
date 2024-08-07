@@ -23,8 +23,8 @@ export interface MyThemeProps {
   };
 }
 
-export const theme = {
-  bg: "#F4f4f4",
+export const lightTheme = {
+  bg: "#fff",
   neutral: {
     c1: "#FFFFFF",
     c2: "#F9F9F9",
@@ -46,4 +46,33 @@ export const theme = {
     medium: "#e6bb52",
     dark: "#ffa500",
   },
+  boxShadowStyle: "1px 2px 8px #999, -1px -6px 12px #fff}",
 };
+
+export const darkTheme = {
+  bg: "#000",
+  neutral: {
+    c1: "#000000", // c9
+    c2: "#101010", // c8
+    c3: "#222222", // c7
+    c4: "#404040", // c6
+    c5: "#B1B1B1", // c5 (permanece o mesmo)
+    c6: "#CCCCCC", // c4
+    c7: "#DEDEDE", // c3
+    c8: "#F9F9F9", // c2
+    c9: "#FFFFFF", // c1
+  },
+  purple: {
+    light: "#b89ff4",
+    medium: "#7b44ff",
+    dark: "#581de6",
+  },
+  yellow: {
+    light: "#f6bb00",
+    medium: "#e6bb52",
+    dark: "#ffa500",
+  },
+  boxShadow: null,
+};
+
+export const theme = lightTheme;

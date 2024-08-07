@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GlobalStorage } from "../context/GlobalStorage";
 
-import { theme } from "../assets/styles/theme";
+import { darkTheme, theme } from "../assets/styles/theme";
 
 import Home from "../Pages/GeneralPages/Home";
 import Login from "../Pages/GeneralPages/Login";
@@ -16,11 +16,19 @@ import InsideLayout from "../Pages/InternalPages/InsideLayout";
 import Feed from "../Pages/InternalPages/Feed";
 import Header from "../components/Layout/Header";
 import Error404 from "../Pages/Error404";
-import Config from "../Pages/InternalPages/Config";
+import Config from "../Pages/InternalPages/UserConfig";
+import { useContext, useEffect } from "react";
+import ThemeContextProvider, { ThemeContext } from "../context/ThemeContext";
 
-function App() {
+function AppContent() {
+  const { systemTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    console.log(systemTheme);
+  }, [systemTheme]);
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={systemTheme === "light" ? theme : darkTheme}>
       <GlobalStorage>
         <Router>
           <Routes>
@@ -44,6 +52,14 @@ function App() {
         </Router>
       </GlobalStorage>
     </ThemeProvider>
+  );
+}
+
+function App() {
+  return (
+    <ThemeContextProvider>
+      <AppContent />
+    </ThemeContextProvider>
   );
 }
 

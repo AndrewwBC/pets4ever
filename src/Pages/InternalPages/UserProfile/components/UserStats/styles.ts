@@ -8,6 +8,7 @@ export const Container = styled.div`
 
   small,
   p {
+    color: ${({ theme }) => theme.neutral.c9};
     font-family: "Nunito";
     font-size: 16px;
     font-weight: 500;

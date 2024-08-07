@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-  background: ${({ theme }) => theme.neutral.c2};
+  background: ${({ theme }) => theme.bg};
+  height: 100%;
   width: calc(100vw - 18px);
   position: relative;
 
@@ -21,9 +22,9 @@ export const Content = styled.section`
 `;
 
 export const SideMenu = styled.div`
-  background: ${({ theme }) => theme.neutral.c2};
+  background: ${({ theme }) => theme.bg};
   height: 100vh;
-  border-right: 1px solid black;
+  border-right: 1px solid ${({ theme }) => theme.neutral.c5};
   position: fixed;
   width: 240px;
   z-index: 999;
@@ -47,7 +48,7 @@ export const SideMenuContent = styled.div`
     display: block;
     font-size: 24px;
     font-weight: 600;
-    color: #222;
+    color: ${({ theme }) => theme.neutral.c9};
     margin: 64px 0;
 
     @media (max-width: 600px) {

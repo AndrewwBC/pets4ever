@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Container, HeaderAndPhoto } from "./styles";
 
 import PostModal from "../components/PostModal";
@@ -12,8 +12,11 @@ import ListOfLikes from "./components/ListOfLikes";
 import { Link } from "react-router-dom";
 import { ListOfLikesStateProps } from "./components/ListOfLikes/types";
 import { FeedPostProps } from "./types";
+import { GlobalContext } from "../../../context/GlobalStorage";
+import { FullDogLoader } from "../../../components/FullDogLoader";
 
 export const Feed = () => {
+  const { data } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
   const [modalPostData, setModalPostData] = useState<FeedPostProps | null>(
     null
@@ -38,7 +41,7 @@ export const Feed = () => {
     setShowModal(true);
     setModalPostData(posts?.find((post) => post.postId === postId)!);
   }
-
+  console.log(data.name);
   async function handlePostLikePut(postId: string) {
     if (!likeLoading) {
       await updateLikeInPost(postId, setLikeLoading);
@@ -46,7 +49,7 @@ export const Feed = () => {
     }
   }
 
-  if (!posts) return <div></div>;
+  if (!posts) return <FullDogLoader />;
   else
     return (
       <Container>
@@ -65,18 +68,9 @@ export const Feed = () => {
         )}
 
         <Stories />
+
         <HeaderAndPhoto>
-          <div className="header">
-            <span>Feeds</span>
-
-            <div className="menuHeader">
-              <p>Recentes</p>
-              <p>Amigos</p>
-              <p>Popular</p>
-            </div>
-          </div>
-
-          <div className="imagesContainer">
+          <div className="postContainer">
             {posts.map((item, index) => {
               return (
                 <div className="eachPost" key={index}>
@@ -88,7 +82,9 @@ export const Feed = () => {
                         height={40}
                         width={40}
                       />
-                      <Link to={`/profile/${item.userId}`}>{item.name}</Link>
+                      <Link to={`/profile/${item.userId}`}>
+                        <span>{item.name}</span>
+                      </Link>
                     </div>
                   </header>
                   <img
@@ -117,7 +113,7 @@ export const Feed = () => {
                     />
                     <div className="nameAndDescription">
                       <Link to={`/profile/${item.userId}`}>
-                        @{item.name.toLowerCase()}
+                        <span className="name">{item.name.toLowerCase()}</span>
                       </Link>
                       <small>{item.description}</small>
                     </div>

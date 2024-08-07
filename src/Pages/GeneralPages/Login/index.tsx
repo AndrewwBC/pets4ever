@@ -1,13 +1,7 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 
 import FormGroup from "../../../components/FormGroup";
-import {
-  AuthContainer,
-  Container,
-  Content,
-  Form,
-  RegisterContent,
-} from "./styles";
+import { Container, Content, Form, RegisterContent } from "./styles";
 import { Input } from "../../../components/input";
 import { Button } from "../../../components/Button";
 import { isEmailValid } from "../../../utils/isEmailValid";
@@ -15,9 +9,9 @@ import axios, { AxiosError } from "axios";
 
 import { Toast } from "../../../components/Toast";
 import { Link, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { GlobalContext } from "../../../context/GlobalStorage";
 import { FullLoader } from "../../../components/FullLoader";
+import { GlobalContext } from "../../../context/GlobalStorage";
+import GoogleAuth from "../../../components/GoogleAuth";
 
 export default function Login() {
   const { setData } = useContext(GlobalContext);
@@ -131,12 +125,11 @@ export default function Login() {
         }
       );
 
-      console.log(response);
-
       if (response) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.userId);
 
+        console.log(response);
         setData({
           name: response.data.username,
           email: response.data.email,
@@ -269,12 +262,7 @@ export default function Login() {
       <Content>
         <h1>Log in</h1>
 
-        <AuthContainer>
-          <div className="loginWithGoogle">
-            <FcGoogle size={22} />
-            <span>Continue com Google</span>
-          </div>
-        </AuthContainer>
+        <GoogleAuth />
 
         <Form onSubmit={Login}>
           <FormGroup label="E-MAIL" error={getErrorMessageByFieldName("email")}>

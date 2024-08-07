@@ -5,16 +5,16 @@
   font-family: "Nunito";
 }
 
-body {
-  background-color: #f9f9f9;
-}
-
 li {
   list-style: none;
 }
 
 a {
   text-decoration: none;
+}
+
+a:visited {
+  color: initial;
 }
 
 img {

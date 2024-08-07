@@ -10,7 +10,7 @@ export const Modal = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10px;
+  z-index: 999;
 
   @media (max-width: 768px) {
     padding-top: 64px;
@@ -45,7 +45,7 @@ export const Content = styled.section`
   }
 
   .postInfo {
-    background-color: #e9e9e9;
+    background-color: ${({ theme }) => theme.bg};
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
@@ -56,7 +56,7 @@ export const Content = styled.section`
     position: relative;
 
     .commentContainer {
-      background-color: #f9f9f9;
+      background-color: ${({ theme }) => theme.bg};
       border-radius: 4px;
       padding: 4px;
       display: flex;
@@ -161,7 +161,7 @@ export const Content = styled.section`
     gap: 12px;
     align-items: center;
     justify-content: flex-start;
-    color: #222;
+    color: ${({ theme }) => theme.neutral.c9};
   }
 
   .insertCommentContainer {

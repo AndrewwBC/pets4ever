@@ -15,6 +15,17 @@ export default function Form() {
   const { toast, setToast } = useToast();
   const [focusedPassword, setFocusedPassword] = useState(false);
 
+  useState(() => {
+    return () => {
+      console.log("desmontouaaaaa");
+      setRegisterData({
+        email: "",
+        name: "",
+        senha: "",
+      });
+    };
+  });
+
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",

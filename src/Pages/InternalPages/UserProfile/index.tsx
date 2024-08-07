@@ -6,7 +6,7 @@ import ProfileFeed from "./components/ProfileFeed";
 import { PostProps } from "./components/ProfileFeed/types";
 import UserStatus from "./components/UserStats";
 import { useParams } from "react-router-dom";
-import { FullLoader } from "../../../components/FullLoader";
+import { FullDogLoader } from "../../../components/FullDogLoader";
 
 const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +73,7 @@ const UserProfile = () => {
     ? `https://pets4ever.s3.us-east-2.amazonaws.com/${usernameAndImg.profileImg}`
     : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg";
 
-  if (isLoading) return <FullLoader />;
+  if (isLoading) return <FullDogLoader />;
   else
     return (
       <Container>
@@ -94,7 +94,7 @@ const UserProfile = () => {
                 />
               </div>
 
-              <h1>{usernameAndImg.username}</h1>
+              <span className="username">{usernameAndImg.username}</span>
             </div>
 
             <UserStatus />

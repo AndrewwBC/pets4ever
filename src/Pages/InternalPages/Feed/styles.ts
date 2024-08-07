@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-  background: ${({ theme }) => theme.neutral.c2};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,35 +40,45 @@ export const Container = styled.main`
 export const HeaderAndPhoto = styled.section`
   background: inherit;
   grid-column: 2/3;
-  .postHeader div {
-    display: flex;
-    align-items: center;
-    padding: 4px;
-    gap: 8px;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-    background: ${({ theme }) => theme.neutral.c1};
-    box-shadow: 1px 6px 6px #bfbfbf, -1px -6px 12px ${({ theme }) => theme.bg};
 
-    p {
-      @media (max-width: 768px) {
-        font-size: 14px;
-      }
-    }
-
-    img {
-      border-radius: 9999px;
-    }
-  }
-
-  .imagesContainer {
+  .postContainer {
     max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    gap: 48px;
-    margin-top: 6px;
+
+    .eachPost {
+      padding-bottom: 24px;
+      border-bottom: 1px solid ${({ theme }) => theme.neutral.c5};
+      &:nth-child(n + 2) {
+        padding-top: 24px;
+      }
+
+      background: ${({ theme }) => theme.neutral.c1};
+    }
+
+    .postHeader div {
+      display: flex;
+      align-items: center;
+      padding: 8px 0px;
+      gap: 18px;
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+      span {
+        color: ${({ theme }) => theme.neutral.c9};
+      }
+
+      p {
+        @media (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
+
+      img {
+        border-radius: 9999px;
+      }
+    }
 
     &::-webkit-scrollbar {
       width: 4px;
@@ -86,7 +95,6 @@ export const HeaderAndPhoto = styled.section`
     }
 
     .feedPhoto {
-      height: 600px;
       width: 520px;
 
       @media (max-width: 1600px) {
@@ -105,6 +113,8 @@ export const HeaderAndPhoto = styled.section`
 
     .postInfoAndStatus {
       max-width: 100%;
+      padding: 12px 0px;
+
       .iconsContainerAndCreatedAt {
         display: flex;
         justify-content: space-between;
@@ -116,7 +126,7 @@ export const HeaderAndPhoto = styled.section`
           gap: 12px;
           align-items: center;
           justify-content: flex-start;
-          color: #222;
+          color: ${({ theme }) => theme.neutral.c9};
         }
 
         .createdAt {
@@ -135,6 +145,7 @@ export const HeaderAndPhoto = styled.section`
         small {
           font-size: 16px;
           font-weight: 600;
+          color: ${({ theme }) => theme.neutral.c8};
         }
       }
 
@@ -144,10 +155,9 @@ export const HeaderAndPhoto = styled.section`
         align-items: center;
         justify-content: start;
         margin-top: 18px;
-        margin-left: 16px;
         gap: 32px;
 
-        p {
+        .name {
           color: ${({ theme }) => theme.neutral.c6};
         }
 
@@ -158,12 +168,6 @@ export const HeaderAndPhoto = styled.section`
           max-width: 260px;
         }
       }
-
-      padding: 12px;
-      border-bottom-right-radius: 8px;
-      border-bottom-left-radius: 8px;
-      background: ${({ theme }) => theme.neutral.c1};
-      box-shadow: 1px 6px 6px #bfbfbf, -1px -6px 12px ${({ theme }) => theme.bg};
     }
   }
 `;

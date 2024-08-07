@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-  background-color: ${({ theme }) => theme.neutral.c2};
+  background-color: ${({ theme }) => theme.bg};
+  height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
 `;
 
@@ -17,6 +18,10 @@ export const Content = styled.section`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .username {
+      color: ${({ theme }) => theme.neutral.c9};
+    }
   }
 
   .userImageAndName {

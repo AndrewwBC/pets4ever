@@ -44,6 +44,7 @@ export const Content = styled.div`
   .menuItems li {
     cursor: pointer;
     font-size: 18px;
+    color: ${({ theme }) => theme.neutral.c9};
 
     a {
       display: block;

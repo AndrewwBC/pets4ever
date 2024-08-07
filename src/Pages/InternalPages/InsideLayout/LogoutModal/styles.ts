@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0px;
   bottom: 0px;
   right: 0px;
@@ -11,6 +11,9 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 9999999;
+  body {
+    overflow: hidden !important;
+  }
 `;
 
 export const Content = styled.div`

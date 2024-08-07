@@ -17,16 +17,16 @@ export const Content = styled.section`
   @media (max-width: 600px) {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     align-items: center;
   }
 
   img {
     display: block;
-    width: 100vw;
     height: 100vh;
+    width: 100vw;
     object-fit: cover;
     @media (max-width: 600px) {
+      width: 100vw;
       max-height: 200px;
       object-fit: cover;
     }
@@ -43,15 +43,28 @@ const textAnimation = keyframes`
 
 export const Intro = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   gap: 32px;
-  padding: 80px 48px;
+  padding: 48px;
 
   @media (max-width: 600px) {
-    padding: 24px;
+    //padding: 24px;
   }
 
   div {
+    .mobTitle {
+      display: none;
+    }
+    @media (max-width: 600px) {
+      .webTitle {
+        display: none;
+      }
+      .mobTitle {
+        display: block;
+      }
+    }
+
     h1 {
       color: ${({ theme }) => theme.neutral.c8};
       font-size: 48px;
@@ -63,7 +76,6 @@ export const Intro = styled.div`
       animation-iteration-count: linear;
 
       @media (max-width: 1400px) {
-        margin-top: 120px;
         font-size: 48px;
       }
 
