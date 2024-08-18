@@ -15,6 +15,7 @@ const Config = () => {
   const [isDeleteButtonDisable, setIsDeleteButtonDisable] = useState(true);
 
   const { data } = useContext(GlobalContext);
+
   console.log(data);
   useEffect(() => {
     if (data.name) {
@@ -44,7 +45,7 @@ const Config = () => {
 
   function handleUpdateSubmit(e: FormEvent) {
     e.preventDefault();
-    UpdateAPI(userData);
+    UpdateAPI(userData, data.userId);
   }
 
   function handleDeleteSubmit(e: FormEvent) {

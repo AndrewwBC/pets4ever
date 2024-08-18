@@ -11,6 +11,7 @@ interface GlobalStorageProps {
 }
 
 interface StateProps {
+  userId: string;
   name: string;
   email: string;
   userProfileImgUrl: string;
@@ -18,6 +19,7 @@ interface StateProps {
 
 interface ContextProps {
   data: {
+    userId: string;
     name: string;
     email: string;
     userProfileImgUrl: string;
@@ -27,6 +29,7 @@ interface ContextProps {
 
 export const GlobalContext = createContext<ContextProps>({
   data: {
+    userId: "",
     name: "",
     email: "",
     userProfileImgUrl: "",
@@ -40,6 +43,7 @@ interface GlobalStorageProps {
 
 export function GlobalStorage({ children }: GlobalStorageProps) {
   const [data, setData] = useState<StateProps>({
+    userId: "",
     name: "",
     email: "",
     userProfileImgUrl: "",

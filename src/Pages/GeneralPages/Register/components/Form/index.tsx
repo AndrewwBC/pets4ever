@@ -1,7 +1,6 @@
 import { Button } from "../../../../../components/Button";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Input } from "../../../../../components/input";
-import axios, { AxiosError } from "axios";
 
 import { isEmailValid } from "../../../../../utils/isEmailValid";
 import useToast from "../../../../../components/Toast/useToast";
