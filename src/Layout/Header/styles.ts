@@ -98,8 +98,8 @@ export const HandleMenuMobileContainer = styled.div`
 
 export const ToggleButton = styled.button`
   display: block;
-  padding: 8px;
-  background-color: ${({ theme }) => theme.yellow.dark};
+  background-color: transparent;
+  font-size: 16px;
   border-radius: 8px;
   border: none;
 `;

@@ -33,7 +33,7 @@ export function Header() {
           </nav>
           <HandleMenuMobileContainer>
             <ToggleButton onClick={() => setMenuMobile(!menuMobile)}>
-              <span>Toggle</span>
+              <span>Menu</span>
             </ToggleButton>
             {menuMobile && <MobileMenu setMenuMobile={setMenuMobile} />}
           </HandleMenuMobileContainer>
