@@ -88,7 +88,6 @@ export const Content = styled.div`
 
 export const HandleMenuMobileContainer = styled.div`
   justify-self: end;
-  //padding: 8px 24px;
   display: none;
 
   @media (max-width: 600px) {
@@ -101,5 +100,6 @@ export const ToggleButton = styled.button`
   background-color: transparent;
   font-size: 16px;
   border-radius: 8px;
+  font-weight: 700;
   border: none;
 `;
