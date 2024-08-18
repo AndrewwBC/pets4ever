@@ -129,6 +129,7 @@ export default function Login() {
         localStorage.setItem("userId", response.userId);
 
         setData({
+          userId: response.userId,
           name: response.username,
           email: response.email,
           userProfileImgUrl: response.userProfileImgUrl,
@@ -177,6 +178,7 @@ export default function Login() {
         if (response && "userId" in response) {
           localStorage.setItem("userId", response.userId);
           setData({
+            userId: response.userId,
             name: response.username,
             email: response.email,
             userProfileImgUrl: response.userProfileImgUrl,
