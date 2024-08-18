@@ -5,13 +5,15 @@ import { Container, Content, Form, RegisterContent } from "./styles";
 import { Input } from "../../../components/input";
 import { Button } from "../../../components/Button";
 import { isEmailValid } from "../../../utils/isEmailValid";
-import axios, { AxiosError } from "axios";
 
 import { Toast } from "../../../components/Toast";
 import { Link, useNavigate } from "react-router-dom";
-import { FullLoader } from "../../../components/FullLoader";
 import { GlobalContext } from "../../../context/GlobalStorage";
 import GoogleAuth from "../../../components/GoogleAuth";
+import userApi from "../../../apis/user/userApi";
+import { SignInErrorProps } from "./types";
+import { FullDogLoader } from "../../../components/FullDogLoader";
+import MyError from "../../../apis/user/errors/myError";
 
 export default function Login() {
   const { setData } = useContext(GlobalContext);
@@ -22,7 +24,7 @@ export default function Login() {
     const userId = localStorage.getItem("userId");
 
     if (token && userId) {
-      loginWithSession();
+      callSignInWithSession();
     }
   }, []);
 
@@ -39,6 +41,7 @@ export default function Login() {
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
+
   function handleEmailBlur({ target }: ChangeEvent<HTMLInputElement>) {
     const errorAlreadyExist = errors.find(
       (error) => error.fieldName === "Email"
@@ -61,7 +64,6 @@ export default function Login() {
       setErrors(errors.filter((error) => error.fieldName !== "Email"));
     }
   }
-
   function handleEmailChange({ target }: ChangeEvent<HTMLInputElement>) {
     setEmail(target.value);
     const fieldName = "email";
@@ -81,7 +83,6 @@ export default function Login() {
       setErrors(errors.filter((error) => error.fieldName !== fieldName));
     }
   }
-
   function handlePasswordChange({ target }: ChangeEvent<HTMLInputElement>) {
     setPassword(target.value);
 
@@ -110,144 +111,86 @@ export default function Login() {
 
   async function Login(event: FormEvent) {
     event.preventDefault();
+    setIsLoading(true);
     if (!email && !password) {
       alert("Preencha os campos!");
       return;
     }
 
     try {
-      setIsLoading(true);
-      const response = await axios.post(
-        `${import.meta.env.VITE_API}/api/v1/auth/signin`,
-        {
-          email: email,
-          password: password,
-        }
-      );
+      const dataLogin = {
+        email,
+        password,
+      };
+      const response = await userApi.signIn(dataLogin);
 
-      if (response) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.userId);
+      if (response && "token" in response) {
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("userId", response.userId);
 
-        console.log(response);
         setData({
-          name: response.data.username,
-          email: response.data.email,
-          userProfileImgUrl: response.data.userProfileImgUrl,
-        });
-
-        setToast({
-          message: "LOGADO!",
-          status: "success",
+          name: response.username,
+          email: response.email,
+          userProfileImgUrl: response.userProfileImgUrl,
         });
 
         nav(`/feed`);
       }
     } catch (err) {
-      if (err instanceof AxiosError) {
-        interface ErrorProps {
-          fieldName: string;
-          message: string;
-        }
-
-        const errorData: ErrorProps[] = err.response?.data;
-        console.log(err.response);
-        errorData.map(({ fieldName, message }) => {
-          setErrors((prevState) => [
-            {
-              ...prevState,
-              fieldName,
-              message,
-            },
-          ]);
-        });
-
-        if (err.code === "ERR_NETWORK") {
+      if (err instanceof MyError) {
+        if (err.code == "ERR_NETWORK") {
           setToast({
             message: err.message,
             status: "error",
           });
-
           return;
         }
-
-        setToast({
-          message: err.response?.data.error,
-          status: "error",
-        });
+        if (err.data) {
+          const errorData: SignInErrorProps[] = err.data;
+          errorData.map(({ fieldName, message }) => {
+            setErrors((prevState) => [
+              {
+                ...prevState,
+                fieldName,
+                message,
+              },
+            ]);
+          });
+        }
       }
     } finally {
       setIsLoading(false);
     }
   }
 
+  async function callSignInWithSession() {
+    await loginWithSession();
+  }
+
   async function loginWithSession() {
-    try {
-      setIsLoading(true);
-      const token = localStorage.getItem("token");
-      alert(token);
-      const response = await axios({
-        url: `${import.meta.env.VITE_API}/api/v1/auth/loginwithsession`,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        method: "POST",
-      });
+    const token = localStorage.getItem("token");
+    if (token)
+      try {
+        setIsLoading(true);
+        const response = await userApi.singnInWithSession(token);
 
-      console.log(response);
-
-      if (response) {
-        localStorage.setItem("userId", response.data.userId);
-
-        setData({
-          name: response.data.username,
-          email: response.data.email,
-          userProfileImgUrl: response.data.userProfileImgUrl,
-        });
-
-        setToast({
-          message: "LOGADO!",
-          status: "success",
-        });
-
-        nav(`/feed`);
-      }
-    } catch (err) {
-      if (err instanceof AxiosError) {
-        interface ErrorProps {
-          fieldName: string;
-          message: string;
-        }
-
-        const errorData: ErrorProps[] = err.response?.data;
-        console.log(errorData);
-        errorData.map(({ fieldName, message }) => {
-          setErrors((prevState) => [
-            {
-              ...prevState,
-              fieldName,
-              message,
-            },
-          ]);
-        });
-
-        if (err.code === "ERR_NETWORK") {
-          setToast({
-            message: err.message,
-            status: "error",
+        if (response && "userId" in response) {
+          localStorage.setItem("userId", response.userId);
+          setData({
+            name: response.username,
+            email: response.email,
+            userProfileImgUrl: response.userProfileImgUrl,
           });
-
-          return;
+          nav(`/feed`);
         }
-
+      } catch (err) {
         setToast({
-          message: err.response?.data.error,
+          message: "Erro ao logar com a sessão.",
           status: "error",
         });
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
   }
 
   function getErrorMessageByFieldName(fieldName: string): string | undefined {
@@ -255,7 +198,7 @@ export default function Login() {
       ?.message;
   }
 
-  if (isLoading) return <FullLoader />;
+  if (isLoading) return <FullDogLoader />;
 
   return (
     <Container>

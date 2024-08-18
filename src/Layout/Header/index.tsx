@@ -1,7 +1,16 @@
 import { Link, Outlet } from "react-router-dom";
-import { Container, Content } from "./styles";
+import {
+  Container,
+  Content,
+  HandleMenuMobileContainer,
+  ToggleButton,
+} from "./styles";
+import MobileMenu from "./components/MobileMenu";
+import { useState } from "react";
 
 export function Header() {
+  const [menuMobile, setMenuMobile] = useState(false);
+
   return (
     <>
       <Container>
@@ -9,7 +18,7 @@ export function Header() {
           <Link to="/">
             <h1>Pets4Ever</h1>
           </Link>
-          <nav>
+          <nav className="deskMenu">
             <menu className="menuItems gradient-border">
               <li>
                 <Link to="/about">Sobre</Link>
@@ -22,6 +31,12 @@ export function Header() {
               </li>
             </menu>
           </nav>
+          <HandleMenuMobileContainer>
+            <ToggleButton onClick={() => setMenuMobile(!menuMobile)}>
+              <span>Toggle</span>
+            </ToggleButton>
+            {menuMobile && <MobileMenu setMenuMobile={setMenuMobile} />}
+          </HandleMenuMobileContainer>
         </Content>
       </Container>
       <Outlet />

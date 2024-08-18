@@ -1,13 +1,11 @@
 import axios from "axios";
 
-export async function UpdateAPI(userData: any, setIsLoading: any) {
+export async function UpdateAPI(userData: any, userId: string) {
   const token = localStorage.getItem("token");
 
   try {
-    setIsLoading(true);
-
     const request = await axios({
-      url: "import.meta.env.import.meta.env.VITE_API/auth/update",
+      url: `${import.meta.env.VITE_API}/api/v1/user/update/${userId}`,
       method: "put",
       data: {
         name: userData.name,
@@ -22,7 +20,5 @@ export async function UpdateAPI(userData: any, setIsLoading: any) {
     console.log(request, token);
   } catch (err) {
     console.log(err);
-  } finally {
-    setIsLoading(false);
   }
 }

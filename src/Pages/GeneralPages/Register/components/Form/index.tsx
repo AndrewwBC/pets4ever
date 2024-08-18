@@ -9,6 +9,8 @@ import FormGroup from "../../../../../components/FormGroup";
 import { Toast } from "../../../../../components/Toast";
 import PasswordValidations from "../PasswordValidations";
 import { useNavigate } from "react-router-dom";
+import userApi from "../../../../../apis/user/userApi";
+import MyError from "../../../../../apis/user/errors/myError";
 
 export default function Form() {
   const nav = useNavigate();
@@ -169,20 +171,10 @@ export default function Form() {
     }
 
     try {
-      const request = await axios.post(
-        `${import.meta.env.VITE_API}/api/v1/auth/signup`,
-        {
-          name: registerData.name,
-          email: registerData.email,
-          password: registerData.senha,
-        }
-      );
-
-      const response = request.data;
-      console.log(response);
-      if (response) {
+      const signUpResponse = await userApi.signup({ registerData });
+      if (signUpResponse) {
         setToast({
-          message: "Registrado com sucesso!",
+          message: signUpResponse,
           status: "success",
         });
 
@@ -203,15 +195,15 @@ export default function Form() {
         }, 3000);
       }
     } catch (err) {
-      if (err instanceof AxiosError) {
-        console.log(err.response?.data);
+      if (err instanceof MyError) {
+        console.log(err.data);
 
         setToast({
           message: "Verifique os dados!",
           status: "error",
         });
 
-        err.response?.data.map((erro: { fieldName: string; message: string }) =>
+        err.data.map((erro: { fieldName: string; message: string }) =>
           setRegisterResponseErrors((prevState) => [
             ...prevState,
             {
@@ -238,7 +230,7 @@ export default function Form() {
   return (
     <div className="formContainer">
       <form onSubmit={handleSubmit}>
-        <FormGroup label="E-MAIL" error={getErrorMessageByFieldName("Email")}>
+        <FormGroup label="E-MAIL" error={getErrorMessageByFieldName("email")}>
           <Input
             placeholder="Insira o seu endereço de e-mail"
             onChange={handleEmailChange}

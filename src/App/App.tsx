@@ -14,7 +14,7 @@ import { Register } from "../Pages/GeneralPages/Register";
 import UserProfile from "../Pages/InternalPages/UserProfile";
 import InsideLayout from "../Pages/InternalPages/InsideLayout";
 import Feed from "../Pages/InternalPages/Feed";
-import Header from "../components/Layout/Header";
+import Header from "../Layout/Header";
 import Error404 from "../Pages/Error404";
 import Config from "../Pages/InternalPages/UserConfig";
 import { useContext, useEffect } from "react";

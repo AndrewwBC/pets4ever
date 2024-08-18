@@ -1,23 +1,21 @@
 import axios from "axios";
 
-export async function DeleteAPI(setIsLoading: any) {
+export async function DeleteAPI() {
   const token = localStorage.getItem("token");
 
   try {
-    setIsLoading(true);
-
     const request = await axios({
-      url: "import.meta.env.import.meta.env.VITE_API/auth/delete",
+      url: `${
+        import.meta.env.VITE_API
+      }/api/v1/user/delete/47ca916d-79bc-4d5e-bc3b-88cde141d0e0`,
       method: "delete",
       headers: {
-        Authorization: "Bearer" + token,
+        Authorization: "Bearer " + token,
       },
     });
 
     console.log(request, token);
   } catch (err) {
     console.log(err);
-  } finally {
-    setIsLoading(false);
   }
 }

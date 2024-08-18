@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.header`
   background: ${({ theme }) => theme.bg};
+  position: relative;
   width: calc(100vw - 18px);
   @media (max-width: 768px) {
     width: 100vw;
@@ -15,8 +16,12 @@ export const Content = styled.div`
   align-items: center;
   padding: 4px 0px;
 
-  @media (max-width: 1400) {
+  @media (max-width: 1400px) {
     padding: 0px 0px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 12px;
   }
 
   a {
@@ -31,6 +36,12 @@ export const Content = styled.div`
 
     @media (max-width: 768px) {
       font-size: 24px;
+    }
+  }
+
+  .deskMenu {
+    @media (max-width: 600px) {
+      display: none;
     }
   }
 
@@ -73,4 +84,22 @@ export const Content = styled.div`
       }
     }
   }
+`;
+
+export const HandleMenuMobileContainer = styled.div`
+  justify-self: end;
+  //padding: 8px 24px;
+  display: none;
+
+  @media (max-width: 600px) {
+    display: block;
+  }
+`;
+
+export const ToggleButton = styled.button`
+  display: block;
+  padding: 8px;
+  background-color: ${({ theme }) => theme.yellow.dark};
+  border-radius: 8px;
+  border: none;
 `;

@@ -13,7 +13,6 @@ const Config = () => {
     password: "",
   });
   const [isDeleteButtonDisable, setIsDeleteButtonDisable] = useState(true);
-  const [setIsLoading] = useState(false);
 
   const { data } = useContext(GlobalContext);
   console.log(data);
@@ -45,12 +44,12 @@ const Config = () => {
 
   function handleUpdateSubmit(e: FormEvent) {
     e.preventDefault();
-    UpdateAPI(userData, setIsLoading);
+    UpdateAPI(userData);
   }
 
   function handleDeleteSubmit(e: FormEvent) {
     e.preventDefault();
-    DeleteAPI(setIsLoading);
+    DeleteAPI();
   }
 
   return (

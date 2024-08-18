@@ -12,7 +12,7 @@ const Modal = styled.div`
   justify-content: center;
   position: fixed;
   z-index: 999999;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
 `;
 
 export function FullDogLoader() {
