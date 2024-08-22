@@ -18,26 +18,28 @@ export default function MobileMenu({ setMenuMobile }: MobileMenuProps) {
   return (
     <Container>
       <Menu>
-        <li>
-          <Link to="" onClick={(e) => handleNavigation(e, "/login")}>
-            Login
-          </Link>
-        </li>
-        <li>
-          <Link to="" onClick={(e) => handleNavigation(e, "/about")}>
-            Sobre
-          </Link>
-        </li>
-        <li>
-          <Link to="" onClick={(e) => handleNavigation(e, "/contact")}>
-            Contato
-          </Link>
-        </li>
-        <li>
-          <Link to="" onClick={(e) => handleNavigation(e, "/register")}>
-            Registrar
-          </Link>
-        </li>
+        <ul>
+          <li>
+            <Link to="" onClick={(e) => handleNavigation(e, "/login")}>
+              Login
+            </Link>
+          </li>
+          <li>
+            <Link to="" onClick={(e) => handleNavigation(e, "/about")}>
+              Sobre
+            </Link>
+          </li>
+          <li>
+            <Link to="" onClick={(e) => handleNavigation(e, "/contact")}>
+              Contato
+            </Link>
+          </li>
+          <li>
+            <Link to="" onClick={(e) => handleNavigation(e, "/register")}>
+              Registrar
+            </Link>
+          </li>
+        </ul>
       </Menu>
     </Container>
   );

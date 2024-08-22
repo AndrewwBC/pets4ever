@@ -21,6 +21,12 @@ export const Menu = styled.nav`
   padding: 12px;
   gap: 16px;
 
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
   li {
     background-color: ${({ theme }) => theme.neutral.c2};
     padding: 8px;
@@ -32,5 +38,7 @@ export const Menu = styled.nav`
   li a {
     color: ${({ theme }) => theme.neutral.c8};
     font-weight: 700;
+    width: 100%;
+    display: block;
   }
 `;

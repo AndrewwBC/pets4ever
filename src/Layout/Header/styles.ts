@@ -102,4 +102,5 @@ export const ToggleButton = styled.button`
   border-radius: 8px;
   font-weight: 700;
   border: none;
+  margin-right: 24px;
 `;
