@@ -15,19 +15,33 @@ export default function MobileMenu({ setMenuMobile }: MobileMenuProps) {
     setMenuMobile(false);
   }
 
-  const linkButtonsText = ["Login", "Sobre", "Contato", "Registrar"];
+  const linkButtonsText = [
+    {
+      title: "Login",
+      navTo: "login",
+    },
+    {
+      title: "Sobre",
+      navTo: "about",
+    },
+    {
+      title: "Contato",
+      navTo: "contact",
+    },
+    {
+      title: "Registrar",
+      navTo: "register",
+    },
+  ];
 
   return (
     <Container>
       <Menu>
         <ul>
-          {linkButtonsText.map((text) => (
+          {linkButtonsText.map(({ title, navTo }) => (
             <li>
-              <Link
-                to=""
-                onClick={(e) => handleNavigation(e, `/${text.toLowerCase()}`)}
-              >
-                {text}
+              <Link to="" onClick={(e) => handleNavigation(e, `/${navTo}`)}>
+                {title}
               </Link>
             </li>
           ))}
