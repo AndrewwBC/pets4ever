@@ -61,7 +61,7 @@ export const Intro = styled.div`
       animation-iteration-count: linear;
 
       @media (max-width: 1400px) {
-        font-size: 32px;
+        font-size: 34px;
       }
     }
   }
