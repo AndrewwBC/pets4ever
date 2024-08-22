@@ -34,9 +34,9 @@ export default function About() {
               </div>
               <Intro>
                 <div>
-                  <h1>
+                  <p>
                     Leia abaixo para mais <span>informações</span>!
-                  </h1>
+                  </p>
                 </div>
 
                 <ArrowContainer onClick={handleUserClick}>

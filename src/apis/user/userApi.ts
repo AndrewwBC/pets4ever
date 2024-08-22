@@ -59,7 +59,7 @@ class UserHttpService {
 
   async signup({ registerData }: SignUpProps): Promise<any> {
     try {
-      const request = await this.api.post("api/v1/user/signup", {
+      const request = await this.api.post("api/v1/user", {
         name: registerData.name,
         email: registerData.email,
         password: registerData.senha,

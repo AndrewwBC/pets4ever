@@ -12,11 +12,21 @@ export const Content = styled.section`
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+
   img {
     display: block;
     width: 100vw;
     height: 100vh;
     object-fit: cover;
+    @media (max-width: 600px) {
+      width: 100vw;
+      max-height: 200px;
+      object-fit: cover;
+      object-position: 0px -80px;
+    }
   }
 `;
 
@@ -30,6 +40,10 @@ const textAnimation = keyframes`
 
 export const Intro = styled.div`
   padding: 48px;
+
+  @media (max-width: 600px) {
+    padding: 16px;
+  }
 
   span {
     color: #7b55fa;

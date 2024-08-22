@@ -23,17 +23,21 @@ export default function Home() {
               </div>
               <Intro>
                 <div>
-                  <h1 className="webTitle">
-                    A Pets4Ever reúne a diversão das redes sociais ao amor aos
-                    Pets.
-                  </h1>
+                  <div>
+                    <h1 className="webTitle">
+                      A Pets4Ever reúne a diversão das redes sociais ao amor aos
+                      Pets.
+                    </h1>
 
-                  <h1 className="mobTitle">Pets4Ever</h1>
-                  <p>
-                    Compartilhe momentos especiais com o seu pet, encontre
-                    companhias de passeio, cuidadores, veterinários e muito
-                    mais.
-                  </p>
+                    <h1 className="mobTitle">Pets4Ever</h1>
+                  </div>
+                  <div>
+                    <p>
+                      Compartilhe momentos especiais com o seu pet, encontre
+                      companhias de passeio, cuidadores, veterinários e muito
+                      mais.
+                    </p>
+                  </div>
                 </div>
 
                 <ButtonContainer>

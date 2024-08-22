@@ -50,83 +50,80 @@ export const Feed = () => {
   }
 
   if (!posts) return <FullDogLoader />;
-  else
-    return (
-      <Container>
-        {showModal && (
-          <PostModal
-            setShowModal={setShowModal}
-            modalPostData={modalPostData}
-            setModalPostData={setModalPostData}
-          />
-        )}
-        {listOfLikes.data && (
-          <ListOfLikes
-            listOfLikes={listOfLikes}
-            setModal={setListOfLikesModal}
-          />
-        )}
 
-        <Stories />
+  return (
+    <Container>
+      {showModal && (
+        <PostModal
+          setShowModal={setShowModal}
+          modalPostData={modalPostData}
+          setModalPostData={setModalPostData}
+        />
+      )}
+      {listOfLikes.data && (
+        <ListOfLikes listOfLikes={listOfLikes} setModal={setListOfLikesModal} />
+      )}
 
-        <HeaderAndPhoto>
-          <div className="postContainer">
-            {posts.map((item, index) => {
-              return (
-                <div className="eachPost" key={index}>
-                  <header className="postHeader">
-                    <div>
-                      <img
-                        src={`https://pets4ever.s3.us-east-2.amazonaws.com/${item.userProfileImageUrl}`}
-                        alt=""
-                        height={40}
-                        width={40}
-                      />
-                      <Link to={`/profile/${item.userId}`}>
-                        <span>{item.name}</span>
-                      </Link>
-                    </div>
-                  </header>
-                  <img
-                    className="feedPhoto"
-                    src={`https://pets4ever.s3.us-east-2.amazonaws.com/${item.imageUrl}`}
-                    alt=""
-                    onClick={() => handlePostModal(item.postId)}
-                  />
-                  <div className="postInfoAndStatus">
-                    <div className="iconsContainerAndCreatedAt">
-                      <IconsToLikeCommentAndShare
-                        postId={item.postId}
-                        userLikedThisPost={item.userLikedThisPost}
-                        handlePostLikePut={handlePostLikePut}
-                      />
+      <Stories />
 
-                      <div className="createdAt">
-                        <small>{item.creationDate}</small>
-                      </div>
-                    </div>
-                    <QuantityOfLikes
-                      listOfLikes={item.listOfLikes}
-                      setListOfLikesModal={setListOfLikesModal}
-                      quantityOfLikes={item.quantityOfLikes}
-                      userLikedThisPost={item.userLikedThisPost}
+      <HeaderAndPhoto>
+        <div className="postContainer">
+          {posts.map((item, index) => {
+            return (
+              <div className="eachPost" key={index}>
+                <header className="postHeader">
+                  <div>
+                    <img
+                      src={`https://pets4ever.s3.us-east-2.amazonaws.com/${item.userProfileImageUrl}`}
+                      alt=""
+                      height={40}
+                      width={40}
                     />
-                    <div className="nameAndDescription">
-                      <Link to={`/profile/${item.userId}`}>
-                        <span className="name">{item.name.toLowerCase()}</span>
-                      </Link>
-                      <small>{item.description}</small>
-                    </div>
-
-                    <LastComment comments={item.comments} />
+                    <Link to={`/profile/${item.userId}`}>
+                      <span>{item.name}</span>
+                    </Link>
                   </div>
+                </header>
+                <img
+                  className="feedPhoto"
+                  src={`https://pets4ever.s3.us-east-2.amazonaws.com/${item.imageUrl}`}
+                  alt=""
+                  onClick={() => handlePostModal(item.postId)}
+                />
+                <div className="postInfoAndStatus">
+                  <div className="iconsContainerAndCreatedAt">
+                    <IconsToLikeCommentAndShare
+                      postId={item.postId}
+                      userLikedThisPost={item.userLikedThisPost}
+                      handlePostLikePut={handlePostLikePut}
+                    />
+
+                    <div className="createdAt">
+                      <small>{item.creationDate}</small>
+                    </div>
+                  </div>
+                  <QuantityOfLikes
+                    listOfLikes={item.listOfLikes}
+                    setListOfLikesModal={setListOfLikesModal}
+                    quantityOfLikes={item.quantityOfLikes}
+                    userLikedThisPost={item.userLikedThisPost}
+                  />
+                  <div className="nameAndDescription">
+                    <Link to={`/profile/${item.userId}`}>
+                      <span className="name">{item.name.toLowerCase()}</span>
+                    </Link>
+                    <small>{item.description}</small>
+                  </div>
+
+                  <LastComment comments={item.comments} />
                 </div>
-              );
-            })}
-          </div>
-        </HeaderAndPhoto>
-      </Container>
-    );
+              </div>
+            );
+          })}
+        </div>
+      </HeaderAndPhoto>
+    </Container>
+  );
 };
 
 export default Feed;

@@ -35,7 +35,7 @@ export default function MobileMenu({ setMenuMobile }: MobileMenuProps) {
         </li>
         <li>
           <Link to="" onClick={(e) => handleNavigation(e, "/register")}>
-            Registre-se
+            Registrar
           </Link>
         </li>
       </Menu>

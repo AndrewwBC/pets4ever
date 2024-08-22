@@ -14,10 +14,8 @@ export const Content = styled.section`
     grid-template-columns: 1fr 2fr;
   }
 
-  @media (max-width: 600px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
 
   img {
@@ -25,10 +23,9 @@ export const Content = styled.section`
     height: 100vh;
     width: 100vw;
     object-fit: cover;
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       width: 100vw;
       max-height: 200px;
-      object-fit: cover;
     }
   }
 `;
@@ -48,8 +45,11 @@ export const Intro = styled.div`
   gap: 32px;
   padding: 48px;
 
-  @media (max-width: 600px) {
-    //padding: 24px;
+  @media (max-width: 768px) {
+    padding: 0px;
+    padding-top: 48px;
+    margin: 0 24px;
+    align-items: center;
   }
 
   div {
@@ -74,21 +74,29 @@ export const Intro = styled.div`
       animation-name: ${textAnimation};
       animation-duration: 0.6s;
       animation-iteration-count: linear;
+      text-align: justify;
 
       @media (max-width: 1400px) {
         font-size: 48px;
       }
 
-      @media (max-width: 764px) {
+      @media (max-width: 768px) {
         font-size: 40px;
+        margin-bottom: 24px;
+        text-align: center;
       }
     }
 
     p {
-      margin: 72px 0px;
+      margin: 72px 24px 0px 0px;
       font-weight: 500;
       color: ${({ theme }) => theme.neutral.c6};
       font-size: 20px;
+      text-align: justify;
+
+      @media (max-width: 768px) {
+        margin: 0px;
+      }
     }
   }
 `;
@@ -112,11 +120,6 @@ const buttonTextColorAnimation = keyframes`
 
 export const ButtonContainer = styled.div`
   max-width: max-content;
-
-  @media (max-width: 764px) {
-    place-self: center;
-    align-self: flex-start;
-  }
 
   border-bottom: 1px solid ${({ theme }) => theme.neutral.c2};
 

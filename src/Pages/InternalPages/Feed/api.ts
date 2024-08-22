@@ -5,7 +5,7 @@ export async function getPosts() {
 
   try {
     const r = await axios({
-      url: `${import.meta.env.VITE_API}/post/show`,
+      url: `${import.meta.env.VITE_API}/api/v1/post/index`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
