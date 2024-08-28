@@ -10,7 +10,7 @@ export const Modal = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 99999;
 
   @media (max-width: 768px) {
     padding-top: 64px;

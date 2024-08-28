@@ -36,6 +36,7 @@ export const StoriesContainer = styled.div`
     span {
       font-weight: 700;
       font-size: 18px;
+      color: ${({ theme }) => theme.neutral.c8};
     }
   }
 
@@ -56,6 +57,7 @@ export const StoriesContainer = styled.div`
 
       span {
         font-size: 14px;
+        color: ${({ theme }) => theme.neutral.c8};
       }
     }
 

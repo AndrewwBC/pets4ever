@@ -1,6 +1,10 @@
 import axios, { AxiosError } from "axios";
 
-export async function updateLikeInPost(postId: string, setLikeLoading: any) {
+export async function updateLikeInPost(
+  userId: string,
+  postId: string,
+  setLikeLoading: any
+) {
   const token = localStorage.getItem("token");
 
   const formData = new FormData();
@@ -9,7 +13,7 @@ export async function updateLikeInPost(postId: string, setLikeLoading: any) {
   try {
     setLikeLoading(true);
     const r = await axios({
-      url: `${import.meta.env.VITE_API}/api/v1/post/postlike`,
+      url: `${import.meta.env.VITE_API}/api/v1/post/postlike/${userId}`,
       method: "post",
       data: formData,
       headers: {

@@ -169,30 +169,28 @@ export default function Login() {
   }
 
   async function loginWithSession() {
-    const token = localStorage.getItem("token");
-    if (token)
-      try {
-        setIsLoading(true);
-        const response = await userApi.singnInWithSession(token);
+    try {
+      setIsLoading(true);
+      const response = await userApi.singnInWithSession();
 
-        if (response && "userId" in response) {
-          localStorage.setItem("userId", response.userId);
-          setData({
-            userId: response.userId,
-            name: response.username,
-            email: response.email,
-            userProfileImgUrl: response.userProfileImgUrl,
-          });
-          nav(`/feed`);
-        }
-      } catch (err) {
-        setToast({
-          message: "Erro ao logar com a sessão.",
-          status: "error",
+      if (response && "userId" in response) {
+        localStorage.setItem("userId", response.userId);
+        setData({
+          userId: response.userId,
+          name: response.username,
+          email: response.email,
+          userProfileImgUrl: response.userProfileImgUrl,
         });
-      } finally {
-        setIsLoading(false);
+        nav(`/feed`);
       }
+    } catch (err) {
+      setToast({
+        message: "Erro ao logar com a sessão.",
+        status: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function getErrorMessageByFieldName(fieldName: string): string | undefined {

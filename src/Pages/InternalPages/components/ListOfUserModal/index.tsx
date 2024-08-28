@@ -1,12 +1,12 @@
 import { createPortal } from "react-dom";
 import { Container } from "./styles";
 import { Link } from "react-router-dom";
-import { ListOfLikesProps } from "./types";
+import { ListOfUserProps } from "./types";
 
 export default function ListOfLikes({
-  listOfLikes,
+  listOfUsers,
   setModal,
-}: ListOfLikesProps) {
+}: ListOfUserProps) {
   window.addEventListener("click", (e: any) => {
     if (e.target?.id === "container")
       setModal({
@@ -15,10 +15,12 @@ export default function ListOfLikes({
       });
   });
 
+  console.log(listOfUsers);
+
   return createPortal(
     <Container id="container">
       <div className="content">
-        {listOfLikes.data!.map((item) => (
+        {listOfUsers.data!.map((item) => (
           <Link to={`/profile/${item.userId}`} className="user">
             <img
               src={

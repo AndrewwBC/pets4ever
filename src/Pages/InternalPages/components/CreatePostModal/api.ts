@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios, { Axios, AxiosError } from "axios";
 import { Dispatch, SetStateAction } from "react";
 
 export async function uploadFile(
+  userId: string,
   file: File,
   postDescription: string,
   setIsLoading: Dispatch<
@@ -24,6 +25,7 @@ export async function uploadFile(
   formData.append("description", postDescription);
   formData.append("creationDate", createdAt);
   formData.append("isStorie", "Storie");
+  formData.append("userId", userId);
 
   try {
     setIsLoading({
@@ -56,7 +58,7 @@ export async function uploadFile(
     console.log("Entrou Java");
 
     const r = await axios({
-      url: `${import.meta.env.VITE_API}/post/create`,
+      url: `${import.meta.env.VITE_API}/api/v1/post/`,
       method: "post",
       data: formData,
       headers: {
@@ -65,16 +67,19 @@ export async function uploadFile(
     });
 
     const response = await r.data;
-
-    console.log(response);
-  } catch (err) {
-    console.log(err);
-  } finally {
-    console.log("Saiu Java");
-
     setIsLoading({
       step: "Posted",
       isLoading: true,
+    });
+    console.log(response);
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      console.log(err.response?.data);
+    }
+  } finally {
+    setIsLoading({
+      step: "",
+      isLoading: false,
     });
   }
 }

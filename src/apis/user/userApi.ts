@@ -1,31 +1,18 @@
 import axios, { AxiosError } from "axios";
 import SignInError from "./errors/myError";
 import MyError from "./errors/myError";
-
-export interface SignInResponse {
-  token: string;
-  userId: string;
-  email: string;
-  username: string;
-  userProfileImgUrl: string;
-}
-
-export interface SignUpProps {
-  registerData: {
-    name: string;
-    email: string;
-    senha: string;
-  };
-}
+import { SignInResponse, SignUpProps } from "./types/types";
+import { ProfileResponse } from "./types/profileResponse";
+import { UpdateDataProps } from "./types/update";
 
 class UserHttpService {
   private api = axios.create({
     baseURL: import.meta.env.VITE_API,
   });
 
-  public getToken() {
+  private getToken() {
     const token = localStorage.getItem("token");
-    if (!token) "Token não encontrado";
+    if (!token) return false;
 
     return token;
   }
@@ -37,11 +24,13 @@ class UserHttpService {
 
       return response as SignInResponse;
     } catch (err) {
-      throw this.getMyError(err, "SignInError");
+      throw this.getMyError(err, "SIGNIN_ERROR");
     }
   }
 
-  async singnInWithSession(token: string): Promise<SignInResponse> {
+  async singnInWithSession(): Promise<SignInResponse> {
+    const token = this.getToken();
+
     try {
       const request = await this.api.get("/api/v1/auth/loginwithsession", {
         headers: {
@@ -69,7 +58,58 @@ class UserHttpService {
 
       return response;
     } catch (err) {
-      throw this.getMyError(err, "SignUpError");
+      throw this.getMyError(err, "SIGNUP_ERROR");
+    }
+  }
+
+  async profile(userId: string): Promise<ProfileResponse> {
+    const token = this.getToken();
+
+    try {
+      const request = await this.api.get(`api/v1/user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return request.data as ProfileResponse;
+    } catch (err) {
+      console.log(err);
+      throw this.getMyError(err, "PROFILE_ERROR");
+    }
+  }
+
+  async update(data: UpdateDataProps, userId: string): Promise<any> {
+    const token = this.getToken();
+
+    try {
+      const request = await this.api.put(`api/v1/user/${userId}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (request) {
+        return request;
+      }
+    } catch (err) {
+      throw this.getMyError(err, "UPDATE_ERROR");
+    }
+  }
+
+  async delete(userId: string): Promise<any> {
+    const token = localStorage.getItem("token");
+
+    try {
+      const request = await this.api.delete(`api/v1/user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return request;
+    } catch (err) {
+      throw this.getMyError(err, "DELETE_ERROR");
     }
   }
 

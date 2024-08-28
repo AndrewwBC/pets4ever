@@ -1,25 +1,25 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface LikeProps {
+export interface UserProps {
   userId: string;
   username: string;
   userProfilePhotoUrl: string;
 }
 
-export interface ListOfLikesProps {
-  listOfLikes: {
+export interface ListOfUserProps {
+  listOfUsers: {
     modalState: boolean;
-    data: LikeProps[] | undefined;
+    data: UserProps[] | undefined;
   };
   setModal: Dispatch<
     SetStateAction<{
       modalState: boolean;
-      data: LikeProps[] | undefined;
+      data: UserProps[] | undefined;
     }>
   >;
 }
 
-export interface ListOfLikesStateProps {
+export interface ListOfUserStateProps {
   modalState: boolean;
-  data: LikeProps[] | undefined;
+  data: UserProps[] | undefined;
 }

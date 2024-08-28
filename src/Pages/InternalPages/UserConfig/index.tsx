@@ -2,8 +2,7 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import { Content, DeleteSection } from "./styles";
 import { GlobalContext } from "../../../context/GlobalStorage";
 import { Button } from "../../../components/Button";
-import { UpdateAPI } from "./updateAPI";
-import { DeleteAPI } from "./deleteAPI";
+import userApi from "../../../apis/user/userApi";
 
 const Config = () => {
   const [option, setOption] = useState(true);
@@ -12,6 +11,7 @@ const Config = () => {
     email: "",
     password: "",
   });
+
   const [isDeleteButtonDisable, setIsDeleteButtonDisable] = useState(true);
 
   const { data } = useContext(GlobalContext);
@@ -43,14 +43,17 @@ const Config = () => {
     }
   }
 
-  function handleUpdateSubmit(e: FormEvent) {
+  async function handleUpdateSubmit(e: FormEvent) {
     e.preventDefault();
-    UpdateAPI(userData, data.userId);
+
+    const response = await userApi.update(userData, data.userId);
+    console.log(response);
   }
 
-  function handleDeleteSubmit(e: FormEvent) {
+  async function handleDeleteSubmit(e: FormEvent) {
     e.preventDefault();
-    DeleteAPI();
+    const response = await userApi.delete(data.userId);
+    console.log(response);
   }
 
   return (

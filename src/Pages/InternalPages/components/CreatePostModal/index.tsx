@@ -34,6 +34,7 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
   const [preview, setPreview] = useState("");
 
   const { data } = useContext(GlobalContext);
+
   const now = new Date();
   const createdAt = `${now.getDate()}/${
     now.getMonth() + 1
@@ -54,7 +55,12 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
     e.preventDefault();
 
     if (file != undefined) {
-      const uploadResponse = await uploadFile(file, description, setIsLoading);
+      const uploadResponse = await uploadFile(
+        data.userId,
+        file,
+        description,
+        setIsLoading
+      );
       setUploadResponse(uploadResponse);
       console.log(uploadResponse);
     }
