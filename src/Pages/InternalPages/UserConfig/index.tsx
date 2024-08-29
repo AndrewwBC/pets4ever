@@ -1,4 +1,3 @@
-import Delete from "./Delete";
 import { Content } from "./styles";
 import Update from "./ProfileUpdate";
 import PasswordUpdate from "./PasswordUpdate";
@@ -10,7 +9,6 @@ const Config = () => {
       <Update />
       <EmailUpdate />
       <PasswordUpdate />
-      {/* <Delete /> */}
     </Content>
   );
 };

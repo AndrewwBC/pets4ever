@@ -1,4 +1,4 @@
-import axios, { Axios, AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { Dispatch, SetStateAction } from "react";
 
 export async function uploadFile(
