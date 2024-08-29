@@ -2,23 +2,24 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import FormGroup from "../../../../../../components/FormGroup";
 import { Input } from "../../../../../../components/input";
 import { isEmailValid } from "../../../../../../utils/isEmailValid";
-import { GlobalContext } from "../../../../../../context/GlobalStorage";
 import { Button } from "../../../../../../components/Button";
-import userApi from "../../../../../../api/user/USER_API";
 import { SectionTitle } from "../../../components/sectionTitle";
 import { Toast } from "../../../../../../components/Toast";
 import VerifyCode from "../VerifyCode";
 import { Section } from "./styles";
 import EMAIL_API from "../../../../../../api/email/EMAIL_API";
+import CODE_API from "../../../../../../api/code/CODE_API";
+import { GlobalContext } from "../../../../../../context/GlobalStorage";
 
 interface StepProps {
   step: "sendEmail" | "verifyCode";
 }
 
 export default function SendCodeToNewEmail() {
-  const { data, setData } = useContext(GlobalContext);
-  const [email, setEmail] = useState("");
+  const { data } = useContext(GlobalContext);
+
   const [code, setCode] = useState("");
+  const [email, setEmail] = useState("");
   const [toast, setToast] = useState({
     message: "",
     status: "",
@@ -32,17 +33,7 @@ export default function SendCodeToNewEmail() {
     setEmail(email);
   }
 
-  function handleEmailSubmit() {
-    setStep({
-      step: "verifyCode",
-    });
-  }
-
-  function handleVerifyCodeAndUpdateEmail() {
-    console.log(code);
-  }
-
-  function getErrorByFieldname(field: string) {
+  function getError() {
     if (!isEmailValid(email) && email.length > 2) {
       const isEmailNotValid = {
         message: "Email inválido",
@@ -51,13 +42,11 @@ export default function SendCodeToNewEmail() {
     }
   }
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleEmailSubmit(e: FormEvent) {
     e.preventDefault();
-
-    const emailData = {
-      email,
-    };
-
+    setStep({
+      step: "verifyCode",
+    });
     try {
       const response = await EMAIL_API.sendCodeToEmail(email);
       console.log(response);
@@ -78,15 +67,31 @@ export default function SendCodeToNewEmail() {
     }
   }
 
+  async function handleVerifyCodeAndUpdateEmail(e: FormEvent) {
+    const validateCodeData = {
+      code,
+      email,
+      userId: data.userId,
+    };
+
+    e.preventDefault();
+    try {
+      const response = await CODE_API.validateCode(validateCodeData);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <Section>
       {toast.message && <Toast setToast={setToast} toast={toast} />}
       <SectionTitle>Editar Email</SectionTitle>
-      <form onSubmit={handleSubmit}>
-        <FormGroup label="E-MAIL" error={getErrorByFieldname("email")}>
+      <form>
+        <FormGroup label="E-MAIL" error={getError()}>
           <Input
             type="email"
-            error={getErrorByFieldname("email")}
+            error={getError()}
             placeholder={"Insira o seu email."}
             value={email}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -95,17 +100,21 @@ export default function SendCodeToNewEmail() {
           />
         </FormGroup>
         <p className="advice">Enviaremos um código para o seu Email.</p>
-        {step.step === "verifyCode" && <VerifyCode />}
+        {step.step === "verifyCode" && (
+          <VerifyCode code={code} setCode={setCode} />
+        )}
 
         {step.step === "sendEmail" ? (
           <Button
-            onClick={() => handleEmailSubmit()}
+            type="submit"
+            onClick={(e) => handleEmailSubmit(e)}
             label="Receber código"
             size="low"
           />
         ) : (
           <Button
-            onClick={() => handleVerifyCodeAndUpdateEmail()}
+            type="submit"
+            onClick={(e) => handleVerifyCodeAndUpdateEmail(e)}
             label="Validar"
             size="low"
           />

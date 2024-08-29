@@ -1,10 +1,13 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import FormGroup from "../../../../../../components/FormGroup";
 import { Input } from "../../../../../../components/input";
 
-function VerifyCode() {
-  const [code, setCode] = useState("");
+interface VerifyCodeProps {
+  code: string;
+  setCode: Dispatch<SetStateAction<string>>;
+}
 
+function VerifyCode({ code, setCode }: VerifyCodeProps) {
   return (
     <FormGroup>
       <label>

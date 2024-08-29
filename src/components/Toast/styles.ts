@@ -35,6 +35,7 @@ export const Modal = styled.div`
   right: 0px;
   bottom: 0px;
   display: flex;
+  z-index: 99999;
   align-items: self-start;
   justify-content: center;
   animation: ${anime} 0.6s ease-in-out, ${animeOut} 0.6s ease-in-out 2.5s;

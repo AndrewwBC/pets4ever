@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import FormGroup from "../../../../components/FormGroup";
 import { Input } from "../../../../components/input";
 import { GlobalContext } from "../../../../context/GlobalStorage";
@@ -9,7 +9,7 @@ import { Toast } from "../../../../components/Toast";
 import PasswordValidations from "../../../GeneralPages/Register/components/PasswordValidations";
 
 export default function PasswordUpdate() {
-  const { data, setData } = useContext(GlobalContext);
+  const { data } = useContext(GlobalContext);
   const [password, setPassword] = useState("");
   const [toast, setToast] = useState({
     message: "",

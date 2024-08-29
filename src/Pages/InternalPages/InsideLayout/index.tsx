@@ -57,42 +57,42 @@ const InsideLayout = () => {
             <nav className="menuContent">
               <li>
                 <Link to={"/feed"}>
-                  <IoHomeOutline size={32} />
-                  Postagens
+                  <IoHomeOutline size={28} />
+                  <p>Postagens</p>
                 </Link>
               </li>
 
               <li>
                 <Link to={""} onClick={(e) => handleClick(e)}>
-                  <IoCreateOutline size={32} />
+                  <IoCreateOutline size={28} />
                   <p>Postar</p>
                 </Link>
               </li>
 
               <li>
                 <Link to={`/profile/${userId}`}>
-                  <CgProfile size={32} />
+                  <CgProfile size={28} />
                   <p>Meu Perfil</p>
                 </Link>
               </li>
 
               <li>
                 <Link to={""} onClick={(e) => handleTheme(e)}>
-                  <CgSun size={32} />
+                  <CgSun size={28} />
                   <p>Mudar Tema</p>
                 </Link>
               </li>
 
               <li>
                 <Link to={`/config`}>
-                  <CgToolbox size={32} />
+                  <CgToolbox size={28} />
                   <p>Configurações</p>
                 </Link>
               </li>
 
               <li>
                 <Link to={""} onClick={(e) => handleLogout(e)}>
-                  <CiLogout size={32} />
+                  <CiLogout size={28} />
                   <p>Encerrar sessão</p>
                 </Link>
               </li>

@@ -23,7 +23,6 @@ export const Content = styled.section`
 
 export const SideMenu = styled.div`
   background: ${({ theme }) => theme.bg};
-  height: 100vh;
   border-right: 1px solid ${({ theme }) => theme.neutral.c5};
   position: fixed;
   width: 240px;
@@ -31,6 +30,31 @@ export const SideMenu = styled.div`
   top: 0;
   left: 0;
   height: 100%;
+  transition: all 0.3s;
+
+  @media (max-width: 1000px) {
+    width: 64px;
+    display: flex;
+    justify-content: center;
+
+    p {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    transition: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    width: 100vw;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 1px solid black;
+  }
 `;
 
 export const SideMenuContent = styled.div`
@@ -41,7 +65,14 @@ export const SideMenuContent = styled.div`
   padding: 0px 24px;
 
   @media (max-width: 764px) {
-    padding: 0px 24px;
+    height: 100%;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      size: 24px !important;
+    }
   }
 
   .pets4EverTitle {
@@ -60,8 +91,21 @@ export const SideMenuContent = styled.div`
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    gap: 12px;
+    gap: 24px;
     flex-wrap: wrap;
+    transition: all 0.3s;
+
+    @media (max-width: 768px) {
+      flex-direction: row;
+      gap: 32px;
+      li {
+        width: max-content !important;
+      }
+    }
+
+    @media (max-width: 460px) {
+      gap: 8px;
+    }
 
     li {
       display: block;
@@ -80,7 +124,7 @@ export const SideMenuContent = styled.div`
       align-items: center;
       gap: 12px;
       color: ${({ theme }) => theme.neutral.c9};
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 500;
       transition: all 0.3s;
       width: 100%;

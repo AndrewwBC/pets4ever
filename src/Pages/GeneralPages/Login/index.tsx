@@ -165,16 +165,17 @@ export default function Login() {
   }
 
   async function callSignInWithSession() {
-    await loginWithSession();
+    await signInWithSession();
   }
 
-  async function loginWithSession() {
+  async function signInWithSession() {
     try {
       setIsLoading(true);
       const response = await userApi.singnInWithSession();
-
+      console.log(response);
       if (response && "userId" in response) {
         localStorage.setItem("userId", response.userId);
+
         setData({
           userId: response.userId,
           name: response.username,
@@ -184,6 +185,7 @@ export default function Login() {
         nav(`/feed`);
       }
     } catch (err) {
+      console.log(err);
       setToast({
         message: "Erro ao logar com a sessão.",
         status: "error",

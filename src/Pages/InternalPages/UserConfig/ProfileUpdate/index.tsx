@@ -11,12 +11,12 @@ import { SectionTitle } from "../components/sectionTitle";
 
 function Update() {
   const { data, setData } = useContext(GlobalContext);
-  const [userData, setUserData] = useState({
-    name: "",
-  });
   const [toast, setToast] = useState({
     message: "",
     status: "",
+  });
+  const [userData, setUserData] = useState({
+    name: "",
   });
   const [updateResponseError, setUpdateResponseError] = useState([
     {
@@ -29,16 +29,17 @@ function Update() {
     e.preventDefault();
 
     try {
-      const response = await userApi.update(userData, data.userId);
+      const response = await userApi.updateName(userData, data.userId);
       console.log(response);
       if (response) {
         setToast({
-          message: response.data,
+          message: response.message,
           status: "success",
         });
 
         setData((previewData) => ({
           ...previewData,
+          name: userData.name,
         }));
       }
     } catch (err: any) {
@@ -46,13 +47,13 @@ function Update() {
     }
   }
 
-  function getErrorByFieldname(field: string) {
-    const error = updateResponseError.find(
-      (error) => error.fieldName === field
-    )?.message;
+  // function getErrorByFieldname(field: string) {
+  //   const error = updateResponseError.find(
+  //     (error) => error.fieldName === field
+  //   )?.message;
 
-    return error;
-  }
+  //   return error;
+  // }
   console.log(updateResponseError);
   return (
     <UpdateSection>
@@ -60,7 +61,7 @@ function Update() {
       <SectionTitle>Editar Perfil</SectionTitle>
 
       <form onSubmit={handleUpdateSubmit}>
-        <FormGroup error={getErrorByFieldname("name")}>
+        <FormGroup>
           <label>
             <p>Nome</p>
             <Input
@@ -77,19 +78,6 @@ function Update() {
           </label>
         </FormGroup>
 
-        <label>
-          <p>Senha</p>
-          <Input
-            type="password"
-            placeholder="Digite uma nova senha."
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setUserData((prevState) => ({
-                ...prevState,
-                password: e.target.value,
-              }))
-            }
-          />
-        </label>
         <Button size="low" type="submit" label="Editar Perfil" />
       </form>
     </UpdateSection>

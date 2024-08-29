@@ -19,7 +19,7 @@ class UserHttpService {
 
   async signIn(data: any): Promise<SignInResponse> {
     try {
-      const request = await this.api.post("api/v1/auth/signin", data);
+      const request = await this.api.post("/api/v1/auth/signin", data);
       const response = await request.data;
 
       return response as SignInResponse;
@@ -30,9 +30,9 @@ class UserHttpService {
 
   async singnInWithSession(): Promise<SignInResponse> {
     const token = this.getToken();
-
+    console.log(token);
     try {
-      const request = await this.api.get("/api/v1/auth/loginwithsession", {
+      const request = await this.api.get("/api/v1/auth/session", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -94,6 +94,31 @@ class UserHttpService {
       }
     } catch (err) {
       throw this.getMyError(err, "UPDATE_ERROR");
+    }
+  }
+
+  // futuramente ira mudar bio/imagem
+  async updateName(
+    data: { name: string },
+    userId: string
+  ): Promise<{
+    message: string;
+  }> {
+    try {
+      const request = await this.api.patch(
+        `/api/v1/user/name/${userId}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${this.getToken()}`,
+          },
+        }
+      );
+
+      console.log(request);
+      return request.data as { message: string };
+    } catch (err) {
+      throw this.getMyError(err, "UPDATE_NAME_ERROR");
     }
   }
 
