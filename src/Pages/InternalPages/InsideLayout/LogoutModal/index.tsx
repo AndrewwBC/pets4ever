@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 import { Container, Content, WarningContainer } from "./styles";
 import { TextContainer } from "./styles";
-import DogLoader from "../../../../components/DogLoader";
+import DogLoader from "../../../../components/FullDogLoader/components/DogLoader";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "../../../../components/Button";
 import { useNavigate } from "react-router-dom";

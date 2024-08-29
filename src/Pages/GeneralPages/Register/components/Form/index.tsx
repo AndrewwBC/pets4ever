@@ -8,8 +8,8 @@ import FormGroup from "../../../../../components/FormGroup";
 import { Toast } from "../../../../../components/Toast";
 import PasswordValidations from "../PasswordValidations";
 import { useNavigate } from "react-router-dom";
-import userApi from "../../../../../apis/user/userApi";
-import MyError from "../../../../../apis/user/errors/myError";
+import userApi from "../../../../../api/user/USER_API";
+import MyError from "../../../../../api/user/errors/myError";
 
 export default function Form() {
   const nav = useNavigate();

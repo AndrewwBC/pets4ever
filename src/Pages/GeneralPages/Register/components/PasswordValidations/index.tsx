@@ -1,5 +1,6 @@
 import { FaCheck } from "react-icons/fa";
 import { VscError } from "react-icons/vsc";
+import { Container } from "./styles";
 
 interface PasswordValidationsProps {
   passwordErrors: {
@@ -21,10 +22,7 @@ export default function PasswordValidations({
   const borderColor = findFalse === false ? "red" : "green";
 
   return (
-    <div
-      style={{ border: `2px solid ${borderColor}` }}
-      className="validationInfo"
-    >
+    <Container style={{ border: `2px solid ${borderColor}` }}>
       <div>
         <div className="validations">
           <div>
@@ -69,6 +67,6 @@ export default function PasswordValidations({
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }

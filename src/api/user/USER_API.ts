@@ -97,6 +97,30 @@ class UserHttpService {
     }
   }
 
+  async updateEmail(
+    data: { email: string },
+    userId: string
+  ): Promise<{
+    message: string;
+  }> {
+    try {
+      const request = await this.api.patch(
+        `/api/v1/user/email/${userId}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${this.getToken()}`,
+          },
+        }
+      );
+
+      console.log(request.data);
+      return request.data as { message: string };
+    } catch (err) {
+      throw this.getMyError(err, "UPDATE_EMAIL_ERROR");
+    }
+  }
+
   async delete(userId: string): Promise<any> {
     const token = localStorage.getItem("token");
 

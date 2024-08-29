@@ -6,8 +6,8 @@ import ProfileFeed from "./components/ProfileFeed";
 import UserStatus from "./components/QuantityOfPostFollowersAndFollowing";
 import { useParams } from "react-router-dom";
 import { FullDogLoader } from "../../../components/FullDogLoader";
-import userApi from "../../../apis/user/userApi";
-import { ProfileResponse } from "../../../apis/user/types/profileResponse";
+import userApi from "../../../api/user/USER_API";
+import { ProfileResponse } from "../../../api/user/types/profileResponse";
 
 const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(false);

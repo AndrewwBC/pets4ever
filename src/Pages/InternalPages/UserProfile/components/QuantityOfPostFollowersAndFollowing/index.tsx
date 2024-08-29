@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   FollowersProps,
   FollowingProps,
-} from "../../../../../apis/user/types/profileResponse";
+} from "../../../../../api/user/types/profileResponse";
 import { Toast } from "../../../../../components/Toast";
 import { Container } from "./styles";
 import { QuantityOfPostFollowersAndFollowingProps } from "./types";

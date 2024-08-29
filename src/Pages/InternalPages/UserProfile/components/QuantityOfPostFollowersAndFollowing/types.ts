@@ -1,7 +1,7 @@
 import {
   FollowersProps,
   FollowingProps,
-} from "../../../../../apis/user/types/profileResponse";
+} from "../../../../../api/user/types/profileResponse";
 
 export interface QuantityOfPostFollowersAndFollowingProps {
   postQuantity: number;

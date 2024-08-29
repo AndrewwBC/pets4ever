@@ -1,10 +1,10 @@
 import { createPortal } from "react-dom";
 import { Container } from "./styles";
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { Loader } from "../../../../../components/Loading/styles";
 import { ImCheckboxChecked } from "react-icons/im";
 import Confetti from "../../../../../components/Confetti";
 import { MyButton } from "../../../../../components/Button/style";
+import { Loader } from "../../../../../components/Loaders/Loading/styles";
 
 interface ValidationImageModalProps {
   isLoadingData: {

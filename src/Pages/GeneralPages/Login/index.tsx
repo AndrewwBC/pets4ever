@@ -10,10 +10,10 @@ import { Toast } from "../../../components/Toast";
 import { Link, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../../context/GlobalStorage";
 import GoogleAuth from "../../../components/GoogleAuth";
-import userApi from "../../../apis/user/userApi";
+import userApi from "../../../api/user/USER_API";
 import { SignInErrorProps } from "./types";
 import { FullDogLoader } from "../../../components/FullDogLoader";
-import MyError from "../../../apis/user/errors/myError";
+import MyError from "../../../api/user/errors/myError";
 
 export default function Login() {
   const { setData } = useContext(GlobalContext);
