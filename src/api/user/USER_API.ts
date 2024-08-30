@@ -1,25 +1,17 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import SignInError from "./errors/myError";
 import MyError from "./errors/myError";
 import { SignInResponse, SignUpProps } from "./types/types";
 import { ProfileResponse } from "./types/profileResponse";
 import { UpdateDataProps } from "./types/update";
+import API from "../axiosInstance";
 
 class UserHttpService {
-  private api = axios.create({
-    baseURL: import.meta.env.VITE_API,
-  });
-
-  private getToken() {
-    const token = localStorage.getItem("token");
-    if (!token) return false;
-
-    return token;
-  }
+  private API = API;
 
   async signIn(data: any): Promise<SignInResponse> {
     try {
-      const request = await this.api.post("/api/v1/auth/signin", data);
+      const request = await this.API.post("/auth/signin", data);
       const response = await request.data;
 
       return response as SignInResponse;
@@ -29,14 +21,8 @@ class UserHttpService {
   }
 
   async singnInWithSession(): Promise<SignInResponse> {
-    const token = this.getToken();
-    console.log(token);
     try {
-      const request = await this.api.get("/api/v1/auth/session", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const request = await this.API.get("/user/session", {});
 
       const response = await request.data;
 
@@ -48,7 +34,7 @@ class UserHttpService {
 
   async signup({ registerData }: SignUpProps): Promise<any> {
     try {
-      const request = await this.api.post("api/v1/user", {
+      const request = await this.API.post("/user", {
         name: registerData.name,
         email: registerData.email,
         password: registerData.senha,
@@ -63,14 +49,8 @@ class UserHttpService {
   }
 
   async profile(userId: string): Promise<ProfileResponse> {
-    const token = this.getToken();
-
     try {
-      const request = await this.api.get(`api/v1/user/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const request = await this.API.get(`/user/${userId}`);
 
       return request.data as ProfileResponse;
     } catch (err) {
@@ -80,14 +60,8 @@ class UserHttpService {
   }
 
   async update(data: UpdateDataProps, userId: string): Promise<any> {
-    const token = this.getToken();
-
     try {
-      const request = await this.api.put(`api/v1/user/${userId}`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const request = await this.API.put(`/user/${userId}`, data);
 
       if (request) {
         return request;
@@ -105,17 +79,8 @@ class UserHttpService {
     message: string;
   }> {
     try {
-      const request = await this.api.patch(
-        `/api/v1/user/name/${userId}`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${this.getToken()}`,
-          },
-        }
-      );
+      const request = await this.API.patch(`/user/name/${userId}`, data, {});
 
-      console.log(request);
       return request.data as { message: string };
     } catch (err) {
       throw this.getMyError(err, "UPDATE_NAME_ERROR");
@@ -129,15 +94,7 @@ class UserHttpService {
     message: string;
   }> {
     try {
-      const request = await this.api.patch(
-        `/api/v1/user/email/${userId}`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${this.getToken()}`,
-          },
-        }
-      );
+      const request = await this.API.patch(`/user/email/${userId}`, data);
 
       console.log(request.data);
       return request.data as { message: string };
@@ -147,14 +104,8 @@ class UserHttpService {
   }
 
   async delete(userId: string): Promise<any> {
-    const token = localStorage.getItem("token");
-
     try {
-      const request = await this.api.delete(`api/v1/user/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const request = await this.API.delete(`/user/${userId}`);
 
       return request;
     } catch (err) {

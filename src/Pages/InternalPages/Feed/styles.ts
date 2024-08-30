@@ -104,7 +104,7 @@ export const HeaderAndPhoto = styled.section`
 
       @media (max-width: 500px) {
         height: 340px;
-        width: 360px;
+        width: 100vw;
       }
     }
 
@@ -115,6 +115,10 @@ export const HeaderAndPhoto = styled.section`
     .postInfoAndStatus {
       max-width: 100%;
       padding: 12px 0px;
+
+      @media (max-width: 500px) {
+        padding: 4px;
+      }
 
       .iconsContainerAndCreatedAt {
         display: flex;

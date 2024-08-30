@@ -30,7 +30,7 @@ export const SideMenu = styled.div`
   top: 0;
   left: 0;
   height: 100%;
-  transition: all 0.3s;
+  transition: width 0.3s;
 
   @media (max-width: 1000px) {
     width: 64px;
@@ -93,7 +93,6 @@ export const SideMenuContent = styled.div`
     flex-direction: column;
     gap: 24px;
     flex-wrap: wrap;
-    transition: all 0.3s;
 
     @media (max-width: 768px) {
       flex-direction: row;

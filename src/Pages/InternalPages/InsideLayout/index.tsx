@@ -1,17 +1,15 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-
 import { Container, Content, SideMenu, SideMenuContent } from "./styles";
-
 import CreatePostModal from "../components/CreatePostModal";
 import { CgProfile, CgSun, CgToolbox } from "react-icons/cg";
 import { IoCreateOutline, IoHomeOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
 import LogoutModal from "./LogoutModal";
-import { ThemeContext } from "../../../context/ThemeContext";
+import { useTheme } from "../../../context/themeProvider";
 
 const InsideLayout = () => {
-  const { systemTheme, setSystemTheme } = useContext(ThemeContext);
+  const { setSystemTheme } = useTheme();
 
   const [logoutModal, setLogoutModal] = useState(false);
   const [createPostModal, setCreatePostModal] = useState(false);
@@ -30,13 +28,7 @@ const InsideLayout = () => {
 
   function handleTheme(e: FormEvent) {
     e.preventDefault();
-    if (systemTheme === "light") {
-      setSystemTheme("darkTheme");
-      localStorage.setItem("color_theme:", "darkTheme");
-      return;
-    }
-    setSystemTheme("light");
-    localStorage.setItem("color_theme:", "light");
+    setSystemTheme();
   }
 
   return (

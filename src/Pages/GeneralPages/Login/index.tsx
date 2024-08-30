@@ -14,16 +14,15 @@ import userApi from "../../../api/user/USER_API";
 import { SignInErrorProps } from "./types";
 import { FullDogLoader } from "../../../components/FullDogLoader";
 import MyError from "../../../api/user/errors/myError";
+import { useAuth } from "../../../context/authProvider";
 
 export default function Login() {
   const { setData } = useContext(GlobalContext);
+  const { state, setToken } = useAuth();
   const nav = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
-
-    if (token && userId) {
+    if (state.token) {
       callSignInWithSession();
     }
   }, []);
@@ -112,10 +111,6 @@ export default function Login() {
   async function Login(event: FormEvent) {
     event.preventDefault();
     setIsLoading(true);
-    if (!email && !password) {
-      alert("Preencha os campos!");
-      return;
-    }
 
     try {
       const dataLogin = {
@@ -125,16 +120,14 @@ export default function Login() {
       const response = await userApi.signIn(dataLogin);
 
       if (response && "token" in response) {
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("userId", response.userId);
-
+        setToken(response.token);
+        console.log(response);
         setData({
+          email: "",
+          name: "",
           userId: response.userId,
-          name: response.username,
-          email: response.email,
-          userProfileImgUrl: response.userProfileImgUrl,
+          userProfileImgUrl: "",
         });
-
         nav(`/feed`);
       }
     } catch (err) {
