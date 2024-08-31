@@ -16,7 +16,6 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 80px 0px 80px;
   padding: 8px;
   border-radius: 8px;
   padding: 16px 12px;

@@ -1,7 +1,6 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import FormGroup from "../../../../components/FormGroup";
 import { Input } from "../../../../components/input";
-import { GlobalContext } from "../../../../context/GlobalStorage";
 import { Button } from "../../../../components/Button";
 
 import { SectionTitle } from "../components/sectionTitle";
@@ -9,7 +8,6 @@ import { Toast } from "../../../../components/Toast";
 import PasswordValidations from "../../../GeneralPages/Register/components/PasswordValidations";
 
 export default function PasswordUpdate() {
-  const { data } = useContext(GlobalContext);
   const [password, setPassword] = useState("");
   const [toast, setToast] = useState({
     message: "",
@@ -36,7 +34,7 @@ export default function PasswordUpdate() {
 
   function handlePassword({ target }: ChangeEvent<HTMLInputElement>) {
     const password = target.value;
-    const hasNotEmailInPassword = !password.includes(data.email);
+    const hasNotEmailInPassword = !password.includes("");
     const hasNumber = /\d/.test(password);
     const hasOneLower = /[a-z]/.test(password);
     const hasOneUpper = /[A-Z]/.test(password);

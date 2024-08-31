@@ -62,7 +62,6 @@ export const Content: React.FC<ContentProps> = styled.div`
   span {
     font-size: 16px;
     font-weight: 500;
-    text-transform: uppercase;
   }
 
   button {

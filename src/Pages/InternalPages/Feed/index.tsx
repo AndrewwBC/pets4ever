@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, HeaderAndPhoto } from "./styles";
 import PostModal from "../components/PostModal";
 import Stories from "./components/Stories";
@@ -11,11 +11,9 @@ import ListOfLikes from "../components/ListOfUserModal";
 import { Link } from "react-router-dom";
 import { ListOfUserStateProps } from "../components/ListOfUserModal/types";
 import { FeedPostProps } from "./types";
-import { GlobalContext } from "../../../context/GlobalStorage";
 import { FullDogLoader } from "../../../components/FullDogLoader";
 
 export const Feed = () => {
-  const { data } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
   const [modalPostData, setModalPostData] = useState<FeedPostProps | null>(
     null
@@ -43,9 +41,8 @@ export const Feed = () => {
   }
 
   async function handlePostLikePut(postId: string) {
-    console.log(data.userId);
     if (!likeLoading) {
-      await updateLikeInPost(data.userId, postId, setLikeLoading);
+      await updateLikeInPost("userid", postId, setLikeLoading);
       await api();
     }
   }

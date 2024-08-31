@@ -7,14 +7,30 @@ import {
   useState,
 } from "react";
 
-const UserContext = createContext<any>({});
+interface UserContextProps {
+  user: {
+    name: string;
+    profileImgUrl: string;
+  };
+  setUser: () => void;
+}
+
+const UserContext = createContext<UserContextProps>({
+  user: {
+    name: "",
+    profileImgUrl: "",
+  },
+  setUser() {},
+});
 
 function UserProvider({ children }: { children: ReactNode }) {
-  const [user, setUser_] = useState();
+  const [user, setUser_] = useState<any>();
 
   useEffect(() => {});
 
-  function setUser() {}
+  function setUser() {
+    //setUser_();
+  }
 
   const contextValue = useMemo(
     () => ({

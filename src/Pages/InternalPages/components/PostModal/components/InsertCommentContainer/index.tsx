@@ -4,7 +4,6 @@ import axios, { AxiosError } from "axios";
 
 import { VscSend } from "react-icons/vsc";
 import { Input } from "../../../../../../components/input";
-import { GlobalContext } from "../../../../../../context/GlobalStorage";
 
 interface InsertCommentPostModalProps {
   retrieveNewComments: () => any;
@@ -20,12 +19,11 @@ function InsertCommentPostModal({
     postId: "",
     userId: "",
   });
-  const { data } = useContext(GlobalContext);
 
   async function handleSendComment() {
     const token = localStorage.getItem("token");
 
-    commentData.userId = data.userId;
+    commentData.userId = "userid";
     commentData.postId = postId;
 
     try {

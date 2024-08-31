@@ -1,7 +1,7 @@
 import "../assets/styles/default.css";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { GlobalStorage } from "../context/GlobalStorage";
+
 import { darkTheme, theme } from "../assets/styles/theme";
 import Home from "../Pages/GeneralPages/Home";
 import Login from "../Pages/GeneralPages/Login";
@@ -24,28 +24,26 @@ function AppContent() {
   return (
     <ThemeProvider theme={systemTheme === "light" ? theme : darkTheme}>
       <AuthProvider>
-        <GlobalStorage>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Header />}>
-                <Route index path="" element={<Home />} />
-                <Route path="login" element={<Login />} />
-                <Route path="about" element={<About />} />
-                <Route path="contact" element={<Contact />} />
-                <Route path="register" element={<Register />} />
-                <Route path="forgotpassword" element={<ForgotPassword />} />
-              </Route>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Header />}>
+              <Route index path="" element={<Home />} />
+              <Route path="login" element={<Login />} />
+              <Route path="about" element={<About />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="register" element={<Register />} />
+              <Route path="forgotpassword" element={<ForgotPassword />} />
+            </Route>
 
-              <Route path="/" element={<InsideLayout />}>
-                <Route index path="/profile/:id" element={<UserProfile />} />
-                <Route path="feed" element={<Feed />} />
-                <Route path="config" element={<Config />} />
-              </Route>
+            <Route path="/" element={<InsideLayout />}>
+              <Route index path="/profile/:id" element={<UserProfile />} />
+              <Route path="feed" element={<Feed />} />
+              <Route path="config" element={<Config />} />
+            </Route>
 
-              <Route path="*" element={<Error404 />} />
-            </Routes>
-          </Router>
-        </GlobalStorage>
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+        </Router>
       </AuthProvider>
     </ThemeProvider>
   );

@@ -1,23 +1,21 @@
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import FormGroup from "../../../components/FormGroup";
 import { Container, Content, Form, RegisterContent } from "./styles";
 import { Input } from "../../../components/input";
 import { Button } from "../../../components/Button";
-import { isEmailValid } from "../../../utils/isEmailValid";
 
 import { Toast } from "../../../components/Toast";
 import { Link, useNavigate } from "react-router-dom";
-import { GlobalContext } from "../../../context/GlobalStorage";
-import GoogleAuth from "../../../components/GoogleAuth";
 import userApi from "../../../api/user/USER_API";
-import { SignInErrorProps } from "./types";
 import { FullDogLoader } from "../../../components/FullDogLoader";
 import MyError from "../../../api/user/errors/myError";
 import { useAuth } from "../../../context/authProvider";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function Login() {
-  const { setData } = useContext(GlobalContext);
   const { state, setToken } = useAuth();
   const nav = useNavigate();
 
@@ -31,103 +29,37 @@ export default function Login() {
     message: "",
     status: "",
   });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([
-    {
-      fieldName: "",
-      message: "",
-    },
-  ]);
+
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleEmailBlur({ target }: ChangeEvent<HTMLInputElement>) {
-    const errorAlreadyExist = errors.find(
-      (error) => error.fieldName === "Email"
-    );
+  const loginFormSchema = z.object({
+    email: z.string().email({ message: "Email inválido." }),
+    password: z
+      .string()
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,64}$/, {
+        message: "Senha inválida.",
+      }),
+  });
 
-    if (
-      !isEmailValid(target.value) &&
-      target.value.length > 1 &&
-      !errorAlreadyExist
-    ) {
-      setErrors((prevState) => [
-        ...prevState,
-        {
-          fieldName: "Email",
-          message: "Email inválido!",
-        },
-      ]);
-    }
-    if (isEmailValid(target.value)) {
-      setErrors(errors.filter((error) => error.fieldName !== "Email"));
-    }
-  }
-  function handleEmailChange({ target }: ChangeEvent<HTMLInputElement>) {
-    setEmail(target.value);
-    const fieldName = "email";
+  type LoginFormSchema = z.infer<typeof loginFormSchema>;
 
-    const thereIsAnError = errors.find((erro) => erro.fieldName === fieldName);
+  const form = useForm<LoginFormSchema>({
+    mode: "onSubmit",
+    resolver: zodResolver(loginFormSchema),
+  });
+  const { register, formState, handleSubmit } = form;
+  const { errors } = formState;
 
-    !isEmailValid(target.value) &&
-      setErrors((prevState) => [
-        ...prevState,
-        {
-          fieldName,
-          message: "Email inválido!",
-        },
-      ]);
-
-    if (thereIsAnError && isEmailValid(target.value)) {
-      setErrors(errors.filter((error) => error.fieldName !== fieldName));
-    }
-  }
-  function handlePasswordChange({ target }: ChangeEvent<HTMLInputElement>) {
-    setPassword(target.value);
-
-    const fieldName = "password";
-
-    const valueLength = target.value.length;
-
-    const errorAlreadyExists = errors.find(
-      (error) => error.fieldName === fieldName
-    );
-
-    if (valueLength > 0 && valueLength < 6 && !errorAlreadyExists) {
-      setErrors((prevState) => [
-        ...prevState,
-        {
-          fieldName,
-          message: "Insira ao menos seis caractéres.",
-        },
-      ]);
-    }
-
-    if (valueLength >= 6) {
-      setErrors(errors.filter((error) => error.fieldName !== fieldName));
-    }
-  }
-
-  async function Login(event: FormEvent) {
-    event.preventDefault();
+  async function Login(data: LoginFormSchema) {
     setIsLoading(true);
 
     try {
-      const dataLogin = {
-        email,
-        password,
-      };
-      const response = await userApi.signIn(dataLogin);
+      const response = await userApi.signIn(data);
 
       if (response && "token" in response) {
         setToken(response.token);
         console.log(response);
-        setData({
-          email: "",
-          name: "",
-          userId: response.userId,
-          userProfileImgUrl: "",
-        });
+
         nav(`/feed`);
       }
     } catch (err) {
@@ -140,15 +72,9 @@ export default function Login() {
           return;
         }
         if (err.data) {
-          const errorData: SignInErrorProps[] = err.data;
-          errorData.map(({ fieldName, message }) => {
-            setErrors((prevState) => [
-              {
-                ...prevState,
-                fieldName,
-                message,
-              },
-            ]);
+          setToast({
+            message: "Email ou senha incorretos.",
+            status: "error",
           });
         }
       }
@@ -169,12 +95,6 @@ export default function Login() {
       if (response && "userId" in response) {
         localStorage.setItem("userId", response.userId);
 
-        setData({
-          userId: response.userId,
-          name: response.username,
-          email: response.email,
-          userProfileImgUrl: response.userProfileImgUrl,
-        });
         nav(`/feed`);
       }
     } catch (err) {
@@ -188,9 +108,10 @@ export default function Login() {
     }
   }
 
-  function getErrorMessageByFieldName(fieldName: string): string | undefined {
-    return errors.find((error) => error.fieldName?.includes(fieldName))
-      ?.message;
+  function getErrorMessageByFieldName(
+    fieldName: keyof LoginFormSchema
+  ): string | undefined {
+    return errors[fieldName]?.message;
   }
 
   if (isLoading) return <FullDogLoader />;
@@ -200,16 +121,12 @@ export default function Login() {
       <Content>
         <h1>Log in</h1>
 
-        <GoogleAuth />
-
-        <Form onSubmit={Login}>
+        <Form onSubmit={handleSubmit(Login)}>
           <FormGroup label="E-MAIL" error={getErrorMessageByFieldName("email")}>
             <Input
+              id="email"
+              {...register("email")}
               type="email"
-              required
-              value={email}
-              onChange={handleEmailChange}
-              onBlur={handleEmailBlur}
               placeholder="Insira o seu e-mail."
             />
           </FormGroup>
@@ -218,22 +135,18 @@ export default function Login() {
             error={getErrorMessageByFieldName("password")}
           >
             <Input
-              value={password}
+              id="password"
               type="password"
-              onChange={handlePasswordChange}
+              {...register("password")}
               placeholder="Insira a sua senha."
             />
           </FormGroup>
+
           <Link style={{ placeSelf: "flex-end" }} to="/forgotpassword">
             <span className="forgotPassword">Esqueceu a senha?</span>
           </Link>
 
-          <Button
-            disabled={Boolean(errors.find((erro) => erro.fieldName))}
-            size={"low"}
-            label="Entrar"
-            type="submit"
-          />
+          <Button size={"low"} label="Entrar" type="submit" />
 
           <RegisterContent>
             <p>

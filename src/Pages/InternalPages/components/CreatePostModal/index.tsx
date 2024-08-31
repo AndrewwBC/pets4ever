@@ -5,7 +5,6 @@ import {
   Dispatch,
   FormEvent,
   SetStateAction,
-  useContext,
   useEffect,
   useState,
 } from "react";
@@ -13,7 +12,6 @@ import { uploadFile } from "./api";
 import { VscComment, VscHeart, VscSend } from "react-icons/vsc";
 import { Content, InputFileModal, Modal } from "./styles";
 import { Input } from "../../../../components/input";
-import { GlobalContext } from "../../../../context/GlobalStorage";
 import ValidatingImageModal from "./ValidatingImageModal";
 
 interface CreatePostModalProps {
@@ -33,7 +31,10 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
   });
   const [preview, setPreview] = useState("");
 
-  const { data } = useContext(GlobalContext);
+  const data = {
+    userId: "",
+    name: "",
+  };
 
   const now = new Date();
   const createdAt = `${now.getDate()}/${

@@ -1,6 +1,5 @@
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import userApi from "../../../../api/user/USER_API";
-import { GlobalContext } from "../../../../context/GlobalStorage";
 import { Button } from "../../../../components/Button";
 import { UpdateSection } from "./styles";
 import { Input } from "../../../../components/input";
@@ -10,7 +9,6 @@ import FormGroup from "../../../../components/FormGroup";
 import { SectionTitle } from "../components/sectionTitle";
 
 function Update() {
-  const { data, setData } = useContext(GlobalContext);
   const [toast, setToast] = useState({
     message: "",
     status: "",
@@ -29,18 +27,13 @@ function Update() {
     e.preventDefault();
 
     try {
-      const response = await userApi.updateName(userData, data.userId);
+      const response = await userApi.updateName(userData, "");
       console.log(response);
       if (response) {
         setToast({
           message: response.message,
           status: "success",
         });
-
-        setData((previewData) => ({
-          ...previewData,
-          name: userData.name,
-        }));
       }
     } catch (err: any) {
       setUpdateResponseError(err.data);
@@ -66,7 +59,6 @@ function Update() {
             <p>Nome</p>
             <Input
               type="text"
-              placeholder={`Nome atual: ${data.name}`}
               value={userData.name}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setUserData((prevState) => ({

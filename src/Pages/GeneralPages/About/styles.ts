@@ -60,7 +60,6 @@ export const Intro = styled.div`
       animation-name: ${textAnimation};
       animation-duration: 0.6s;
       animation-iteration-count: linear;
-      text-align: justify;
       @media (max-width: 1400px) {
         font-size: 32px;
       }

@@ -9,15 +9,12 @@ import VerifyCode from "../VerifyCode";
 import { Section } from "./styles";
 import EMAIL_API from "../../../../../../api/email/EMAIL_API";
 import CODE_API from "../../../../../../api/code/CODE_API";
-import { GlobalContext } from "../../../../../../context/GlobalStorage";
 
 interface StepProps {
   step: "sendEmail" | "verifyCode";
 }
 
 export default function SendCodeToNewEmail() {
-  const { data } = useContext(GlobalContext);
-
   const [code, setCode] = useState("");
   const [email, setEmail] = useState("");
   const [toast, setToast] = useState({
@@ -71,7 +68,7 @@ export default function SendCodeToNewEmail() {
     const validateCodeData = {
       code,
       email,
-      userId: data.userId,
+      userId: "userid",
     };
 
     e.preventDefault();
