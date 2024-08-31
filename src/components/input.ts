@@ -20,6 +20,10 @@ export const Input: React.FC<MyInputProps> = styled.input`
     color: ${({ theme }) => theme.neutral.c6};
   }
 
+  &:disabled {
+    color: ${({ theme }) => theme.neutral.c5};
+  }
+
   &:focus {
     border: 2px solid ${({ theme }) => theme.purple.light};
   }

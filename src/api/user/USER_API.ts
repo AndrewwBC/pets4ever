@@ -32,12 +32,10 @@ class UserHttpService {
     }
   }
 
-  async signup({ registerData }: SignUpProps): Promise<any> {
+  async signup(registerData: SignUpProps): Promise<any> {
     try {
       const request = await this.API.post("/user", {
-        name: registerData.name,
-        email: registerData.email,
-        password: registerData.senha,
+        ...registerData,
       });
 
       const response = await request.data;
@@ -51,7 +49,7 @@ class UserHttpService {
   async profile(userId: string): Promise<ProfileResponse> {
     try {
       const request = await this.API.get(`/user/${userId}`);
-
+      console.log(request);
       return request.data as ProfileResponse;
     } catch (err) {
       console.log(err);

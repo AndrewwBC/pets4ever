@@ -3,13 +3,13 @@ export interface SignInResponse {
   userId: string;
   email: string;
   username: string;
+  fullname: string;
   userProfileImgUrl: string;
 }
 
 export interface SignUpProps {
-  registerData: {
-    name: string;
-    email: string;
-    senha: string;
-  };
+  fullname: string;
+  username: string;
+  email: string;
+  password: string;
 }

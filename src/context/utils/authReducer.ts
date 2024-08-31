@@ -10,23 +10,34 @@ type Action = {
   type: "setToken" | "clearToken";
   payload: string | null;
 };
+let myInterceptor: number | null = null;
 
 export const authReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case ACTIONS.setToken:
-      API.interceptors.request.use((request: any) => {
-        request.headers = {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        };
-        return request;
-      });
       if (action.payload) {
         localStorage.setItem("token", action.payload);
       }
+
+      if (myInterceptor !== null) {
+        API.interceptors.request.eject(myInterceptor);
+      }
+
+      myInterceptor = API.interceptors.request.use((request: any) => {
+        const token = action.payload;
+        if (token) {
+          request.headers.Authorization = `Bearer ${token}`;
+        }
+        return request;
+      });
       return { ...state, token: action.payload };
 
     case ACTIONS.clearToken:
-      API.interceptors.request.clear();
+      if (myInterceptor !== null) {
+        API.interceptors.request.eject(myInterceptor);
+        myInterceptor = null;
+      }
+
       localStorage.removeItem("token");
 
       return { ...state, token: null };

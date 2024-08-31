@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import axios, { Axios, AxiosError, AxiosInstance } from "axios";
 import { DataProps, ValidateCodeResponse } from "./types";
 
 class CODE_API {
@@ -19,15 +19,16 @@ class CODE_API {
 
   async validateCode(data: DataProps): Promise<ValidateCodeResponse> {
     try {
-      const request = await this.getApi().post(`/api/v1/code/validate`, data);
+      const request = await this.getApi().post(`/api/v1/code/validate`, data, {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      });
       const response = request.data;
       console.log(request);
       return response as ValidateCodeResponse;
     } catch (err) {
-      if (err instanceof AxiosError) {
-        throw new Error(err.response?.data.message);
-      }
-      throw new Error("Código Inválido.");
+      throw new AxiosError("Código Inválido.");
     }
   }
 }

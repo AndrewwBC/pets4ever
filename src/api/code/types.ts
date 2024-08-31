@@ -5,4 +5,5 @@ export interface ValidateCodeResponse {
 export interface DataProps {
   code: string;
   email: string;
+  userId: string;
 }

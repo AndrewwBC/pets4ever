@@ -23,14 +23,14 @@ from {
 `;
 
 const backgroundColorsOfMessages = {
-  error: "#990f00",
+  error: "#EE4B10",
   success: " #4CBB17",
 };
 
 export const Modal = styled.div`
   height: max-content;
   position: fixed;
-  top: 48px;
+  top: 80px;
   left: 0px;
   right: 0px;
   bottom: 0px;
@@ -38,7 +38,7 @@ export const Modal = styled.div`
   z-index: 99999;
   align-items: self-start;
   justify-content: center;
-  animation: ${anime} 0.6s ease-in-out, ${animeOut} 0.6s ease-in-out 2.5s;
+  animation: ${anime} 0.6s ease-in-out, ${animeOut} 0.6s ease-in-out 3.5s;
 `;
 
 interface ContentProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -60,8 +60,9 @@ export const Content: React.FC<ContentProps> = styled.div`
   justify-content: space-between;
 
   span {
+    font-family: "Poppins";
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   button {

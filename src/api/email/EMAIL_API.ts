@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { Axios, AxiosError, AxiosInstance } from "axios";
 
 class EMAIL_API {
   private token;
@@ -25,6 +25,9 @@ class EMAIL_API {
 
       return response;
     } catch (err) {
+      if (err instanceof AxiosError) {
+        throw new AxiosError(err.response?.data);
+      }
       console.log(err);
     }
   }

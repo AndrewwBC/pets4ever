@@ -16,7 +16,7 @@ export function Toast({ toast, setToast }: ToastProps) {
         message: "",
         status: "",
       });
-    }, 3000);
+    }, 4000);
 
     return;
   });

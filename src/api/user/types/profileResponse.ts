@@ -1,4 +1,4 @@
-import { FeedPostProps } from "../../../Pages/InternalPages/Feed/types";
+import { FeedPostProps } from "../../../Pages/auth/Feed/types";
 
 interface UserIdNameAndImageProps {
   name: string;
