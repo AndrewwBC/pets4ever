@@ -1,4 +1,4 @@
-import axios, { Axios, AxiosError, AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance } from "axios";
 
 class EMAIL_API {
   private token;

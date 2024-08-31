@@ -1,11 +1,10 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { DeleteSection } from "./styles";
 import userApi from "../../../../api/user/USER_API";
-import { GlobalContext } from "../../../../context/GlobalStorage";
+
 import { Button } from "../../../../components/Button";
 
 function Delete() {
-  const { data } = useContext(GlobalContext);
   const [isDeleteButtonDisable, setIsDeleteButtonDisable] = useState(true);
 
   function handleDeleteInput(inputText: string) {
@@ -18,7 +17,8 @@ function Delete() {
 
   async function handleDeleteSubmit(e: FormEvent) {
     e.preventDefault();
-    const response = await userApi.delete(data.userId);
+    const userId = localStorage.getItem("userId")!;
+    const response = await userApi.delete(userId);
     console.log(response);
   }
 
