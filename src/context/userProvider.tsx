@@ -1,52 +1,52 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+// import {
+//   createContext,
+//   ReactNode,
+//   useContext,
+//   useEffect,
+//   useMemo,
+//   useState,
+// } from "react";
 
-interface UserContextProps {
-  user: {
-    name: string;
-    profileImgUrl: string;
-  };
-  setUser: () => void;
-}
+// interface UserContextProps {
+//   user: {
+//     name: string;
+//     profileImgUrl: string;
+//   };
+//   setUser: () => void;
+// }
 
-const UserContext = createContext<UserContextProps>({
-  user: {
-    name: "",
-    profileImgUrl: "",
-  },
-  setUser() {},
-});
+// const UserContext = createContext<UserContextProps>({
+//   user: {
+//     name: "",
+//     profileImgUrl: "",
+//   },
+//   setUser() {},
+// });
 
-function UserProvider({ children }: { children: ReactNode }) {
-  ///const [user, setUser_] = useState<any>();
+// function UserProvider({ children }: { children: ReactNode }) {
+//   ///const [user, setUser_] = useState<any>();
 
-  useEffect(() => {});
+//   useEffect(() => {});
 
-  function setUser() {
-    //setUser_();
-  }
+//   function setUser() {
+//     //setUser_();
+//   }
 
-  const contextValue = useMemo(
-    () => ({
-      user,
-      setUser,
-    }),
-    []
-  );
+//   const contextValue = useMemo(
+//     () => ({
+//       user,
+//       setUser,
+//     }),
+//     []
+//   );
 
-  return (
-    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
-  );
-}
+//   return (
+//     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
+//   );
+// }
 
-export default UserProvider;
+// export default UserProvider;
 
-export function useUser() {
-  return useContext(UserContext);
-}
+// export function useUser() {
+//   return useContext(UserContext);
+// }
