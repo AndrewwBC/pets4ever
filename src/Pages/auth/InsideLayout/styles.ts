@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.main`
   background: ${({ theme }) => theme.bg};
   height: 100%;
-  width: calc(100vw - 18px);
   position: relative;
 
   @media (max-width: 768px) {
