@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { sideMenuWidth } from "./sideMenuWidth";
 
 export const Container = styled.main`
   background: ${({ theme }) => theme.bg};
@@ -24,7 +25,7 @@ export const SideMenu = styled.div`
   background: ${({ theme }) => theme.bg};
   border-right: 1px solid ${({ theme }) => theme.neutral.c5};
   position: fixed;
-  width: 240px;
+  width: ${sideMenuWidth};
   z-index: 999;
   top: 0;
   left: 0;
@@ -111,6 +112,10 @@ export const SideMenuContent = styled.div`
       display: flex;
       align-items: center;
       gap: 8px;
+
+      p {
+        margin-top: 2px;
+      }
     }
 
     a {

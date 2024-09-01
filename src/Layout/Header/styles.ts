@@ -3,13 +3,12 @@ import styled from "styled-components";
 export const Container = styled.header`
   background: ${({ theme }) => theme.bg};
   position: relative;
-  width: calc(100vw - 18px);
+  width: calc(100vw - 17px);
   @media (max-width: 768px) {
     width: 100vw;
   }
 
   border-radius: 0px;
-  background: #ffffff;
   box-shadow: 1px 1px 2px #e8e8e8, -1px -1px 2px #f2f2f2;
 `;
 

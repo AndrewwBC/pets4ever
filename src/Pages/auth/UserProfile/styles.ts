@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { sideMenuWidth } from "../InsideLayout/sideMenuWidth";
 
 export const Container = styled.main`
   background-color: ${({ theme }) => theme.bg};
@@ -9,16 +10,28 @@ export const Container = styled.main`
 `;
 
 export const Content = styled.section`
-  max-width: 1000px;
   width: 100%;
-  margin-left: 160px;
+
   padding-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1000px) {
+    margin-left: 48px;
+    padding: 24px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 
   .userContent {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
+    justify-content: center;
+    gap: 120px;
+    flex-grow: 1;
     .username {
       color: ${({ theme }) => theme.neutral.c9};
     }
@@ -26,6 +39,7 @@ export const Content = styled.section`
 
   .userImageAndName {
     gap: 8px;
+
     display: flex;
     align-items: center;
     flex-direction: column;

@@ -61,8 +61,8 @@ const UserProfile = () => {
             <div className="userImageAndName">
               <div>
                 <img
-                  width={64}
-                  height={64}
+                  width={120}
+                  height={120}
                   src={src}
                   alt="sua foto de perfil"
                   onClick={updateProfileImg}

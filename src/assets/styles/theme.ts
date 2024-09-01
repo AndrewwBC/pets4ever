@@ -50,7 +50,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  bg: "#000",
+  bg: "#111",
   neutral: {
     c1: "#000000", // c9
     c2: "#101010", // c8
