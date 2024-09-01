@@ -48,7 +48,7 @@ export default function ForgotPassword() {
   return (
     <Container>
       <Content>
-        <p>Problemas com o Login?</p>
+        <h1>Problemas com o Login?</h1>
 
         <p>Insira o seu email para que possamos redefinir a sua senha.</p>
 
@@ -60,7 +60,7 @@ export default function ForgotPassword() {
                 setEmail(event.target.value)
               }
               onBlur={(event) => handleEmailBlur(event)}
-              placeholder="Email ou nome de usuário."
+              placeholder="Insira o seu email"
             />
           </FormGroup>
 

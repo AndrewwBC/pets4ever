@@ -1,10 +1,5 @@
-import {
-  ArrowContainer,
-  Container,
-  Content,
-  Intro,
-  SectionText,
-} from "./styles";
+import { ArrowContainer, SectionText, TextContainer } from "./styles";
+import { Container, Content, Intro } from "../noAuthStyle";
 
 import aboutImage from "../../../assets/images/catAbout.jpg";
 
@@ -23,11 +18,12 @@ export default function About() {
           <img src={aboutImage} alt="cachorro e gato" />
         </div>
         <Intro>
-          <div>
-            <p>
-              Leia abaixo para mais <span>informações</span>!
-            </p>
-          </div>
+          <TextContainer>
+            <h1>
+              Uma rede social com a temática voltada a
+              <span> animais domésticos</span>.
+            </h1>
+          </TextContainer>
 
           <ArrowContainer onClick={handleUserClick}>
             <div id="arrowAnim">

@@ -1,8 +1,9 @@
-import { ButtonContainer, Container, Content, Intro } from "./styles";
+import { ButtonContainer, Paragraph } from "./styles";
 
 import homeImage from "../../../assets/images/dogHome.jpg";
 import { Button } from "../../../components/Button";
 import { Link } from "react-router-dom";
+import { Container, Content, Intro } from "../noAuthStyle";
 
 export default function Home() {
   return (
@@ -23,10 +24,10 @@ export default function Home() {
                 <h1 className="mobTitle">Pets4Ever</h1>
               </div>
               <div>
-                <p>
+                <Paragraph>
                   Compartilhe momentos especiais com o seu pet, encontre
                   companhias de passeio, cuidadores, veterinários e muito mais.
-                </p>
+                </Paragraph>
               </div>
             </div>
 

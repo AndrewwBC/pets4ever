@@ -1,8 +1,9 @@
-import { Container, Content, Intro } from "./styles";
+import { Container, Content, Intro } from "../noAuthStyle";
 
 import contactImage from "../../../assets/images/contact.jpg";
+import { PurpleSpan } from "./styles";
 
-export default function About() {
+export default function Contact() {
   return (
     <Container>
       <Content>
@@ -12,8 +13,9 @@ export default function About() {
         <Intro>
           <div>
             <h1>
-              Possui alguma <span>dúvida</span>, <span>crítica</span> ou
-              <span> sugestão</span>? Fale com a gente!
+              Possui alguma <PurpleSpan>dúvida</PurpleSpan>,
+              <PurpleSpan> crítica</PurpleSpan> ou
+              <PurpleSpan> sugestão</PurpleSpan>? Fale com a gente!
             </h1>
           </div>
         </Intro>

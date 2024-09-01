@@ -1,4 +1,4 @@
-import API from "../../api/axiosInstance";
+import { ejectInterceptor, useInterceptor } from "./myInterceptor";
 
 const ACTIONS = {
   setToken: "setToken",
@@ -10,35 +10,21 @@ type Action = {
   type: "setToken" | "clearToken";
   payload: string | null;
 };
-let myInterceptor: number | null = null;
 
 export const authReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case ACTIONS.setToken:
       if (action.payload) {
         localStorage.setItem("token", action.payload);
+        useInterceptor(action.payload);
       }
 
-      if (myInterceptor !== null) {
-        API.interceptors.request.eject(myInterceptor);
-      }
-
-      myInterceptor = API.interceptors.request.use((request: any) => {
-        const token = action.payload;
-        if (token) {
-          request.headers.Authorization = `Bearer ${token}`;
-        }
-        return request;
-      });
       return { ...state, token: action.payload };
 
     case ACTIONS.clearToken:
-      if (myInterceptor !== null) {
-        API.interceptors.request.eject(myInterceptor);
-        myInterceptor = null;
-      }
-
+      ejectInterceptor();
       localStorage.removeItem("token");
+      localStorage.removeItem("userId");
 
       return { ...state, token: null };
 

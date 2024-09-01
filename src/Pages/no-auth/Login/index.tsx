@@ -39,10 +39,9 @@ export default function Login() {
 
       if (response && "token" in response) {
         setToken(response.token);
-        //mudar isso!!
         localStorage.setItem("userId", response.userId);
 
-        nav(`/feed`);
+        nav(`/`);
       }
     } catch (err) {
       if (err instanceof MyError) {

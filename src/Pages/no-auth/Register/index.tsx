@@ -1,25 +1,21 @@
-import { Container, Content } from "./styles";
-import homeImage from "../../../assets/images/dogHome.jpg";
+import { TextGoogleAndForm } from "./styles";
+import { Container, Content } from "../noAuthStyle";
 
 import Form from "./components/Form";
-import GoogleAuth from "../../../components/GoogleAuth";
 
 export function Register() {
   return (
     <Container>
       <Content>
-        <div>
-          <img src={homeImage} alt="cachorro e gato" />
-        </div>
-        <div className="formAndText">
+        <TextGoogleAndForm>
           <div className="text">
             <h1>Crie sua conta</h1>
 
             <p>Apenas quatro informações para iniciar.</p>
           </div>
-          <GoogleAuth />
+
           <Form />
-        </div>
+        </TextGoogleAndForm>
       </Content>
     </Container>
   );

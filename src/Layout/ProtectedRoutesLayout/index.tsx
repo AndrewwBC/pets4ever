@@ -1,14 +1,15 @@
 import { FormEvent, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Container, Content, SideMenu, SideMenuContent } from "./styles";
-import CreatePostModal from "../components/CreatePostModal";
+import CreatePostModal from "../../Pages/auth/components/CreatePostModal";
 import { CgProfile, CgSun, CgToolbox } from "react-icons/cg";
 import { IoCreateOutline, IoHomeOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
-import LogoutModal from "./LogoutModal";
-import { useTheme } from "../../../context/themeProvider";
 
-const InsideLayout = () => {
+import { useTheme } from "../../context/themeProvider";
+import LogoutModal from "./LogoutModal";
+
+const ProtectedRoutesLayout = () => {
   const { setSystemTheme } = useTheme();
 
   const [logoutModal, setLogoutModal] = useState(false);
@@ -41,14 +42,14 @@ const InsideLayout = () => {
         <SideMenu>
           <SideMenuContent>
             <div>
-              <Link className="pets4EverTitle" to={"/feed"}>
+              <Link className="pets4EverTitle" to={"/"}>
                 <p>Pets4Ever</p>
               </Link>
             </div>
 
             <nav className="menuContent">
               <li>
-                <Link to={"/feed"}>
+                <Link to={"/"}>
                   <IoHomeOutline size={28} />
                   <p>Postagens</p>
                 </Link>
@@ -100,4 +101,4 @@ const InsideLayout = () => {
   );
 };
 
-export default InsideLayout;
+export default ProtectedRoutesLayout;

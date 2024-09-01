@@ -83,6 +83,7 @@ export default function SendCodeToNewEmail() {
       });
 
       setStep({ step: "sendEmail" });
+      setEmail("");
 
       console.log(response);
     } catch (err: any) {
