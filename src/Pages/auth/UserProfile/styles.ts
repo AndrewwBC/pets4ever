@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { sideMenuWidth } from "../InsideLayout/sideMenuWidth";
 
 export const Container = styled.main`
   background-color: ${({ theme }) => theme.bg};
