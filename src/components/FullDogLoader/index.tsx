@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import DogLoader from "../DogLoader";
+import DogLoader from "./components/DogLoader";
 
 const Modal = styled.div`
   top: 0;

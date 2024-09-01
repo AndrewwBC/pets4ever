@@ -23,7 +23,7 @@ export const Content: React.FC<ContentProps> = styled.div`
     flex-direction: column;
     p {
       align-self: self-start;
-      font-size: 14px;
+      font-size: 12px;
       margin-bottom: 2px;
       font-weight: 700;
       color: ${({ theme }) => theme.neutral.c9};

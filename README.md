@@ -1,6 +1,14 @@
-# Pets4Ever 
+# Pets4Ever
 
 Link: https://pets4ever.site/
+
+Este projeto nasceu da necessidade de aprimorar minhas habilidades como Desenvolvedor Web.
+
+A primeira versão se chamava Catgram, mas na época eu não tinha as habilidades adequadas,
+então terminei o projeto com muitos bugs, devido ao prazo.
+
+Neste momento, com Pets4Ever, estou usando mais TypeScript para garantir a qualidade do código,
+e alterei a linguagem Backend para Java, com framework Spring Boot.
 
 This project was born due to the need of improve my skills as Web Developer.
 

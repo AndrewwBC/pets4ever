@@ -37,10 +37,10 @@ export const MyButton: React.FC<MyButtonProps> = styled.button`
   }
 
   span {
-    font-size: 18px !important;
+    font-size: 16px !important;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.6;
+    letter-spacing: 0.6px;
     color: ${({ theme }) => theme.neutral.p1} !important;
   }
 

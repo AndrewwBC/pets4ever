@@ -1,35 +1,29 @@
 import "../assets/styles/default.css";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { GlobalStorage } from "../context/GlobalStorage";
 
 import { darkTheme, theme } from "../assets/styles/theme";
-
-import Home from "../Pages/GeneralPages/Home";
-import Login from "../Pages/GeneralPages/Login";
-import About from "../Pages/GeneralPages/About/index";
-import Contact from "../Pages/GeneralPages/Contact";
-import ForgotPassword from "../Pages/GeneralPages/ForgotPassword";
-import { Register } from "../Pages/GeneralPages/Register";
-import UserProfile from "../Pages/InternalPages/UserProfile";
-import InsideLayout from "../Pages/InternalPages/InsideLayout";
-import Feed from "../Pages/InternalPages/Feed";
+import Home from "../Pages/no-auth/Home";
+import Login from "../Pages/no-auth/Login";
+import About from "../Pages/no-auth/About/index";
+import Contact from "../Pages/no-auth/Contact";
+import ForgotPassword from "../Pages/no-auth/ForgotPassword";
+import { Register } from "../Pages/no-auth/Register";
+import UserProfile from "../Pages/auth/UserProfile";
+import InsideLayout from "../Pages/auth/InsideLayout";
+import Feed from "../Pages/auth/Feed";
 import Header from "../Layout/Header";
-import Error404 from "../Pages/Error404";
-import Config from "../Pages/InternalPages/UserConfig";
-import { useContext, useEffect } from "react";
-import ThemeContextProvider, { ThemeContext } from "../context/ThemeContext";
+import Error404 from "../Pages/404";
+import Config from "../Pages/auth/UserConfig";
+import ChangeThemeProvider, { useTheme } from "../context/themeProvider";
+import AuthProvider from "../context/authProvider";
 
 function AppContent() {
-  const { systemTheme } = useContext(ThemeContext);
-
-  useEffect(() => {
-    console.log(systemTheme);
-  }, [systemTheme]);
+  const { systemTheme } = useTheme();
 
   return (
     <ThemeProvider theme={systemTheme === "light" ? theme : darkTheme}>
-      <GlobalStorage>
+      <AuthProvider>
         <Router>
           <Routes>
             <Route path="/" element={<Header />}>
@@ -50,16 +44,16 @@ function AppContent() {
             <Route path="*" element={<Error404 />} />
           </Routes>
         </Router>
-      </GlobalStorage>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
 
 function App() {
   return (
-    <ThemeContextProvider>
+    <ChangeThemeProvider>
       <AppContent />
-    </ThemeContextProvider>
+    </ChangeThemeProvider>
   );
 }
 
