@@ -8,7 +8,7 @@ import {
 } from "react";
 import { AuthContextProps } from "./types/authProviderTypes";
 import { authReducer } from "./utils/authReducer";
-import API from "../api/axiosInstance";
+import { useInterceptor } from "./utils/myInterceptor";
 
 const AuthContext = createContext<AuthContextProps>({
   state: {
@@ -32,20 +32,11 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    let myInterceptor: number | null = null;
-
-    if (myInterceptor !== null) {
-      API.interceptors.request.eject(myInterceptor);
+    if (state.token) {
+      useInterceptor(state.token);
+      console.log("chamou interceptor");
     }
-
-    myInterceptor = API.interceptors.request.use((request: any) => {
-      const token = state.token;
-      if (token) {
-        request.headers.Authorization = `Bearer ${token}`;
-      }
-      return request;
-    });
-  }, []);
+  }, [state.token]);
 
   const clearToken = () => {
     dispatch({ type: "clearToken", payload: null });

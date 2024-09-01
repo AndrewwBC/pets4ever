@@ -1,10 +1,12 @@
 import { createPortal } from "react-dom";
 import { Container, Content, WarningContainer } from "./styles";
 import { TextContainer } from "./styles";
-import DogLoader from "../../../../components/FullDogLoader/components/DogLoader";
 import { Dispatch, SetStateAction, useState } from "react";
-import { Button } from "../../../../components/Button";
+
 import { useNavigate } from "react-router-dom";
+import DogLoader from "../../../components/FullDogLoader/components/DogLoader";
+import { Button } from "../../../components/Button";
+import { useAuth } from "../../../context/authProvider";
 
 interface LogoutModalProps {
   logoutModal: boolean;
@@ -17,16 +19,17 @@ export default function LogoutModal({
 }: LogoutModalProps) {
   const [confirmLogout, setConfirmLogout] = useState(false);
   const nav = useNavigate();
+  const { clearToken } = useAuth();
 
   function handleLogoutConfirmation(option: boolean) {
     if (option) {
       setConfirmLogout(true);
-      localStorage.clear();
 
       const timer = setTimeout(() => {
-        nav("/");
+        nav("");
         setLogoutModal(false);
         clearTimeout(timer);
+        clearToken();
       }, 2000);
     } else setLogoutModal(false);
   }

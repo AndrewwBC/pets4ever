@@ -1,73 +1,11 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-export const Container = styled.main`
-  background: ${({ theme }) => theme.bg};
-  height: 100vh;
-`;
-
-export const Content = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-
-  img {
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    @media (max-width: 768px) {
-      max-height: 200px;
-    }
-  }
-`;
-
-const textAnimation = keyframes`
-  from {
-    transform: translate3d(0px, -32px, 0px);
-  } to {
-    transform: translate3d(0px, 0px, 0px);
-  }
-`;
-
-export const Intro = styled.div`
-  padding: 48px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    height: 100vw;
-    margin-bottom: 48px;
-  }
+export const TextContainer = styled.div`
+  font-size: 40px;
+  color: ${({ theme }) => theme.neutral.c8};
 
   span {
     color: #7b55fa;
-  }
-
-  div {
-    p {
-      color: ${({ theme }) => theme.neutral.c8};
-      font-size: 48px;
-      font-weight: 600;
-      line-height: 1.2;
-      transition: all 0.6s;
-      animation-name: ${textAnimation};
-      animation-duration: 0.6s;
-      animation-iteration-count: linear;
-      @media (max-width: 1400px) {
-        font-size: 32px;
-      }
-
-      @media (max-width: 768px) {
-        font-size: 28px;
-      }
-    }
   }
 `;
 

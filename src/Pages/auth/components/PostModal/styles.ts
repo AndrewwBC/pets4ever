@@ -20,24 +20,23 @@ export const Modal = styled.main`
 
 export const Content = styled.section`
   display: grid;
-  grid-template-columns: 1fr auto;
-  max-height: 640px;
-  max-width: 800px;
-  padding: 8px;
+  grid-template-columns: 1fr 1fr;
+
+  padding: 200px 400px;
 
   @media (max-width: 768px) {
+    height: 100vh;
+    padding: 0px;
     grid-template-columns: 1fr;
   }
 
   .feedPhoto {
-    max-height: 100%;
     max-width: 100%;
+    max-height: 100%;
     border-bottom-left-radius: 8px;
     border-top-left-radius: 8px;
     object-fit: cover;
     @media (max-width: 764px) {
-      max-height: 700px;
-      width: 100%;
       border-radius: 0px;
       border-top-right-radius: 8px;
       border-top-left-radius: 8px;

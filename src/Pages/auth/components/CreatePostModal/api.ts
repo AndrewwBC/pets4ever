@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { Dispatch, SetStateAction } from "react";
+import API from "../../../../api/axiosInstance";
 
 export async function uploadFile(
   userId: string,
@@ -57,16 +58,9 @@ export async function uploadFile(
     });
     console.log("Entrou Java");
 
-    const r = await axios({
-      url: `${import.meta.env.VITE_API}/api/v1/post/`,
-      method: "post",
-      data: formData,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const r = await API.post(`/post`, formData);
 
-    const response = await r.data;
+    const response = r.data;
     setIsLoading({
       step: "Posted",
       isLoading: true,

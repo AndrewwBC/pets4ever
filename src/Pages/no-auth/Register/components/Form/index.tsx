@@ -13,6 +13,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import USER_API from "../../../../../api/user/USER_API";
 import MyError from "../../../../../api/user/errors/myError";
+import { RegisterForm } from "./styles";
+import { Link } from "react-router-dom";
 
 export default function Form() {
   const nav = useNavigate();
@@ -95,7 +97,7 @@ export default function Form() {
 
         const changeRoute = setTimeout(() => {
           console.log("Entrou");
-          nav("/login");
+          nav("/");
           clearTimeout(changeRoute);
           console.log("saiu");
         }, 3000);
@@ -123,8 +125,8 @@ export default function Form() {
   }
 
   return (
-    <div className="formContainer">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <RegisterForm onSubmit={handleSubmit(onSubmit)}>
         <FormGroup
           label="NOME COMPLETO"
           error={getErrorMessageByFieldName("fullname")}
@@ -175,8 +177,15 @@ export default function Form() {
         )}
 
         <Button type="submit" size="low" label="Registrar" />
-      </form>
+
+        <div className="doLogin">
+          <span>Já possui uma conta?</span>
+          <Link to={"/"}>
+            <p>Fazer login</p>
+          </Link>
+        </div>
+      </RegisterForm>
       {toast.message && <Toast toast={toast} setToast={setToast}></Toast>}
-    </div>
+    </>
   );
 }
