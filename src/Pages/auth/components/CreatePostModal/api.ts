@@ -16,8 +16,6 @@ export async function uploadFile(
   const formData = new FormData();
   const now = new Date();
 
-  const token = localStorage.getItem("token");
-
   const createdAt = `${now.getDate()}/${
     now.getMonth() + 1
   }/${now.getFullYear()}`;
