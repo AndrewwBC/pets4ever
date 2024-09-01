@@ -27,7 +27,9 @@ export function useInterceptor(token: string) {
           localStorage.removeItem("token");
           localStorage.removeItem("userId");
 
-          window.location.href = "/login";
+          alert("SESSÃO EXPIRADA");
+
+          window.location.href = "/";
         }
       }
     }
