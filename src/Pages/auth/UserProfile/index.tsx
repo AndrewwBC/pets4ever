@@ -79,9 +79,7 @@ const UserProfile = () => {
             />
           </div>
 
-          <ProfileFeed
-            posts={profileData?.userPostsAndQuantityOfPosts.posts}
-          ></ProfileFeed>
+          <ProfileFeed posts={profileData.userPostsAndQuantityOfPosts.posts} />
         </Content>
       </Container>
     );
