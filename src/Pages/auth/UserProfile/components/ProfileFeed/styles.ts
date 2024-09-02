@@ -2,32 +2,29 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   margin-top: 80px;
+  max-width: 1000px;
+  margin-left: 200px;
+  width: 100%;
 
   .profileFeedContent {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-content: space-between;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    align-items: start;
+    justify-content: start;
+    width: 100%;
+
     gap: 8px;
 
-    div {
-      width: 100%;
-      overflow: hidden;
-      margin: 0;
-      padding-top: 56.25%;
-      position: relative;
-    }
-
-    img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      transform: translate(-50%, -50%);
-      cursor: pointer;
-
-      &:hover {
-        scale: 1.01;
-        transition: 0.3s;
+    .eachImg {
+      img {
+        height: 200px;
+        width: 300px;
+        display: block;
+        object-fit: cover;
+        transition: all 0.6s;
+        &:hover {
+          scale: 1.1;
+        }
       }
     }
   }
