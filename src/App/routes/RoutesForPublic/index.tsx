@@ -21,7 +21,7 @@ export default function RoutesForPublic() {
     <Routes>
       <Route path="/" element={<PublicRoutesLayout />}>
         {routes.map(({ path, element }) => (
-          <Route path={path} element={element} />
+          <Route key={path} path={path} element={element} />
         ))}
       </Route>
     </Routes>
