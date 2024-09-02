@@ -12,15 +12,15 @@ function AppContent() {
   const { systemTheme } = useTheme();
 
   return (
-    <ThemeProvider theme={systemTheme === "light" ? theme : darkTheme}>
-      <AuthProvider>
+    <AuthProvider>
+      <ThemeProvider theme={systemTheme === "light" ? theme : darkTheme}>
         <Router>
           <RoutesForPublic />
           <RoutesForNonAuthenticated />
           <ProtectedRoutes />
         </Router>
-      </AuthProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 

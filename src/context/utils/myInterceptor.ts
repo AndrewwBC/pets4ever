@@ -9,6 +9,7 @@ export function useInterceptor(token: string) {
   }
 
   myInterceptor = API.interceptors.request.use((request: any) => {
+    console.log("colocando token");
     if (token) {
       request.headers.Authorization = `Bearer ${token}`;
     }

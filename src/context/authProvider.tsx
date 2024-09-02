@@ -2,7 +2,6 @@ import {
   createContext,
   ReactNode,
   useContext,
-  useEffect,
   useMemo,
   useReducer,
 } from "react";
@@ -26,17 +25,11 @@ const initialData: {
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, initialData);
-  console.log("authProvider");
+  useInterceptor(state.token!);
+
   const setToken = (newToken: string) => {
     dispatch({ type: "setToken", payload: newToken });
   };
-
-  useEffect(() => {
-    if (state.token) {
-      useInterceptor(state.token);
-      console.log("chamou interceptor");
-    }
-  }, [state.token]);
 
   const clearToken = () => {
     dispatch({ type: "clearToken", payload: null });
@@ -48,7 +41,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       setToken,
       clearToken,
     }),
-    [state]
+    [state.token]
   );
 
   return (
