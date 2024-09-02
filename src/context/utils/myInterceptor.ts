@@ -21,7 +21,6 @@ export function useInterceptor(token: string) {
       return response;
     },
     (error: AxiosError) => {
-      console.log(error.response?.data);
       if (error.response && error.response.status === 401) {
         if (error.response.data === "Invalid token") {
           console.log("Entrou antes de removeItem", error.response.data);
@@ -29,10 +28,11 @@ export function useInterceptor(token: string) {
           localStorage.removeItem("userId");
 
           alert("SESSÃO EXPIRADA");
-
           window.location.href = "/";
         }
       }
+
+      return Promise.reject(error);
     }
   );
 }
