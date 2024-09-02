@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Dispatch, SetStateAction, useState } from "react";
 import {
   Modal,
@@ -6,24 +5,20 @@ import {
   ModalOpacity,
   UpdateProfileImgLoader,
 } from "./styles";
+import API from "../../../../api/axiosInstance";
 
-interface PostProfilePicture {
+interface PostProfilePictureProps {
   setModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const PostProfilePicture = ({ setModal }: PostProfilePicture) => {
+const PostProfilePicture = ({ setModal }: PostProfilePictureProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [response, setResponse] = useState({
-    status: "",
-    message: "",
-  });
 
   const formData = new FormData();
 
   async function PostPicture() {
-    const token = localStorage.getItem("token");
-
+    const userId = localStorage.getItem("userId");
     if (file) {
       formData.append("file", file);
     } else return;
@@ -31,25 +26,10 @@ const PostProfilePicture = ({ setModal }: PostProfilePicture) => {
     try {
       setIsLoading(true);
 
-      const request = await axios({
-        url: `${import.meta.env.VITE_API}/api/v1/user/profileimg`,
-        data: formData,
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const request = await API.patch(`/user/${userId}/profile-img`, formData);
 
-      if (request.status !== 200) {
-        setResponse({
-          status: "ERROR",
-          message: "Upload não realizado.",
-        });
-      } else {
-        setResponse({
-          status: "SUCCESS",
-          message: "Upload realizado com sucesso!.",
-        });
+      if (request) {
+        setModal(false);
       }
 
       console.log(request);
@@ -80,16 +60,6 @@ const PostProfilePicture = ({ setModal }: PostProfilePicture) => {
         </Modal>
         <div>{isLoading && <UpdateProfileImgLoader />}</div>
 
-        {response && (
-          <p
-            className="uploadMessage"
-            style={{
-              color: response.status === "SUCCESS" ? "green" : "red",
-            }}
-          >
-            {response.message}
-          </p>
-        )}
         <div className="buttonContainer">
           <button disabled={isLoading} onClick={PostPicture}>
             Enviar
