@@ -9,13 +9,9 @@ import API from "../../../../api/axiosInstance";
 
 interface PostProfilePictureProps {
   setModal: Dispatch<SetStateAction<boolean>>;
-  getUserData: () => Promise<any>;
 }
 
-const PostProfilePicture = ({
-  setModal,
-  getUserData,
-}: PostProfilePictureProps) => {
+const PostProfilePicture = ({ setModal }: PostProfilePictureProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,7 +30,6 @@ const PostProfilePicture = ({
 
       if (request) {
         setModal(false);
-        getUserData();
       }
 
       console.log(request);
