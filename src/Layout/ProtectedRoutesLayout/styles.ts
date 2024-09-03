@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { sideMenuWidth } from "./sideMenuWidth";
 
 export const Container = styled.main`
   background: ${({ theme }) => theme.bg};
@@ -12,48 +11,79 @@ export const Container = styled.main`
 `;
 
 export const Content = styled.section`
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
   align-items: center;
+  justify-content: center;
 
   .outletContainer {
+    --nav-narrow-width: 72px;
+    --nav-medium-width: 244px;
+    --nav-wide-width: 335px;
+    @media (max-width: 1920px) {
+      width: calc(100% - var(--nav-wide-width));
+    }
+
+    @media (min-width: 1264px) and (max-width: 1919px) {
+      width: calc(100% - var(--nav-medium-width));
+    }
+
+    @media (min-width: 768px) and (max-width: 1263px) {
+      width: calc(100% - var(--nav-narrow-width));
+    }
+
+    @media (max-width: 768px) {
+      max-width: 630px;
+      width: 100%;
+    }
+
     margin-top: 64px;
   }
 `;
 
 export const SideMenu = styled.div`
+  --nav-narrow-width: 72px;
+  --nav-medium-width: 244px;
+  --nav-wide-width: 335px;
+
   background: ${({ theme }) => theme.bg};
   border-right: 1px solid ${({ theme }) => theme.neutral.c5};
   position: fixed;
-  width: ${sideMenuWidth};
+
   z-index: 999;
   top: 0;
   left: 0;
   height: 100%;
   transition: width 0.3s;
 
-  @media (max-width: 1000px) {
-    width: 64px;
-    display: flex;
-    justify-content: center;
+  @media (max-width: 1920px) {
+    width: var(--nav-wide-width);
+  }
 
-    p {
-      display: none;
-    }
+  @media (min-width: 1264px) and (max-width: 1919px) {
+    width: var(--nav-medium-width);
+  }
+
+  @media (min-width: 768px) and (max-width: 1263px) {
+    width: var(--nav-narrow-width);
   }
 
   @media (max-width: 768px) {
+    p {
+      display: none;
+    }
+
     transition: none;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 64px;
     width: 100vw;
+
     top: auto;
     left: 0;
     right: 0;
     bottom: 0;
-    border-top: 1px solid black;
+    border-top: 1.4px solid ${({ theme }) => theme.neutral.c8};
   }
 `;
 
@@ -64,8 +94,12 @@ export const SideMenuContent = styled.div`
   flex-wrap: wrap;
   padding: 0px 24px;
 
-  @media (max-width: 764px) {
-    height: 100%;
+  @media (min-width: 768px) and (max-width: 1263px) {
+    align-items: center;
+    padding: 0px;
+  }
+
+  @media (max-width: 768px) {
     padding: 0px;
     justify-content: center;
     align-items: center;
@@ -82,28 +116,42 @@ export const SideMenuContent = styled.div`
     color: ${({ theme }) => theme.neutral.c9};
     margin: 64px 0;
 
-    @media (max-width: 600px) {
-      font-size: 16px;
+    @media (max-width: 1263px) {
+      display: none;
     }
   }
 
   .menuContent {
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
     flex-direction: column;
     gap: 24px;
     flex-wrap: wrap;
 
+    @media (max-width: 1263px) {
+      margin-top: 48px;
+      align-items: center;
+      p {
+        display: none;
+      }
+    }
+
     @media (max-width: 768px) {
+      margin: 0;
+      width: 100vw;
+      padding: 0px 24px;
       flex-direction: row;
-      gap: 32px;
+      gap: 4px;
       li {
         width: max-content !important;
       }
     }
 
-    @media (max-width: 460px) {
-      gap: 8px;
+    @media (max-width: 400px) {
+      li {
+        width: 42px !important;
+      }
     }
 
     li {

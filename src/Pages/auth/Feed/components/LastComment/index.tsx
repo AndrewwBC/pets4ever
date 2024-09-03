@@ -14,13 +14,10 @@ export default function LastComment({ comments }: LastCommentProps) {
     return (
       <Container>
         <div className="content">
-          <p>
-            <Link to={`/profile/${lastComment.userId}`}>
-              {lastComment?.username}
-            </Link>
-            <span> comentou</span>
-          </p>
-          <p>{lastComment?.comment}</p>
+          <Link to={`/profile/${lastComment.userId}`}>
+            <p>{lastComment?.username}</p>
+          </Link>
+          <p>comentou: {lastComment?.comment}</p>
         </div>
       </Container>
     );

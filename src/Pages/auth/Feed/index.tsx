@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container } from "./styles";
+import { Container, Content } from "./styles";
 import Stories from "./components/Stories";
 import { getPosts } from "./api";
 import { FeedPostProps } from "./types";
@@ -24,8 +24,10 @@ export const Feed = () => {
   else
     return (
       <Container>
-        <Stories />
-        <Posts api={api} posts={posts} />
+        <Content>
+          <Stories />
+          <Posts api={api} posts={posts} />
+        </Content>
       </Container>
     );
 };

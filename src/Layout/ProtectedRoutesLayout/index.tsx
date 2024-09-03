@@ -2,9 +2,8 @@ import { FormEvent, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Container, Content, SideMenu, SideMenuContent } from "./styles";
 import CreatePostModal from "../../Pages/auth/components/CreatePostModal";
-import { CgProfile, CgSun, CgToolbox } from "react-icons/cg";
+import { CgLogOut, CgProfile, CgSun, CgToolbox } from "react-icons/cg";
 import { IoCreateOutline, IoHomeOutline } from "react-icons/io5";
-import { CiLogout } from "react-icons/ci";
 
 import { useTheme } from "../../context/themeProvider";
 import LogoutModal from "./LogoutModal";
@@ -85,7 +84,7 @@ const ProtectedRoutesLayout = () => {
 
               <li>
                 <Link to={""} onClick={(e) => handleLogout(e)}>
-                  <CiLogout size={28} />
+                  <CgLogOut size={28} />
                   <p>Encerrar sessão</p>
                 </Link>
               </li>
