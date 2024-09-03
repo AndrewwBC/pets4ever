@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   margin-top: 80px;
-  max-width: 1000px;
-  margin-left: 200px;
+
   width: 100%;
 
   .profileFeedContent {

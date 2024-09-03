@@ -60,64 +60,64 @@ export default function Posts({ posts, api }: PostsProps) {
             setModalPostData={setModalPostData}
           />
         )}
-        <div className="postContainer">
-          {posts.map((item, index) => {
-            return (
-              <div className="eachPost" key={index}>
-                <header className="postHeader">
-                  <div>
-                    <img
-                      src={
-                        item.profileImgUrl
-                          ? `https://pets4ever.s3.us-east-2.amazonaws.com/${item.profileImgUrl}`
-                          : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
-                      }
-                      alt=""
-                      height={40}
-                      width={40}
-                    />
-                    <Link to={`/profile/${item.userId}`}>
-                      <span>{item.name}</span>
-                    </Link>
-                  </div>
-                </header>
+
+        {posts.map((item, index) => {
+          return (
+            <div className="eachPost" key={index}>
+              <header className="postHeader">
+                <div>
+                  <img
+                    src={
+                      item.profileImgUrl
+                        ? `https://pets4ever.s3.us-east-2.amazonaws.com/${item.profileImgUrl}`
+                        : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
+                    }
+                    alt=""
+                    height={40}
+                    width={40}
+                  />
+                  <Link to={`/profile/${item.userId}`}>
+                    <span>{item.name}</span>
+                  </Link>
+                </div>
+              </header>
+              <div className="imageContainer">
                 <img
-                  className="feedPhoto"
                   src={`https://pets4ever.s3.us-east-2.amazonaws.com/${item.imageUrl}`}
                   alt=""
                   onClick={() => handlePostModal(item.postId)}
                 />
-                <div className="postInfoAndStatus">
-                  <div className="iconsContainerAndCreatedAt">
-                    <IconsToLikeCommentAndShare
-                      postId={item.postId}
-                      userLikedThisPost={item.userLikedThisPost}
-                      handlePostLikePut={handlePostLikePut}
-                    />
-
-                    <div className="createdAt">
-                      <small>{item.creationDate}</small>
-                    </div>
-                  </div>
-                  <QuantityOfLikes
-                    listOfLikes={item.listOfLikes}
-                    setListOfLikesModal={setListOfLikesModal}
-                    quantityOfLikes={item.quantityOfLikes}
-                    userLikedThisPost={item.userLikedThisPost}
-                  />
-                  <div className="nameAndDescription">
-                    <Link to={`/profile/${item.userId}`}>
-                      <span className="name">{item.name.toLowerCase()}</span>
-                    </Link>
-                    <small>{item.description}</small>
-                  </div>
-
-                  <LastComment comments={item.comments} />
-                </div>
               </div>
-            );
-          })}
-        </div>
+              <div className="postInfoAndStatus">
+                <div className="iconsContainerAndCreatedAt">
+                  <IconsToLikeCommentAndShare
+                    postId={item.postId}
+                    userLikedThisPost={item.userLikedThisPost}
+                    handlePostLikePut={handlePostLikePut}
+                  />
+
+                  <div className="createdAt">
+                    <small>{item.creationDate}</small>
+                  </div>
+                </div>
+                <QuantityOfLikes
+                  listOfLikes={item.listOfLikes}
+                  setListOfLikesModal={setListOfLikesModal}
+                  quantityOfLikes={item.quantityOfLikes}
+                  userLikedThisPost={item.userLikedThisPost}
+                />
+                <div className="nameAndDescription">
+                  <Link to={`/profile/${item.userId}`}>
+                    <span className="name">{item.name.toLowerCase()}</span>
+                  </Link>
+                  <small>{item.description}</small>
+                </div>
+
+                <LastComment comments={item.comments} />
+              </div>
+            </div>
+          );
+        })}
       </PostsContainer>
     );
 }

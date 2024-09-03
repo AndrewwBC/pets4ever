@@ -2,15 +2,19 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   .content {
-    background-color: ${({ theme }) => theme.neutral.c3};
-    padding: 6px;
+    background-color: ${({ theme }) => theme.neutral.c7};
+    padding: 8px;
     border-radius: 8px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 16px;
-    gap: 18px;
-
-    p {
-      font-size: 14px;
+    gap: 8px;
+    color: ${({ theme }) => theme.neutral.c4};
+    a {
+      font-family: "Roboto";
+      font-size: 16px;
+      color: ${({ theme }) => theme.neutral.c1};
     }
   }
 `;

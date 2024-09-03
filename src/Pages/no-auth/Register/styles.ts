@@ -25,5 +25,6 @@ export const TextGoogleAndForm = styled.div`
     width: 100%;
     margin-top: 120px;
     padding: 0 64px;
+    padding-bottom: 48px;
   }
 `;

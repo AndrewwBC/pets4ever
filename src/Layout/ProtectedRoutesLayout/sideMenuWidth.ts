@@ -1,1 +1,1 @@
-export const sideMenuWidth = "240px";
+export const sideMenuWidth = "340px";
