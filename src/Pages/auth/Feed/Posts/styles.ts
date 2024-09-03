@@ -9,7 +9,6 @@ export const PostsContainer = styled.section`
   margin-top: 24px;
   width: 100%;
   flex-grow: 1;
-  background-color: red;
 
   .eachPost {
     width: 100%;
