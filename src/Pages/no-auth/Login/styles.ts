@@ -85,8 +85,13 @@ export const RegisterContent = styled.div`
   padding-top: 18px;
   border-top: 1px solid ${({ theme }) => theme.neutral.c9};
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  .registerLink {
+    font-size: 18px;
+  }
 
   p {
     color: ${({ theme }) => theme.neutral.c9};

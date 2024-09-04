@@ -5,7 +5,7 @@ export const TextGoogleAndForm = styled.div`
 
   padding: 0 40px;
   max-width: 600px;
-  place-self: center;
+
   width: 100%;
 
   .text {

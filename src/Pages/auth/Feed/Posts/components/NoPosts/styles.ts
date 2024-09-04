@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.bg};
-  width: 100%;
-  height: 100%;
+  margin-bottom: auto;
+  flex-grow: 1;
 
   div {
     display: flex;
@@ -11,6 +11,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     gap: 24px;
+    flex-grow: 1;
     margin: 80px;
 
     small {
