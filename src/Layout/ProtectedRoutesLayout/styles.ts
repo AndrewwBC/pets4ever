@@ -16,6 +16,7 @@ export const Content = styled.section`
   justify-content: center;
 
   .outletContainer {
+    min-height: 100vh;
     --nav-narrow-width: 72px;
     --nav-medium-width: 244px;
     --nav-wide-width: 335px;

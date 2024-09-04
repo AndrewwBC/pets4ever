@@ -107,12 +107,12 @@ export default function Login() {
           <Button size={"low"} label="Entrar" type="submit" />
 
           <RegisterContent>
-            <p>
-              Não possui uma conta?
-              <Link to="/register">
-                <span className="registerLink"> Registre-se</span>
-              </Link>
-            </p>
+            <div>
+              <p>Não possui uma conta?</p>
+            </div>
+            <Link to="/register">
+              <span className="registerLink"> Registre-se</span>
+            </Link>
           </RegisterContent>
         </Form>
       </Content>

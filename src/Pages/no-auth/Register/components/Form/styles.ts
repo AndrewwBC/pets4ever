@@ -13,10 +13,15 @@ export const RegisterForm = styled.form`
 
   .doLogin {
     display: flex;
+    flex-direction: column;
     gap: 4px;
     align-items: center;
     align-self: center;
     margin-top: 24px;
+
+    span {
+      color: ${({ theme }) => theme.neutral.c6};
+    }
 
     p {
       font-family: "Roboto", sans-serif;

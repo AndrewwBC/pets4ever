@@ -2,23 +2,15 @@ import styled, { keyframes } from "styled-components";
 
 export const Container = styled.main`
   background: ${({ theme }) => theme.bg};
+  height: 100vh;
 `;
 
 export const Content = styled.section`
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
   align-items: center;
   justify-content: center;
-
-  img {
-    display: block;
-    height: 100vh;
-    width: 100%;
-    object-fit: cover;
-    @media (max-width: 768px) {
-      display: none;
-    }
-  }
+  height: 100%;
+  padding-bottom: 80px;
 `;
 
 const textAnimation = keyframes`
