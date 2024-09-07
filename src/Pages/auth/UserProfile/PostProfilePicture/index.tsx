@@ -6,19 +6,21 @@ import {
   UpdateProfileImgLoader,
 } from "./styles";
 import API from "../../../../api/axiosInstance";
+import { useUser } from "../../../../context/userProvider";
 
 interface PostProfilePictureProps {
   setModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const PostProfilePicture = ({ setModal }: PostProfilePictureProps) => {
+  const { user } = useUser();
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const formData = new FormData();
 
   async function PostPicture() {
-    const userId = localStorage.getItem("userId");
+    const userId = user.userId;
     if (file) {
       formData.append("file", file);
     } else return;

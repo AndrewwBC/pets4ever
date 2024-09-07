@@ -5,16 +5,18 @@ import { getPosts } from "./api";
 import { FeedPostProps } from "./types";
 import { FullDogLoader } from "../../../components/FullDogLoader";
 import Posts from "./Posts";
+import { useUser } from "../../../context/userProvider";
 
 export const Feed = () => {
   const [posts, setPosts] = useState<FeedPostProps[]>();
+  const { user } = useUser();
 
   useEffect(() => {
     api();
   }, []);
 
   async function api() {
-    const posts = await getPosts();
+    const posts = await getPosts(user.username);
     setPosts(posts);
   }
 

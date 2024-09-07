@@ -10,6 +10,7 @@ import { ListOfUserStateProps } from "../../components/ListOfUserModal/types";
 import { updateLikeInPost } from "../api/likePost";
 import ListOfLikes from "../../components/ListOfUserModal";
 import NoPosts from "./components/NoPosts";
+import { useUser } from "../../../../context/userProvider";
 
 interface PostsProps {
   posts: FeedPostProps[];
@@ -22,6 +23,7 @@ export default function Posts({ posts, api }: PostsProps) {
     data: undefined,
   });
 
+  const { user } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [modalPostData, setModalPostData] = useState<FeedPostProps | null>(
     null
@@ -35,7 +37,7 @@ export default function Posts({ posts, api }: PostsProps) {
   }
 
   async function handlePostLikePut(postId: string) {
-    const userId = localStorage.getItem("userId")!;
+    const userId = user.userId;
     if (!likeLoading) {
       await updateLikeInPost(userId, postId, setLikeLoading);
       await api();
@@ -76,8 +78,8 @@ export default function Posts({ posts, api }: PostsProps) {
                     height={40}
                     width={40}
                   />
-                  <Link to={`/profile/${item.userId}`}>
-                    <span>{item.name}</span>
+                  <Link to={`/${item.username}`}>
+                    <span>{item.username}</span>
                   </Link>
                 </div>
               </header>
@@ -107,8 +109,8 @@ export default function Posts({ posts, api }: PostsProps) {
                   userLikedThisPost={item.userLikedThisPost}
                 />
                 <div className="nameAndDescription">
-                  <Link to={`/profile/${item.userId}`}>
-                    <span className="name">{item.name.toLowerCase()}</span>
+                  <Link to={`/${item.username}`}>
+                    <span className="name">{item.username.toLowerCase()}</span>
                   </Link>
                   <small>{item.description}</small>
                 </div>

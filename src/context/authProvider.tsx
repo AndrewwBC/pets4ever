@@ -8,6 +8,7 @@ import {
 import { AuthContextProps } from "./types/authProviderTypes";
 import { authReducer } from "./utils/authReducer";
 import { useInterceptor } from "./utils/myInterceptor";
+import { useUser } from "./userProvider";
 
 const AuthContext = createContext<AuthContextProps>({
   state: {

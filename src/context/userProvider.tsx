@@ -1,52 +1,78 @@
-// import {
-//   createContext,
-//   ReactNode,
-//   useContext,
-//   useEffect,
-//   useMemo,
-//   useState,
-// } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
+import { UserProps } from "../api/user/types/profileResponse";
+import USER_API from "../api/user/USER_API";
 
-// interface UserContextProps {
-//   user: {
-//     name: string;
-//     profileImgUrl: string;
-//   };
-//   setUser: () => void;
-// }
+interface UserContextProps {
+  user: UserProps;
+  retrieveUser: () => Promise<any>;
+}
 
-// const UserContext = createContext<UserContextProps>({
-//   user: {
-//     name: "",
-//     profileImgUrl: "",
-//   },
-//   setUser() {},
-// });
+interface UserContextStateProps {
+  user: UserProps;
+  setUser: Dispatch<SetStateAction<UserProps>>;
+}
 
-// function UserProvider({ children }: { children: ReactNode }) {
-//   ///const [user, setUser_] = useState<any>();
+const UserContext = createContext<UserContextProps>({
+  user: {
+    email: "",
+    userId: "",
+    fullname: "",
+    username: "",
+    profileImgUrl: "",
+    userPostsAndQuantityOfPosts: {
+      posts: [],
+      quantity: 0,
+    },
+    following: {
+      followingList: [],
+      quantity: 0,
+    },
+    followers: {
+      followersList: [],
+      quantity: 0,
+    },
+  },
+  async retrieveUser() {},
+});
 
-//   useEffect(() => {});
+function UserProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<UserContextStateProps>();
 
-//   function setUser() {
-//     //setUser_();
-//   }
+  async function retrieveUser() {
+    try {
+      const data = await USER_API.user();
+      console.log("Data " + data);
+      setUser(data);
 
-//   const contextValue = useMemo(
-//     () => ({
-//       user,
-//       setUser,
-//     }),
-//     []
-//   );
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-//   return (
-//     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
-//   );
-// }
+  const contextValue = useMemo(
+    () => ({
+      user,
+      retrieveUser,
+    }),
+    [user]
+  );
 
-// export default UserProvider;
+  return (
+    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
+  );
+}
 
-// export function useUser() {
-//   return useContext(UserContext);
-// }
+export default UserProvider;
+
+export function useUser() {
+  return useContext(UserContext);
+}

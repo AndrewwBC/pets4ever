@@ -1,3 +1,4 @@
+import { useUser } from "../userProvider";
 import { ejectInterceptor, useInterceptor } from "./myInterceptor";
 
 const ACTIONS = {
@@ -16,7 +17,7 @@ export const authReducer = (state: State, action: Action): State => {
     case ACTIONS.setToken:
       if (action.payload) {
         localStorage.setItem("token", action.payload);
-        useInterceptor(action.payload);
+        useInterceptor();
       }
 
       return { ...state, token: action.payload };

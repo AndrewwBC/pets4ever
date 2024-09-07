@@ -13,6 +13,7 @@ import { VscComment, VscHeart, VscSend } from "react-icons/vsc";
 import { Content, InputFileModal, Modal } from "./styles";
 import { Input } from "../../../../components/input";
 import ValidatingImageModal from "./ValidatingImageModal";
+import { useUser } from "../../../../context/userProvider";
 
 interface CreatePostModalProps {
   setCreatePostModal: Dispatch<SetStateAction<boolean>>;
@@ -30,6 +31,7 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
     isLoading: false,
   });
   const [preview, setPreview] = useState("");
+  const { user } = useUser();
 
   const data = {
     userId: "",
@@ -54,7 +56,8 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const userId = localStorage.getItem("userId")!;
+
+    const userId = user.userId;
 
     if (file != undefined) {
       const uploadResponse = await uploadFile(

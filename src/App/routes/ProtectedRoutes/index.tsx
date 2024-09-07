@@ -2,17 +2,17 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Feed from "../../../Pages/auth/Feed";
 import Config from "../../../Pages/auth/UserConfig";
 import UserProfile from "../../../Pages/auth/UserProfile";
-import { useAuth } from "../../../context/authProvider";
 
 import ProtectedRoutesLayout from "../../../Layout/ProtectedRoutesLayout";
 import Error404 from "../../../Pages/404";
+import { useUser } from "../../../context/userProvider";
 
 export default function ProtectedRoutes() {
-  const { state } = useAuth();
+  const { user } = useUser();
 
   const protectedRoutes = [
     {
-      path: "/profile/:id",
+      path: "/:username",
       element: <UserProfile />,
     },
     {
@@ -24,22 +24,18 @@ export default function ProtectedRoutes() {
       element: <Config />,
     },
   ];
-  console.log(state);
-  if (state.token)
+  console.log(user);
+  if (user)
     return (
       <Routes>
         <Route
           path="/"
           element={
-            state.token ? (
-              <ProtectedRoutesLayout />
-            ) : (
-              <Navigate to="/access-denied" />
-            )
+            user ? <ProtectedRoutesLayout /> : <Navigate to="/access-denied" />
           }
         >
           <Route path="*" element={<Error404 />} />
-          {state.token ? (
+          {user ? (
             protectedRoutes.map(({ path, element }) => (
               <Route key={path} path={path} element={element} />
             ))
