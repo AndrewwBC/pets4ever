@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from "react";
 import { UserProps } from "../api/user/types/profileResponse";
 import USER_API from "../api/user/USER_API";
+import { FullDogLoader } from "../components/FullDogLoader";
 
 interface UserContextProps {
   user: UserProps | null;
@@ -16,9 +17,11 @@ const UserContext = createContext<UserContextProps>({
 
 function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserProps | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function retrieveUser() {
     try {
+      setIsLoading(true);
       const data = await USER_API.user();
       setUser(data);
     } catch (error) {
@@ -26,6 +29,7 @@ function UserProvider({ children }: { children: ReactNode }) {
     } finally {
       const timer = setTimeout(() => {
         console.log("Entrou no timer");
+        setIsLoading(false);
         clearTimeout(timer);
       }, 2000);
     }
@@ -51,6 +55,8 @@ function UserProvider({ children }: { children: ReactNode }) {
     }),
     [user]
   );
+
+  if (isLoading) return <FullDogLoader />;
 
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
