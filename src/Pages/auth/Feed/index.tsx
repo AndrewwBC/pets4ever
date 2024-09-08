@@ -16,7 +16,7 @@ export const Feed = () => {
   }, []);
 
   async function api() {
-    const posts = await getPosts(user.username);
+    const posts = await getPosts(user?.username!);
     setPosts(posts);
   }
 
