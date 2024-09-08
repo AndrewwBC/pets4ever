@@ -5,9 +5,9 @@ import CreatePostModal from "../../Pages/auth/components/CreatePostModal";
 import { CgLogOut, CgProfile, CgSun, CgToolbox } from "react-icons/cg";
 import { IoCreateOutline, IoHomeOutline } from "react-icons/io5";
 
-import { useTheme } from "../../context/themeProvider";
+import { useTheme } from "../../context/MyThemeProvider";
 import LogoutModal from "./LogoutModal";
-import { useUser } from "../../context/userProvider";
+import { useUser } from "../../context/UserProvider";
 
 const ProtectedRoutesLayout = () => {
   const { setSystemTheme } = useTheme();

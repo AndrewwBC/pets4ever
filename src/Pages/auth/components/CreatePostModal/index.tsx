@@ -13,7 +13,7 @@ import { VscComment, VscHeart, VscSend } from "react-icons/vsc";
 import { Content, InputFileModal, Modal } from "./styles";
 import { Input } from "../../../../components/input";
 import ValidatingImageModal from "./ValidatingImageModal";
-import { useUser } from "../../../../context/userProvider";
+import { useUser } from "../../../../context/UserProvider";
 
 interface CreatePostModalProps {
   setCreatePostModal: Dispatch<SetStateAction<boolean>>;

@@ -49,6 +49,15 @@ class UserHttpService {
     );
   }
 
+  async logout(): Promise<{
+    message: string;
+  }> {
+    return this.handleRequest<any>(
+      () => this.API.post("user/logout"),
+      "LOGOUT_ERROR"
+    );
+  }
+
   async update(data: UpdateDataProps, userId: string): Promise<any> {
     return this.handleRequest<any>(
       () => this.API.put(`/user/${userId}`, data),

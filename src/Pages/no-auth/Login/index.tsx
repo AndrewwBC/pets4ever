@@ -11,7 +11,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema, LoginFormSchema } from "./zodSchema";
 import USER_API from "../../../api/user/USER_API";
-import { useUser } from "../../../context/userProvider";
+import { useUser } from "../../../context/UserProvider";
+import { useInterceptor } from "../../../context/utils/myInterceptor";
 
 export default function Login() {
   const nav = useNavigate();
@@ -38,6 +39,7 @@ export default function Login() {
       const response = await USER_API.signIn(data);
 
       if (response) {
+        useInterceptor();
         retrieveUser();
         nav(`/`);
       }

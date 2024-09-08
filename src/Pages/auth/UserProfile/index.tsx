@@ -5,7 +5,7 @@ import ProfileFeed from "./components/ProfileFeed";
 import UserStatus from "./components/QuantityOfPostFollowersAndFollowing";
 
 import FollowOrUnfollow from "./components/FollowOrUnfollow";
-import { useUser } from "../../../context/userProvider";
+import { useUser } from "../../../context/UserProvider";
 
 const UserProfile = () => {
   const [postProfilePictureModal, setPostProfilePictureModal] =

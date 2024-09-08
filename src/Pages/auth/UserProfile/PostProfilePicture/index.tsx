@@ -6,7 +6,7 @@ import {
   UpdateProfileImgLoader,
 } from "./styles";
 import API from "../../../../api/axiosInstance";
-import { useUser } from "../../../../context/userProvider";
+import { useUser } from "../../../../context/UserProvider";
 
 interface PostProfilePictureProps {
   setModal: Dispatch<SetStateAction<boolean>>;

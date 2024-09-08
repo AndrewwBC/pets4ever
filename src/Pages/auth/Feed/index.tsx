@@ -5,7 +5,7 @@ import { getPosts } from "./api";
 import { FeedPostProps } from "./types";
 import { FullDogLoader } from "../../../components/FullDogLoader";
 import Posts from "./Posts";
-import { useUser } from "../../../context/userProvider";
+import { useUser } from "../../../context/UserProvider";
 
 export const Feed = () => {
   const [posts, setPosts] = useState<FeedPostProps[]>();

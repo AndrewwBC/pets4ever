@@ -9,7 +9,7 @@ import VerifyCode from "../VerifyCode";
 import { Section } from "./styles";
 import EMAIL_API from "../../../../../../api/email/EMAIL_API";
 import CODE_API from "../../../../../../api/code/CODE_API";
-import { useUser } from "../../../../../../context/userProvider";
+import { useUser } from "../../../../../../context/UserProvider";
 
 interface StepProps {
   step: "sendEmail" | "verifyCode";

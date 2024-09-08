@@ -4,7 +4,7 @@ import axios, { AxiosError } from "axios";
 
 import { VscSend } from "react-icons/vsc";
 import { Input } from "../../../../../../components/input";
-import { useUser } from "../../../../../../context/userProvider";
+import { useUser } from "../../../../../../context/UserProvider";
 
 interface InsertCommentPostModalProps {
   retrieveNewComments: () => any;

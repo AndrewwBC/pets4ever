@@ -15,8 +15,6 @@ export function useInterceptor() {
     (error: AxiosError) => {
       if (error.response && error.response.status === 401) {
         if (error.response.data === "Invalid token") {
-          console.log("Entrou antes de removeItem", error.response.data);
-
           alert("SESSÃO EXPIRADA");
           window.location.href = "/";
         }

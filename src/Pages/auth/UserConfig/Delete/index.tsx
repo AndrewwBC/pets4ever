@@ -3,7 +3,7 @@ import { DeleteSection } from "./styles";
 import userApi from "../../../../api/user/USER_API";
 
 import { Button } from "../../../../components/Button";
-import { useUser } from "../../../../context/userProvider";
+import { useUser } from "../../../../context/UserProvider";
 
 function Delete() {
   const { user } = useUser();

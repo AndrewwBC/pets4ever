@@ -10,7 +10,7 @@ import { ListOfUserStateProps } from "../../components/ListOfUserModal/types";
 import { updateLikeInPost } from "../api/likePost";
 import ListOfLikes from "../../components/ListOfUserModal";
 import NoPosts from "./components/NoPosts";
-import { useUser } from "../../../../context/userProvider";
+import { useUser } from "../../../../context/UserProvider";
 
 interface PostsProps {
   posts: FeedPostProps[];

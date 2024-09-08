@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DogLoader from "../../../components/FullDogLoader/components/DogLoader";
 import { Button } from "../../../components/Button";
-import { useAuth } from "../../../context/authProvider";
+import { useUser } from "../../../context/UserProvider";
 
 interface LogoutModalProps {
   logoutModal: boolean;
@@ -19,7 +19,7 @@ export default function LogoutModal({
 }: LogoutModalProps) {
   const [confirmLogout, setConfirmLogout] = useState(false);
   const nav = useNavigate();
-  const { clearToken } = useAuth();
+  const { clearUser } = useUser();
 
   function handleLogoutConfirmation(option: boolean) {
     if (option) {
@@ -29,7 +29,7 @@ export default function LogoutModal({
         nav("");
         setLogoutModal(false);
         clearTimeout(timer);
-        clearToken();
+        clearUser();
       }, 2000);
     } else setLogoutModal(false);
   }
