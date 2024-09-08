@@ -37,7 +37,7 @@ export default function Posts({ posts, api }: PostsProps) {
   }
 
   async function handlePostLikePut(postId: string) {
-    const userId = user.userId;
+    const userId = user?.userId!;
     if (!likeLoading) {
       await updateLikeInPost(userId, postId, setLikeLoading);
       await api();

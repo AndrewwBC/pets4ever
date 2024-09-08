@@ -22,7 +22,7 @@ function InsertCommentPostModal({
   });
   const { user } = useUser();
   async function handleSendComment() {
-    commentData.userId = user.userId;
+    commentData.userId = user?.userId!;
     commentData.postId = postId;
 
     try {

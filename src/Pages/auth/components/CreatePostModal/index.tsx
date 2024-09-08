@@ -57,7 +57,7 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const userId = user.userId;
+    const userId = user?.userId!;
 
     if (file != undefined) {
       const uploadResponse = await uploadFile(

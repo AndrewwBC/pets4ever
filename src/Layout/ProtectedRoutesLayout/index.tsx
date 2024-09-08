@@ -63,7 +63,7 @@ const ProtectedRoutesLayout = () => {
               </li>
 
               <li>
-                <Link to={`/${user.username}`}>
+                <Link to={`/${user?.username}`}>
                   <CgProfile size={28} />
                   <p>Meu Perfil</p>
                 </Link>
