@@ -20,7 +20,7 @@ const PostProfilePicture = ({ setModal }: PostProfilePictureProps) => {
   const formData = new FormData();
 
   async function PostPicture() {
-    const userId = user.userId;
+    const userId = user?.userId;
     if (file) {
       formData.append("file", file);
     } else return;

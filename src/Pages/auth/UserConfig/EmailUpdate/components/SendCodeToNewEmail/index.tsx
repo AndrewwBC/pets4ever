@@ -71,7 +71,7 @@ export default function SendCodeToNewEmail() {
     const validateCodeData = {
       code,
       email,
-      userId: user.userId,
+      userId: user?.userId!,
     };
 
     e.preventDefault();
