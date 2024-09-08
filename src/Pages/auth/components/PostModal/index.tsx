@@ -67,7 +67,7 @@ const PostModal = ({
             </div>
             <div className="nameDescriptionAndCreatedAt">
               <div className="nameAndCreatedAt">
-                <p>@{modalPostData.name.toLowerCase()}</p>
+                <p>@{modalPostData.username.toLowerCase()}</p>
                 <small>{modalPostData.creationDate}</small>
               </div>
 
