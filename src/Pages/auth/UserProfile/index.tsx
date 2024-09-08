@@ -1,55 +1,27 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { Container, Content } from "./styles";
-import { AxiosError } from "axios";
 import PostProfilePicture from "./PostProfilePicture";
 import ProfileFeed from "./components/ProfileFeed";
 import UserStatus from "./components/QuantityOfPostFollowersAndFollowing";
-import { useParams } from "react-router-dom";
-import { FullDogLoader } from "../../../components/FullDogLoader";
-import { ProfileResponse } from "../../../api/user/types/profileResponse";
-import USER_API from "../../../api/user/USER_API";
+
+import FollowOrUnfollow from "./components/FollowOrUnfollow";
+import { useUser } from "../../../context/UserProvider";
 
 const UserProfile = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [profileData, setProfileData] = useState<ProfileResponse>();
   const [postProfilePictureModal, setPostProfilePictureModal] =
     useState<boolean>(false);
 
-  const { id } = useParams();
-  useEffect(() => {
-    getUserData();
-  }, [id]);
-  console.log(id);
-
-  async function getUserData() {
-    try {
-      setIsLoading(true);
-      const data = await USER_API.profile(id!);
-
-      setProfileData(data);
-
-      return;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-        return error;
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const { user } = useUser();
 
   function updateProfileImg() {
     setPostProfilePictureModal(!postProfilePictureModal);
   }
 
-  const src = profileData?.userImageProfileUrl
-    ? `https://pets4ever.s3.us-east-2.amazonaws.com/${profileData?.userImageProfileUrl}`
+  const src = user?.profileImgUrl
+    ? `https://pets4ever.s3.us-east-2.amazonaws.com/${user?.profileImgUrl}`
     : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg";
 
-  if (isLoading) return <FullDogLoader />;
-
-  if (profileData)
+  if (user)
     return (
       <Container>
         {postProfilePictureModal && (
@@ -69,17 +41,19 @@ const UserProfile = () => {
                 />
               </div>
 
-              <span className="username">{profileData?.username}</span>
+              <span className="username">{user?.username}</span>
             </div>
 
             <UserStatus
-              postQuantity={profileData?.userPostsAndQuantityOfPosts.quantity}
-              followers={profileData?.followers}
-              following={profileData?.following}
+              postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
+              followers={user?.followers}
+              following={user?.following}
             />
+
+            <FollowOrUnfollow />
           </div>
 
-          <ProfileFeed posts={profileData.userPostsAndQuantityOfPosts.posts} />
+          <ProfileFeed posts={user.userPostsAndQuantityOfPosts.posts} />
         </Content>
       </Container>
     );

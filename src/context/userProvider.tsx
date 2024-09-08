@@ -1,52 +1,70 @@
-// import {
-//   createContext,
-//   ReactNode,
-//   useContext,
-//   useEffect,
-//   useMemo,
-//   useState,
-// } from "react";
+import { createContext, ReactNode, useContext, useMemo, useState } from "react";
+import { UserProps } from "../api/user/types/profileResponse";
+import USER_API from "../api/user/USER_API";
+import { FullDogLoader } from "../components/FullDogLoader";
 
-// interface UserContextProps {
-//   user: {
-//     name: string;
-//     profileImgUrl: string;
-//   };
-//   setUser: () => void;
-// }
+interface UserContextProps {
+  user: UserProps | null;
+  retrieveUser: () => Promise<void>;
+  clearUser: () => Promise<void>;
+}
 
-// const UserContext = createContext<UserContextProps>({
-//   user: {
-//     name: "",
-//     profileImgUrl: "",
-//   },
-//   setUser() {},
-// });
+const UserContext = createContext<UserContextProps>({
+  user: null,
+  retrieveUser: async () => {},
+  clearUser: async () => {},
+});
 
-// function UserProvider({ children }: { children: ReactNode }) {
-//   ///const [user, setUser_] = useState<any>();
+function UserProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<UserProps | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-//   useEffect(() => {});
+  async function retrieveUser() {
+    try {
+      setIsLoading(true);
+      const data = await USER_API.user();
+      setUser(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      const timer = setTimeout(() => {
+        console.log("Entrou no timer");
+        setIsLoading(false);
+        clearTimeout(timer);
+      }, 2000);
+    }
+  }
 
-//   function setUser() {
-//     //setUser_();
-//   }
+  async function clearUser() {
+    try {
+      const response = await USER_API.logout();
+      if (response) {
+        setUser(null);
+        alert(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-//   const contextValue = useMemo(
-//     () => ({
-//       user,
-//       setUser,
-//     }),
-//     []
-//   );
+  const contextValue = useMemo(
+    () => ({
+      user,
+      retrieveUser,
+      clearUser,
+    }),
+    [user]
+  );
 
-//   return (
-//     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
-//   );
-// }
+  if (isLoading) return <FullDogLoader />;
 
-// export default UserProvider;
+  return (
+    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
+  );
+}
 
-// export function useUser() {
-//   return useContext(UserContext);
-// }
+export default UserProvider;
+
+export function useUser() {
+  return useContext(UserContext);
+}

@@ -3,8 +3,10 @@ import { DeleteSection } from "./styles";
 import userApi from "../../../../api/user/USER_API";
 
 import { Button } from "../../../../components/Button";
+import { useUser } from "../../../../context/UserProvider";
 
 function Delete() {
+  const { user } = useUser();
   const [isDeleteButtonDisable, setIsDeleteButtonDisable] = useState(true);
 
   function handleDeleteInput(inputText: string) {
@@ -17,8 +19,8 @@ function Delete() {
 
   async function handleDeleteSubmit(e: FormEvent) {
     e.preventDefault();
-    const userId = localStorage.getItem("userId")!;
-    const response = await userApi.delete(userId);
+    const userId = user?.userId;
+    const response = await userApi.delete(userId!);
     console.log(response);
   }
 

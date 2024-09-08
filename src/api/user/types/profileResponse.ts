@@ -16,10 +16,12 @@ export interface FollowingProps {
   quantity: number;
 }
 
-export interface ProfileResponse {
-  email: string;
+export interface UserProps {
+  fullname: string;
   username: string;
-  userImageProfileUrl: string;
+  userId: string;
+  email: string;
+  profileImgUrl: string;
   followers: FollowersProps;
   following: FollowingProps;
   userPostsAndQuantityOfPosts: {

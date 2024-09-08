@@ -9,6 +9,7 @@ import VerifyCode from "../VerifyCode";
 import { Section } from "./styles";
 import EMAIL_API from "../../../../../../api/email/EMAIL_API";
 import CODE_API from "../../../../../../api/code/CODE_API";
+import { useUser } from "../../../../../../context/UserProvider";
 
 interface StepProps {
   step: "sendEmail" | "verifyCode";
@@ -21,6 +22,8 @@ export default function SendCodeToNewEmail() {
     message: "",
     status: "",
   });
+
+  const { user } = useUser();
 
   const [step, setStep] = useState<StepProps>({
     step: "sendEmail",
@@ -65,12 +68,10 @@ export default function SendCodeToNewEmail() {
   }
 
   async function handleVerifyCodeAndUpdateEmail(e: FormEvent) {
-    const userId = localStorage.getItem("userId")!;
-
     const validateCodeData = {
       code,
       email,
-      userId,
+      userId: user?.userId!,
     };
 
     e.preventDefault();

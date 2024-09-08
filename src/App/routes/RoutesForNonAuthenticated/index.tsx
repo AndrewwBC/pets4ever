@@ -3,12 +3,14 @@ import { PublicRoutesLayout } from "../../../Layout/PublicLayout";
 import ForgotPassword from "../../../Pages/no-auth/ForgotPassword";
 import Login from "../../../Pages/no-auth/Login";
 import { Register } from "../../../Pages/no-auth/Register";
-import { useAuth } from "../../../context/authProvider";
 import Error404 from "../../../Pages/404";
 import AccessDenied from "../ProtectedRoutes/AccessDenied";
+import { useUser } from "../../../context/UserProvider";
+import { hasSession } from "../../../utils/getCookie";
+import InitialLoader from "../InitialLoader";
 
 export default function RoutesForNonAuthenticated() {
-  const { state } = useAuth();
+  const { user } = useUser();
 
   const routes = [
     { path: "/", element: <Login /> },
@@ -16,7 +18,7 @@ export default function RoutesForNonAuthenticated() {
     { path: "forgotpassword", element: <ForgotPassword /> },
     { path: "*", element: <Error404 /> },
     {
-      path: "/profile/:id",
+      path: "/:id",
       element: <AccessDenied />,
     },
     {
@@ -29,14 +31,18 @@ export default function RoutesForNonAuthenticated() {
     },
   ];
 
-  if (!state.token)
+  if (user === null && hasSession) {
+    return <InitialLoader />;
+  }
+
+  if (!user)
     return (
       <Routes>
         <Route path="/" element={<PublicRoutesLayout />}>
           {routes.map(({ path, element }) => (
             <Route
               path={path}
-              element={state.token ? <Navigate to="/feed" /> : element}
+              element={user ? <Navigate to="/feed" /> : element}
             />
           ))}
         </Route>

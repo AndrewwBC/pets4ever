@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 
 import { VscSend } from "react-icons/vsc";
 import { Input } from "../../../../../../components/input";
+import { useUser } from "../../../../../../context/UserProvider";
 
 interface InsertCommentPostModalProps {
   retrieveNewComments: () => any;
@@ -19,23 +20,15 @@ function InsertCommentPostModal({
     postId: "",
     userId: "",
   });
-
+  const { user } = useUser();
   async function handleSendComment() {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId")!;
-
-    commentData.userId = userId;
+    commentData.userId = user.userId;
     commentData.postId = postId;
 
     try {
       const request = await axios.post(
         `${import.meta.env.VITE_API}/api/v1/comment/`,
-        commentData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        commentData
       );
 
       if (request) retrieveNewComments();

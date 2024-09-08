@@ -1,10 +1,8 @@
 import API from "../../../api/axiosInstance";
 
-export async function getPosts() {
-  const userId = localStorage.getItem("userId");
-  console.log("Oi");
+export async function getPosts(username: string) {
   try {
-    const r = await API.get(`/post/${userId}`);
+    const r = await API.get(`/post/${username}`);
     const response = await r.data;
 
     return response;

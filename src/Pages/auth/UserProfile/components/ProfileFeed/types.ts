@@ -9,7 +9,7 @@ export interface PostProps {
   creationDate: string;
   description: string;
   imageUrl: string;
-  name: string;
+  username: string;
   postId: string;
   userId: string;
   profileImgUrl: string;

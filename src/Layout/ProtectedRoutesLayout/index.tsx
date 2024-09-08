@@ -5,8 +5,9 @@ import CreatePostModal from "../../Pages/auth/components/CreatePostModal";
 import { CgLogOut, CgProfile, CgSun, CgToolbox } from "react-icons/cg";
 import { IoCreateOutline, IoHomeOutline } from "react-icons/io5";
 
-import { useTheme } from "../../context/themeProvider";
+import { useTheme } from "../../context/MyThemeProvider";
 import LogoutModal from "./LogoutModal";
+import { useUser } from "../../context/UserProvider";
 
 const ProtectedRoutesLayout = () => {
   const { setSystemTheme } = useTheme();
@@ -14,7 +15,7 @@ const ProtectedRoutesLayout = () => {
   const [logoutModal, setLogoutModal] = useState(false);
   const [createPostModal, setCreatePostModal] = useState(false);
 
-  const userId = localStorage.getItem("userId");
+  const { user } = useUser();
 
   function handleClick(e: FormEvent) {
     e.preventDefault();
@@ -62,7 +63,7 @@ const ProtectedRoutesLayout = () => {
               </li>
 
               <li>
-                <Link to={`/profile/${userId}`}>
+                <Link to={`/${user.username}`}>
                   <CgProfile size={28} />
                   <p>Meu Perfil</p>
                 </Link>

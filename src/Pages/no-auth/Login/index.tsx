@@ -7,15 +7,16 @@ import { Toast } from "../../../components/Toast";
 import { Link, useNavigate } from "react-router-dom";
 import { FullDogLoader } from "../../../components/FullDogLoader";
 import MyError from "../../../api/user/errors/myError";
-import { useAuth } from "../../../context/authProvider";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema, LoginFormSchema } from "./zodSchema";
 import USER_API from "../../../api/user/USER_API";
+import { useUser } from "../../../context/UserProvider";
+import { useInterceptor } from "../../../context/utils/myInterceptor";
 
 export default function Login() {
-  const { setToken } = useAuth();
   const nav = useNavigate();
+  const { retrieveUser } = useUser();
 
   const [toast, setToast] = useState({
     message: "",
@@ -37,10 +38,9 @@ export default function Login() {
     try {
       const response = await USER_API.signIn(data);
 
-      if (response && "token" in response) {
-        setToken(response.token);
-        localStorage.setItem("userId", response.userId);
-
+      if (response) {
+        useInterceptor();
+        retrieveUser();
         nav(`/`);
       }
     } catch (err) {

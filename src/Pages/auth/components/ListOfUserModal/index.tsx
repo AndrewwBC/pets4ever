@@ -21,7 +21,7 @@ export default function ListOfLikes({
     <Container id="container">
       <div className="content">
         {listOfUsers.data!.map((item) => (
-          <Link to={`/profile/${item.userId}`} className="user">
+          <Link to={`/${item.username}`} className="user">
             <img
               src={
                 item.userProfilePhotoUrl
