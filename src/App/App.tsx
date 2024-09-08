@@ -12,10 +12,12 @@ function AppContent() {
 
   return (
     <ThemeProvider theme={systemTheme === "light" ? theme : darkTheme}>
-      <Router>
-        <RoutesForNonAuthenticated />
-        <ProtectedRoutes />
-      </Router>
+      <UserProvider>
+        <Router>
+          <RoutesForNonAuthenticated />
+          <ProtectedRoutes />
+        </Router>
+      </UserProvider>
     </ThemeProvider>
   );
 }
@@ -23,9 +25,7 @@ function AppContent() {
 function App() {
   return (
     <ChangeThemeProvider>
-      <UserProvider>
-        <AppContent />
-      </UserProvider>
+      <AppContent />
     </ChangeThemeProvider>
   );
 }
