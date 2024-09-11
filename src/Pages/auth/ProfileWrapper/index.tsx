@@ -7,7 +7,7 @@ export default function ProfileWrapper() {
   const { user } = useUser();
   const params = useParams();
 
-  user?.username === params.username ? (
+  return user?.username === params.username ? (
     <SectionUser user={user!} />
   ) : (
     <OtherUser username={params.username!} />
