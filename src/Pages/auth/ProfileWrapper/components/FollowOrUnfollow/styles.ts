@@ -10,6 +10,6 @@ export const PurpleButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.purple.dark};
+    background-color: ${({ theme }) => theme.purple.light};
   }
 `;

@@ -1,4 +1,4 @@
-import { PostProps } from "../UserProfile/components/ProfileFeed/types";
+import { PostProps } from "../ProfileWrapper/components/ProfileFeed/types";
 
 interface ListOfLikesProps {
   userId: string;

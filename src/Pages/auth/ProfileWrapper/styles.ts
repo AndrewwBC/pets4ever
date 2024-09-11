@@ -32,8 +32,42 @@ export const Content = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     gap: 120px;
     flex-grow: 1;
+
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 48px;
+      }
+
+      .usernameAndProfileImg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+          border-radius: 9999px;
+          border: 1px solid black;
+        }
+
+        span {
+          font-weight: 500;
+          font-family: "Poppins";
+        }
+      }
+
+      .numbersAndButton {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+    }
 
     @media (max-width: 768px) {
       gap: 24px;

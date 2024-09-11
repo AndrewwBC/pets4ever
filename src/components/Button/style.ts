@@ -21,14 +21,14 @@ export const MyButton: React.FC<MyButtonProps> = styled.button`
 
   border: none;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.yellow.light};
+  background-color: ${({ theme }) => theme.yellow.dark};
   max-width: max-content;
   transition: 0.3s;
 
   &:hover {
     cursor: pointer;
     animation-play-state: paused;
-    background-color: ${({ theme }) => theme.yellow.dark};
+    background-color: ${({ theme }) => theme.yellow.light};
   }
 
   &:disabled {

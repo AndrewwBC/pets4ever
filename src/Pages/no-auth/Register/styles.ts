@@ -18,6 +18,7 @@ export const TextGoogleAndForm = styled.div`
 
     p {
       color: ${({ theme }) => theme.neutral.c5};
+      margin-bottom: 16px;
     }
   }
 

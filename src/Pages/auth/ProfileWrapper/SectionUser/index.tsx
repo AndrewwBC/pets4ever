@@ -1,17 +1,17 @@
 import { memo, useState } from "react";
-import { Container, Content } from "./styles";
-import PostProfilePicture from "./PostProfilePicture";
-import ProfileFeed from "./components/ProfileFeed";
-import UserStatus from "./components/QuantityOfPostFollowersAndFollowing";
+import { Container, Content } from "../../ProfileWrapper/styles";
+import { UserProps } from "../../../../api/user/types/profileResponse";
+import PostProfilePicture from "../components/PostProfilePicture";
+import QuantityOfPostFollowersAndFollowing from "../components/QuantityOfPostFollowersAndFollowing";
+import ProfileFeed from "../components/ProfileFeed";
 
-import FollowOrUnfollow from "./components/FollowOrUnfollow";
-import { useUser } from "../../../context/UserProvider";
+interface Props {
+  user: UserProps;
+}
 
-const UserProfile = () => {
+const UserProfile = ({ user }: Props) => {
   const [postProfilePictureModal, setPostProfilePictureModal] =
     useState<boolean>(false);
-
-  const { user } = useUser();
 
   function updateProfileImg() {
     setPostProfilePictureModal(!postProfilePictureModal);
@@ -30,8 +30,8 @@ const UserProfile = () => {
 
         <Content>
           <div className="userContent">
-            <div className="userImageAndName">
-              <div>
+            <div className="user">
+              <div className="usernameAndProfileImg">
                 <img
                   width={120}
                   height={120}
@@ -39,18 +39,17 @@ const UserProfile = () => {
                   alt="sua foto de perfil"
                   onClick={updateProfileImg}
                 />
+                <span className="username">{user?.username}</span>
               </div>
 
-              <span className="username">{user?.username}</span>
+              <div className="numbersAndButton">
+                <QuantityOfPostFollowersAndFollowing
+                  postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
+                  followers={user?.followers}
+                  following={user?.following}
+                />
+              </div>
             </div>
-
-            <UserStatus
-              postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
-              followers={user?.followers}
-              following={user?.following}
-            />
-
-            <FollowOrUnfollow />
           </div>
 
           <ProfileFeed posts={user.userPostsAndQuantityOfPosts.posts} />
