@@ -25,7 +25,7 @@ export const Content: React.FC<ContentProps> = styled.div`
       align-self: self-start;
       font-size: 12px;
       margin-bottom: 2px;
-      font-weight: 700;
+      font-weight: 500;
       color: ${({ theme }) => theme.neutral.c9};
     }
   }

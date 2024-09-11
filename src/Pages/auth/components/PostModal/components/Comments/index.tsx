@@ -1,4 +1,4 @@
-import { Comment } from "../../../../UserProfile/components/ProfileFeed/types";
+import { Comment } from "../../../../ProfileWrapper/components/ProfileFeed/types";
 
 interface CommentsPostModalProps {
   comments?: Comment[];

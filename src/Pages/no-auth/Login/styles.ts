@@ -53,13 +53,13 @@ export const Content = styled.div`
   .forgotPassword,
   .registerLink {
     margin: 0px 0px;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
     color: ${({ theme }) => theme.purple.medium};
     font-family: "Roboto", sans-serif;
 
     &:hover {
-      color: ${({ theme }) => theme.purple.dark};
+      color: ${({ theme }) => theme.purple.light};
       cursor: pointer;
     }
   }

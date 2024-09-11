@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { PostProps } from "../../UserProfile/components/ProfileFeed/types";
+import { PostProps } from "../../ProfileWrapper/components/ProfileFeed/types";
 import { FeedPostProps } from "../../Feed/types";
 
 export interface PostModalProps {

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import axios from "axios";
 
-import { Comment } from "../../UserProfile/components/ProfileFeed/types";
+import { Comment } from "../../ProfileWrapper/components/ProfileFeed/types";
 import { PostModalProps } from "./types";
 import { createPortal } from "react-dom";
 import { Content, Modal } from "./styles";

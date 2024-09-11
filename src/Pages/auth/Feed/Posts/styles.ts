@@ -117,7 +117,7 @@ export const PostsContainer = styled.section`
     .quantityOfLikesContainer {
       small {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
         color: ${({ theme }) => theme.neutral.c8};
       }
     }

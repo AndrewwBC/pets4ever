@@ -18,7 +18,11 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    font-size: 16px;
+    flex-direction: row;
+    gap: 8px;
+
+    p {
+      font-weight: 700;
+    }
   }
 `;

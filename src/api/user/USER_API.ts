@@ -49,6 +49,12 @@ class UserHttpService {
     );
   }
 
+  // async getOtherUser(): Promise<UserProps> {
+  //   return this.handleRequest<UserProps>(
+  //     () => this.API.get(`/user`)
+  //   )
+  // }
+
   async logout(): Promise<{
     message: string;
   }> {
