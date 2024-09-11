@@ -1,9 +1,10 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Container, Content } from "../../ProfileWrapper/styles";
 import { UserProps } from "../../../../api/user/types/profileResponse";
 import QuantityOfPostFollowersAndFollowing from "../components/QuantityOfPostFollowersAndFollowing";
 import FollowOrUnfollow from "../components/FollowOrUnfollow";
 import ProfileFeed from "../components/ProfileFeed";
+import USER_API from "../../../../api/user/USER_API";
 
 interface OtherUserProps {
   username: string;
@@ -11,6 +12,15 @@ interface OtherUserProps {
 
 function OtherUser({ username }: OtherUserProps) {
   const [user, setUser] = useState<UserProps>();
+
+  useEffect(() => {
+    getData();
+  }, [username]);
+
+  async function getData() {
+    const data = await USER_API.getOtherUser(username);
+    if (data) setUser(data);
+  }
 
   const src = user?.profileImgUrl
     ? `https://pets4ever.s3.us-east-2.amazonaws.com/${user?.profileImgUrl}`
