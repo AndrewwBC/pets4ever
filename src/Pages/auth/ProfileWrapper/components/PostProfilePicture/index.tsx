@@ -5,8 +5,8 @@ import {
   ModalOpacity,
   UpdateProfileImgLoader,
 } from "./styles";
-import API from "../../../../api/axiosInstance";
-import { useUser } from "../../../../context/UserProvider";
+import API from "../../../../../api/axiosInstance";
+import { useUser } from "../../../../../context/UserProvider";
 
 interface PostProfilePictureProps {
   setModal: Dispatch<SetStateAction<boolean>>;
