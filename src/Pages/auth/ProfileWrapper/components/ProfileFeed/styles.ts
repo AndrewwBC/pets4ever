@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   margin-top: 80px;
-
+  padding: 0px 40px;
   width: 100%;
 
   .profileFeedContent {
@@ -12,7 +12,7 @@ export const Container = styled.section`
     justify-content: start;
     width: 100%;
 
-    gap: 8px;
+    gap: 2px;
 
     .eachImg {
       img {
@@ -21,9 +21,6 @@ export const Container = styled.section`
         display: block;
         object-fit: cover;
         transition: all 0.6s;
-        &:hover {
-          scale: 1.1;
-        }
       }
     }
   }

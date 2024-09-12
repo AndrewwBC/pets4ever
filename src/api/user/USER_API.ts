@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-import SignInError from "./errors/myError";
 import MyError from "./errors/myError";
 import { SignInResponse, SignUpProps } from "./types/types";
 import { UserProps } from "./types/profileResponse";
@@ -108,7 +107,7 @@ class UserHttpService {
 
   private getMyError(err: any, name: string): MyError {
     const { message, response, code } = err as AxiosError;
-    return new SignInError(
+    return new MyError(
       message,
       name,
       response?.data,

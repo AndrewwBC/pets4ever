@@ -7,10 +7,10 @@ import IconsToLikeCommentAndShare from "../components/IconsToLikeCommentAndShare
 import QuantityOfLikes from "../components/QuantityOfLikes";
 import LastComment from "../components/LastComment";
 import { ListOfUserStateProps } from "../../components/ListOfUserModal/types";
-import { updateLikeInPost } from "../api/likePost";
-import ListOfLikes from "../../components/ListOfUserModal";
 import NoPosts from "./components/NoPosts";
 import { useUser } from "../../../../context/UserProvider";
+import ListOfUserModal from "../../components/ListOfUserModal";
+import POST_API from "../../../../api/post/POST_API";
 
 interface PostsProps {
   posts: FeedPostProps[];
@@ -37,10 +37,21 @@ export default function Posts({ posts, api }: PostsProps) {
   }
 
   async function handlePostLikePut(postId: string) {
-    const userId = user?.userId!;
+    const data = {
+      username: user!.username,
+      postId,
+    };
+    console.log(data);
     if (!likeLoading) {
-      await updateLikeInPost(userId, postId, setLikeLoading);
-      await api();
+      try {
+        setLikeLoading(true);
+        await POST_API.patchPostLike(data);
+        await api();
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLikeLoading(false);
+      }
     }
   }
 
@@ -50,7 +61,7 @@ export default function Posts({ posts, api }: PostsProps) {
     return (
       <PostsContainer>
         {listOfLikes.data && (
-          <ListOfLikes
+          <ListOfUserModal
             listOfUsers={listOfLikes}
             setModal={setListOfLikesModal}
           />
@@ -69,6 +80,7 @@ export default function Posts({ posts, api }: PostsProps) {
               <header className="postHeader">
                 <div>
                   <img
+                    loading="lazy"
                     src={
                       item.profileImgUrl
                         ? `https://pets4ever.s3.us-east-2.amazonaws.com/${item.profileImgUrl}`

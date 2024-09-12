@@ -1,18 +1,17 @@
 import { FeedPostProps } from "../../../Pages/auth/Feed/types";
 
-interface UserIdNameAndImageProps {
-  name: string;
-  userId: string;
-  profileImageUrl: string;
+export interface UsernameAndProfileImgUrlProps {
+  username: string;
+  profileImgUrl: string;
 }
 
 export interface FollowersProps {
-  followersList: UserIdNameAndImageProps[];
+  followersList: UsernameAndProfileImgUrlProps[];
   quantity: number;
 }
 
 export interface FollowingProps {
-  followingList: UserIdNameAndImageProps[];
+  followingList: UsernameAndProfileImgUrlProps[];
   quantity: number;
 }
 
