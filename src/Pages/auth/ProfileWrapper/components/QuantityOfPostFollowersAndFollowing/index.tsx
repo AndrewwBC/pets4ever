@@ -1,11 +1,10 @@
 import { useState } from "react";
-import {
-  FollowersProps,
-  FollowingProps,
-} from "../../../../../api/user/types/profileResponse";
+import { UsernameAndProfileImgUrlProps } from "../../../../../api/user/types/profileResponse";
 import { Toast } from "../../../../../components/Toast";
 import { Container } from "./styles";
 import { QuantityOfPostFollowersAndFollowingProps } from "./types";
+import ListOfUserModal from "../../../components/ListOfUserModal";
+import { ListOfUserStateProps } from "../../../components/ListOfUserModal/types";
 
 function QuantityOfPostFollowersAndFollowing({
   postQuantity,
@@ -17,17 +16,23 @@ function QuantityOfPostFollowersAndFollowing({
     status: "",
   });
 
-  function handleClick(data: FollowersProps | FollowingProps) {
-    if (data.quantity === 0) {
-      setToast({
-        message: "Não há dados.",
-        status: "error",
-      });
-    }
+  const [modal, setModal] = useState<ListOfUserStateProps>({
+    modalState: false,
+    data: undefined,
+  });
+
+  function handleClick(data: UsernameAndProfileImgUrlProps[]) {
+    setModal({
+      data: data,
+      modalState: true,
+    });
   }
 
   return (
     <Container className="userStats">
+      {modal.modalState && (
+        <ListOfUserModal listOfUsers={modal} setModal={setModal} />
+      )}
       {toast.message && <Toast setToast={setToast} toast={toast} />}
       <div>
         <p>{postQuantity}</p>
@@ -35,13 +40,17 @@ function QuantityOfPostFollowersAndFollowing({
       </div>
 
       <div>
-        <p>{followers.quantity}</p>
-        <small onClick={() => handleClick(followers)}>Seguindo</small>
+        <p>{following.quantity}</p>
+        <small onClick={() => handleClick(following.followingList)}>
+          Seguindo
+        </small>
       </div>
 
       <div>
-        <p>{following.quantity}</p>
-        <small onClick={() => handleClick(followers)}>Seguidores</small>
+        <p>{followers.quantity}</p>
+        <small onClick={() => handleClick(followers.followersList)}>
+          Seguidores
+        </small>
       </div>
     </Container>
   );

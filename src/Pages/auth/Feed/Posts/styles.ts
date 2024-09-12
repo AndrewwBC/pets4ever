@@ -12,6 +12,7 @@ export const PostsContainer = styled.section`
 
   .eachPost {
     width: 100%;
+    width: min(470px, 100vw);
     padding-bottom: 24px;
     border-bottom: 1px solid ${({ theme }) => theme.neutral.c5};
     background-color: ${({ theme }) => theme.bg};
@@ -63,7 +64,7 @@ export const PostsContainer = styled.section`
   .imageContainer {
     width: 100%;
     height: 0;
-    padding-bottom: 100%; /* 1:1 Aspect Ratio */
+    padding-bottom: 125%; /* 1:1 Aspect Ratio */
     position: relative;
 
     @media (max-width: 768px) {
@@ -72,6 +73,8 @@ export const PostsContainer = styled.section`
 
     img {
       position: absolute;
+      border-radius: 4px;
+
       top: 0;
       left: 0;
       width: 100%;

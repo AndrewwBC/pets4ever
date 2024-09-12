@@ -1,12 +1,14 @@
 import { createPortal } from "react-dom";
 import { Container } from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ListOfUserProps } from "./types";
 
-export default function ListOfLikes({
+export default function ListOfUserModal({
   listOfUsers,
   setModal,
 }: ListOfUserProps) {
+  const nav = useNavigate();
+
   window.addEventListener("click", (e: any) => {
     if (e.target?.id === "container")
       setModal({
@@ -15,17 +17,28 @@ export default function ListOfLikes({
       });
   });
 
-  console.log(listOfUsers);
+  function handleClick(e: any, username: string) {
+    e.preventDefault();
+    setModal({
+      data: undefined,
+      modalState: false,
+    });
+    nav(`/${username}`);
+  }
 
   return createPortal(
     <Container id="container">
       <div className="content">
         {listOfUsers.data!.map((item) => (
-          <Link to={`/${item.username}`} className="user">
+          <Link
+            onClick={(e: any) => handleClick(e, item.username)}
+            to={""}
+            className="user"
+          >
             <img
               src={
-                item.userProfilePhotoUrl
-                  ? `https://pets4ever.s3.us-east-2.amazonaws.com/${item.userProfilePhotoUrl}`
+                item.profileImgUrl
+                  ? `https://pets4ever.s3.us-east-2.amazonaws.com/${item.profileImgUrl}`
                   : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
               }
               alt=""

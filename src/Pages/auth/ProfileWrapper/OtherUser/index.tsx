@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { Container, Content } from "../../ProfileWrapper/styles";
 import { UserProps } from "../../../../api/user/types/profileResponse";
 import QuantityOfPostFollowersAndFollowing from "../components/QuantityOfPostFollowersAndFollowing";
@@ -13,14 +13,14 @@ interface OtherUserProps {
 function OtherUser({ username }: OtherUserProps) {
   const [user, setUser] = useState<UserProps>();
 
-  useEffect(() => {
-    getData();
-  }, [username]);
-
-  async function getData() {
+  const getData = useCallback(async () => {
     const data = await USER_API.getOtherUser(username);
     if (data) setUser(data);
-  }
+  }, [username]);
+
+  useEffect(() => {
+    getData();
+  }, [username, getData]);
 
   const src = user?.profileImgUrl
     ? `https://pets4ever.s3.us-east-2.amazonaws.com/${user?.profileImgUrl}`
@@ -48,7 +48,11 @@ function OtherUser({ username }: OtherUserProps) {
                   followers={user?.followers}
                   following={user?.following}
                 />
-                <FollowOrUnfollow />
+                <FollowOrUnfollow
+                  getData={getData}
+                  usernameOfUserToBeFollowed={user.username}
+                  userFollowersList={user.followers}
+                />
               </div>
             </div>
           </div>
