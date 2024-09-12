@@ -33,7 +33,7 @@ function FollowOrUnfollow({
   }
 
   const userAlreadyFollowed = userFollowersList.followersList.find(
-    (item) => item.name === user?.username
+    (item) => item.username === user?.username
   );
 
   return (
