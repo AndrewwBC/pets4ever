@@ -27,9 +27,7 @@ function FollowOrUnfollow({
       if (response) {
         getData();
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }
 
   const userAlreadyFollowed = userFollowersList.followersList.find(

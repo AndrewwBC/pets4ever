@@ -38,11 +38,9 @@ export async function uploadFile(
     });
 
     const previsao = await requestPy.data.previsao;
-    console.log(previsao);
+    return previsao;
   } catch (err) {
-    console.log(err);
   } finally {
-    console.log("Passou pelo python");
     setIsLoading({
       step: "",
       isLoading: true,
@@ -54,19 +52,17 @@ export async function uploadFile(
       step: "Posting",
       isLoading: true,
     });
-    console.log("Entrou Java");
 
     const r = await API.post(`/post`, formData);
 
     const response = r.data;
-    setIsLoading({
-      step: "Posted",
-      isLoading: true,
-    });
-    console.log(response);
+    if (response)
+      setIsLoading({
+        step: "Posted",
+        isLoading: true,
+      });
   } catch (err) {
     if (err instanceof AxiosError) {
-      console.log(err.response?.data);
     }
   } finally {
     setIsLoading({

@@ -20,8 +20,6 @@ export const Feed = () => {
     setPosts(posts);
   }
 
-  console.log(posts);
-
   if (!posts) return <FullDogLoader />;
   else
     return (

@@ -67,7 +67,6 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
         setIsLoading
       );
       setUploadResponse(uploadResponse);
-      console.log(uploadResponse);
     }
   }
 

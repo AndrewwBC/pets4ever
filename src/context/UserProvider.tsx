@@ -25,10 +25,8 @@ function UserProvider({ children }: { children: ReactNode }) {
       const data = await USER_API.user();
       setUser(data);
     } catch (error) {
-      console.log(error);
     } finally {
       const timer = setTimeout(() => {
-        console.log("Entrou no timer");
         setIsLoading(false);
         clearTimeout(timer);
       }, 2000);
@@ -42,9 +40,7 @@ function UserProvider({ children }: { children: ReactNode }) {
         setUser(null);
         alert(response);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
 
   const contextValue = useMemo(

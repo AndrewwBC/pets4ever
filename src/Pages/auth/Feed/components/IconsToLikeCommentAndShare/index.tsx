@@ -5,7 +5,6 @@ export default function IconsToLikeCommentAndShare({
   postId,
   handlePostLikePut,
 }: any) {
-  console.log(userLikedThisPost);
   return (
     <div className="icons">
       {!userLikedThisPost ? (

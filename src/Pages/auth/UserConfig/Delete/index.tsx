@@ -20,8 +20,7 @@ function Delete() {
   async function handleDeleteSubmit(e: FormEvent) {
     e.preventDefault();
     const userId = user?.userId;
-    const response = await userApi.delete(userId!);
-    console.log(response);
+    await userApi.delete(userId!);
   }
 
   return (

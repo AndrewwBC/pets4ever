@@ -16,7 +16,6 @@ export default function ForgotPassword() {
   });
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  console.log(error);
 
   function handleEmailBlur(event: ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
@@ -37,12 +36,8 @@ export default function ForgotPassword() {
       const request = await axios.post(
         `${import.meta.env.VITE_API}/email/send/${email}`
       );
-
-      const response = request.data;
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+      return request.data;
+    } catch (error) {}
   }
 
   return (

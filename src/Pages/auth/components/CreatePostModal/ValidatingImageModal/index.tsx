@@ -23,9 +23,7 @@ export default function ValidatingImageModal({
   isLoadingData,
   setModal,
 }: ValidationImageModalProps) {
-  useEffect(() => {
-    console.log("Entrou");
-  }, [isLoadingData.step]);
+  useEffect(() => {}, [isLoadingData.step]);
 
   if (isLoadingData.step === "Validating")
     return createPortal(
