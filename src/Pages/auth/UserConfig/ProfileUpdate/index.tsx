@@ -28,7 +28,7 @@ function Update() {
 
     try {
       const response = await userApi.updateName(userData, "");
-      console.log(response);
+
       if (response) {
         setToast({
           message: response.message,
@@ -47,7 +47,7 @@ function Update() {
 
   //   return error;
   // }
-  console.log(updateResponseError);
+
   return (
     <UpdateSection>
       {toast.message && <Toast setToast={setToast} toast={toast} />}

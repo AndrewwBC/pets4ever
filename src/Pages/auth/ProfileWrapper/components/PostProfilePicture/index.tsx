@@ -33,10 +33,7 @@ const PostProfilePicture = ({ setModal }: PostProfilePictureProps) => {
       if (request) {
         setModal(false);
       }
-
-      console.log(request);
     } catch (err) {
-      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -45,8 +42,6 @@ const PostProfilePicture = ({ setModal }: PostProfilePictureProps) => {
   function handleCloseModal() {
     setModal(false);
   }
-
-  console.log(file);
 
   return (
     <ModalOpacity>

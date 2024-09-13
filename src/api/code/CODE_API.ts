@@ -25,7 +25,7 @@ class CODE_API {
         },
       });
       const response = request.data;
-      console.log(request);
+
       return response as ValidateCodeResponse;
     } catch (err) {
       throw new AxiosError("Código Inválido");

@@ -32,11 +32,8 @@ function InsertCommentPostModal({
       );
 
       if (request) retrieveNewComments();
-
-      console.log(request);
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log(error);
       }
     }
   }

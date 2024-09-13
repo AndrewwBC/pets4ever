@@ -28,7 +28,6 @@ class EMAIL_API {
       if (err instanceof AxiosError) {
         throw new AxiosError(err.response?.data);
       }
-      console.log(err);
     }
   }
 
@@ -40,9 +39,7 @@ class EMAIL_API {
       const response = await request.data;
 
       return response;
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }
 }
 

@@ -96,16 +96,12 @@ export default function Form() {
         }, 1500);
 
         const changeRoute = setTimeout(() => {
-          console.log("Entrou");
           nav("/");
           clearTimeout(changeRoute);
-          console.log("saiu");
         }, 3000);
       }
     } catch (err) {
       if (err instanceof MyError) {
-        console.log(err.data);
-
         setToast({
           message: "Verifique os dados!",
           status: "error",

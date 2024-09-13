@@ -23,10 +23,8 @@ export async function updateLikeInPost(
 
     const response = await r.data;
 
-    console.log(response);
     return response;
   } catch (err) {
-    if (err instanceof AxiosError) console.log(err.message);
   } finally {
     setLikeLoading(false);
   }

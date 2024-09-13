@@ -47,7 +47,6 @@ export default function SendCodeToNewEmail() {
 
     try {
       const response = await EMAIL_API.sendCodeToEmail(email);
-      console.log(response);
 
       if (response) {
         setToast({
@@ -85,14 +84,11 @@ export default function SendCodeToNewEmail() {
 
       setStep({ step: "sendEmail" });
       setEmail("");
-
-      console.log(response);
     } catch (err: any) {
       setToast({
         message: err.message,
         status: "error",
       });
-      console.log(err);
     }
   }
 

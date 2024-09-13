@@ -17,7 +17,7 @@ export default function PasswordValidations({
   const findFalse = Object.values(passwordErrors).find(
     (error) => error === false
   );
-  console.log(findFalse);
+
   const borderColor = findFalse === false ? "red" : "green";
 
   return (

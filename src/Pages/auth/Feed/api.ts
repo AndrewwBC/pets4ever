@@ -6,7 +6,5 @@ export async function getPosts(username: string) {
     const response = await r.data;
 
     return response;
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 }

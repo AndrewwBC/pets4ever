@@ -39,9 +39,7 @@ const PostModal = ({
       if (request) {
         setComments(request.data);
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }
 
   window.addEventListener("click", (e: any) => {

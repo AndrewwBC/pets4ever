@@ -21,7 +21,6 @@ function Delete() {
     e.preventDefault();
     const userId = user?.userId;
     const response = await userApi.delete(userId!);
-    console.log(response);
   }
 
   return (

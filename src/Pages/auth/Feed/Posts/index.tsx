@@ -41,14 +41,13 @@ export default function Posts({ posts, api }: PostsProps) {
       username: user!.username,
       postId,
     };
-    console.log(data);
+
     if (!likeLoading) {
       try {
         setLikeLoading(true);
         await POST_API.patchPostLike(data);
         await api();
       } catch (err) {
-        console.log(err);
       } finally {
         setLikeLoading(false);
       }
