@@ -107,3 +107,19 @@ export const ToggleButton = styled.button`
   border: none;
   margin-right: 24px;
 `;
+
+export const ToggleThemeButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  position: absolute;
+  top: 32px;
+  right: 100px;
+  cursor: pointer;
+  width: 64px;
+  height: 64px;
+  background-color: ${({ theme }) => theme.neutral.c2};
+`;
