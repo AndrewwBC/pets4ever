@@ -40,13 +40,13 @@ function Update() {
     }
   }
 
-  // function getErrorByFieldname(field: string) {
-  //   const error = updateResponseError.find(
-  //     (error) => error.fieldName === field
-  //   )?.message;
+  function getErrorByFieldname(field: string) {
+    const error = updateResponseError.find(
+      (error) => error.fieldName === field
+    )?.message;
 
-  //   return error;
-  // }
+    return error;
+  }
 
   return (
     <UpdateSection>
@@ -54,21 +54,21 @@ function Update() {
       <SectionTitle>Editar Perfil</SectionTitle>
 
       <form onSubmit={handleUpdateSubmit}>
-        <FormGroup>
-          <label>
-            <p>Nome</p>
-            <Input
-              type="text"
-              value={userData.name}
-              placeholder="Edite o seu nome"
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setUserData((prevState) => ({
-                  ...prevState,
-                  name: e.target.value,
-                }))
-              }
-            />
-          </label>
+        <FormGroup
+          label="Nome completo"
+          error={getErrorByFieldname("fullname")}
+        >
+          <Input
+            type="text"
+            value={userData.name}
+            placeholder="Edite o seu nome"
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setUserData((prevState) => ({
+                ...prevState,
+                name: e.target.value,
+              }))
+            }
+          />
         </FormGroup>
 
         <Button size="low" type="submit" label="Editar Perfil" />

@@ -36,10 +36,8 @@ export default function ForgotPassword() {
       const request = await axios.post(
         `${import.meta.env.VITE_API}/email/send/${email}`
       );
-      const response = request.data;
-    } catch (error) {
-      console.log(error);
-    }
+      return request.data;
+    } catch (error) {}
   }
 
   return (

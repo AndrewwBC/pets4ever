@@ -56,10 +56,11 @@ export async function uploadFile(
     const r = await API.post(`/post`, formData);
 
     const response = r.data;
-    setIsLoading({
-      step: "Posted",
-      isLoading: true,
-    });
+    if (response)
+      setIsLoading({
+        step: "Posted",
+        isLoading: true,
+      });
   } catch (err) {
     if (err instanceof AxiosError) {
     }
