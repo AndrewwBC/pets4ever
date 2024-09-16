@@ -20,6 +20,7 @@ export const Container = styled.div`
     justify-content: center;
     flex-direction: row;
     gap: 8px;
+    cursor: pointer;
 
     p {
       font-weight: 700;
