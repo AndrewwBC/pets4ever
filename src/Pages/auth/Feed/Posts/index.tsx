@@ -11,6 +11,7 @@ import NoPosts from "./components/NoPosts";
 import { useUser } from "../../../../context/UserProvider";
 import ListOfUserModal from "../../components/ListOfUserModal";
 import POST_API from "../../../../api/post/POST_API";
+import { timeSince } from "../../../../utils/timeSince";
 
 interface PostsProps {
   posts: FeedPostProps[];
@@ -110,7 +111,7 @@ export default function Posts({ posts, api }: PostsProps) {
                   />
 
                   <div className="createdAt">
-                    <small>{item.creationDate}</small>
+                    <small>{timeSince(item.creationDate)}</small>
                   </div>
                 </div>
                 <QuantityOfLikes

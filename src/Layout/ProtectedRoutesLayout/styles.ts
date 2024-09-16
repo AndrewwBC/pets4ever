@@ -49,6 +49,9 @@ export const SideMenu = styled.div`
   background: ${({ theme }) => theme.bg};
   border-right: 1px solid ${({ theme }) => theme.neutral.c5};
   position: fixed;
+  border-radius: 0px;
+
+  box-shadow: 2px 2px 6px #d0d0d0, -5px -5px 1px #f0f0f0;
 
   z-index: 999;
   top: 0;

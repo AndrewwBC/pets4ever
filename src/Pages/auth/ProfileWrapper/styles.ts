@@ -53,6 +53,7 @@ export const Content = styled.section`
 
         img {
           border-radius: 9999px;
+          cursor: pointer;
         }
 
         span {
