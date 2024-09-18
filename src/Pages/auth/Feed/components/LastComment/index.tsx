@@ -1,4 +1,4 @@
-import { Comment } from "../../../ProfileWrapper/components/ProfileFeed/types";
+import { Comment } from "../../../../../types/comment";
 import { Container } from "./styles";
 import { Link } from "react-router-dom";
 
