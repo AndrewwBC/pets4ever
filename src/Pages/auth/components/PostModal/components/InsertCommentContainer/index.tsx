@@ -1,10 +1,9 @@
 import { ChangeEvent, useState } from "react";
 
-import axios, { AxiosError } from "axios";
-
 import { VscSend } from "react-icons/vsc";
 import { Input } from "../../../../../../components/input";
 import { useUser } from "../../../../../../context/UserProvider";
+import COMMENT_API from "../../../../../../api/comment/COMMENT_API";
 
 interface InsertCommentPostModalProps {
   retrieveNewComments: () => any;
@@ -15,26 +14,24 @@ function InsertCommentPostModal({
   retrieveNewComments,
   postId,
 }: InsertCommentPostModalProps) {
-  const [commentData, setCommentData] = useState({
-    comment: "",
-    postId: "",
-    userId: "",
-  });
+  const [comment, setComment] = useState("");
   const { user } = useUser();
+
   async function handleSendComment() {
-    commentData.userId = user?.userId!;
-    commentData.postId = postId;
+    const userId = user?.userId;
+
+    const data = {
+      userId: userId,
+      postId: postId,
+      comment,
+    };
 
     try {
-      const request = await axios.post(
-        `${import.meta.env.VITE_API}/api/v1/comment/`,
-        commentData
-      );
-
-      if (request) retrieveNewComments();
+      await COMMENT_API.comment(data);
+      retrieveNewComments();
     } catch (error) {
-      if (error instanceof AxiosError) {
-      }
+    } finally {
+      setComment("");
     }
   }
 
@@ -44,12 +41,9 @@ function InsertCommentPostModal({
         id="inputComment"
         placeholder="Insira um comentário..."
         onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
-          setCommentData({
-            comment: target.value,
-            postId: "",
-            userId: "",
-          })
+          setComment(target.value)
         }
+        value={comment}
       />
       <VscSend
         onClick={handleSendComment}

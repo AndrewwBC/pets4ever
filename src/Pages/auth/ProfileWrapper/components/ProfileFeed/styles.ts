@@ -2,26 +2,37 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   margin-top: 80px;
-  padding: 0px 40px;
+  padding: 40px;
   width: 100%;
 
   .profileFeedContent {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    display: flex;
+    flex-direction: column;
     align-items: start;
     justify-content: start;
     width: 100%;
+    margin-left: 64px;
 
     gap: 2px;
+  }
+`;
 
-    .eachImg {
-      img {
-        height: 200px;
-        width: 300px;
-        display: block;
-        object-fit: cover;
-        transition: all 0.6s;
-      }
-    }
+export const EachRow = styled.div`
+  display: flex;
+  gap: 4px;
+  align-items: stretch;
+  max-height: 240px;
+  height: 240px;
+  width: 100%;
+`;
+
+export const ImageContainer = styled.div`
+  flex: 1;
+  height: 100%;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 `;

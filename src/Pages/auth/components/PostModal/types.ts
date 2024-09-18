@@ -1,14 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
-import { PostProps } from "../../ProfileWrapper/components/ProfileFeed/types";
-import { FeedPostProps } from "../../Feed/types";
+import { PostProps } from "../../../../types/post";
 
 export interface PostModalProps {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   modalPostData: PostProps | null;
-  setModalPostData: Dispatch<SetStateAction<FeedPostProps | null>>;
+  setModalPostData: Dispatch<SetStateAction<PostProps | null>>;
+  handlePostLikePut: (postId: string) => Promise<void>;
 }
 
-export function isPostProps(obj: any): obj is FeedPostProps {
+export function isPostProps(obj: any): obj is PostProps {
   return (
     typeof obj === "object" &&
     obj !== null &&

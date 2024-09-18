@@ -1,14 +1,9 @@
 import { AxiosError } from "axios";
 import API from "../axiosInstance";
 import MyError from "../user/errors/myError";
-import { FeedPostProps } from "../../Pages/auth/Feed/types";
+import { Comment } from "../../Pages/auth/ProfileWrapper/components/ProfileFeed/types";
 
-interface UsernameAndPostIdProps {
-  username: string;
-  postId: string;
-}
-
-class PostHttpService {
+class COMMENT_API {
   private API = API;
 
   private async handleRequest<T>(
@@ -23,10 +18,17 @@ class PostHttpService {
     }
   }
 
-  public patchPostLike(data: UsernameAndPostIdProps): Promise<FeedPostProps> {
-    return this.handleRequest<FeedPostProps>(
-      () => this.API.patch("/post/postlike", data),
-      "PATCH_POST_LIKE"
+  public comment(data: any): Promise<any> {
+    return this.handleRequest(
+      () => this.API.post("/comment/", data),
+      "POST_COMMENT_ERROR"
+    );
+  }
+
+  public getComments(postId: string): Promise<Comment[]> {
+    return this.handleRequest<Comment[]>(
+      () => this.API.get(`/comment/${postId}`),
+      "GET_COMMENTS_ERROR"
     );
   }
 
@@ -42,4 +44,4 @@ class PostHttpService {
   }
 }
 
-export default new PostHttpService();
+export default new COMMENT_API();

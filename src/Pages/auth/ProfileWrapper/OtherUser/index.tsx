@@ -1,10 +1,11 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import { Container, Content } from "../../ProfileWrapper/styles";
-import { UserProps } from "../../../../api/user/types/profileResponse";
+
 import QuantityOfPostFollowersAndFollowing from "../components/QuantityOfPostFollowersAndFollowing";
 import FollowOrUnfollow from "../components/FollowOrUnfollow";
 import ProfileFeed from "../components/ProfileFeed";
 import USER_API from "../../../../api/user/USER_API";
+import { UserProps } from "../../../../types/user";
 
 interface OtherUserProps {
   username: string;

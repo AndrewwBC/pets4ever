@@ -1,9 +1,5 @@
-export interface Comment {
-  comment: string;
-  userId: string;
-  username: string;
-  profileImageUrl: string;
-}
+import { Comment } from "./comment";
+import { ListOfUserProps } from "./listOfUsers";
 
 export interface PostProps {
   creationDate: string;
@@ -14,6 +10,9 @@ export interface PostProps {
   userId: string;
   profileImgUrl: string;
   comments: Comment[];
+  listOfLikes: ListOfUserProps[];
+  userLikedThisPost: boolean;
+  quantityOfLikes: number;
 }
 
 export interface PostArrayProps {

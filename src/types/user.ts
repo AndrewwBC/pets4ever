@@ -1,4 +1,4 @@
-import { FeedPostProps } from "../../../Pages/auth/Feed/types";
+import { PostProps } from "./post";
 
 export interface UsernameAndProfileImgUrlProps {
   username: string;
@@ -24,7 +24,7 @@ export interface UserProps {
   followers: FollowersProps;
   following: FollowingProps;
   userPostsAndQuantityOfPosts: {
-    posts: FeedPostProps[];
+    posts: PostProps[];
     quantity: number;
   };
 }
