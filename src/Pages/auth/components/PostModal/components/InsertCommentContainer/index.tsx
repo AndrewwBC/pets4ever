@@ -4,6 +4,8 @@ import { VscSend } from "react-icons/vsc";
 import { Input } from "../../../../../../components/input";
 import { useUser } from "../../../../../../context/UserProvider";
 import COMMENT_API from "../../../../../../api/comment/COMMENT_API";
+import { SendCommentButton } from "./styles";
+import FormGroup from "../../../../../../components/FormGroup";
 
 interface InsertCommentPostModalProps {
   retrieveNewComments: () => any;
@@ -16,8 +18,14 @@ function InsertCommentPostModal({
 }: InsertCommentPostModalProps) {
   const [comment, setComment] = useState("");
   const { user } = useUser();
+  const [commentError, setCommentError] = useState("");
 
   async function handleSendComment() {
+    if (comment.length < 1) {
+      setCommentError("O comentário não pode ser vázio.");
+      return;
+    }
+
     const userId = user?.userId;
 
     const data = {
@@ -37,19 +45,25 @@ function InsertCommentPostModal({
 
   return (
     <div className="insertCommentContainer">
-      <Input
-        id="inputComment"
-        placeholder="Insira um comentário..."
-        onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
-          setComment(target.value)
-        }
-        value={comment}
-      />
-      <VscSend
-        onClick={handleSendComment}
-        style={{ cursor: "pointer" }}
-        size={26}
-      />
+      <FormGroup error={commentError}>
+        <Input
+          id="inputComment"
+          placeholder="Insira um comentário..."
+          onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
+            setCommentError("");
+            setComment(target.value);
+          }}
+          value={comment}
+        />
+      </FormGroup>
+
+      <SendCommentButton>
+        <VscSend
+          onClick={handleSendComment}
+          style={{ cursor: "pointer" }}
+          size={26}
+        />
+      </SendCommentButton>
     </div>
   );
 }

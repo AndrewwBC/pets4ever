@@ -10,12 +10,18 @@ export const Modal = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
+  z-index: 999;
 
-  /* @media (max-width: 768px) {
-    padding-top: 64px;
+  padding: 240px;
+
+  @media (max-width: 1200px) {
+    padding: 60px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 12px;
     align-items: start;
-  } */
+  }
 `;
 
 export const Content = styled.section`
@@ -23,20 +29,13 @@ export const Content = styled.section`
   grid-template-columns: 1fr 1fr;
   align-self: center;
   width: 100%;
-  padding: 180px;
   transition: all 1s;
-  padding: 240px;
-
-  @media (max-width: 1200px) {
-    padding: 40px;
-  }
 
   @media (max-width: 768px) {
     display: flex;
     align-self: center;
     flex-direction: column;
     justify-content: center;
-    padding: 8px;
   }
 
   .imageContainer {
@@ -76,7 +75,7 @@ export const Content = styled.section`
     grid-template-rows: auto 60vh auto;
 
     @media (max-width: 768px) {
-      grid-template-rows: auto 30vh auto;
+      grid-template-rows: auto 20vh auto;
       border-bottom-right-radius: 8px;
       border-bottom-left-radius: 8px;
       border-top-right-radius: 0px;
@@ -183,7 +182,7 @@ export const Content = styled.section`
     width: 100%;
     margin-top: 12px;
 
-    input {
+    div {
       width: 100%;
     }
   }
