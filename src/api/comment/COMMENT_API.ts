@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import API from "../axiosInstance";
 import MyError from "../user/errors/myError";
-import { Comment } from "../../Pages/auth/ProfileWrapper/components/ProfileFeed/types";
+import { Comment } from "../../types/comment";
 
 class COMMENT_API {
   private API = API;

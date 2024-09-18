@@ -1,8 +1,8 @@
-import { FeedPostProps } from "../../../Feed/types";
+import { PostProps } from "../../../../../types/post";
 import { Container, EachRow, ImageContainer } from "./styles";
 
 interface ProfileFeedProps {
-  posts: FeedPostProps[];
+  posts: PostProps[];
 }
 
 function ProfileFeed({ posts }: ProfileFeedProps) {
@@ -11,12 +11,12 @@ function ProfileFeed({ posts }: ProfileFeedProps) {
   }
 
   interface GroupOf3PostsProps {
-    group: FeedPostProps[];
+    group: PostProps[];
   }
 
   if (posts) {
     let aux = 0;
-    let group: FeedPostProps[] = [];
+    let group: PostProps[] = [];
     let groupsOf3posts: GroupOf3PostsProps[] = [];
 
     posts.forEach((post: any) => {

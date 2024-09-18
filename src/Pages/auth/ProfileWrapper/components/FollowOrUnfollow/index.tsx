@@ -1,6 +1,6 @@
-import { FollowersProps } from "../../../../../api/user/types/profileResponse";
 import USER_API from "../../../../../api/user/USER_API";
 import { useUser } from "../../../../../context/UserProvider";
+import { FollowersProps } from "../../../../../types/user";
 import { PurpleButton } from "./styles";
 
 interface FollowOrUnfollow {

@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import API from "../axiosInstance";
 import MyError from "../user/errors/myError";
-import { FeedPostProps } from "../../Pages/auth/Feed/types";
+import { PostProps } from "../../types/post";
 
 interface UsernameAndPostIdProps {
   username: string;
@@ -23,8 +23,8 @@ class PostHttpService {
     }
   }
 
-  public patchPostLike(data: UsernameAndPostIdProps): Promise<FeedPostProps> {
-    return this.handleRequest<FeedPostProps>(
+  public patchPostLike(data: UsernameAndPostIdProps): Promise<PostProps> {
+    return this.handleRequest<PostProps>(
       () => this.API.patch("/post/postlike", data),
       "PATCH_POST_LIKE"
     );
