@@ -51,7 +51,7 @@ export const SideMenu = styled.div`
   position: fixed;
   border-radius: 0px;
 
-  box-shadow: 2px 2px 6px #d0d0d0, -5px -5px 1px #f0f0f0;
+  box-shadow: ${({ theme }) => theme.boxShadowStyle};
 
   z-index: 999;
   top: 0;

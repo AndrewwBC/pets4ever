@@ -24,11 +24,6 @@ const PostModal = ({
     };
   }, [modalPostData]);
 
-  function handleCloseModal() {
-    setModalPostData(null);
-    setShowModal(false);
-  }
-
   async function retrieveNewComments() {
     try {
       const comments = await COMMENT_API.getComments(modalPostData?.postId!);
@@ -40,8 +35,11 @@ const PostModal = ({
   }
 
   window.addEventListener("click", (e: any) => {
-    if ((e.target as HTMLElement)?.id === "container") {
-      handleCloseModal();
+    console.log(e);
+    if (e.target?.id === "container") {
+      console.log("entrou");
+      setShowModal(false);
+      setModalPostData(null);
     }
   });
 

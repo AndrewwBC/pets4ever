@@ -10,7 +10,7 @@ function IconsLikeCommentSharePostModal({ postId, userLikedThisPost }: any) {
   const { user } = useUser();
 
   function handleCommentFocus() {
-    document.getElementById("inputComment")?.focus;
+    document.getElementById("inputComment")?.focus();
   }
 
   useEffect(() => {}, [userLikedThisPost]);

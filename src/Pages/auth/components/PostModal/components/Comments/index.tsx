@@ -9,7 +9,7 @@ function CommentsPostModal({ comments }: CommentsPostModalProps) {
     return (
       <>
         <div>
-          <p>Sem comentários.</p>
+          <p>Seja o primeiro a comentar.</p>
         </div>
       </>
     );

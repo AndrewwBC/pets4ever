@@ -46,7 +46,7 @@ export const lightTheme = {
     medium: "#e6bb52",
     dark: "#ffa500",
   },
-  boxShadowStyle: "1px 2px 8px #999, -1px -6px 12px #fff}",
+  boxShadowStyle: "1px 2px 6px #d0d0d0, -5px -5px 1px #f0f0f0",
 };
 
 export const darkTheme = {
