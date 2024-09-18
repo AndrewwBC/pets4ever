@@ -1,9 +1,10 @@
 import { memo, useState } from "react";
 import { Container, Content } from "../../ProfileWrapper/styles";
-import { UserProps } from "../../../../api/user/types/profileResponse";
+
 import PostProfilePicture from "../components/PostProfilePicture";
 import QuantityOfPostFollowersAndFollowing from "../components/QuantityOfPostFollowersAndFollowing";
 import ProfileFeed from "../components/ProfileFeed";
+import { UserProps } from "../../../../types/user";
 
 interface Props {
   user: UserProps;

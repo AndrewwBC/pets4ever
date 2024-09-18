@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { Container, Content } from "./styles";
 import Stories from "./components/Stories";
 import { getPosts } from "./api";
-import { FeedPostProps } from "./types";
+
 import { FullDogLoader } from "../../../components/FullDogLoader";
 import Posts from "./Posts";
 import { useUser } from "../../../context/UserProvider";
+import { PostProps } from "../../../types/post";
 
 export const Feed = () => {
-  const [posts, setPosts] = useState<FeedPostProps[]>();
+  const [posts, setPosts] = useState<PostProps[]>();
   const { user } = useUser();
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export const Feed = () => {
       <Container>
         <Content>
           <Stories />
-          <Posts api={api} posts={posts} />
+          <Posts posts={posts} setPosts={setPosts} />
         </Content>
       </Container>
     );

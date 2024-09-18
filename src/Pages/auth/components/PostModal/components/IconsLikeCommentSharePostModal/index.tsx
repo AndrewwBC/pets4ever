@@ -1,25 +1,65 @@
-import { VscComment, VscHeart, VscSend } from "react-icons/vsc"
+import { VscComment, VscHeart, VscHeartFilled, VscSend } from "react-icons/vsc";
+import POST_API from "../../../../../../api/post/POST_API";
+import { useUser } from "../../../../../../context/UserProvider";
+import { useEffect, useState } from "react";
 
-function IconsLikeCommentSharePostModal() {
+function IconsLikeCommentSharePostModal({ postId, userLikedThisPost }: any) {
+  const [likeLoading, setLikeLoading] = useState(false);
+  const [userLiked, setUserLiked] = useState(userLikedThisPost);
+
+  const { user } = useUser();
 
   function handleCommentFocus() {
-    const input = document.getElementById("inputComment");
-
-    input?.focus();
+    document.getElementById("inputComment")?.focus;
   }
 
+  useEffect(() => {}, [userLikedThisPost]);
 
-    return (
-        <div className="icons">
-        <VscHeart style={{ cursor: "pointer" }} size={26} />
-        <VscComment
-          onClick={() => handleCommentFocus()}
+  async function handlePostLikePutModal(postId: string) {
+    const data = {
+      username: user!.username,
+      postId,
+    };
+
+    if (!likeLoading) {
+      try {
+        setLikeLoading(true);
+        const newPost = await POST_API.patchPostLike(data);
+
+        if (newPost) {
+          setUserLiked(newPost.userLikedThisPost);
+        }
+      } catch (err) {
+      } finally {
+        setLikeLoading(false);
+      }
+    }
+  }
+
+  return (
+    <div className="icons">
+      {!userLiked ? (
+        <VscHeart
+          onClick={() => handlePostLikePutModal(postId)}
           style={{ cursor: "pointer" }}
           size={26}
         />
-        <VscSend style={{ cursor: "pointer" }} size={26} />
-      </div>
-    )
+      ) : (
+        <VscHeartFilled
+          onClick={() => handlePostLikePutModal(postId)}
+          style={{ cursor: "pointer" }}
+          size={26}
+          color="red"
+        />
+      )}
+      <VscComment
+        onClick={() => handleCommentFocus()}
+        style={{ cursor: "pointer" }}
+        size={26}
+      />
+      <VscSend style={{ cursor: "pointer" }} size={26} />
+    </div>
+  );
 }
 
-export default IconsLikeCommentSharePostModal
+export default IconsLikeCommentSharePostModal;

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { UsernameAndProfileImgUrlProps } from "../../../../../api/user/types/profileResponse";
 import { Toast } from "../../../../../components/Toast";
 import { Container } from "./styles";
 import { QuantityOfPostFollowersAndFollowingProps } from "./types";
 import ListOfUserModal from "../../../components/ListOfUserModal";
 import { ListOfUserStateProps } from "../../../components/ListOfUserModal/types";
+import { UsernameAndProfileImgUrlProps } from "../../../../../types/user";
 
 function QuantityOfPostFollowersAndFollowing({
   postQuantity,

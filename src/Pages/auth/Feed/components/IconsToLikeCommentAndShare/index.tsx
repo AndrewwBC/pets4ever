@@ -4,6 +4,7 @@ export default function IconsToLikeCommentAndShare({
   userLikedThisPost,
   postId,
   handlePostLikePut,
+  handlePostModal,
 }: any) {
   return (
     <div className="icons">
@@ -21,7 +22,11 @@ export default function IconsToLikeCommentAndShare({
           color="red"
         />
       )}
-      <VscComment style={{ cursor: "pointer" }} size={26} />
+      <VscComment
+        onClick={() => handlePostModal(postId)}
+        style={{ cursor: "pointer" }}
+        size={26}
+      />
       <VscSend style={{ cursor: "pointer" }} size={26} />
     </div>
   );

@@ -1,9 +1,9 @@
 import { AxiosError } from "axios";
 import MyError from "./errors/myError";
 import { SignInResponse, SignUpProps } from "./types/types";
-import { UserProps } from "./types/profileResponse";
 import { UpdateDataProps } from "./types/update";
 import API from "../axiosInstance";
+import { UserProps } from "../../types/user";
 
 class UserHttpService {
   private API = API;

@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from "react";
-import { UserProps } from "../api/user/types/profileResponse";
 import USER_API from "../api/user/USER_API";
 import { FullDogLoader } from "../components/FullDogLoader";
+import { UserProps } from "../types/user";
 
 interface UserContextProps {
   user: UserProps | null;

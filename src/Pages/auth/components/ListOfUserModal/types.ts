@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { UsernameAndProfileImgUrlProps } from "../../../../api/user/types/profileResponse";
+import { UsernameAndProfileImgUrlProps } from "../../../../types/user";
 
 export interface ListOfUserProps {
   listOfUsers: {

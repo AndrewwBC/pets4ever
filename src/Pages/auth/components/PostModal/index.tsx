@@ -1,24 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import axios from "axios";
-
-import { Comment } from "../../ProfileWrapper/components/ProfileFeed/types";
 import { PostModalProps } from "./types";
 import { createPortal } from "react-dom";
 import { Content, Modal } from "./styles";
-
 import CommentsPostModal from "./components/Comments";
 import IconsLikeCommentSharePostModal from "./components/IconsLikeCommentSharePostModal";
 import InsertCommentPostModal from "./components/InsertCommentContainer";
+import { timeSince } from "../../../../utils/timeSince";
+import COMMENT_API from "../../../../api/comment/COMMENT_API";
+import { Comment } from "../../../../types/comment";
 
 const PostModal = ({
   setShowModal,
   modalPostData,
   setModalPostData,
 }: PostModalProps) => {
-  const [comments, setComments] = useState<Comment[]>();
+  const [comments, setComments] = useState<Comment[]>(modalPostData?.comments!);
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
 
-  const token = localStorage.getItem("token");
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [modalPostData]);
 
   function handleCloseModal() {
     setModalPostData(null);
@@ -27,17 +31,10 @@ const PostModal = ({
 
   async function retrieveNewComments() {
     try {
-      const request = await axios.get(
-        `${import.meta.env.VITE_API}/api/v1/comment/${modalPostData?.postId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const comments = await COMMENT_API.getComments(modalPostData?.postId!);
 
-      if (request) {
-        setComments(request.data);
+      if (comments) {
+        setComments(comments);
       }
     } catch (err) {}
   }
@@ -52,33 +49,31 @@ const PostModal = ({
     return createPortal(
       <Modal id="container">
         <Content>
-          <img
-            className="feedPhoto"
-            src={`https://pets4ever.s3.us-east-2.amazonaws.com/${modalPostData.imageUrl}`}
-            alt=""
-          />
+          <div className="imageContainer">
+            <img
+              src={`https://pets4ever.s3.us-east-2.amazonaws.com/${modalPostData.imageUrl}`}
+              alt=""
+            />
+          </div>
 
           <div className="postInfo">
-            <div className="closeModal" onClick={handleCloseModal}>
-              <p className="x">x</p>
-              <p className="fechar">Fechar</p>
-            </div>
             <div className="nameDescriptionAndCreatedAt">
               <div className="nameAndCreatedAt">
                 <p>@{modalPostData.username.toLowerCase()}</p>
-                <small>{modalPostData.creationDate}</small>
+                <small>{timeSince(modalPostData.creationDate)}</small>
               </div>
 
-              <div>
-                <small className="description">
-                  {modalPostData.description}
-                </small>
+              <div className="description">
+                <small>{modalPostData.description}</small>
               </div>
             </div>
 
             <CommentsPostModal comments={comments} />
 
-            <IconsLikeCommentSharePostModal />
+            <IconsLikeCommentSharePostModal
+              postId={modalPostData.postId}
+              userLikedThisPost={modalPostData.userLikedThisPost}
+            />
 
             <InsertCommentPostModal
               postId={modalPostData?.postId}

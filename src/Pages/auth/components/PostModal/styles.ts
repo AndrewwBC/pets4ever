@@ -12,34 +12,60 @@ export const Modal = styled.main`
   justify-content: center;
   z-index: 99999;
 
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     padding-top: 64px;
     align-items: start;
-  }
+  } */
 `;
 
 export const Content = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-self: center;
+  width: 100%;
+  padding: 180px;
+  transition: all 1s;
+  padding: 240px;
 
-  padding: 200px 400px;
-
-  @media (max-width: 768px) {
-    height: 100vh;
-    padding: 0px;
-    grid-template-columns: 1fr;
+  @media (max-width: 1200px) {
+    padding: 40px;
   }
 
-  .feedPhoto {
-    max-width: 100%;
-    max-height: 100%;
-    border-bottom-left-radius: 8px;
-    border-top-left-radius: 8px;
-    object-fit: cover;
-    @media (max-width: 764px) {
-      border-radius: 0px;
-      border-top-right-radius: 8px;
+  @media (max-width: 768px) {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px;
+  }
+
+  .imageContainer {
+    width: 100%;
+
+    padding-bottom: 125%;
+    position: relative;
+
+    @media (max-width: 768px) {
+      padding-bottom: 75%;
+    }
+
+    img {
+      position: absolute;
       border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+
+      @media (max-width: 768px) {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+      }
+
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
@@ -47,12 +73,27 @@ export const Content = styled.section`
     background-color: ${({ theme }) => theme.bg};
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 60vh auto;
+
+    @media (max-width: 768px) {
+      grid-template-rows: auto 30vh auto;
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+      border-top-right-radius: 0px;
+    }
+
     padding: 16px;
     padding-top: 28px;
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
     position: relative;
+
+    .description {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 12px;
+    }
 
     .commentContainer {
       background-color: ${({ theme }) => theme.bg};
@@ -63,12 +104,10 @@ export const Content = styled.section`
       gap: 8px;
       margin: 12px 0px;
       overflow-y: scroll;
-      max-height: 260px;
 
       @media (max-width: 768px) {
-        height: 48px;
+        max-height: 100%;
         padding-top: 12px;
-        overflow-y: scroll;
       }
 
       .comment {
@@ -91,34 +130,6 @@ export const Content = styled.section`
             border-radius: 999px;
             object-fit: cover;
           }
-        }
-      }
-    }
-
-    .closeModal {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      background-color: red;
-      font-size: 14px;
-      font-weight: 700;
-      color: #f9f9f9;
-      right: 0;
-      left: 0;
-      cursor: pointer;
-
-      .fechar {
-        display: none;
-      }
-
-      &:hover {
-        .x {
-          display: none;
-        }
-
-        .fechar {
-          display: block;
-          font-size: 16px;
         }
       }
     }
@@ -158,16 +169,22 @@ export const Content = styled.section`
   .icons {
     display: flex;
     gap: 12px;
-    align-items: center;
+    align-items: end;
     justify-content: flex-start;
     color: ${({ theme }) => theme.neutral.c9};
   }
 
   .insertCommentContainer {
-    gap: 12px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    width: 100%;
     margin-top: 12px;
+
+    input {
+      width: 100%;
+    }
   }
 `;

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { PostsContainer } from "./styles";
-import { FeedPostProps } from "../types";
+
 import PostModal from "../../components/PostModal";
 import { Link } from "react-router-dom";
 import IconsToLikeCommentAndShare from "../components/IconsToLikeCommentAndShare";
@@ -12,13 +12,15 @@ import { useUser } from "../../../../context/UserProvider";
 import ListOfUserModal from "../../components/ListOfUserModal";
 import POST_API from "../../../../api/post/POST_API";
 import { timeSince } from "../../../../utils/timeSince";
+import { PostProps } from "../../../../types/post";
 
 interface PostsProps {
-  posts: FeedPostProps[];
-  api: () => Promise<any>;
+  posts: PostProps[];
+
+  setPosts: Dispatch<SetStateAction<PostProps[] | undefined>>;
 }
 
-export default function Posts({ posts, api }: PostsProps) {
+export default function Posts({ posts, setPosts }: PostsProps) {
   const [listOfLikes, setListOfLikesModal] = useState<ListOfUserStateProps>({
     modalState: false,
     data: undefined,
@@ -26,10 +28,8 @@ export default function Posts({ posts, api }: PostsProps) {
 
   const { user } = useUser();
   const [showModal, setShowModal] = useState(false);
-  const [modalPostData, setModalPostData] = useState<FeedPostProps | null>(
-    null
-  );
-
+  const [modalPostData, setModalPostData] = useState<PostProps | null>(null);
+  console.log(posts);
   const [likeLoading, setLikeLoading] = useState(false);
 
   function handlePostModal(postId: string) {
@@ -46,8 +46,15 @@ export default function Posts({ posts, api }: PostsProps) {
     if (!likeLoading) {
       try {
         setLikeLoading(true);
-        await POST_API.patchPostLike(data);
-        await api();
+        const updatedPost = await POST_API.patchPostLike(data);
+
+        const newPosts = posts.map((post) =>
+          post.postId === updatedPost.postId
+            ? (post = updatedPost)
+            : (post = post)
+        );
+
+        setPosts(newPosts);
       } catch (err) {
       } finally {
         setLikeLoading(false);
@@ -71,6 +78,7 @@ export default function Posts({ posts, api }: PostsProps) {
             setShowModal={setShowModal}
             modalPostData={modalPostData}
             setModalPostData={setModalPostData}
+            handlePostLikePut={handlePostLikePut}
           />
         )}
 
@@ -108,6 +116,7 @@ export default function Posts({ posts, api }: PostsProps) {
                     postId={item.postId}
                     userLikedThisPost={item.userLikedThisPost}
                     handlePostLikePut={handlePostLikePut}
+                    handlePostModal={handlePostModal}
                   />
 
                   <div className="createdAt">
