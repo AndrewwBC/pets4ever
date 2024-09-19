@@ -6,6 +6,7 @@ import FollowOrUnfollow from "../components/FollowOrUnfollow";
 import ProfileFeed from "../components/ProfileFeed";
 import USER_API from "../../../../api/user/USER_API";
 import { UserProps } from "../../../../types/user";
+import { FollowButtonAndNumbers, FullnameNumbersAndButton } from "./styles";
 
 interface OtherUserProps {
   username: string;
@@ -43,18 +44,23 @@ function OtherUser({ username }: OtherUserProps) {
                 <span className="username">{user?.username}</span>
               </div>
 
-              <div className="numbersAndButton">
-                <QuantityOfPostFollowersAndFollowing
-                  postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
-                  followers={user?.followers}
-                  following={user?.following}
-                />
-                <FollowOrUnfollow
-                  getData={getData}
-                  usernameOfUserToBeFollowed={user.username}
-                  userFollowersList={user.followers}
-                />
-              </div>
+              <FullnameNumbersAndButton>
+                <div className="fullname">
+                  <p>{user.fullname}</p>
+                </div>
+                <FollowButtonAndNumbers>
+                  <QuantityOfPostFollowersAndFollowing
+                    postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
+                    followers={user?.followers}
+                    following={user?.following}
+                  />
+                  <FollowOrUnfollow
+                    getData={getData}
+                    usernameOfUserToBeFollowed={user.username}
+                    userFollowersList={user.followers}
+                  />
+                </FollowButtonAndNumbers>
+              </FullnameNumbersAndButton>
             </div>
           </div>
 

@@ -62,7 +62,19 @@ export const Content = styled.section`
         }
       }
 
-      .numbersAndButton {
+      .fullnameAndNumbers {
+        .fullnameAndButtonToEditPerfil {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .fullname {
+          color: ${({ theme }) => theme.neutral.c9};
+          font-weight: 400;
+          font-size: 18px;
+        }
+
         display: flex;
         flex-direction: column;
         gap: 24px;

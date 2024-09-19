@@ -1,4 +1,5 @@
 import { PostProps } from "../../../../../types/post";
+import NoPosts from "../../../Feed/Posts/components/NoPosts";
 import { Container, EachRow, ImageContainer } from "./styles";
 
 interface ProfileFeedProps {
@@ -37,23 +38,30 @@ function ProfileFeed({ posts }: ProfileFeedProps) {
     return (
       <Container>
         <div className="profileFeedContent">
-          {groupsOf3posts.map(({ group }) => (
-            <EachRow>
-              {group.map((post, index) => (
-                <ImageContainer
-                  className="imageContainer"
-                  key={index}
-                  onClick={() => handlePostModal(post.postId)}
-                >
-                  <img
-                    className="feedPhoto"
-                    src={`https://pets4ever.s3.us-east-2.amazonaws.com/${post.imageUrl}`}
-                    alt=""
-                  />
-                </ImageContainer>
-              ))}
-            </EachRow>
-          ))}
+          {groupsOf3posts.length > 0 ? (
+            groupsOf3posts.map(({ group }) => (
+              <EachRow>
+                {group.map((post, index) => (
+                  <ImageContainer
+                    className="imageContainer"
+                    key={index}
+                    onClick={() => handlePostModal(post.postId)}
+                  >
+                    <img
+                      className="feedPhoto"
+                      src={`https://pets4ever.s3.us-east-2.amazonaws.com/${post.imageUrl}`}
+                      alt=""
+                    />
+                  </ImageContainer>
+                ))}
+              </EachRow>
+            ))
+          ) : (
+            <NoPosts
+              small="Você ainda não fez nenhuma postagem."
+              paragraph="Comece agora!"
+            />
+          )}
         </div>
       </Container>
     );

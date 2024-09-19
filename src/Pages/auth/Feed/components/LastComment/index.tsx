@@ -14,7 +14,7 @@ export default function LastComment({ comments }: LastCommentProps) {
     return (
       <Container>
         <div className="content">
-          <Link to={`/profile/${lastComment.userId}`}>
+          <Link to={`/${lastComment.username}`}>
             <p>{lastComment?.username}</p>
           </Link>
           <p>comentou: {lastComment?.comment}</p>

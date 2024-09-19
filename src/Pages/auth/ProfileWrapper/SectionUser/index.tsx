@@ -5,6 +5,8 @@ import PostProfilePicture from "../components/PostProfilePicture";
 import QuantityOfPostFollowersAndFollowing from "../components/QuantityOfPostFollowersAndFollowing";
 import ProfileFeed from "../components/ProfileFeed";
 import { UserProps } from "../../../../types/user";
+import { PurpleButton } from "../components/FollowOrUnfollow/styles";
+import { Link } from "react-router-dom";
 
 interface Props {
   user: UserProps;
@@ -17,6 +19,8 @@ const UserProfile = ({ user }: Props) => {
   function updateProfileImg() {
     setPostProfilePictureModal(!postProfilePictureModal);
   }
+
+  console.log(user);
 
   const src = user?.profileImgUrl
     ? `https://pets4ever.s3.us-east-2.amazonaws.com/${user?.profileImgUrl}`
@@ -43,7 +47,13 @@ const UserProfile = ({ user }: Props) => {
                 <span className="username">{user?.username}</span>
               </div>
 
-              <div className="numbersAndButton">
+              <div className="fullnameAndNumbers">
+                <div className="fullnameAndButtonToEditPerfil">
+                  <p className="fullname">{user?.fullname}</p>
+                  <Link to={"/config"}>
+                    <PurpleButton>Editar Perfil</PurpleButton>
+                  </Link>
+                </div>
                 <QuantityOfPostFollowersAndFollowing
                   postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
                   followers={user?.followers}

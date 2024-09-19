@@ -2,8 +2,19 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   margin-top: 80px;
-  padding: 40px;
+  padding: 40px 0px;
   width: 100%;
+  margin-left: 64px;
+  border-top: 1px solid ${({ theme }) => theme.neutral.c4};
+
+  @media (max-width: 1600px) {
+    margin-left: 80px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0px;
+    margin-top: 32px;
+  }
 
   .profileFeedContent {
     display: flex;
@@ -11,7 +22,6 @@ export const Container = styled.section`
     align-items: start;
     justify-content: start;
     width: 100%;
-    margin-left: 64px;
 
     gap: 2px;
   }
