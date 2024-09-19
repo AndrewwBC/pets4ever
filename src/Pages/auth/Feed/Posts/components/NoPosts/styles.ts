@@ -4,6 +4,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.bg};
   margin-bottom: auto;
   flex-grow: 1;
+  align-self: center;
 
   div {
     display: flex;
@@ -16,7 +17,7 @@ export const Container = styled.div`
 
     small {
       font-size: 18px;
-      color: ${({ theme }) => theme.neutral.c6};
+      color: ${({ theme }) => theme.neutral.c7};
       font-weight: 400;
     }
     p {

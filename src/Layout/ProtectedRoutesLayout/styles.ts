@@ -20,8 +20,9 @@ export const Content = styled.section`
     --nav-narrow-width: 72px;
     --nav-medium-width: 244px;
     --nav-wide-width: 335px;
-    @media (max-width: 1920px) {
-      width: calc(100% - var(--nav-wide-width));
+
+    @media (min-width: 1920px) {
+      width: calc(100vw);
     }
 
     @media (min-width: 1264px) and (max-width: 1919px) {

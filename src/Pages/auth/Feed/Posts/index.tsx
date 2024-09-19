@@ -62,7 +62,8 @@ export default function Posts({ posts, setPosts }: PostsProps) {
     }
   }
 
-  if (posts.length < 1) return <NoPosts />;
+  if (posts.length < 1)
+    return <NoPosts small="Não há postagens." paragraph="Seja o primeiro!" />;
 
   if (posts)
     return (

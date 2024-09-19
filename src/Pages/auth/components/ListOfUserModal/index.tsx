@@ -2,21 +2,12 @@ import { createPortal } from "react-dom";
 import { Container } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import { ListOfUserProps } from "./types";
-import { useEffect } from "react";
 
 export default function ListOfUserModal({
   listOfUsers,
   setModal,
 }: ListOfUserProps) {
   const nav = useNavigate();
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [listOfUsers]);
 
   window.addEventListener("click", (e: any) => {
     if (e.target?.id === "container")
@@ -38,7 +29,7 @@ export default function ListOfUserModal({
   return createPortal(
     <Container id="container">
       <div className="content">
-        {listOfUsers.data?.length! > 1 ? (
+        {listOfUsers.data?.length! > 0 ? (
           listOfUsers.data!.map((item) => (
             <Link
               onClick={(e: any) => handleClick(e, item.username)}
