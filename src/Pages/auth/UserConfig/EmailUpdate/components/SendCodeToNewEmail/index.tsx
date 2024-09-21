@@ -10,6 +10,7 @@ import { Section } from "./styles";
 import EMAIL_API from "../../../../../../api/email/EMAIL_API";
 import CODE_API from "../../../../../../api/code/CODE_API";
 import { useUser } from "../../../../../../context/UserProvider";
+import { FullDogLoader } from "../../../../../../components/FullDogLoader";
 
 interface StepProps {
   step: "sendEmail" | "verifyCode";
@@ -22,6 +23,7 @@ export default function SendCodeToNewEmail() {
     message: "",
     status: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useUser();
 
@@ -46,6 +48,7 @@ export default function SendCodeToNewEmail() {
     e.preventDefault();
 
     try {
+      setIsLoading(true);
       const response = await EMAIL_API.sendCodeToEmail(email);
 
       if (response) {
@@ -63,6 +66,8 @@ export default function SendCodeToNewEmail() {
         message: err.message,
         status: "error",
       });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -75,6 +80,7 @@ export default function SendCodeToNewEmail() {
 
     e.preventDefault();
     try {
+      setIsLoading(true);
       const response = await CODE_API.validateCode(validateCodeData);
 
       setToast({
@@ -89,12 +95,15 @@ export default function SendCodeToNewEmail() {
         message: err.message,
         status: "error",
       });
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
     <Section>
       {toast.message && <Toast setToast={setToast} toast={toast} />}
+      {isLoading && <FullDogLoader transparent={true} />}
       <SectionTitle>Editar Email</SectionTitle>
       <form>
         <FormGroup label="E-MAIL" error={getError()}>
@@ -102,7 +111,7 @@ export default function SendCodeToNewEmail() {
             type="email"
             disabled={step.step === "verifyCode" ? true : false}
             error={getError()}
-            placeholder={"Insira o seu email."}
+            placeholder={"Insira o novo email."}
             value={email}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleEmailChange(e.target.value)

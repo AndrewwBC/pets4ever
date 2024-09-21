@@ -4,7 +4,6 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import { ImCheckboxChecked } from "react-icons/im";
 import Confetti from "../../../../../components/Confetti";
 import { MyButton } from "../../../../../components/Button/style";
-import { Loader } from "../../../../../components/Loaders/Loading/styles";
 
 interface ValidationImageModalProps {
   isLoadingData: {
@@ -29,7 +28,6 @@ export default function ValidatingImageModal({
     return createPortal(
       <Container>
         <div className="content">
-          <Loader />
           <p>Estamos validando a sua imagem.</p>
         </div>
       </Container>,
@@ -40,7 +38,6 @@ export default function ValidatingImageModal({
     return createPortal(
       <Container>
         <div className="content">
-          <Loader />
           <p style={{ color: "green", fontWeight: 700 }}>
             Sua imagem foi aceita!
           </p>

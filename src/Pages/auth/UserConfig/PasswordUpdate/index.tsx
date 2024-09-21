@@ -63,7 +63,7 @@ export default function PasswordUpdate() {
       <form style={{ display: "flex", flexDirection: "column" }}>
         <FormGroup label="SENHA" error={findPasswordError()}>
           <Input
-            placeholder="Digite a sua senha"
+            placeholder="Digite a sua nova senha"
             onChange={handlePassword}
             type="password"
             onFocus={() => setFocusedPassword(true)}

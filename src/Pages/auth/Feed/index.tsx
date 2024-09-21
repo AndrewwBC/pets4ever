@@ -21,7 +21,7 @@ export const Feed = () => {
     setPosts(posts);
   }
 
-  if (!posts) return <FullDogLoader />;
+  if (!posts) return <FullDogLoader transparent={false} />;
   else
     return (
       <Container>

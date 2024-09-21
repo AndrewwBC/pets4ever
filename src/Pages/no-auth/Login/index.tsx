@@ -70,7 +70,7 @@ export default function Login() {
     return errors[fieldName]?.message;
   }
 
-  if (isLoading) return <FullDogLoader />;
+  if (isLoading) return <FullDogLoader transparent={false} />;
 
   return (
     <Container>

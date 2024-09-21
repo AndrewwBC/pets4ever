@@ -20,6 +20,7 @@ export interface UserProps {
   username: string;
   userId: string;
   email: string;
+  routeTest?: string;
   profileImgUrl: string;
   followers: FollowersProps;
   following: FollowingProps;
