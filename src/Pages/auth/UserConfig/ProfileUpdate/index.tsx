@@ -71,6 +71,23 @@ function Update() {
           />
         </FormGroup>
 
+        <FormGroup
+          label="Nome de usuário"
+          error={getErrorByFieldname("fullname")}
+        >
+          <Input
+            type="text"
+            value={userData.name}
+            placeholder="Novo nome de usuário"
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setUserData((prevState) => ({
+                ...prevState,
+                name: e.target.value,
+              }))
+            }
+          />
+        </FormGroup>
+
         <Button size="low" type="submit" label="Editar Perfil" />
       </form>
     </UpdateSection>

@@ -1,21 +1,20 @@
 import { createPortal } from "react-dom";
-import styled from "styled-components";
 import DogLoader from "./components/DogLoader";
+import { Modal, TransparentModalContainer } from "./styles";
 
-const Modal = styled.div`
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  z-index: 999999;
-  background-color: #fff;
-`;
+interface FullDogLoaderProps {
+  transparent: boolean;
+}
 
-export function FullDogLoader() {
+export function FullDogLoader({ transparent }: FullDogLoaderProps) {
+  if (transparent)
+    return createPortal(
+      <TransparentModalContainer>
+        <DogLoader />
+      </TransparentModalContainer>,
+      document.getElementById("modal")!
+    );
+
   return createPortal(
     <Modal>
       <DogLoader />

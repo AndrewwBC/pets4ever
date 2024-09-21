@@ -1,24 +1,12 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import { AxiosError } from "axios";
+import API from "../axiosInstance";
 
 class EMAIL_API {
-  private token;
-
-  private getApi(): AxiosInstance {
-    const api = axios.create({
-      baseURL: import.meta.env.VITE_API,
-      headers: { Authorization: `Bearer ${this.token}` },
-    });
-    return api;
-  }
-
-  constructor() {
-    const storagedToken = localStorage.getItem("token");
-    if (storagedToken) this.token = storagedToken;
-  }
+  private API = API;
 
   async sendCodeToEmail(email: any): Promise<any> {
     try {
-      const request = await this.getApi().post(
+      const request = await this.API.post(
         `/email/send/updateEmailCode/${email}`
       );
       const response = await request.data;
@@ -33,7 +21,7 @@ class EMAIL_API {
 
   async renewCodeToEmail(email: any): Promise<any> {
     try {
-      const request = await this.getApi().post(
+      const request = await this.API.post(
         `/email/send/renewUpdateEmailCode/${email}`
       );
       const response = await request.data;

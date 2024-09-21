@@ -52,7 +52,7 @@ function UserProvider({ children }: { children: ReactNode }) {
     [user]
   );
 
-  if (isLoading) return <FullDogLoader />;
+  if (isLoading) return <FullDogLoader transparent={false} />;
 
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
