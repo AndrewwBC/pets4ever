@@ -1,7 +1,7 @@
 import USER_API from "../../../../../api/user/USER_API";
+import { PurpleButton } from "../../../../../components/purpleButton";
 import { useUser } from "../../../../../context/UserProvider";
 import { FollowersProps } from "../../../../../types/user";
-import { PurpleButton } from "./styles";
 
 interface FollowOrUnfollow {
   getData: () => Promise<void>;
