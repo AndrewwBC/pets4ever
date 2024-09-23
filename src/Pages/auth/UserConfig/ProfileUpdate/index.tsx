@@ -7,16 +7,20 @@ import { Toast } from "../../../../components/Toast";
 import FormGroup from "../../../../components/FormGroup";
 
 import { SectionTitle } from "../components/sectionTitle";
+import { useUser } from "../../../../context/UserProvider";
 
-function Update() {
+function PatchProfile() {
+  const { user } = useUser();
+
   const [toast, setToast] = useState({
     message: "",
     status: "",
   });
   const [userData, setUserData] = useState({
-    name: "",
+    fullname: "",
+    username: "",
   });
-  const [updateResponseError, setUpdateResponseError] = useState([
+  const [patchResponseError, setPatchResponseError] = useState([
     {
       fieldName: "",
       message: "",
@@ -27,7 +31,7 @@ function Update() {
     e.preventDefault();
 
     try {
-      const response = await userApi.updateName(userData, "");
+      const response = await userApi.patchProfile(userData, user?.userId!);
 
       if (response) {
         setToast({
@@ -36,12 +40,12 @@ function Update() {
         });
       }
     } catch (err: any) {
-      setUpdateResponseError(err.data);
+      setPatchResponseError(err.data);
     }
   }
 
   function getErrorByFieldname(field: string) {
-    const error = updateResponseError.find(
+    const error = patchResponseError.find(
       (error) => error.fieldName === field
     )?.message;
 
@@ -60,12 +64,12 @@ function Update() {
         >
           <Input
             type="text"
-            value={userData.name}
+            value={userData.fullname}
             placeholder="Edite o seu nome"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setUserData((prevState) => ({
                 ...prevState,
-                name: e.target.value,
+                fullname: e.target.value,
               }))
             }
           />
@@ -77,12 +81,12 @@ function Update() {
         >
           <Input
             type="text"
-            value={userData.name}
+            value={userData.username}
             placeholder="Novo nome de usuário"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setUserData((prevState) => ({
                 ...prevState,
-                name: e.target.value,
+                username: e.target.value,
               }))
             }
           />
@@ -94,4 +98,4 @@ function Update() {
   );
 }
 
-export default Update;
+export default PatchProfile;

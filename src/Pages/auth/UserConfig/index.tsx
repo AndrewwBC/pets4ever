@@ -1,12 +1,12 @@
 import { Content } from "./styles";
-import Update from "./ProfileUpdate";
 import PasswordUpdate from "./PasswordUpdate";
 import EmailUpdate from "./EmailUpdate";
+import PatchProfile from "./ProfileUpdate";
 
 const Config = () => {
   return (
     <Content>
-      <Update />
+      <PatchProfile />
       <EmailUpdate />
       <PasswordUpdate />
     </Content>
