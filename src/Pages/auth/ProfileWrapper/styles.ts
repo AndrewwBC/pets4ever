@@ -4,7 +4,7 @@ export const Container = styled.main`
   background-color: ${({ theme }) => theme.bg};
   width: calc(100% - 40px);
   max-width: 1000px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: start;
   justify-content: center;
@@ -46,35 +46,7 @@ export const Content = styled.section`
         gap: 48px;
       }
 
-      .usernameAndProfileImg {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        img {
-          border-radius: 9999px;
-          cursor: pointer;
-        }
-
-        span {
-          font-weight: 500;
-          font-family: "Poppins";
-        }
-      }
-
       .fullnameAndNumbers {
-        .fullnameAndButtonToEditPerfil {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .fullname {
-          color: ${({ theme }) => theme.neutral.c9};
-          font-weight: 400;
-          font-size: 18px;
-        }
-
         display: flex;
         flex-direction: column;
         gap: 24px;

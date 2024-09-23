@@ -1,59 +1,31 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import { Container, Content } from "../../ProfileWrapper/styles";
-
-import PostProfilePicture from "../components/PostProfilePicture";
 import QuantityOfPostFollowersAndFollowing from "../components/QuantityOfPostFollowersAndFollowing";
 import ProfileFeed from "../components/ProfileFeed";
 import { UserProps } from "../../../../types/user";
-import { PurpleButton } from "../components/FollowOrUnfollow/styles";
-import { Link } from "react-router-dom";
+import UsernameAndProfileImg from "../components/UsernameAndProfileImg";
+import FullnameAndButtonToEditProfile from "../components/FullnameAndButtonToEditProfile";
 
 interface Props {
   user: UserProps;
 }
 
 const UserProfile = ({ user }: Props) => {
-  const [postProfilePictureModal, setPostProfilePictureModal] =
-    useState<boolean>(false);
-
-  function updateProfileImg() {
-    setPostProfilePictureModal(!postProfilePictureModal);
-  }
-
   console.log(user);
-
-  const src = user?.profileImgUrl
-    ? `https://pets4ever.s3.us-east-2.amazonaws.com/${user?.profileImgUrl}`
-    : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg";
 
   if (user)
     return (
       <Container>
-        {postProfilePictureModal && (
-          <PostProfilePicture setModal={setPostProfilePictureModal} />
-        )}
-
         <Content>
           <div className="userContent">
             <div className="user">
-              <div className="usernameAndProfileImg">
-                <img
-                  width={120}
-                  height={120}
-                  src={src}
-                  alt="sua foto de perfil"
-                  onClick={updateProfileImg}
-                />
-                <span className="username">{user?.username}</span>
-              </div>
+              <UsernameAndProfileImg
+                profileImgUrl={user.profileImgUrl}
+                username={user.username}
+              />
 
               <div className="fullnameAndNumbers">
-                <div className="fullnameAndButtonToEditPerfil">
-                  <p className="fullname">{user?.fullname}</p>
-                  <Link to={"/config"}>
-                    <PurpleButton>Editar Perfil</PurpleButton>
-                  </Link>
-                </div>
+                <FullnameAndButtonToEditProfile fullname={user.fullname} />
                 <QuantityOfPostFollowersAndFollowing
                   postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
                   followers={user?.followers}
