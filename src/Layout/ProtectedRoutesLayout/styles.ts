@@ -54,6 +54,10 @@ export const SideMenu = styled.div`
 
   box-shadow: ${({ theme }) => theme.boxShadowStyle};
 
+  @media (max-width: 768px) {
+    box-shadow: none;
+  }
+
   z-index: 999;
   top: 0;
   left: 0;

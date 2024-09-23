@@ -53,7 +53,6 @@ const UserProfile = ({ user }: Props) => {
                   <Link to={"/config"}>
                     <PurpleButton>Editar Perfil</PurpleButton>
                   </Link>
-                  <p>{user.routeTest && user.routeTest}</p>
                 </div>
                 <QuantityOfPostFollowersAndFollowing
                   postQuantity={user?.userPostsAndQuantityOfPosts.quantity}

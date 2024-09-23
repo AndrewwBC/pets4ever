@@ -71,12 +71,12 @@ class UserHttpService {
     );
   }
 
-  async updateName(
-    data: { name: string },
+  async patchProfile(
+    data: { fullname: string; username: string },
     userId: string
   ): Promise<{ message: string }> {
     return this.handleRequest<{ message: string }>(
-      () => this.API.patch(`/user/name/${userId}`, data),
+      () => this.API.patch(`/user/profile/${userId}`, data),
       "UPDATE_NAME_ERROR"
     );
   }
