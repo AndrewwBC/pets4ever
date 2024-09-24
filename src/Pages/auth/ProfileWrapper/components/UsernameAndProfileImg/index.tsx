@@ -27,7 +27,9 @@ function UsernameAndProfileImg({
       {postProfilePictureModal && (
         <PostProfilePicture setModal={setPostProfilePictureModal} />
       )}
-      <img src={src} alt="sua foto de perfil" onClick={updateProfileImg} />
+      <div>
+        <img src={src} alt="sua foto de perfil" onClick={updateProfileImg} />
+      </div>
       <span className="username">{username}</span>
     </Content>
   );

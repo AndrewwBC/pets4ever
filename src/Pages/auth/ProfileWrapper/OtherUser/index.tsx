@@ -7,6 +7,7 @@ import ProfileFeed from "../components/ProfileFeed";
 import USER_API from "../../../../api/user/USER_API";
 import { UserProps } from "../../../../types/user";
 import { FollowButtonAndNumbers, FullnameNumbersAndButton } from "./styles";
+import UsernameAndProfileImg from "../components/UsernameAndProfileImg";
 
 interface OtherUserProps {
   username: string;
@@ -24,25 +25,16 @@ function OtherUser({ username }: OtherUserProps) {
     getData();
   }, [username, getData]);
 
-  const src = user?.profileImgUrl
-    ? `https://pets4ever.s3.us-east-2.amazonaws.com/${user?.profileImgUrl}`
-    : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg";
-
   if (user)
     return (
       <Container>
         <Content>
           <div className="userContent">
             <div className="user">
-              <div className="usernameAndProfileImg">
-                <img
-                  width={120}
-                  height={120}
-                  src={src}
-                  alt="imagem de perfil"
-                />
-                <span className="username">{user?.username}</span>
-              </div>
+              <UsernameAndProfileImg
+                profileImgUrl={user.profileImgUrl}
+                username={user.username}
+              />
 
               <FullnameNumbersAndButton>
                 <div className="fullname">

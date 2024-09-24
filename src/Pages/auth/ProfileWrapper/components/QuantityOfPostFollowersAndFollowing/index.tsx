@@ -17,12 +17,14 @@ function QuantityOfPostFollowersAndFollowing({
   });
 
   const [modal, setModal] = useState<ListOfUserStateProps>({
+    title: "",
     modalState: false,
     data: undefined,
   });
 
-  function handleClick(data: UsernameAndProfileImgUrlProps[]) {
+  function handleClick(data: UsernameAndProfileImgUrlProps[], title: string) {
     setModal({
+      title,
       data: data,
       modalState: true,
     });
@@ -31,7 +33,11 @@ function QuantityOfPostFollowersAndFollowing({
   return (
     <Container className="userStats">
       {modal.modalState && (
-        <ListOfUserModal listOfUsers={modal} setModal={setModal} />
+        <ListOfUserModal
+          title={modal.title}
+          listOfUsers={modal}
+          setModal={setModal}
+        />
       )}
       {toast.message && <Toast setToast={setToast} toast={toast} />}
       <div>
@@ -41,14 +47,16 @@ function QuantityOfPostFollowersAndFollowing({
 
       <div>
         <p>{following.quantity}</p>
-        <small onClick={() => handleClick(following.followingList)}>
+        <small onClick={() => handleClick(following.followingList, "Seguindo")}>
           Seguindo
         </small>
       </div>
 
       <div>
         <p>{followers.quantity}</p>
-        <small onClick={() => handleClick(followers.followersList)}>
+        <small
+          onClick={() => handleClick(followers.followersList, "Seguidores")}
+        >
           Seguidores
         </small>
       </div>
