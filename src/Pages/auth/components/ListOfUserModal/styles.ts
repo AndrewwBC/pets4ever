@@ -11,22 +11,36 @@ export const Container = styled.main`
   justify-content: center;
   align-items: center;
   z-index: 999;
+`;
 
-  .content {
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-    background-color: rgba(255, 255, 255, 0.8);
-    gap: 8px;
-    border-radius: 8px;
-    z-index: 999;
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 1);
+  gap: 8px;
+  border-radius: 8px;
+  z-index: 999;
+  max-height: 400px;
+  overflow-y: scroll;
+
+  .title {
+    text-align: center;
+    color: ${({ theme }) => theme.neutral.c8};
+    font-weight: 500;
   }
+`;
+
+export const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 
   .user {
     border-radius: 8px;
     padding: 4px;
     display: flex;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: ${({ theme }) => theme.neutral.c3};
     align-items: center;
     flex-direction: row;
     justify-content: start;

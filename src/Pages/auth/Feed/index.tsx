@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Container, Content } from "./styles";
 import Stories from "./components/Stories";
 import { getPosts } from "./api";
@@ -33,4 +33,4 @@ export const Feed = () => {
     );
 };
 
-export default Feed;
+export default memo(Feed);
