@@ -22,6 +22,7 @@ interface PostsProps {
 
 export default function Posts({ posts, setPosts }: PostsProps) {
   const [listOfLikes, setListOfLikesModal] = useState<ListOfUserStateProps>({
+    title: "Curtidas",
     modalState: false,
     data: undefined,
   });
@@ -70,6 +71,7 @@ export default function Posts({ posts, setPosts }: PostsProps) {
       <PostsContainer>
         {listOfLikes.data && (
           <ListOfUserModal
+            title={listOfLikes.title}
             listOfUsers={listOfLikes}
             setModal={setListOfLikesModal}
           />
