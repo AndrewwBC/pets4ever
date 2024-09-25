@@ -30,6 +30,13 @@ class PostHttpService {
     );
   }
 
+  public show(data: ShowProps) {
+    return this.handleRequest<PostProps>(
+      () => this.API.get(`/post/show/${data.postId}/${data.username}`),
+      "SHOW_POST"
+    );
+  }
+
   private getMyError(err: any, name: string): MyError {
     const { message, response, code } = err as AxiosError;
     return new MyError(

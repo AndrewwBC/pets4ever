@@ -92,45 +92,8 @@ export const Content = styled.section`
       width: 100%;
       margin-bottom: 12px;
       padding: 12px;
-    }
-
-    .commentContainer {
-      background-color: ${({ theme }) => theme.bg};
-      border-radius: 4px;
-      padding: 4px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin: 12px 0px;
-      overflow-y: scroll;
-
-      @media (max-width: 768px) {
-        max-height: 100%;
-        padding-top: 12px;
-      }
-
-      .comment {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        font-size: 14px;
-        color: #222;
-
-        .usernameAndImage {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          p {
-            color: #888;
-          }
-
-          img {
-            display: block;
-            border-radius: 999px;
-            object-fit: cover;
-          }
-        }
-      }
+      font-size: 18px;
+      color: ${({ theme }) => theme.neutral.c8};
     }
   }
 

@@ -1,7 +1,7 @@
 import { Content } from "./styles";
 import PasswordUpdate from "./PasswordUpdate";
 import EmailUpdate from "./EmailUpdate";
-import PatchProfile from "./ProfileUpdate";
+import PatchProfile from "./PatchProfile";
 
 const Config = () => {
   return (

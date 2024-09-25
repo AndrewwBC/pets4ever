@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const registerFormSchema = z.object({
+export const patchProfileSchema = z.object({
   fullname: z
     .string()
     .min(1, { message: "Insira ao menos 1 caractér" })
@@ -10,14 +10,6 @@ export const registerFormSchema = z.object({
     .toLowerCase()
     .min(1, { message: "Insira ao menos 1 caractéres" })
     .max(32, { message: "Permitido apenas 32 caractéres" }),
-  email: z.string().email({
-    message: "Insira um email válido",
-  }),
-  password: z
-    .string()
-    .min(8)
-    .max(64)
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/),
 });
 
-export type RegisterFormSchema = z.infer<typeof registerFormSchema>;
+export type PatchProfileSchema = z.infer<typeof patchProfileSchema>;

@@ -9,6 +9,7 @@ export const Container = styled.div`
   text-align: start;
   padding: 8px;
   border-radius: 8px;
+  margin-top: 4px;
 
   .validations {
     display: flex;

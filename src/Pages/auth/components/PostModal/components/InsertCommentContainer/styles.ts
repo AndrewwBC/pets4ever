@@ -5,4 +5,5 @@ export const SendCommentButton = styled.button`
   background-color: transparent;
   display: flex;
   align-items: center;
+  color: ${({ theme }) => theme.neutral.c8};
 `;

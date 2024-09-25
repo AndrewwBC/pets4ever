@@ -31,7 +31,7 @@ export const Content: React.FC<ContentProps> = styled.div`
   }
 
   small {
-    margin-top: 4px;
+    margin-top: 2px;
     font-size: 14px;
     color: red;
     align-self: self-start;
