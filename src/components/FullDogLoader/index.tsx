@@ -1,23 +1,21 @@
 import { createPortal } from "react-dom";
 import DogLoader from "./components/DogLoader";
-import { Modal, TransparentModalContainer } from "./styles";
+import { Modal, ModalContent } from "./styles";
 
 interface FullDogLoaderProps {
   transparent: boolean;
+  text: string;
 }
 
-export function FullDogLoader({ transparent }: FullDogLoaderProps) {
-  if (transparent)
-    return createPortal(
-      <TransparentModalContainer>
-        <DogLoader />
-      </TransparentModalContainer>,
-      document.getElementById("modal")!
-    );
-
+export function FullDogLoader({ transparent, text }: FullDogLoaderProps) {
   return createPortal(
-    <Modal>
-      <DogLoader />
+    <Modal transparent={transparent}>
+      <ModalContent>
+        <DogLoader />
+        <div className="text">
+          <p>{text}</p>
+        </div>
+      </ModalContent>
     </Modal>,
     document.getElementById("modal")!
   );

@@ -1,12 +1,11 @@
 import { createPortal } from "react-dom";
 import { Container, Content, WarningContainer } from "./styles";
-import { TextContainer } from "./styles";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import DogLoader from "../../../components/FullDogLoader/components/DogLoader";
 import { Button } from "../../../components/Button";
 import { useUser } from "../../../context/UserProvider";
+import { FullDogLoader } from "../../../components/FullDogLoader";
 
 interface LogoutModalProps {
   logoutModal: boolean;
@@ -26,43 +25,38 @@ export default function LogoutModal({
       setConfirmLogout(true);
 
       const timer = setTimeout(() => {
-        nav("");
         setLogoutModal(false);
         clearTimeout(timer);
         clearUser();
+        nav("");
       }, 2000);
-    } else setLogoutModal(false);
+      setLogoutModal(false);
+    }
+    setLogoutModal(false);
+  }
+  if (confirmLogout) {
+    return <FullDogLoader transparent={false} text="Encerrando a sessão..." />;
   }
 
   if (logoutModal)
     return createPortal(
       <Container>
         <Content>
-          {!confirmLogout ? (
-            <WarningContainer>
-              <span>Confirme a saída no botão</span>
-              <div className="buttons">
-                <Button
-                  onClick={() => handleLogoutConfirmation(true)}
-                  size="medium"
-                  label="Sair"
-                />
-                <Button
-                  onClick={() => handleLogoutConfirmation(false)}
-                  size="medium"
-                  label="Cancelar"
-                />
-              </div>
-            </WarningContainer>
-          ) : (
-            <>
-              <TextContainer>
-                <p>Desconectando...</p>
-              </TextContainer>
-
-              <DogLoader />
-            </>
-          )}
+          <WarningContainer>
+            <span>Confirme a saída no botão</span>
+            <div className="buttons">
+              <Button
+                onClick={() => handleLogoutConfirmation(true)}
+                size="medium"
+                label="Sair"
+              />
+              <Button
+                onClick={() => handleLogoutConfirmation(false)}
+                size="medium"
+                label="Cancelar"
+              />
+            </div>
+          </WarningContainer>
         </Content>
       </Container>,
       document.getElementById("logoutModal")!

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { PostModalProps } from "./types";
 import { createPortal } from "react-dom";
@@ -7,15 +7,16 @@ import CommentsPostModal from "./components/Comments";
 import IconsLikeCommentSharePostModal from "./components/IconsLikeCommentSharePostModal";
 import InsertCommentPostModal from "./components/InsertCommentContainer";
 import { timeSince } from "../../../../utils/timeSince";
-import COMMENT_API from "../../../../api/comment/COMMENT_API";
-import { Comment } from "../../../../types/comment";
+import POST_API from "../../../../api/post/POST_API";
+import { useUser } from "../../../../context/UserProvider";
 
 const PostModal = ({
   setShowModal,
   modalPostData,
   setModalPostData,
 }: PostModalProps) => {
-  const [comments, setComments] = useState<Comment[]>(modalPostData?.comments!);
+  const { user } = useUser();
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -24,20 +25,23 @@ const PostModal = ({
     };
   }, [modalPostData]);
 
-  async function retrieveNewComments() {
-    try {
-      const comments = await COMMENT_API.getComments(modalPostData?.postId!);
+  async function getPost() {
+    const data = {
+      username: user?.username,
+      postId: modalPostData?.postId,
+    };
 
-      if (comments) {
-        setComments(comments);
+    try {
+      const post = await POST_API.show(data);
+
+      if (post) {
+        setModalPostData(post);
       }
     } catch (err) {}
   }
 
   window.addEventListener("click", (e: any) => {
-    console.log(e);
     if (e.target?.id === "container") {
-      console.log("entrou");
       setShowModal(false);
       setModalPostData(null);
     }
@@ -66,7 +70,7 @@ const PostModal = ({
               </div>
             </div>
 
-            <CommentsPostModal comments={comments} />
+            <CommentsPostModal comments={modalPostData.comments} />
 
             <IconsLikeCommentSharePostModal
               postId={modalPostData.postId}
@@ -75,7 +79,7 @@ const PostModal = ({
 
             <InsertCommentPostModal
               postId={modalPostData?.postId}
-              retrieveNewComments={retrieveNewComments}
+              getPost={getPost}
             />
           </div>
         </Content>

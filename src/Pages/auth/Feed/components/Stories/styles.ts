@@ -1,6 +1,19 @@
 import styled from "styled-components";
 
-export const StoriesContainer = styled.div`
+export const Container = styled.div`
+  header {
+    padding-bottom: 12px;
+    display: flex;
+    justify-content: start;
+    span {
+      font-weight: 700;
+      font-size: 18px;
+      color: ${({ theme }) => theme.neutral.c8};
+    }
+  }
+`;
+
+export const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: start;
@@ -10,29 +23,18 @@ export const StoriesContainer = styled.div`
   margin-left: 8px;
 
   &::-webkit-scrollbar {
-    width: 1px;
+    width: 5px;
     height: 8px;
   }
 
   &::-webkit-scrollbar-track {
-    background: #fff;
+    background: ${({ theme }) => theme.neutral.c8};
+    border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #f9f9f9;
-    border-radius: 20px;
-    border: 1px solid #a9a9a9;
-  }
-
-  header {
-    padding-bottom: 12px;
-    display: flex;
-    justify-content: center;
-    span {
-      font-weight: 700;
-      font-size: 18px;
-      color: ${({ theme }) => theme.neutral.c8};
-    }
+    background-color: ${({ theme }) => theme.neutral.c4};
+    border-radius: 4px;
   }
 
   .storiesContent {

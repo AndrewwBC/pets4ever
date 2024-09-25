@@ -1,6 +1,11 @@
-import styled from "styled-components";
+import { HTMLProps } from "react";
+import styled, { css } from "styled-components";
 
-export const Modal = styled.div`
+interface ModalProps extends HTMLProps<HTMLDivElement> {
+  transparent: boolean;
+}
+
+export const Modal: React.FC<ModalProps> = styled.div`
   top: 0;
   bottom: 0;
   right: 0;
@@ -10,18 +15,26 @@ export const Modal = styled.div`
   justify-content: center;
   position: fixed;
   z-index: 999999;
-  background-color: ${({ theme }) => theme.neutral.c2};
+  ${({ transparent }: { transparent: boolean }) =>
+    transparent
+      ? css`
+          background-color: rgba(0, 0, 0, 0.8);
+        `
+      : css`
+          background-color: ${({ theme }) => theme.neutral.c2};
+        `}
 `;
 
-export const TransparentModalContainer = styled.div`
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+export const ModalContent = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: fixed;
-  z-index: 999999;
-  background-color: rgba(0, 0, 0, 0.5);
+  gap: 48px;
+
+  .text {
+    background-color: ${({ theme }) => theme.neutral.c2};
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 18px;
+  }
 `;

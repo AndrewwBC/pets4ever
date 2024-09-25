@@ -23,7 +23,10 @@ export default function SendCodeToNewEmail() {
     message: "",
     status: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({
+    state: false,
+    message: "",
+  });
 
   const { user } = useUser();
 
@@ -48,7 +51,10 @@ export default function SendCodeToNewEmail() {
     e.preventDefault();
 
     try {
-      setIsLoading(true);
+      setIsLoading({
+        message: "Enviando código para o email...",
+        state: true,
+      });
       const response = await EMAIL_API.sendCodeToEmail(email);
 
       if (response) {
@@ -67,7 +73,10 @@ export default function SendCodeToNewEmail() {
         status: "error",
       });
     } finally {
-      setIsLoading(false);
+      setIsLoading({
+        message: "",
+        state: false,
+      });
     }
   }
 
@@ -80,7 +89,10 @@ export default function SendCodeToNewEmail() {
 
     e.preventDefault();
     try {
-      setIsLoading(true);
+      setIsLoading({
+        message: "Validando o código...",
+        state: true,
+      });
       const response = await CODE_API.validateCode(validateCodeData);
 
       setToast({
@@ -96,14 +108,19 @@ export default function SendCodeToNewEmail() {
         status: "error",
       });
     } finally {
-      setIsLoading(false);
+      setIsLoading({
+        message: "",
+        state: false,
+      });
     }
   }
 
   return (
     <Section>
       {toast.message && <Toast setToast={setToast} toast={toast} />}
-      {isLoading && <FullDogLoader transparent={true} />}
+      {isLoading.state && (
+        <FullDogLoader text={isLoading.message} transparent={true} />
+      )}
       <SectionTitle>Editar Email</SectionTitle>
       <form>
         <FormGroup label="E-MAIL" error={getError()}>

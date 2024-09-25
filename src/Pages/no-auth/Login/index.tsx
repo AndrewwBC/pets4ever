@@ -40,7 +40,7 @@ export default function Login() {
 
       if (response) {
         useInterceptor();
-        retrieveUser();
+        retrieveUser(true);
         nav(`/`);
       }
     } catch (err) {
@@ -70,7 +70,10 @@ export default function Login() {
     return errors[fieldName]?.message;
   }
 
-  if (isLoading) return <FullDogLoader transparent={false} />;
+  if (isLoading)
+    return (
+      <FullDogLoader text="Carregando seus dados..." transparent={false} />
+    );
 
   return (
     <Container>

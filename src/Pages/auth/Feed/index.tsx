@@ -21,7 +21,8 @@ export const Feed = () => {
     setPosts(posts);
   }
 
-  if (!posts) return <FullDogLoader transparent={false} />;
+  if (!posts)
+    return <FullDogLoader text="Carregando Postagens..." transparent={false} />;
   else
     return (
       <Container>

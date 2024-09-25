@@ -5,7 +5,7 @@ import { UserProps } from "../types/user";
 
 interface UserContextProps {
   user: UserProps | null;
-  retrieveUser: () => Promise<void>;
+  retrieveUser: (loading: boolean) => Promise<void>;
   clearUser: () => Promise<void>;
 }
 
@@ -19,17 +19,17 @@ function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserProps | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  async function retrieveUser() {
+  async function retrieveUser(loading: boolean) {
     try {
-      setIsLoading(true);
+      loading && setIsLoading(true);
       const data = await USER_API.user();
       setUser(data);
     } catch (error) {
     } finally {
       const timer = setTimeout(() => {
-        setIsLoading(false);
+        loading && setIsLoading(false);
         clearTimeout(timer);
-      }, 2000);
+      }, 1000);
     }
   }
 
@@ -38,7 +38,6 @@ function UserProvider({ children }: { children: ReactNode }) {
       const response = await USER_API.logout();
       if (response) {
         setUser(null);
-        alert(response);
       }
     } catch (error) {}
   }
@@ -52,7 +51,10 @@ function UserProvider({ children }: { children: ReactNode }) {
     [user]
   );
 
-  if (isLoading) return <FullDogLoader transparent={false} />;
+  if (isLoading)
+    return (
+      <FullDogLoader text="Carregando seus dados..." transparent={false} />
+    );
 
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import MyError from "./errors/myError";
-import { SignInResponse, SignUpProps } from "./types/types";
+import { SignUpProps } from "./types/types";
 import { UpdateDataProps } from "./types/update";
 import API from "../axiosInstance";
 import { UserProps } from "../../types/user";
@@ -24,13 +24,6 @@ class UserHttpService {
     return this.handleRequest<any>(
       () => this.API.post("/auth/signin", data),
       "SIGNIN_ERROR"
-    );
-  }
-
-  async signInWithSession(): Promise<SignInResponse> {
-    return this.handleRequest<SignInResponse>(
-      () => this.API.get("/user/session", {}),
-      "SESSION_ERROR"
     );
   }
 
@@ -78,6 +71,13 @@ class UserHttpService {
     return this.handleRequest<{ message: string }>(
       () => this.API.patch(`/user/profile/${userId}`, data),
       "UPDATE_NAME_ERROR"
+    );
+  }
+
+  async patchPassword(username: string, data: any) {
+    return this.handleRequest(
+      () => this.API.patch(`/user/${username}/password`, data),
+      "PATCH_PASSWORD_ERROR"
     );
   }
 
