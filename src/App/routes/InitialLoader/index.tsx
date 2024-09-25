@@ -9,7 +9,7 @@ function InitialLoader() {
   }, []);
 
   async function getData() {
-    await retrieveUser();
+    await retrieveUser(true);
   }
 
   return null;
