@@ -18,7 +18,6 @@ const UserContext = createContext<UserContextProps>({
 function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserProps | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(user);
 
   async function retrieveUser(loading: boolean) {
     try {

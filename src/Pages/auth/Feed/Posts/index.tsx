@@ -30,7 +30,6 @@ export default function Posts({ posts, setPosts }: PostsProps) {
   const { user } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [modalPostData, setModalPostData] = useState<PostProps | null>(null);
-  console.log(posts);
   const [likeLoading, setLikeLoading] = useState(false);
 
   function handlePostModal(postId: string) {
