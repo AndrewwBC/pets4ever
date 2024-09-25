@@ -40,7 +40,7 @@ export default function Login() {
 
       if (response) {
         useInterceptor();
-        retrieveUser();
+        retrieveUser(true);
         nav(`/`);
       }
     } catch (err) {

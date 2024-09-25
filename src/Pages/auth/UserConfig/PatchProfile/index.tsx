@@ -18,7 +18,7 @@ function PatchProfile() {
     mode: "onSubmit",
     resolver: zodResolver(patchProfileSchema),
   });
-  const { register, formState, handleSubmit } = form;
+  const { register, formState, handleSubmit, reset } = form;
   const { errors } = formState;
 
   const [toast, setToast] = useState({
@@ -33,14 +33,18 @@ function PatchProfile() {
     },
   ]);
 
-  async function onSubmit(data: PatchProfileSchema) {
-    console.log(data, errors);
+  async function patch(data: PatchProfileSchema) {
+    setPatchResponseError(
+      patchResponseError.filter((error) => !error.fieldName)
+    );
+
+    console.log(errors);
     try {
       const response = await userApi.patchProfile(data, user?.userId!);
 
       if (response) {
         retrieveUser(false);
-
+        reset();
         setToast({
           message: "Dados atualizados.",
           status: "success",
@@ -51,12 +55,15 @@ function PatchProfile() {
     }
   }
 
-  function getErrorByFieldname(field: string) {
-    const error = patchResponseError.find(
+  function getErrorByFieldname(field: keyof PatchProfileSchema) {
+    const apiError = patchResponseError.find(
       (error) => error.fieldName === field
     )?.message;
 
-    return error;
+    const zodError = errors[field]?.message; // Captura os erros de Zod
+    console.log(zodError);
+    // Prioriza os erros do Zod, mas se não houver, exibe o erro da API
+    return zodError || apiError;
   }
 
   return (
@@ -64,16 +71,16 @@ function PatchProfile() {
       {toast.message && <Toast setToast={setToast} toast={toast} />}
       <SectionTitle>Editar Perfil</SectionTitle>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(patch)}>
         <FormGroup
           label="Nome completo"
           error={getErrorByFieldname("fullname")}
         >
           <Input
+            id="fullname"
             type="text"
             placeholder="Novo nome completo"
             {...register("fullname")}
-            required
           />
         </FormGroup>
 
@@ -82,10 +89,10 @@ function PatchProfile() {
           error={getErrorByFieldname("username")}
         >
           <Input
+            id="username"
             type="text"
             placeholder="Novo nome de usuário"
             {...register("username")}
-            required
           />
         </FormGroup>
 

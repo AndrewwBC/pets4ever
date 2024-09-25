@@ -8,7 +8,7 @@ export const patchProfileSchema = z.object({
   username: z
     .string()
     .toLowerCase()
-    .min(1, { message: "Insira ao menos 1 caractéres" })
+    .min(1, { message: "Insira ao menos 3 caractéres" })
     .max(32, { message: "Permitido apenas 32 caractéres" }),
 });
 
