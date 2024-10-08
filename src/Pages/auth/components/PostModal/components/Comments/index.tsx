@@ -14,9 +14,10 @@ import { Link } from "react-router-dom";
 
 interface CommentsPostModalProps {
   comments?: Comment[];
+  getPost: () => Promise<any>;
 }
 
-function CommentsPostModal({ comments }: CommentsPostModalProps) {
+function CommentsPostModal({ comments, getPost }: CommentsPostModalProps) {
   const [deleteOrDenounceModal, setDeleteOrDenounceModal] = useState(false);
 
   const container: {
@@ -78,6 +79,7 @@ function CommentsPostModal({ comments }: CommentsPostModalProps) {
                         commentId={commentId}
                         modal={deleteOrDenounceModal}
                         setModal={setDeleteOrDenounceModal}
+                        getPost={getPost}
                       />
                     )}
                   </div>

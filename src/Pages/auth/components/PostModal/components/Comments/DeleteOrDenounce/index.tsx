@@ -12,6 +12,7 @@ interface DeleteOrDenounceProps {
   commentId: string;
   modal: boolean;
   setModal: Dispatch<SetStateAction<boolean>>;
+  getPost: () => Promise<any>;
 }
 
 function DeleteOrDenounce({
@@ -19,6 +20,7 @@ function DeleteOrDenounce({
   commentId,
   setModal,
   modal,
+  getPost,
 }: DeleteOrDenounceProps) {
   const { user } = useUser();
 
@@ -31,6 +33,10 @@ function DeleteOrDenounce({
   async function handleDelete() {
     try {
       const response = await COMMENT_API.delete(commentId);
+      if (response) {
+        await getPost();
+        setModal(false);
+      }
       console.log(response);
     } catch (err) {
       console.log(err);
