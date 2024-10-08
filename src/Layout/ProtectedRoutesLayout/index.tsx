@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Container, Content, SideMenu, SideMenuContent } from "./styles";
-import CreatePostModal from "../../Pages/auth/components/CreatePostModal";
+import CreatePostModal from "../../Pages/auth/modals/CreatePostModal";
 import { CgLogOut, CgProfile, CgSun, CgToolbox } from "react-icons/cg";
 import { IoCreateOutline, IoHomeOutline } from "react-icons/io5";
 

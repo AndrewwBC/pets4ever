@@ -1,5 +1,5 @@
 import { Container } from "./styles";
-import StoriesModal from "../../../components/StoriesModal";
+import StoriesModal from "../../../modals/StoriesModal";
 import { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
