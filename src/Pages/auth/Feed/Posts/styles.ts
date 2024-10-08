@@ -84,6 +84,7 @@ export const PostsContainer = styled.section`
     img {
       position: absolute;
       border-radius: 4px;
+      cursor: pointer;
 
       top: 0;
       left: 0;

@@ -28,7 +28,15 @@ export default function Posts() {
   });
   const [showModal, setShowModal] = useState(false);
   const [modalPostData, setModalPostData] = useState<PostProps | null>(null);
-  const [modalPostOptions, setPostOptionsModal] = useState(false);
+
+  const [modalPostOptions, setPostOptionsModal] = useState<{
+    state: boolean;
+    post: PostProps | undefined;
+  }>({
+    state: false,
+    post: undefined,
+  });
+
   const [likeLoading, setLikeLoading] = useState(false);
 
   useEffect(() => {
@@ -94,17 +102,17 @@ export default function Posts() {
             handlePostLikePut={handlePostLikePut}
           />
         )}
+        {modalPostOptions.state && (
+          <PostOptionsModal
+            api={api}
+            modal={modalPostOptions}
+            setModal={setPostOptionsModal}
+          />
+        )}
 
         {posts.map((item, index) => {
           return (
             <div className="eachPost" key={index}>
-              {modalPostOptions && (
-                <PostOptionsModal
-                  api={api}
-                  post={item}
-                  setModal={setPostOptionsModal}
-                />
-              )}
               <header className="postHeader">
                 <div className="usernameAndProfileImg">
                   <img
@@ -126,7 +134,12 @@ export default function Posts() {
                 <RxDotsVertical
                   className="dots"
                   size={22}
-                  onClick={() => setPostOptionsModal(true)}
+                  onClick={() =>
+                    setPostOptionsModal({
+                      state: true,
+                      post: item,
+                    })
+                  }
                 />
               </header>
               <div className="imageContainer">
