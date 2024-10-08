@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { PostsContainer } from "./styles";
 
-import PostModal from "../../components/PostModal";
+import PostModal from "../../modals/PostModal";
 import { Link } from "react-router-dom";
 import IconsToLikeCommentAndShare from "../components/IconsToLikeCommentAndShare";
 import QuantityOfLikes from "../components/QuantityOfLikes";
 import LastComment from "../components/LastComment";
-import { ListOfUserStateProps } from "../../components/ListOfUserModal/types";
+import { ListOfUserStateProps } from "../../modals/ListOfUserModal/types";
 import NoPosts from "./components/NoPosts";
 import { useUser } from "../../../../context/UserProvider";
-import ListOfUserModal from "../../components/ListOfUserModal";
+import ListOfUserModal from "../../modals/ListOfUserModal";
 import POST_API from "../../../../api/post/POST_API";
 import { timeSince } from "../../../../utils/timeSince";
 import { PostProps } from "../../../../types/post";
