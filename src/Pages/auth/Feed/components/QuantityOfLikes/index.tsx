@@ -1,3 +1,5 @@
+import { Container } from "./styles";
+
 export default function QuantityOfLikes({
   quantityOfLikes,
   userLikedThisPost,
@@ -16,58 +18,58 @@ export default function QuantityOfLikes({
 
   if (quantityOfLikes === 0)
     return (
-      <div className="quantityOfLikesContainer">
-        <small>
+      <Container>
+        <small className="noLikes">
           Seja o <span>primeiro </span>a curtir este post!
         </small>
-      </div>
+      </Container>
     );
   else if (quantityOfLikes === 1 && userLikedThisPost)
     return (
-      <div className="quantityOfLikesContainer">
+      <Container>
         <small>
           Você{" "}
           <span
             onClick={() => handleQuantityOfLikesClick()}
-            style={{ color: "green", cursor: "pointer" }}
+            style={{ cursor: "pointer" }}
           >
             {spanText}{" "}
           </span>{" "}
           este post!
         </small>
-      </div>
+      </Container>
     );
   else if (quantityOfLikes > 1 && userLikedThisPost)
     return (
-      <div className="quantityOfLikesContainer">
+      <Container>
         <small>
           Você e {quantityOfLikes - 1}{" "}
           {quantityOfLikes - 1 === 1 ? "usuário" : "usuários"}
           <span
             onClick={() => handleQuantityOfLikesClick()}
-            style={{ color: "green", cursor: "pointer" }}
+            style={{ cursor: "pointer" }}
           >
             {" "}
             curtiram{" "}
           </span>{" "}
           este post!
         </small>
-      </div>
+      </Container>
     );
   else
     return (
-      <div className="quantityOfLikesContainer">
+      <Container>
         <small>
           {quantityOfLikes} {userOsUsers}
           <span
             onClick={() => handleQuantityOfLikesClick()}
-            style={{ color: "green", cursor: "pointer" }}
+            style={{ cursor: "pointer" }}
           >
             {" "}
             {spanText}{" "}
           </span>{" "}
           este post!
         </small>
-      </div>
+      </Container>
     );
 }

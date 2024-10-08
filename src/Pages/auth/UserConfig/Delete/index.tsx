@@ -1,16 +1,27 @@
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { DeleteSection } from "./styles";
-import userApi from "../../../../api/user/USER_API";
 
 import { Button } from "../../../../components/Button";
 import { useUser } from "../../../../context/UserProvider";
+import USER_API from "../../../../api/user/USER_API";
+import { SectionTitle } from "../components/sectionTitle";
+import { Input } from "../../../../components/input";
+import FormGroup from "../../../../components/FormGroup";
+import { useNavigate } from "react-router-dom";
+import { FullDogLoader } from "../../../../components/FullDogLoader";
 
 function Delete() {
-  const { user } = useUser();
+  const [isLoading, setIsLoading] = useState({
+    state: false,
+    text: "",
+  });
+
+  const nav = useNavigate();
+  const { user, setUser } = useUser();
   const [isDeleteButtonDisable, setIsDeleteButtonDisable] = useState(true);
 
   function handleDeleteInput(inputText: string) {
-    if (inputText === "deletar minha conta") {
+    if (inputText === "Deletar minha conta") {
       setIsDeleteButtonDisable(false);
     } else {
       setIsDeleteButtonDisable(true);
@@ -20,27 +31,61 @@ function Delete() {
   async function handleDeleteSubmit(e: FormEvent) {
     e.preventDefault();
     const userId = user?.userId;
-    await userApi.delete(userId!);
+    try {
+      setIsLoading({
+        state: true,
+        text: "Excluindo sua conta...",
+      });
+      const response = await USER_API.delete(userId!);
+
+      if (response) {
+        setIsLoading({
+          state: true,
+          text: "Sucesso. Direcionando para Login...",
+        });
+
+        const navTimer = setTimeout(() => {
+          setUser(null);
+          nav("/");
+          setIsLoading({
+            state: false,
+            text: "",
+          });
+          clearTimeout(navTimer);
+        }, 2000);
+      }
+    } catch (err) {
+      setIsLoading({
+        state: false,
+        text: "",
+      });
+    }
   }
 
   return (
     <DeleteSection onSubmit={handleDeleteSubmit}>
-      <p>Deletar perfil</p>
-      <label>
-        Digite "deletar minha conta" para liberar a ação.
-        <input
-          placeholder="deletar minha conta"
-          type="text"
-          onChange={(e) => handleDeleteInput(e.target.value)}
+      {isLoading.state && (
+        <FullDogLoader text={isLoading.text} transparent={true} />
+      )}
+      <SectionTitle>Excluir Conta</SectionTitle>
+      <form action="">
+        <FormGroup label="Confirme a exclusão">
+          <Input
+            placeholder="Digite: Deletar minha conta"
+            type="text"
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              handleDeleteInput(e.target.value)
+            }
+          />
+        </FormGroup>
+
+        <Button
+          size="low"
+          label="Excluir Perfil"
+          disabled={isDeleteButtonDisable}
+          type="submit"
         />
-      </label>
-      <p>Ao clicar no botão, sua conta será deletada imediatamente.</p>
-      <Button
-        size="medium"
-        label="Deletar"
-        disabled={isDeleteButtonDisable}
-        type="submit"
-      />
+      </form>
     </DeleteSection>
   );
 }

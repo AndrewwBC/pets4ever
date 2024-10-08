@@ -22,31 +22,41 @@ export const PostsContainer = styled.section`
     }
   }
 
-  .postHeader div {
+  .postHeader {
     display: flex;
     align-items: center;
     padding: 8px;
-    gap: 18px;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
+    .usernameAndProfileImg {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
 
-    span {
-      color: ${({ theme }) => theme.neutral.c9};
-      font-weight: 500;
-    }
+      span {
+        color: ${({ theme }) => theme.neutral.c9};
+        font-weight: 500;
+      }
 
-    p {
-      @media (max-width: 768px) {
-        font-size: 14px;
+      p {
+        @media (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
+
+      img {
+        border-radius: 9999px;
+        object-fit: cover;
       }
     }
 
-    img {
-      border-radius: 9999px;
-      object-fit: cover;
+    .dots {
+      flex-shrink: 1;
+      color: ${({ theme }) => theme.purple.medium};
+      cursor: pointer;
     }
   }
-
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -114,14 +124,6 @@ export const PostsContainer = styled.section`
             font-size: 14px;
           }
         }
-      }
-    }
-
-    .quantityOfLikesContainer {
-      small {
-        font-size: 16px;
-        font-weight: 500;
-        color: ${({ theme }) => theme.neutral.c8};
       }
     }
 

@@ -32,6 +32,13 @@ class COMMENT_API {
     );
   }
 
+  public delete(id: string): Promise<any> {
+    return this.handleRequest<any>(
+      () => this.API.delete(`/comment/${id}`),
+      "DELETE_COMMENT_ERROR"
+    );
+  }
+
   private getMyError(err: any, name: string): MyError {
     const { message, response, code } = err as AxiosError;
     return new MyError(

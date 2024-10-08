@@ -1,12 +1,24 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Comment } from "../../../../../../types/comment";
-import { Container } from "./styles";
+import {
+  Container,
+  EachComment,
+  UsernameAndOptions,
+  CommentContent,
+} from "./styles";
+
+import { timeSinceComment } from "../../../../../../utils/timeSinceComment";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import DeleteOrDenounce from "./DeleteOrDenounce";
+import { Link } from "react-router-dom";
 
 interface CommentsPostModalProps {
   comments?: Comment[];
 }
 
 function CommentsPostModal({ comments }: CommentsPostModalProps) {
+  const [deleteOrDenounceModal, setDeleteOrDenounceModal] = useState(false);
+
   const container: {
     current: HTMLDivElement | null;
   } = useRef(null);
@@ -23,23 +35,61 @@ function CommentsPostModal({ comments }: CommentsPostModalProps) {
   if (comments)
     return (
       <Container ref={container}>
-        {comments?.map(({ comment, userId, username, profileImgUrl }) => (
-          <div className="comment" key={userId + Math.random()}>
-            <div className="usernameAndImage">
-              <img
-                src={
-                  profileImgUrl
-                    ? `https://pets4ever.s3.us-east-2.amazonaws.com/${profileImgUrl}`
-                    : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
-                }
-                alt=""
-              />
-              <p>{username}</p>
-            </div>
+        {comments?.map(
+          ({
+            commentId,
+            comment,
+            creationDate,
+            userId,
+            username,
+            profileImgUrl,
+          }) => (
+            <EachComment>
+              <div className="comment" key={userId + Math.random()}>
+                <div className="image">
+                  <img
+                    src={
+                      profileImgUrl
+                        ? `https://pets4ever.s3.us-east-2.amazonaws.com/${profileImgUrl}`
+                        : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
+                    }
+                    alt=""
+                  />
+                </div>
 
-            <p>{comment}</p>
-          </div>
-        ))}
+                <UsernameAndOptions>
+                  <div>
+                    <Link to={username}>
+                      <p>{username}</p>
+                    </Link>
+                  </div>
+                  <div className="options">
+                    <p className="timeSince">
+                      {timeSinceComment(creationDate)}
+                    </p>
+                    <HiOutlineDotsHorizontal
+                      style={{ cursor: "pointer" }}
+                      onClick={() => setDeleteOrDenounceModal(true)}
+                      size={20}
+                    />
+                    {deleteOrDenounceModal && (
+                      <DeleteOrDenounce
+                        username={username}
+                        commentId={commentId}
+                        modal={deleteOrDenounceModal}
+                        setModal={setDeleteOrDenounceModal}
+                      />
+                    )}
+                  </div>
+                </UsernameAndOptions>
+
+                <CommentContent>
+                  <p>{comment}</p>
+                </CommentContent>
+              </div>
+            </EachComment>
+          )
+        )}
       </Container>
     );
 }

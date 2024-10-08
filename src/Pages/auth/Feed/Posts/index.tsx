@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useEffect, useState } from "react";
 import { PostsContainer } from "./styles";
 
 import PostModal from "../../components/PostModal";
@@ -13,24 +13,32 @@ import ListOfUserModal from "../../components/ListOfUserModal";
 import POST_API from "../../../../api/post/POST_API";
 import { timeSince } from "../../../../utils/timeSince";
 import { PostProps } from "../../../../types/post";
+import PostOptionsModal from "./components/PostOptionsModal";
+import { RxDotsVertical } from "react-icons/rx";
+import { getPosts } from "../api";
+import { FullDogLoader } from "../../../../components/FullDogLoader";
 
-interface PostsProps {
-  posts: PostProps[];
-
-  setPosts: Dispatch<SetStateAction<PostProps[] | undefined>>;
-}
-
-export default function Posts({ posts, setPosts }: PostsProps) {
+export default function Posts() {
+  const { user } = useUser();
+  const [posts, setPosts] = useState<PostProps[]>();
   const [listOfLikes, setListOfLikesModal] = useState<ListOfUserStateProps>({
     title: "Curtidas",
     modalState: false,
     data: undefined,
   });
-
-  const { user } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [modalPostData, setModalPostData] = useState<PostProps | null>(null);
+  const [modalPostOptions, setPostOptionsModal] = useState(false);
   const [likeLoading, setLikeLoading] = useState(false);
+
+  useEffect(() => {
+    api();
+  }, [modalPostData]);
+
+  async function api() {
+    const posts = await getPosts(user?.username!);
+    setPosts(posts);
+  }
 
   function handlePostModal(postId: string) {
     setShowModal(true);
@@ -48,7 +56,7 @@ export default function Posts({ posts, setPosts }: PostsProps) {
         setLikeLoading(true);
         const updatedPost = await POST_API.patchPostLike(data);
 
-        const newPosts = posts.map((post) =>
+        const newPosts = posts!.map((post) =>
           post.postId === updatedPost.postId
             ? (post = updatedPost)
             : (post = post)
@@ -61,6 +69,9 @@ export default function Posts({ posts, setPosts }: PostsProps) {
       }
     }
   }
+
+  if (!posts)
+    return <FullDogLoader text="Carregando Postagens..." transparent={false} />;
 
   if (posts.length < 1)
     return <NoPosts small="Não há postagens." paragraph="Seja o primeiro!" />;
@@ -87,8 +98,15 @@ export default function Posts({ posts, setPosts }: PostsProps) {
         {posts.map((item, index) => {
           return (
             <div className="eachPost" key={index}>
+              {modalPostOptions && (
+                <PostOptionsModal
+                  api={api}
+                  post={item}
+                  setModal={setPostOptionsModal}
+                />
+              )}
               <header className="postHeader">
-                <div>
+                <div className="usernameAndProfileImg">
                   <img
                     loading="lazy"
                     src={
@@ -104,6 +122,12 @@ export default function Posts({ posts, setPosts }: PostsProps) {
                     <span>{item.username}</span>
                   </Link>
                 </div>
+
+                <RxDotsVertical
+                  className="dots"
+                  size={22}
+                  onClick={() => setPostOptionsModal(true)}
+                />
               </header>
               <div className="imageContainer">
                 <img

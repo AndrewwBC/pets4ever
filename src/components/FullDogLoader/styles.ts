@@ -32,9 +32,10 @@ export const ModalContent = styled.div`
   gap: 48px;
 
   .text {
-    background-color: ${({ theme }) => theme.neutral.c2};
-    padding: 4px 8px;
+    background-color: ${({ theme }) => theme.neutral.c8};
+    padding: 8px 24px;
     border-radius: 4px;
     font-size: 18px;
+    color: ${({ theme }) => theme.neutral.c2};
   }
 `;

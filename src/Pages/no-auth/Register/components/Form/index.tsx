@@ -25,7 +25,7 @@ export default function Form() {
     mode: "onSubmit",
     resolver: zodResolver(registerFormSchema),
   });
-  const { register, formState, handleSubmit, watch } = form;
+  const { register, formState, handleSubmit, watch, reset } = form;
   const { errors } = formState;
 
   const [registerResponseErrors, setRegisterResponseErrors] = useState([
@@ -42,12 +42,13 @@ export default function Form() {
   });
 
   function getErrorMessageByFieldName(fieldName: keyof RegisterFormSchema) {
-    if (registerResponseErrors.length) {
-      return registerResponseErrors.find((err) => err.field === fieldName)
-        ?.message;
-    }
+    const errorsFromAPI = registerResponseErrors.find(
+      (err) => err.field === fieldName
+    )?.message;
 
-    return errors[fieldName]?.message;
+    const zodError = errors[fieldName]?.message;
+
+    return errorsFromAPI || zodError;
   }
 
   function handlePassword(password: string) {
@@ -74,6 +75,7 @@ export default function Form() {
   }
 
   async function onSubmit(data: RegisterFormSchema) {
+    console.log(errors);
     setRegisterResponseErrors(
       registerResponseErrors.filter((err) => !err.field)
     );
@@ -81,6 +83,7 @@ export default function Form() {
     try {
       const signUpResponse = await USER_API.signup(data);
       if (signUpResponse) {
+        reset();
         setToast({
           message: signUpResponse,
           status: "success",
@@ -130,8 +133,8 @@ export default function Form() {
           <Input
             id="fullname"
             placeholder="Insira o nome"
-            {...register("fullname")}
             required
+            {...register("fullname")}
           />
         </FormGroup>
 
@@ -142,8 +145,8 @@ export default function Form() {
           <Input
             id="username"
             placeholder="Insira o nome de usuário"
-            {...register("username")}
             required
+            {...register("username")}
           />
         </FormGroup>
 
@@ -152,6 +155,7 @@ export default function Form() {
             id="email"
             placeholder="Insira o seu endereço de e-mail"
             required
+            type="email"
             {...register("email")}
           />
         </FormGroup>
@@ -161,11 +165,11 @@ export default function Form() {
             placeholder="Digite a sua senha"
             type="password"
             onFocus={() => setFocusedPassword(true)}
+            required
             {...register("password", {
               onChange: (e: ChangeEvent<HTMLInputElement>) =>
                 handlePassword(e.target.value),
             })}
-            required
           />
         </FormGroup>
         {focusedPassword && (
