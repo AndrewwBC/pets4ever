@@ -37,6 +37,13 @@ class PostHttpService {
     );
   }
 
+  public delete(id: string) {
+    return this.handleRequest<any>(
+      () => this.API.delete(`/post/${id}`),
+      "DELETE_POST_ERROR"
+    );
+  }
+
   private getMyError(err: any, name: string): MyError {
     const { message, response, code } = err as AxiosError;
     return new MyError(

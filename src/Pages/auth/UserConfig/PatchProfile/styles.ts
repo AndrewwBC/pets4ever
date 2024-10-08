@@ -13,10 +13,6 @@ export const UpdateSection = styled.section`
     gap: 12px;
 
     label {
-      p {
-        font-size: 14px;
-      }
-
       gap: 2px;
       display: flex;
       flex-direction: column;

@@ -8,7 +8,7 @@ export const registerFormSchema = z.object({
   username: z
     .string()
     .toLowerCase()
-    .min(1, { message: "Insira ao menos 1 caractéres" })
+    .min(3, { message: "Insira ao menos 3 caractéres" })
     .max(32, { message: "Permitido apenas 32 caractéres" }),
   email: z.string().email({
     message: "Insira um email válido",

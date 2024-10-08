@@ -1,10 +1,19 @@
-import { createContext, ReactNode, useContext, useMemo, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import USER_API from "../api/user/USER_API";
 import { FullDogLoader } from "../components/FullDogLoader";
 import { UserProps } from "../types/user";
 
 interface UserContextProps {
   user: UserProps | null;
+  setUser: Dispatch<SetStateAction<UserProps | null>>;
   retrieveUser: (loading: boolean) => Promise<void>;
   clearUser: () => Promise<void>;
 }
@@ -13,6 +22,7 @@ const UserContext = createContext<UserContextProps>({
   user: null,
   retrieveUser: async () => {},
   clearUser: async () => {},
+  setUser: () => {},
 });
 
 function UserProvider({ children }: { children: ReactNode }) {
@@ -45,6 +55,7 @@ function UserProvider({ children }: { children: ReactNode }) {
   const contextValue = useMemo(
     () => ({
       user,
+      setUser,
       retrieveUser,
       clearUser,
     }),

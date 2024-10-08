@@ -27,6 +27,7 @@ export const Content: React.FC<ContentProps> = styled.div`
       margin-bottom: 2px;
       font-weight: 500;
       color: ${({ theme }) => theme.neutral.c9};
+      text-transform: uppercase;
     }
   }
 

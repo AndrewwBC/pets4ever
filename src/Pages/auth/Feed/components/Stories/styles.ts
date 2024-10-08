@@ -11,41 +11,9 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.neutral.c8};
     }
   }
-`;
 
-export const Content = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  flex-direction: column;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-  margin-left: 8px;
-
-  &::-webkit-scrollbar {
-    width: 5px;
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.neutral.c8};
-    border-radius: 4px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.neutral.c4};
-    border-radius: 4px;
-  }
-
-  .storiesContent {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 4px;
-    gap: 12px;
-    width: initial;
-
-    margin-right: 8px;
+  .storiesContainer {
+    padding-bottom: 32px;
 
     .eachStorie {
       display: flex;

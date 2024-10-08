@@ -37,14 +37,7 @@ export const Container = styled.div`
     font-size: 16px;
     color: ${({ theme }) => theme.neutral.c8};
 
-    .usernameAndImage {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      p {
-        color: #888;
-      }
-
+    .image {
       img {
         height: 40px;
         width: 40px;
@@ -59,4 +52,35 @@ export const Container = styled.div`
 export const Advice = styled.div`
   color: ${({ theme }) => theme.neutral.c8};
   text-align: center;
+`;
+
+export const EachComment = styled.div`
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+
+  .creationDate {
+    margin-left: 8px;
+    font-size: 12px !important;
+  }
+`;
+
+export const UsernameAndOptions = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    .timeSince {
+      font-size: 12px;
+    }
+  }
+`;
+
+export const CommentContent = styled.div`
+  align-self: self-start;
 `;
