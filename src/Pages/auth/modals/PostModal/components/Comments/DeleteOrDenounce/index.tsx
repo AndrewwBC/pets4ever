@@ -4,38 +4,55 @@ import {
   Modal,
   Content,
 } from "../../../../../Feed/Posts/components/PostOptionsModal/styles";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import COMMENT_API from "../../../../../../../api/comment/COMMENT_API";
 
 interface DeleteOrDenounceProps {
-  username: string;
-  commentId: string;
-  modal: boolean;
-  setModal: Dispatch<SetStateAction<boolean>>;
+  modal: {
+    state: boolean;
+    data: {
+      username: string;
+      commentId: string;
+    };
+  };
+  setModal: Dispatch<
+    SetStateAction<{
+      state: boolean;
+      data: {
+        username: string;
+        commentId: string;
+      };
+    }>
+  >;
   getPost: () => Promise<any>;
 }
 
-function DeleteOrDenounce({
-  username,
-  commentId,
-  setModal,
-  modal,
-  getPost,
-}: DeleteOrDenounceProps) {
+function DeleteOrDenounce({ setModal, modal, getPost }: DeleteOrDenounceProps) {
   const { user } = useUser();
 
   window.addEventListener("click", (e: any) => {
-    if (e.target.id === "deleteOrDenounceContainer") setModal(false);
+    if (e.target.id === "deleteOrDenounceContainer")
+      setModal({
+        state: false,
+        data: {
+          username: "",
+          commentId: "",
+        },
+      });
   });
-
-  useEffect(() => {}, [username]);
 
   async function handleDelete() {
     try {
-      const response = await COMMENT_API.delete(commentId);
+      const response = await COMMENT_API.delete(modal.data.commentId);
       if (response) {
         await getPost();
-        setModal(false);
+        setModal({
+          state: false,
+          data: {
+            username: "",
+            commentId: "",
+          },
+        });
       }
       console.log(response);
     } catch (err) {
@@ -48,14 +65,26 @@ function DeleteOrDenounce({
       <Modal id="deleteOrDenounceContainer">
         <Content>
           <ul>
-            {user?.username === username ? (
+            {user?.username === modal.data.username ? (
               <li onClick={() => handleDelete()} className="delete">
                 Excluir
               </li>
             ) : (
               <li>Denunciar</li>
             )}
-            <li onClick={() => setModal(false)}>Cancelar</li>
+            <li
+              onClick={() =>
+                setModal({
+                  state: false,
+                  data: {
+                    username: "",
+                    commentId: "",
+                  },
+                })
+              }
+            >
+              Cancelar
+            </li>
           </ul>
         </Content>
       </Modal>,

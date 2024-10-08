@@ -18,7 +18,13 @@ interface CommentsPostModalProps {
 }
 
 function CommentsPostModal({ comments, getPost }: CommentsPostModalProps) {
-  const [deleteOrDenounceModal, setDeleteOrDenounceModal] = useState(false);
+  const [deleteOrDenounceModal, setDeleteOrDenounceModal] = useState({
+    state: false,
+    data: {
+      username: "",
+      commentId: "",
+    },
+  });
 
   const container: {
     current: HTMLDivElement | null;
@@ -36,10 +42,17 @@ function CommentsPostModal({ comments, getPost }: CommentsPostModalProps) {
   if (comments)
     return (
       <Container ref={container}>
+        {deleteOrDenounceModal && (
+          <DeleteOrDenounce
+            modal={deleteOrDenounceModal}
+            setModal={setDeleteOrDenounceModal}
+            getPost={getPost}
+          />
+        )}
         {comments?.map(
           ({
-            commentId,
             comment,
+            commentId,
             creationDate,
             userId,
             username,
@@ -70,18 +83,17 @@ function CommentsPostModal({ comments, getPost }: CommentsPostModalProps) {
                     </p>
                     <HiOutlineDotsHorizontal
                       style={{ cursor: "pointer" }}
-                      onClick={() => setDeleteOrDenounceModal(true)}
+                      onClick={() =>
+                        setDeleteOrDenounceModal({
+                          state: true,
+                          data: {
+                            username,
+                            commentId,
+                          },
+                        })
+                      }
                       size={20}
                     />
-                    {deleteOrDenounceModal && (
-                      <DeleteOrDenounce
-                        username={username}
-                        commentId={commentId}
-                        modal={deleteOrDenounceModal}
-                        setModal={setDeleteOrDenounceModal}
-                        getPost={getPost}
-                      />
-                    )}
                   </div>
                 </UsernameAndOptions>
 
