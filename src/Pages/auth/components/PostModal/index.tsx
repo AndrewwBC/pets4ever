@@ -70,7 +70,10 @@ const PostModal = ({
               </div>
             </div>
 
-            <CommentsPostModal comments={modalPostData.comments} />
+            <CommentsPostModal
+              getPost={getPost}
+              comments={modalPostData.comments}
+            />
 
             <IconsLikeCommentSharePostModal
               postId={modalPostData.postId}
