@@ -42,7 +42,7 @@ function CommentsPostModal({ comments, getPost }: CommentsPostModalProps) {
   if (comments)
     return (
       <Container ref={container}>
-        {deleteOrDenounceModal && (
+        {deleteOrDenounceModal.state && (
           <DeleteOrDenounce
             modal={deleteOrDenounceModal}
             setModal={setDeleteOrDenounceModal}
