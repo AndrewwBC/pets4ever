@@ -33,16 +33,6 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
   const [preview, setPreview] = useState("");
   const { user } = useUser();
 
-  const data = {
-    userId: "",
-    name: "",
-  };
-
-  const now = new Date();
-  const createdAt = `${now.getDate()}/${
-    now.getMonth() + 1
-  }/${now.getFullYear()}`;
-
   useEffect(() => {
     if (!file) {
       setPreview("");
@@ -70,8 +60,13 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
     }
   }
 
+  window.addEventListener("click", (e: any) => {
+    if (e.target?.id === "createPostModalContainer") {
+      setCreatePostModal(false);
+    }
+  });
   return createPortal(
-    <Modal>
+    <Modal id="createPostModalContainer">
       <Content>
         <div>
           {isLoading.isLoading && (
@@ -82,26 +77,28 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
           )}
 
           {!preview ? (
-            <InputFileModal>
-              <div>
-                <input
-                  type="file"
-                  onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
-                    if (target.files?.length != null) {
-                      setFile(target.files[0]);
-                    }
-                  }}
-                />
+            <div className="inputContainer">
+              <InputFileModal>
+                <div>
+                  <input
+                    type="file"
+                    onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
+                      if (target.files?.length != null) {
+                        setFile(target.files[0]);
+                      }
+                    }}
+                  />
 
-                {!file ? (
-                  <p>Clique aqui para selecionar uma imagem.</p>
-                ) : (
-                  <p>Arquivo selecionado: {file.name}</p>
-                )}
-              </div>
-            </InputFileModal>
+                  {!file ? (
+                    <p>Clique aqui para selecionar uma imagem.</p>
+                  ) : (
+                    <p>Arquivo selecionado: {file.name}</p>
+                  )}
+                </div>
+              </InputFileModal>
+            </div>
           ) : (
-            <div>
+            <div className="previewContainer">
               <img className="feedPhoto" src={preview} />
               <button
                 onClick={() => setFile(null)}
@@ -114,19 +111,9 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
         </div>
 
         <div className="postInfo">
-          <div onClick={() => setCreatePostModal(false)} className="closeModal">
-            <p className="x">x</p>
-            <p className="fechar">cancelar</p>
-          </div>
-
-          <div onClick={handleSubmit} className="post">
-            <p>Postar</p>
-          </div>
-
           <div className="nameDescriptionAndCreatedAt">
             <div className="nameAndCreatedAt">
-              <p>@{data.name}</p>
-              <small>{createdAt}</small>
+              <p>@{user?.username}</p>
             </div>
 
             <div className="descriptionContainer">
@@ -147,6 +134,10 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
           <div className="commentContainer">
             <Input disabled={true} placeholder="Insira um comentário..." />
             <VscSend style={{ cursor: "pointer" }} size={26} />
+          </div>
+
+          <div onClick={handleSubmit} className="post">
+            <p>Postar</p>
           </div>
         </div>
       </Content>

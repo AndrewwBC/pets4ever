@@ -2,7 +2,15 @@ import { Dispatch, SetStateAction } from "react";
 import { PostProps } from "../../../../../../types/post";
 
 export interface PostOptionsModalProps {
-  post: PostProps;
-  setModal: Dispatch<SetStateAction<boolean>>;
+  setModal: Dispatch<
+    SetStateAction<{
+      state: boolean;
+      post: PostProps | undefined;
+    }>
+  >;
+  modal: {
+    state: boolean;
+    post: PostProps | undefined;
+  };
   api: () => Promise<any>;
 }
