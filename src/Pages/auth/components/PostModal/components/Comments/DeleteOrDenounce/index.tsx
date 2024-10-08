@@ -4,7 +4,7 @@ import {
   Modal,
   Content,
 } from "../../../../../Feed/Posts/components/PostOptionsModal/styles";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import COMMENT_API from "../../../../../../../api/comment/COMMENT_API";
 
 interface DeleteOrDenounceProps {
@@ -25,6 +25,8 @@ function DeleteOrDenounce({
   window.addEventListener("click", (e: any) => {
     if (e.target.id === "deleteOrDenounceContainer") setModal(false);
   });
+
+  useEffect(() => {}, [username]);
 
   async function handleDelete() {
     try {
