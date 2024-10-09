@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PostProfilePicture from "../PostProfilePicture";
 import { Content } from "./styles";
+import { useUser } from "../../../../../context/UserProvider";
 
 interface UsernameAndProfileImgProps {
   profileImgUrl: string;
@@ -11,10 +12,13 @@ function UsernameAndProfileImg({
   profileImgUrl,
   username,
 }: UsernameAndProfileImgProps) {
+  const { user } = useUser();
+
   const [postProfilePictureModal, setPostProfilePictureModal] =
     useState<boolean>(false);
 
   function updateProfileImg() {
+    if (user?.username === username) return;
     setPostProfilePictureModal(!postProfilePictureModal);
   }
 
