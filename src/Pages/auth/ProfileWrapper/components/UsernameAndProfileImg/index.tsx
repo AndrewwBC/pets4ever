@@ -18,7 +18,7 @@ function UsernameAndProfileImg({
     useState<boolean>(false);
 
   function updateProfileImg() {
-    if (user?.username === username) return;
+    if (user?.username !== username) return;
     setPostProfilePictureModal(!postProfilePictureModal);
   }
 
