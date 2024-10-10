@@ -4,14 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { ListOfUserProps } from "./types";
 
 export default function ListOfUserModal({
-  listOfUsers,
+  modal,
   setModal,
   title,
 }: ListOfUserProps) {
   const nav = useNavigate();
 
   window.addEventListener("click", (e: any) => {
-    if (e.target?.id === "container")
+    if (e.target?.id === "listOfUserModal")
       setModal({
         title: "",
         modalState: false,
@@ -29,16 +29,16 @@ export default function ListOfUserModal({
     nav(`/${username}`);
   }
 
-  if (listOfUsers.data?.length! > 0)
+  if (modal.data?.length! > 0)
     return createPortal(
-      <Container id="container">
+      <Container id="listOfUserModal">
         <Content>
           <div className="title">
             <p>{title}</p>
           </div>
 
           <ListContainer>
-            {listOfUsers.data!.map((item) => (
+            {modal.data!.map((item) => (
               <Link
                 onClick={(e: any) => handleClick(e, item.username)}
                 to={""}

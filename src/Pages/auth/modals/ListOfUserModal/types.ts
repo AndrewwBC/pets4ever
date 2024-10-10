@@ -3,7 +3,7 @@ import { UsernameAndProfileImgUrlProps } from "../../../../types/user";
 
 export interface ListOfUserProps {
   title: string;
-  listOfUsers: {
+  modal: {
     modalState: boolean;
     data: UsernameAndProfileImgUrlProps[] | undefined;
   };

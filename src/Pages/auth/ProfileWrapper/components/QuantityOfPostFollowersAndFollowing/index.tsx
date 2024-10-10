@@ -35,7 +35,7 @@ function QuantityOfPostFollowersAndFollowing({
       {modal.modalState && (
         <ListOfUserModal
           title={modal.title}
-          listOfUsers={modal}
+          modal={modal}
           setModal={setModal}
         />
       )}

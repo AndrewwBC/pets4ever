@@ -134,6 +134,7 @@ export const Content = styled.section`
     align-items: end;
     justify-content: flex-start;
     color: ${({ theme }) => theme.neutral.c9};
+    margin-bottom: 8px;
   }
 
   .insertCommentContainer {

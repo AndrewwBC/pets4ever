@@ -6,10 +6,8 @@ import { Link } from "react-router-dom";
 import IconsToLikeCommentAndShare from "../components/IconsToLikeCommentAndShare";
 import QuantityOfLikes from "../components/QuantityOfLikes";
 import LastComment from "../components/LastComment";
-import { ListOfUserStateProps } from "../../modals/ListOfUserModal/types";
 import NoPosts from "./components/NoPosts";
 import { useUser } from "../../../../context/UserProvider";
-import ListOfUserModal from "../../modals/ListOfUserModal";
 import POST_API from "../../../../api/post/POST_API";
 import { timeSince } from "../../../../utils/timeSince";
 import { PostProps } from "../../../../types/post";
@@ -21,11 +19,7 @@ import { FullDogLoader } from "../../../../components/FullDogLoader";
 export default function Posts() {
   const { user } = useUser();
   const [posts, setPosts] = useState<PostProps[]>();
-  const [listOfLikes, setListOfLikesModal] = useState<ListOfUserStateProps>({
-    title: "Curtidas",
-    modalState: false,
-    data: undefined,
-  });
+
   const [showModal, setShowModal] = useState(false);
   const [modalPostData, setModalPostData] = useState<PostProps | null>(null);
 
@@ -87,13 +81,6 @@ export default function Posts() {
   if (posts)
     return (
       <PostsContainer>
-        {listOfLikes.data && (
-          <ListOfUserModal
-            title={listOfLikes.title}
-            listOfUsers={listOfLikes}
-            setModal={setListOfLikesModal}
-          />
-        )}
         {showModal && (
           <PostModal
             setShowModal={setShowModal}
@@ -127,7 +114,7 @@ export default function Posts() {
                     width={40}
                   />
                   <Link to={`/${item.username}`}>
-                    <span>{item.username}</span>
+                    <span>@{item.username}</span>
                   </Link>
                 </div>
 
@@ -164,13 +151,12 @@ export default function Posts() {
                 </div>
                 <QuantityOfLikes
                   listOfLikes={item.listOfLikes}
-                  setListOfLikesModal={setListOfLikesModal}
                   quantityOfLikes={item.quantityOfLikes}
                   userLikedThisPost={item.userLikedThisPost}
                 />
                 <div className="nameAndDescription">
                   <Link to={`/${item.username}`}>
-                    <span className="name">{item.username.toLowerCase()}</span>
+                    <span className="name">@{item.username.toLowerCase()}</span>
                   </Link>
                   <small>{item.description}</small>
                 </div>

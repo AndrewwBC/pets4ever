@@ -38,7 +38,6 @@ function PatchProfile() {
       patchResponseError.filter((error) => !error.fieldName)
     );
 
-    console.log(errors);
     try {
       const response = await userApi.patchProfile(data, user?.userId!);
 
@@ -61,7 +60,7 @@ function PatchProfile() {
     )?.message;
 
     const zodError = errors[field]?.message; // Captura os erros de Zod
-    console.log(zodError);
+
     // Prioriza os erros do Zod, mas se não houver, exibe o erro da API
     return zodError || apiError;
   }
