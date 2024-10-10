@@ -9,6 +9,8 @@ import InsertCommentPostModal from "./components/InsertCommentContainer";
 import { timeSince } from "../../../../utils/timeSince";
 import POST_API from "../../../../api/post/POST_API";
 import { useUser } from "../../../../context/UserProvider";
+import QuantityOfLikes from "../../Feed/components/QuantityOfLikes";
+import { Link } from "react-router-dom";
 
 const PostModal = ({
   setShowModal,
@@ -19,7 +21,6 @@ const PostModal = ({
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -61,7 +62,9 @@ const PostModal = ({
           <div className="postInfo">
             <div className="nameDescriptionAndCreatedAt">
               <div className="nameAndCreatedAt">
-                <p>@{modalPostData.username.toLowerCase()}</p>
+                <Link to={modalPostData.username}>
+                  <p>@{modalPostData.username}</p>
+                </Link>
                 <small>{timeSince(modalPostData.creationDate)}</small>
               </div>
 
@@ -77,6 +80,13 @@ const PostModal = ({
 
             <IconsLikeCommentSharePostModal
               postId={modalPostData.postId}
+              userLikedThisPost={modalPostData.userLikedThisPost}
+              getPost={getPost}
+            />
+
+            <QuantityOfLikes
+              listOfLikes={modalPostData.listOfLikes}
+              quantityOfLikes={modalPostData.quantityOfLikes}
               userLikedThisPost={modalPostData.userLikedThisPost}
             />
 

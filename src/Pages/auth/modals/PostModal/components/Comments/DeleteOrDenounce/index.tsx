@@ -54,10 +54,7 @@ function DeleteOrDenounce({ setModal, modal, getPost }: DeleteOrDenounceProps) {
           },
         });
       }
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }
 
   if (modal)

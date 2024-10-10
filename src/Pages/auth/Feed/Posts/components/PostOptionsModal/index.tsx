@@ -18,13 +18,11 @@ function PostOptionsModal({ modal, setModal, api }: PostOptionsModalProps) {
   async function deletePost() {
     try {
       const response = await POST_API.delete(modal.post!.postId);
-      console.log(response, modal.post!.postId);
+
       if (response) {
         await api();
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }
 
   if (modal.state) {

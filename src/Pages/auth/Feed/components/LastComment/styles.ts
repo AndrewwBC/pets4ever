@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   .content {
-    background-color: ${({ theme }) => theme.neutral.c7};
+    background-color: ${({ theme }) => theme.purple.dark};
     padding: 8px;
     border-radius: 8px;
     display: flex;

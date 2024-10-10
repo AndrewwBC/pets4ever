@@ -75,7 +75,6 @@ export default function Form() {
   }
 
   async function onSubmit(data: RegisterFormSchema) {
-    console.log(errors);
     setRegisterResponseErrors(
       registerResponseErrors.filter((err) => !err.field)
     );

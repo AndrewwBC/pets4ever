@@ -14,7 +14,7 @@ export const PostsContainer = styled.section`
     width: 100%;
     width: min(470px, 100vw);
     padding-bottom: 24px;
-    border-bottom: 1px solid ${({ theme }) => theme.neutral.c5};
+    border-bottom: 1px solid ${({ theme }) => theme.purple.medium};
     background-color: ${({ theme }) => theme.bg};
 
     &:nth-child(n + 2) {
@@ -53,7 +53,7 @@ export const PostsContainer = styled.section`
 
     .dots {
       flex-shrink: 1;
-      color: ${({ theme }) => theme.purple.medium};
+      color: ${({ theme }) => theme.purple.light};
       cursor: pointer;
     }
   }
@@ -133,7 +133,7 @@ export const PostsContainer = styled.section`
       display: flex;
       align-items: center;
       justify-content: start;
-      margin-top: 18px;
+      margin-top: 12px;
       gap: 32px;
 
       .name {

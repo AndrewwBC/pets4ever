@@ -122,7 +122,7 @@ export const SideMenuContent = styled.div`
     display: block;
     font-size: 24px;
     font-weight: 600;
-    color: ${({ theme }) => theme.neutral.c9};
+    color: ${({ theme }) => theme.yellow.dark};
     margin: 64px 0;
 
     @media (max-width: 1263px) {

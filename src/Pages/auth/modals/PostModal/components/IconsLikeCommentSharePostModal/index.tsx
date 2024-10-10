@@ -3,7 +3,11 @@ import POST_API from "../../../../../../api/post/POST_API";
 import { useUser } from "../../../../../../context/UserProvider";
 import { useEffect, useState } from "react";
 
-function IconsLikeCommentSharePostModal({ postId, userLikedThisPost }: any) {
+function IconsLikeCommentSharePostModal({
+  postId,
+  userLikedThisPost,
+  getPost,
+}: any) {
   const [likeLoading, setLikeLoading] = useState(false);
   const [userLiked, setUserLiked] = useState(userLikedThisPost);
 
@@ -32,6 +36,7 @@ function IconsLikeCommentSharePostModal({ postId, userLikedThisPost }: any) {
       } catch (err) {
       } finally {
         setLikeLoading(false);
+        getPost();
       }
     }
   }
