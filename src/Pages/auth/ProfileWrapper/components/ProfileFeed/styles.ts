@@ -21,8 +21,6 @@ export const Container = styled.section`
     flex-direction: column;
     align-items: start;
     justify-content: start;
-    width: 100%;
-
     gap: 2px;
   }
 `;
@@ -33,7 +31,7 @@ export const EachRow = styled.div`
   align-items: stretch;
   max-height: 240px;
   height: 240px;
-  width: 100%;
+  width: max-content;
 `;
 
 export const ImageContainer = styled.div`

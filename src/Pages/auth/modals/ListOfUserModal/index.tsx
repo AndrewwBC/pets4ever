@@ -11,12 +11,13 @@ export default function ListOfUserModal({
   const nav = useNavigate();
 
   window.addEventListener("click", (e: any) => {
-    if (e.target?.id === "listOfUserModal")
+    if (e.target?.id === "listOfUserModal") {
       setModal({
         title: "",
         modalState: false,
         data: undefined,
       });
+    }
   });
 
   function handleClick(e: any, username: string) {

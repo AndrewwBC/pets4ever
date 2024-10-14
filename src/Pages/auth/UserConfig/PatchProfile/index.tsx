@@ -59,9 +59,7 @@ function PatchProfile() {
       (error) => error.fieldName === field
     )?.message;
 
-    const zodError = errors[field]?.message; // Captura os erros de Zod
-
-    // Prioriza os erros do Zod, mas se não houver, exibe o erro da API
+    const zodError = errors[field]?.message;
     return zodError || apiError;
   }
 
