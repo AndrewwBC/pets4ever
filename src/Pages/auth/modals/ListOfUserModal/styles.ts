@@ -16,13 +16,27 @@ export const Container = styled.main`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 8px;
-  background-color: rgba(255, 255, 255, 1);
+  padding: 8px 24px;
+  background-color: ${({ theme }) => theme.neutral.c2};
   gap: 8px;
   border-radius: 8px;
   z-index: 999;
   max-height: 400px;
-  overflow-y: scroll;
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ddd;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 10px;
+  }
 
   .title {
     text-align: center;
@@ -41,6 +55,7 @@ export const ListContainer = styled.div`
     padding: 4px;
     display: flex;
     background-color: ${({ theme }) => theme.neutral.c3};
+    color: ${({ theme }) => theme.neutral.c8};
     align-items: center;
     flex-direction: row;
     justify-content: start;
