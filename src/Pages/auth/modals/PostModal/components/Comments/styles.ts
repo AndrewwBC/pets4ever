@@ -9,6 +9,8 @@ export const Container = styled.div`
   gap: 8px;
   margin: 12px 0px;
   overflow-y: auto;
+  max-height: 380px;
+  padding: 24px 0px;
 
   &::-webkit-scrollbar {
     width: 5px;
