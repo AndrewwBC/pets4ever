@@ -30,6 +30,13 @@ class PostHttpService {
     );
   }
 
+  public patchPostDescription(data: any): Promise<any> {
+    return this.handleRequest<any>(
+      () => this.API.patch("/post/description", data),
+      "PATCH_DESCRIPTION_ERROR"
+    );
+  }
+
   public show(data: ShowProps) {
     return this.handleRequest<PostProps>(
       () => this.API.get(`/post/show/${data.postId}/${data.username}`),

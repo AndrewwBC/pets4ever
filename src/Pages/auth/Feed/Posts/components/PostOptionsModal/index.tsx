@@ -5,11 +5,17 @@ import { useUser } from "../../../../../../context/UserProvider";
 import { PostOptionsModalProps } from "./types";
 import POST_API from "../../../../../../api/post/POST_API";
 
-function PostOptionsModal({ modal, setModal, api }: PostOptionsModalProps) {
+function PostOptionsModal({
+  modal,
+  setModal,
+  getPosts,
+  setPostModal,
+  editPostDescriptionFunction,
+}: PostOptionsModalProps) {
   const { user } = useUser();
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
-
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -20,9 +26,22 @@ function PostOptionsModal({ modal, setModal, api }: PostOptionsModalProps) {
       const response = await POST_API.delete(modal.post!.postId);
 
       if (response) {
-        await api();
+        setPostModal!(false);
+        setModal({
+          state: false,
+          post: undefined,
+        });
+        await getPosts!();
       }
     } catch (err) {}
+  }
+
+  function handleEdit() {
+    editPostDescriptionFunction(modal.post?.postId!);
+    setModal({
+      state: false,
+      post: undefined,
+    });
   }
 
   if (modal.state) {
@@ -32,7 +51,7 @@ function PostOptionsModal({ modal, setModal, api }: PostOptionsModalProps) {
           <li onClick={() => deletePost()} className="delete">
             Excluir
           </li>
-          <li>Editar</li>
+          <li onClick={() => handleEdit()}>Editar</li>
         </>
       ) : (
         <li>Denunciar</li>
@@ -50,7 +69,7 @@ function PostOptionsModal({ modal, setModal, api }: PostOptionsModalProps) {
       <Modal id="container">
         <Content>
           <ul>
-            {content}{" "}
+            {content}
             <li
               onClick={() =>
                 setModal({

@@ -70,9 +70,8 @@ export const Content = styled.section`
 
   .postInfo {
     background-color: ${({ theme }) => theme.bg};
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 60vh auto;
+    display: flex;
+    flex-direction: column;
 
     @media (max-width: 768px) {
       grid-template-rows: auto 20vh auto;
@@ -86,30 +85,23 @@ export const Content = styled.section`
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
     position: relative;
-
-    .description {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-      width: 100%;
-      margin-bottom: 12px;
-      padding: 12px;
-      font-size: 18px;
-      color: ${({ theme }) => theme.neutral.c8};
-    }
   }
 
-  .nameDescriptionAndCreatedAt {
+  .nameDescriptionAndDots {
     display: flex;
     flex-direction: column;
     align-items: self-start;
     justify-content: flex-start;
+    flex-grow: 1;
 
     gap: 32px;
 
-    .nameAndCreatedAt {
+    .nameAndPostOptions {
       display: flex;
       width: 100%;
       align-items: center;
       justify-content: space-between;
+      color: ${({ theme }) => theme.purple.light};
 
       p {
         color: ${({ theme }) => theme.neutral.c6};
@@ -123,8 +115,17 @@ export const Content = styled.section`
     }
 
     .description {
-      font-size: 16px;
+      border-bottom: 1px solid ${({ theme }) => theme.yellow.light};
+      width: 100%;
+      margin-bottom: 12px;
+      padding-bottom: 2px;
+      font-size: 18px;
+      font-weight: 500;
+      color: ${({ theme }) => theme.neutral.c8};
+      width: 100%;
+      height: max-content;
       word-wrap: break-word;
+      line-break: anywhere;
     }
   }
 

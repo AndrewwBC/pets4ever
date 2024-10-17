@@ -19,7 +19,7 @@ import { FullDogLoader } from "../../../../components/FullDogLoader";
 export default function Posts() {
   const { user } = useUser();
   const [posts, setPosts] = useState<PostProps[]>();
-
+  const [editPost, setEditPost] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalPostData, setModalPostData] = useState<PostProps | null>(null);
 
@@ -72,6 +72,12 @@ export default function Posts() {
     }
   }
 
+  function editPostDescription(postId: string) {
+    setEditPost(true);
+    setShowModal(true);
+    setModalPostData(posts?.find((post) => post.postId === postId)!);
+  }
+
   if (!posts)
     return <FullDogLoader text="Carregando Postagens..." transparent={false} />;
 
@@ -83,6 +89,9 @@ export default function Posts() {
       <PostsContainer>
         {showModal && (
           <PostModal
+            getPosts={api}
+            editDescription={editPost}
+            setEditPost={setEditPost}
             setShowModal={setShowModal}
             modalPostData={modalPostData}
             setModalPostData={setModalPostData}
@@ -91,9 +100,10 @@ export default function Posts() {
         )}
         {modalPostOptions.state && (
           <PostOptionsModal
-            api={api}
+            getPosts={api}
             modal={modalPostOptions}
             setModal={setPostOptionsModal}
+            editPostDescriptionFunction={editPostDescription}
           />
         )}
 
@@ -158,7 +168,11 @@ export default function Posts() {
                   <Link to={`/${item.username}`}>
                     <span className="name">@{item.username.toLowerCase()}</span>
                   </Link>
-                  <small>{item.description}</small>
+                  <small>
+                    {item.description.length > 28
+                      ? item.description.slice(0, 28) + "..."
+                      : item.description.slice(0, 28)}
+                  </small>
                 </div>
 
                 <LastComment comments={item.comments} />
