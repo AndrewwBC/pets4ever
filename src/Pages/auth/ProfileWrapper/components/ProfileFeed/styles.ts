@@ -5,7 +5,7 @@ export const Container = styled.section`
   padding: 40px 0px;
   width: 100%;
   margin-left: 64px;
-  border-top: 1px solid ${({ theme }) => theme.neutral.c4};
+  border-top: 1px solid ${({ theme }) => theme.yellow.light};
 
   @media (max-width: 1600px) {
     margin-left: 80px;
@@ -21,17 +21,18 @@ export const Container = styled.section`
     flex-direction: column;
     align-items: start;
     justify-content: start;
-    gap: 2px;
+    gap: 4px;
   }
 `;
 
 export const EachRow = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 240px;
   gap: 4px;
-  align-items: stretch;
   max-height: 240px;
   height: 240px;
-  width: max-content;
+  max-width: 100%;
 `;
 
 export const ImageContainer = styled.div`
@@ -41,6 +42,6 @@ export const ImageContainer = styled.div`
   img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 `;

@@ -28,6 +28,7 @@ export const Content = styled.section`
 
     img {
       height: 100%;
+      object-fit: cover;
     }
     background-color: ${({ theme }) => theme.neutral.c2};
   }

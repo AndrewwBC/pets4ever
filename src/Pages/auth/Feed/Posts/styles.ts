@@ -14,7 +14,7 @@ export const PostsContainer = styled.section`
     width: 100%;
     width: min(470px, 100vw);
     padding-bottom: 24px;
-    border-bottom: 1px solid ${({ theme }) => theme.purple.medium};
+    border-bottom: 1px solid ${({ theme }) => theme.yellow.light};
     background-color: ${({ theme }) => theme.bg};
 
     &:nth-child(n + 2) {

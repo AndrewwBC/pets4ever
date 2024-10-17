@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { PostProps } from "../../../../../../types/post";
 
 export interface PostOptionsModalProps {
+  editPostDescriptionFunction: (postId: string) => void;
   setModal: Dispatch<
     SetStateAction<{
       state: boolean;
@@ -12,5 +13,6 @@ export interface PostOptionsModalProps {
     state: boolean;
     post: PostProps | undefined;
   };
-  api: () => Promise<any>;
+  getPosts?: () => Promise<any>;
+  setPostModal?: Dispatch<SetStateAction<boolean>>;
 }

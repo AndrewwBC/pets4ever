@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { PostModalProps } from "./types";
 import { createPortal } from "react-dom";
@@ -11,13 +11,27 @@ import POST_API from "../../../../api/post/POST_API";
 import { useUser } from "../../../../context/UserProvider";
 import QuantityOfLikes from "../../Feed/components/QuantityOfLikes";
 import { Link } from "react-router-dom";
+import EditDescriptionModal from "../../Feed/Posts/components/EditDescriptionModal";
+import { PostProps } from "../../../../types/post";
+import PostOptionsModal from "../../Feed/Posts/components/PostOptionsModal";
+import { RxDotsVertical } from "react-icons/rx";
 
 const PostModal = ({
+  getPosts,
   setShowModal,
   modalPostData,
   setModalPostData,
+  editDescription,
+  setEditPost,
 }: PostModalProps) => {
   const { user } = useUser();
+  const [modalPostOptions, setPostOptionsModal] = useState<{
+    state: boolean;
+    post: PostProps | undefined;
+  }>({
+    state: false,
+    post: undefined,
+  });
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -48,9 +62,31 @@ const PostModal = ({
     }
   });
 
+  function editPostDescription() {
+    setEditPost(true);
+    setShowModal(true);
+    setModalPostData(modalPostData);
+  }
+
   if (modalPostData)
     return createPortal(
       <Modal id="container">
+        {modalPostOptions.state && (
+          <PostOptionsModal
+            getPosts={getPosts}
+            modal={modalPostOptions}
+            setModal={setPostOptionsModal}
+            setPostModal={setShowModal}
+            editPostDescriptionFunction={editPostDescription}
+          />
+        )}
+        {editDescription && (
+          <EditDescriptionModal
+            postId={modalPostData.postId}
+            getPost={getPost}
+            setModal={setEditPost}
+          />
+        )}
         <Content>
           <div className="imageContainer">
             <img
@@ -60,12 +96,23 @@ const PostModal = ({
           </div>
 
           <div className="postInfo">
-            <div className="nameDescriptionAndCreatedAt">
-              <div className="nameAndCreatedAt">
+            <div className="nameDescriptionAndDots">
+              <div className="nameAndPostOptions">
                 <Link to={modalPostData.username}>
                   <p>@{modalPostData.username}</p>
                 </Link>
-                <small>{timeSince(modalPostData.creationDate)}</small>
+
+                <RxDotsVertical
+                  style={{ cursor: "pointer" }}
+                  className="dots"
+                  size={22}
+                  onClick={() =>
+                    setPostOptionsModal({
+                      state: true,
+                      post: modalPostData,
+                    })
+                  }
+                />
               </div>
 
               <div className="description">
@@ -78,11 +125,15 @@ const PostModal = ({
               comments={modalPostData.comments}
             />
 
-            <IconsLikeCommentSharePostModal
-              postId={modalPostData.postId}
-              userLikedThisPost={modalPostData.userLikedThisPost}
-              getPost={getPost}
-            />
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <IconsLikeCommentSharePostModal
+                postId={modalPostData.postId}
+                userLikedThisPost={modalPostData.userLikedThisPost}
+                getPost={getPost}
+              />
+
+              <small>{timeSince(modalPostData.creationDate)}</small>
+            </div>
 
             <QuantityOfLikes
               listOfLikes={modalPostData.listOfLikes}
