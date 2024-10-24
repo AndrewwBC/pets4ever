@@ -3,9 +3,12 @@ import StoriesModal from "../../../modals/StoriesModal";
 import { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { FaRegPlusSquare } from "react-icons/fa";
+import CreateStorieModal from "./CreateStorieModal";
 
 const Stories = () => {
   const [storiesModal, setStoriesModal] = useState(false);
+  const [createModal, setCreateModal] = useState(true);
 
   const stories = [
     {
@@ -78,8 +81,16 @@ const Stories = () => {
   }
   return (
     <Container>
+      {createModal && <CreateStorieModal setModal={setCreateModal} />}
       <header>
-        <span>Stories</span>
+        <div>
+          <span>Stories</span>
+        </div>
+        <div className="gradient"></div>
+        <div onClick={() => setCreateModal(true)} className="icon">
+          <FaRegPlusSquare size={20} />
+          <p>Novo</p>
+        </div>
       </header>
 
       {storiesModal && <StoriesModal />}

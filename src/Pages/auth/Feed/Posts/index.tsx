@@ -15,6 +15,7 @@ import PostOptionsModal from "./components/PostOptionsModal";
 import { RxDotsVertical } from "react-icons/rx";
 import { getPosts } from "../api";
 import { FullDogLoader } from "../../../../components/FullDogLoader";
+import VideoOrImage from "./components/VideoOrImage";
 
 export default function Posts() {
   const { user } = useUser();
@@ -139,13 +140,10 @@ export default function Posts() {
                   }
                 />
               </header>
-              <div className="imageContainer">
-                <img
-                  src={`https://pets4ever.s3.us-east-2.amazonaws.com/${item.imageUrl}`}
-                  alt=""
-                  onClick={() => handlePostModal(item.postId)}
-                />
-              </div>
+              <VideoOrImage
+                onClick={() => handlePostModal(item.postId)}
+                postUrl={item.imageUrl}
+              />
               <div className="postInfoAndStatus">
                 <div className="iconsContainerAndCreatedAt">
                   <IconsToLikeCommentAndShare

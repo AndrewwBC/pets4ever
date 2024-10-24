@@ -30,6 +30,12 @@ export const Content = styled.section`
       height: 100%;
       object-fit: cover;
     }
+
+    video {
+      max-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     background-color: ${({ theme }) => theme.neutral.c2};
   }
 

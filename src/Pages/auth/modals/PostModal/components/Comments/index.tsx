@@ -73,7 +73,7 @@ function CommentsPostModal({ comments, getPost }: CommentsPostModalProps) {
 
                 <UsernameAndOptions>
                   <div>
-                    <Link to={username}>
+                    <Link className="username" to={username}>
                       <p>{username}</p>
                     </Link>
                   </div>

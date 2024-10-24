@@ -30,17 +30,27 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
     step: "",
     isLoading: false,
   });
-  const [preview, setPreview] = useState("");
+  const [preview, setPreview] = useState({
+    file: "",
+    type: "",
+  });
   const { user } = useUser();
 
   useEffect(() => {
     if (!file) {
-      setPreview("");
+      setPreview({
+        file: "",
+        type: "",
+      });
       return;
     }
 
     const objectUrl = URL.createObjectURL(file);
-    setPreview(objectUrl);
+    setPreview({
+      file: objectUrl,
+      type: file.type,
+    });
+
     return () => URL.revokeObjectURL(objectUrl);
   }, [file]);
 
@@ -65,6 +75,7 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
       setCreatePostModal(false);
     }
   });
+  console.log(preview);
   return createPortal(
     <Modal id="createPostModalContainer">
       <Content>
@@ -76,7 +87,7 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
             />
           )}
 
-          {!preview ? (
+          {!preview.file ? (
             <div className="inputContainer">
               <InputFileModal>
                 <div>
@@ -99,7 +110,15 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
             </div>
           ) : (
             <div className="previewContainer">
-              <img className="feedPhoto" src={preview} />
+              {preview.type.includes("mp4") ? (
+                <video controls preload="metadata" playsInline>
+                  <source src={preview.file} type="video/mp4" />
+                  Seu navegador não suporta a tag de vídeo.
+                </video>
+              ) : (
+                <img className="feedPhoto" src={preview.file} />
+              )}
+
               <button
                 onClick={() => setFile(null)}
                 className="cancelImageButton"

@@ -13,7 +13,7 @@ export const PostsContainer = styled.section`
   .eachPost {
     width: 100%;
     width: min(470px, 100vw);
-    padding-bottom: 24px;
+    padding-bottom: 12px;
     border-bottom: 1px solid ${({ theme }) => theme.yellow.light};
     background-color: ${({ theme }) => theme.bg};
 
@@ -81,7 +81,8 @@ export const PostsContainer = styled.section`
       padding-bottom: 75%; /* Alterar a proporção para telas menores */
     }
 
-    img {
+    img,
+    video {
       position: absolute;
       border-radius: 4px;
       cursor: pointer;
