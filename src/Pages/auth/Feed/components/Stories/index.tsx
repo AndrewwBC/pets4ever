@@ -8,7 +8,7 @@ import CreateStorieModal from "./CreateStorieModal";
 
 const Stories = () => {
   const [storiesModal, setStoriesModal] = useState(false);
-  const [createModal, setCreateModal] = useState(true);
+  const [createModal, setCreateModal] = useState(false);
 
   const stories = [
     {
