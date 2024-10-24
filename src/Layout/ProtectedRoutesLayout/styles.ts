@@ -183,7 +183,7 @@ export const SideMenuContent = styled.div`
       border-radius: 4px;
       align-items: center;
       gap: 12px;
-      color: ${({ theme }) => theme.neutral.c9};
+      color: ${({ theme }) => theme.neutral.c9} !important;
       font-size: 16px;
       font-weight: 500;
       transition: all 0.3s;
@@ -199,7 +199,7 @@ export const SideMenuContent = styled.div`
 
       &:hover {
         color: #222;
-        background-color: ${({ theme }) => theme.yellow.dark};
+        background-color: ${({ theme }) => theme.yellow.dark} !important;
         * {
           transition: all 0.1s;
         }

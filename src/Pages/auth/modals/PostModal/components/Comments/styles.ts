@@ -72,6 +72,10 @@ export const UsernameAndOptions = styled.div`
   display: flex;
   flex-direction: column;
 
+  .username {
+    color: ${({ theme }) => theme.neutral.c8};
+  }
+
   .options {
     display: flex;
     align-items: center;

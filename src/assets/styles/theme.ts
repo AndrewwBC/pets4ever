@@ -37,9 +37,9 @@ export const lightTheme = {
     c9: "#000000",
   },
   purple: {
-    light: "#A56ABA",
-    medium: "#9632BA",
-    dark: "#581E6E",
+    light: "#B108F3",
+    medium: "#8A05BE",
+    dark: "#7B04A9",
   },
   yellow: {
     light: "#f6bb00",
@@ -63,9 +63,9 @@ export const darkTheme = {
     c9: "#FFFFFF", // c1
   },
   purple: {
-    light: "#b89ff4",
-    medium: "#7b44ff",
-    dark: "#581de6",
+    light: "#B108F3",
+    medium: "#8A05BE",
+    dark: "#7B04A9",
   },
   yellow: {
     light: "#f6bb00",
