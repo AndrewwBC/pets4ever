@@ -125,7 +125,7 @@ export default function Posts() {
                     width={40}
                   />
                   <Link to={`/${item.username}`}>
-                    <span>@{item.username}</span>
+                    <span>{item.username}</span>
                   </Link>
                 </div>
 
@@ -164,7 +164,7 @@ export default function Posts() {
                 />
                 <div className="nameAndDescription">
                   <Link to={`/${item.username}`}>
-                    <span className="name">@{item.username.toLowerCase()}</span>
+                    <span className="name">{item.username.toLowerCase()}</span>
                   </Link>
                   <small>
                     {item.description.length > 28

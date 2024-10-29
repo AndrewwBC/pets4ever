@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useUser } from "../../../../../../context/UserProvider";
 import STORIE_API from "../../../../../../api/storie/STORIE_API";
 import { Content, PreviewContainer } from "./styles";
@@ -14,12 +7,12 @@ import {
   Modal,
 } from "../../../../modals/CreatePostModal/styles";
 import { createPortal } from "react-dom";
+import { CreateStorieModalProps } from "./types";
 
-interface CreateStorieModalProps {
-  setModal: Dispatch<SetStateAction<boolean>>;
-}
-
-function CreateStorieModal({ setModal }: CreateStorieModalProps) {
+function CreateStorieModal({
+  setModal,
+  setCreateStatus,
+}: CreateStorieModalProps) {
   const [file, setFile] = useState<File | null | undefined>();
 
   const [preview, setPreview] = useState({
@@ -57,10 +50,38 @@ function CreateStorieModal({ setModal }: CreateStorieModalProps) {
       formData.append("userId", userId);
 
       try {
+        setModal(false);
+        setCreateStatus({
+          isLoading: true,
+          success: undefined,
+        });
         const uploadResponse = await STORIE_API.create(formData);
+
+        if (uploadResponse) {
+          setCreateStatus({
+            isLoading: true,
+            success: true,
+          });
+        }
         console.log(uploadResponse);
       } catch (err) {
+        setCreateStatus({
+          isLoading: true,
+          success: false,
+        });
         console.log(err);
+      } finally {
+        setCreateStatus({
+          isLoading: false,
+          success: true,
+        });
+        const timer = setTimeout(() => {
+          setCreateStatus({
+            isLoading: false,
+            success: undefined,
+          });
+          clearTimeout(timer);
+        }, 3000);
       }
     }
   }

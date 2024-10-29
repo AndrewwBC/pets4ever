@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   header {
-    padding-bottom: 12px;
+    padding-bottom: 8px;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
@@ -33,11 +33,15 @@ export const Container = styled.div`
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d5b4e2",endColorstr="#d5b4e2",GradientType=1);
     }
 
-    .icon {
+    .new {
       display: flex;
       align-items: center;
       gap: 8px;
       cursor: pointer;
+
+      .icon {
+        color: ${({ theme }) => theme.neutral.c8};
+      }
     }
 
     span,
@@ -50,21 +54,38 @@ export const Container = styled.div`
 
   .storiesContainer {
     padding-bottom: 32px;
+    display: flex;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
 
     .eachStorie {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: space-between;
+      max-width: max-content;
 
       span {
-        font-size: 14px;
-        color: ${({ theme }) => theme.neutral.c8};
+        font-size: 12px;
+        color: ${({ theme }) => theme.neutral.c9};
+
+        @media (max-width: 500px) {
+          font-size: 10px;
+        }
       }
     }
 
     img {
-      height: 48px;
-      width: 48px;
+      height: 60px;
+      width: 60px;
+
+      @media (max-width: 768px) {
+        height: 40px;
+        width: 40px;
+      }
+
       border-radius: 999999px;
       cursor: pointer;
       transition: 0.3s;
@@ -75,5 +96,49 @@ export const Container = styled.div`
         border: 2px solid black;
       }
     }
+  }
+`;
+
+const loader = keyframes`
+  0% {
+    background-color: #f6bb00;
+  } 50% {
+    background-color: #ffa000;
+ } 100% {
+  background-color: #f6bb00;
+ }
+ `;
+
+export const CreateStatusContainer = styled.div`
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ${loader} 2s infinite ease-in-out;
+    border-radius: 4px;
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .message {
+    font-size: 16px;
+    color: ${({ theme }) => theme.neutral.c2};
+  }
+`;
+
+export const SuccessStatusContainer = styled.div`
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00cc00;
+    border-radius: 4px;
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .message {
+    font-size: 16px;
+    color: ${({ theme }) => theme.neutral.c2};
   }
 `;

@@ -1,3 +1,5 @@
+import { ImageContainer } from "./styles";
+
 interface VideoOrImageProps {
   postUrl: string;
   onClick: () => void;
@@ -7,8 +9,9 @@ function VideoOrImage({ postUrl, onClick }: VideoOrImageProps) {
   const isVideo = postUrl.endsWith(".mp4");
   const mediaUrl = `https://pets4ever.s3.us-east-2.amazonaws.com/${postUrl}`;
 
+  console.log(mediaUrl);
   return (
-    <div onClick={onClick} className="imageContainer">
+    <ImageContainer onClick={onClick}>
       {isVideo ? (
         <video controls preload="metadata" playsInline>
           <source src={mediaUrl} type="video/mp4" />
@@ -17,7 +20,7 @@ function VideoOrImage({ postUrl, onClick }: VideoOrImageProps) {
       ) : (
         <img src={mediaUrl} alt="Post" loading="lazy" />
       )}
-    </div>
+    </ImageContainer>
   );
 }
 

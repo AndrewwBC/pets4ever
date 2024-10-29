@@ -1,65 +1,43 @@
-import { Container } from "./styles";
+import {
+  Container,
+  CreateStatusContainer,
+  SuccessStatusContainer,
+} from "./styles";
 import StoriesModal from "../../../modals/StoriesModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { FaRegPlusSquare } from "react-icons/fa";
 import CreateStorieModal from "./CreateStorieModal";
+import STORIE_API from "../../../../../api/storie/STORIE_API";
+import { StoriesProps } from "../../../../../api/storie/types";
+import { CreateStatusProps, StoriesModalProps } from "./types";
 
 const Stories = () => {
-  const [storiesModal, setStoriesModal] = useState(false);
+  const [storiesModal, setStoriesModal] = useState<StoriesModalProps>({
+    storie: undefined,
+    modalState: false,
+  });
   const [createModal, setCreateModal] = useState(false);
+  const [stories, setStories] = useState<StoriesProps[]>([]);
+  const [createStatus, setCreateStatus] = useState<CreateStatusProps>({
+    isLoading: false,
+    success: undefined,
+  });
 
-  const stories = [
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1608744882201-52a7f7f3dd60?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      user: "@sasa",
-    },
-  ];
+  useEffect(() => {
+    getStories();
+  }, []);
+
+  async function getStories() {
+    try {
+      const response = await STORIE_API.index();
+      console.log(response);
+      if (response) setStories(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const responsive = {
     desktop: {
@@ -72,28 +50,36 @@ const Stories = () => {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
+      items: 6,
+    },
+    mini: {
+      breakpoint: { max: 320, min: 0 },
+      items: 4,
     },
   };
 
-  function handleStoriesClick() {
-    setStoriesModal(!storiesModal);
-  }
   return (
     <Container>
-      {createModal && <CreateStorieModal setModal={setCreateModal} />}
+      {createModal && (
+        <CreateStorieModal
+          setModal={setCreateModal}
+          setCreateStatus={setCreateStatus}
+        />
+      )}
       <header>
         <div>
           <span>Stories</span>
         </div>
         <div className="gradient"></div>
-        <div onClick={() => setCreateModal(true)} className="icon">
-          <FaRegPlusSquare size={20} />
+        <div onClick={() => setCreateModal(true)} className="new">
+          <FaRegPlusSquare size={20} className="icon" />
           <p>Novo</p>
         </div>
       </header>
 
-      {storiesModal && <StoriesModal />}
+      {storiesModal.modalState && (
+        <StoriesModal modal={storiesModal} setModal={setStoriesModal} />
+      )}
 
       <Carousel
         centerMode={true}
@@ -105,15 +91,49 @@ const Stories = () => {
       >
         {stories.map((item) => (
           <div
-            onClick={() => handleStoriesClick}
+            onClick={() =>
+              setStoriesModal({
+                storie: item,
+                modalState: true,
+              })
+            }
             key={Math.random()}
             className="eachStorie"
           >
-            <img src={item.img} alt="" />
-            <span>{item.user}</span>
+            <img
+              src={
+                item.profileImgUrl
+                  ? `https://pets4ever.s3.us-east-2.amazonaws.com/${item.profileImgUrl}`
+                  : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
+              }
+              alt=""
+            />
+            <span>
+              {item.username.length > 8
+                ? item.username.slice(0, 8).concat("...")
+                : item.username}
+            </span>
           </div>
         ))}
       </Carousel>
+      {createStatus.isLoading && (
+        <CreateStatusContainer>
+          {true && (
+            <div className="content">
+              <p className="message">Estamos registrando o seu storie</p>
+            </div>
+          )}
+        </CreateStatusContainer>
+      )}
+      {!createStatus.isLoading && createStatus.success && (
+        <SuccessStatusContainer>
+          {true && (
+            <div className="content">
+              <p className="message">Storie registrado!</p>
+            </div>
+          )}
+        </SuccessStatusContainer>
+      )}
     </Container>
   );
 };

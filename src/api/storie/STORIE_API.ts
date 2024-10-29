@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import MyError from "../user/errors/myError";
 import API from "../axiosInstance";
+import { StoriesProps } from "./types";
 
 class StorieHttpService {
   private API = API;
@@ -18,9 +19,16 @@ class StorieHttpService {
   }
 
   public create(data: any) {
-    return this.handleRequest(
+    return this.handleRequest<any>(
       () => this.API.post("/storie/", data),
       "CREATE_STORIE_ERROR"
+    );
+  }
+
+  public index() {
+    return this.handleRequest<StoriesProps[]>(
+      () => this.API.get("/storie/"),
+      "INDEX_STORIE_ERROR"
     );
   }
 

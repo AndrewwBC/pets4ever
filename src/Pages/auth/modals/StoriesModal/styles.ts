@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Modal = styled.main`
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -14,30 +14,25 @@ export const Modal = styled.main`
 `;
 
 export const Content = styled.section`
-  border-radius: 12px;
-  position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
   justify-content: center;
-
-  img {
-    border-radius: 12px;
-    width: 540px;
-    height: 720px;
-    object-fit: fill;
-  }
+  min-width: 400px;
+  max-height: 600px;
 
   .userActions {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.6);
-    left: 0;
-    bottom: 0;
-    right: 0;
-    flex-grow: 1;
+    background-color: ${({ theme }) => theme.neutral.c1};
 
     display: grid;
     grid-template-columns: 1fr auto;
     padding: 12px 24px;
     gap: 32px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    .icon {
+      color: ${({ theme }) => theme.neutral.c8};
+    }
   }
 `;
