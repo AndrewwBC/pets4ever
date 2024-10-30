@@ -34,6 +34,21 @@ export default function ValidatingImageModal({
       document.getElementById("validatingImageModal")!
     );
 
+  if (isLoadingData.step === "isNotAnimal")
+    return createPortal(
+      <Container>
+        <div className="content">
+          <p style={{ color: "red", fontWeight: 700 }}>
+            Sua imagem foi negada!
+          </p>
+          <p style={{ color: "red", fontWeight: 700 }}>
+            Nosso sistema detectou que a imagem não é de um animal.
+          </p>
+        </div>
+      </Container>,
+      document.getElementById("validatingImageModal")!
+    );
+
   if (isLoadingData.step === "Posting")
     return createPortal(
       <Container>

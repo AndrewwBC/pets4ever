@@ -64,6 +64,7 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
         userId,
         file,
         description,
+        isLoading,
         setIsLoading
       );
       setUploadResponse(uploadResponse);

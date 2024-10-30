@@ -6,6 +6,10 @@ export async function uploadFile(
   userId: string,
   file: File,
   postDescription: string,
+  isLoading: {
+    step: string;
+    isLoading: boolean;
+  },
   setIsLoading: Dispatch<
     SetStateAction<{
       step: string;
@@ -32,26 +36,46 @@ export async function uploadFile(
       isLoading: true,
     });
     const requestPy = await axios({
-      url: "http://127.0.0.1:5000/getPredction",
+      url: "https://api.pets4ever.site/api/predction",
       method: "POST",
       data: formData,
     });
 
     const previsao = await requestPy.data.previsao;
-    return previsao;
-  } catch (err) {
-  } finally {
-    setIsLoading({
-      step: "",
-      isLoading: true,
-    });
-  }
 
+    if (previsao === "Animal") {
+      setIsLoading({
+        step: "isAnimal",
+        isLoading: true,
+      });
+
+      await post(setIsLoading, formData);
+    }
+
+    if (previsao === "Não é Animal") {
+      setIsLoading({
+        step: "isNotAnimal",
+        isLoading: true,
+      });
+    }
+
+    return previsao;
+  } catch (err) {}
+
+  if (isLoading.step === "isNotAnimal") {
+    console.log("Cancelando post");
+    return;
+  }
+}
+
+async function post(setIsLoading: any, formData: any) {
   try {
     setIsLoading({
       step: "Posting",
       isLoading: true,
     });
+
+    console.log("Postando");
 
     const r = await API.post(`/post`, formData);
 
