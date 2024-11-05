@@ -12,7 +12,6 @@ import { useUser } from "../../context/UserProvider";
 const ProtectedRoutesLayout = () => {
   const { setSystemTheme } = useTheme();
 
-  const [setIsActiveLabel] = useState("");
   const [logoutModal, setLogoutModal] = useState(false);
   const [createPostModal, setCreatePostModal] = useState(false);
 
@@ -86,19 +85,8 @@ const ProtectedRoutesLayout = () => {
 
             <nav className="menuContent">
               {menuItems.map((item) => (
-                <li
-                  key={Math.random()}
-                  onClick={() => setIsActiveLabel(item.label)}
-                >
-                  <Link
-                    // style={{
-                    //   color: isActiveLabel === item.label ? "#fff" : "initial",
-                    //   backgroundColor:
-                    //     isActiveLabel === item.label ? "#8A05BE" : "initial",
-                    // }}
-                    onClick={item.onClick}
-                    to={item.to}
-                  >
+                <li key={Math.random()}>
+                  <Link onClick={item.onClick} to={item.to}>
                     {item.icon}
                     <p>{item.label}</p>
                   </Link>
