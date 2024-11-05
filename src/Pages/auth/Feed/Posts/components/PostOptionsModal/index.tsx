@@ -26,12 +26,13 @@ function PostOptionsModal({
       const response = await POST_API.delete(modal.post!.postId);
 
       if (response) {
-        setPostModal!(false);
+        console.log("deletou");
+        await getPosts!();
         setModal({
           state: false,
           post: undefined,
         });
-        await getPosts!();
+        setPostModal!(false);
       }
     } catch (err) {}
   }

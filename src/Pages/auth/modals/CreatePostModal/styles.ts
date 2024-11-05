@@ -156,7 +156,7 @@ export const InputFileModal = styled.div`
   border-top-left-radius: 8px;
   background-color: ${({ theme }) => theme.neutral.c2};
 
-  color: black;
+  color: ${({ theme }) => theme.neutral.c8};
 
   padding: 10px 20px;
   border-width: 4px;
@@ -165,7 +165,7 @@ export const InputFileModal = styled.div`
 
   cursor: pointer;
   div {
-    border: 3px dashed #444;
+    border: 3px dashed ${({ theme }) => theme.neutral.c8};
     padding: 8px 4px;
   }
 

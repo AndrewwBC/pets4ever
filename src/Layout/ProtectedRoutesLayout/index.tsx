@@ -86,13 +86,16 @@ const ProtectedRoutesLayout = () => {
 
             <nav className="menuContent">
               {menuItems.map((item) => (
-                <li onClick={() => setIsActiveLabel(item.label)}>
+                <li
+                  key={Math.random()}
+                  onClick={() => setIsActiveLabel(item.label)}
+                >
                   <Link
-                    style={{
-                      color: isActiveLabel === item.label ? "#fff" : "initial",
-                      backgroundColor:
-                        isActiveLabel === item.label ? "#8A05BE" : "initial",
-                    }}
+                    // style={{
+                    //   color: isActiveLabel === item.label ? "#fff" : "initial",
+                    //   backgroundColor:
+                    //     isActiveLabel === item.label ? "#8A05BE" : "initial",
+                    // }}
                     onClick={item.onClick}
                     to={item.to}
                   >

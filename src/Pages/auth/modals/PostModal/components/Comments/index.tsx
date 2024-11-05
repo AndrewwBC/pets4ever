@@ -58,7 +58,7 @@ function CommentsPostModal({ comments, getPost }: CommentsPostModalProps) {
             username,
             profileImgUrl,
           }) => (
-            <EachComment>
+            <EachComment key={Math.random()}>
               <div className="comment" key={userId + Math.random()}>
                 <div className="image">
                   <img

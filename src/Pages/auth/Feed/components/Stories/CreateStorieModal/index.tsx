@@ -1,11 +1,8 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useUser } from "../../../../../../context/UserProvider";
 import STORIE_API from "../../../../../../api/storie/STORIE_API";
-import { Content, PreviewContainer } from "./styles";
-import {
-  InputFileModal,
-  Modal,
-} from "../../../../modals/CreatePostModal/styles";
+import { Content, PreviewContainer, InputFileModalStorie } from "./styles";
+import { Modal } from "../../../../modals/CreatePostModal/styles";
 import { createPortal } from "react-dom";
 import { CreateStorieModalProps } from "./types";
 
@@ -97,8 +94,8 @@ function CreateStorieModal({
       <Content>
         {!preview.file ? (
           <div className="inputContainer">
-            <InputFileModal>
-              <div>
+            <InputFileModalStorie>
+              <div className="selectFile">
                 <input
                   type="file"
                   onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -114,7 +111,7 @@ function CreateStorieModal({
                   <p>Arquivo selecionado: {file.name}</p>
                 )}
               </div>
-            </InputFileModal>
+            </InputFileModalStorie>
           </div>
         ) : (
           <PreviewContainer>

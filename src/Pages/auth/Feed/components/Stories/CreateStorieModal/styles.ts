@@ -69,3 +69,39 @@ export const PreviewContainer = styled.div`
     }
   }
 `;
+
+export const InputFileModalStorie = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  background-color: ${({ theme }) => theme.neutral.c2};
+
+  color: ${({ theme }) => theme.neutral.c8};
+
+  padding: 10px 20px;
+  border-width: 4px;
+
+  transition: background-color 0.3s ease;
+
+  cursor: pointer;
+  div {
+    border: 3px dashed ${({ theme }) => theme.neutral.c8};
+    padding: 8px 4px;
+  }
+
+  input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+`;

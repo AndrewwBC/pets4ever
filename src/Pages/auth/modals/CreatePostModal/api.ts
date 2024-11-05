@@ -30,13 +30,14 @@ export async function uploadFile(
   formData.append("isStorie", "Storie");
   formData.append("userId", userId);
 
+  await post(setIsLoading, formData);
   try {
     setIsLoading({
       step: "Validating",
       isLoading: true,
     });
     const requestPy = await axios({
-      url: "https://api.pets4ever.site/api/predction",
+      url: "https://iapython-dccdb8299722.herokuapp.com/validate",
       method: "POST",
       data: formData,
     });
@@ -48,8 +49,6 @@ export async function uploadFile(
         step: "isAnimal",
         isLoading: true,
       });
-
-      await post(setIsLoading, formData);
     }
 
     if (previsao === "Não é Animal") {
