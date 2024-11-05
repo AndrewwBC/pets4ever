@@ -12,7 +12,7 @@ import { useUser } from "../../context/UserProvider";
 const ProtectedRoutesLayout = () => {
   const { setSystemTheme } = useTheme();
 
-  const [isActiveLabel, setIsActiveLabel] = useState("");
+  const [setIsActiveLabel] = useState("");
   const [logoutModal, setLogoutModal] = useState(false);
   const [createPostModal, setCreatePostModal] = useState(false);
 
