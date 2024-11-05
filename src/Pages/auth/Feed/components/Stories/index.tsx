@@ -32,7 +32,6 @@ const Stories = () => {
   async function getStories() {
     try {
       const response = await STORIE_API.index();
-      console.log(response);
       if (response) setStories(response);
     } catch (err) {
       console.log(err);

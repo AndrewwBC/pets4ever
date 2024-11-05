@@ -68,7 +68,7 @@ export const Container = styled.div`
       max-width: max-content;
 
       span {
-        font-size: 12px;
+        font-size: 14px;
         color: ${({ theme }) => theme.neutral.c9};
 
         @media (max-width: 500px) {
