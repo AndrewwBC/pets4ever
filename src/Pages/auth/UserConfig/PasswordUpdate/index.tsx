@@ -21,17 +21,18 @@ export default function PasswordUpdate({ hasSession }: PasswordUpdateProps) {
   let [params] = useSearchParams();
 
   useEffect(() => {
-    if (!params.get("code") || !params.get("username")) {
-      setToast({
-        message: "LINK INCOMPLETO",
-        status: "error",
-      });
+    if (!hasSession)
+      if (!params.get("code") || !params.get("username")) {
+        setToast({
+          message: "LINK INCOMPLETO",
+          status: "error",
+        });
 
-      const timer = setTimeout(() => {
-        navigate("/");
-        clearTimeout(timer);
-      }, 2000);
-    }
+        const timer = setTimeout(() => {
+          navigate("/");
+          clearTimeout(timer);
+        }, 2000);
+      }
   }, []);
 
   const [forgotPassword, setForgotPassword] = useState({
