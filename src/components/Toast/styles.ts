@@ -61,8 +61,14 @@ export const Content: React.FC<ContentProps> = styled.div`
 
   span {
     font-family: "Poppins";
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 500;
+
+    @media (max-width: 768px) {
+      span {
+        font-size: 16px;
+      }
+    }
   }
 
   button {

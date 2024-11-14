@@ -53,8 +53,8 @@ export const Container = styled.div`
   }
 
   .storiesContainer {
-    padding-bottom: 32px;
     display: flex;
+    padding: 4px;
 
     @media (max-width: 768px) {
       width: 100%;

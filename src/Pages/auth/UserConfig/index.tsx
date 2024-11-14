@@ -9,7 +9,7 @@ const Config = () => {
     <Content>
       <PatchProfile />
       <EmailUpdate />
-      <PasswordUpdate />
+      <PasswordUpdate hasSession={true} />
       <Delete />
     </Content>
   );

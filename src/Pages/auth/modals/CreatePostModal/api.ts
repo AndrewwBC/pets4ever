@@ -30,7 +30,6 @@ export async function uploadFile(
   formData.append("isStorie", "Storie");
   formData.append("userId", userId);
 
-  await post(setIsLoading, formData);
   try {
     setIsLoading({
       step: "Validating",
@@ -43,12 +42,14 @@ export async function uploadFile(
     });
 
     const previsao = await requestPy.data.previsao;
-
+    console.log(previsao, requestPy);
     if (previsao === "Animal") {
       setIsLoading({
         step: "isAnimal",
         isLoading: true,
       });
+
+      await post(setIsLoading, formData);
     }
 
     if (previsao === "Não é Animal") {
@@ -87,10 +88,5 @@ async function post(setIsLoading: any, formData: any) {
   } catch (err) {
     if (err instanceof AxiosError) {
     }
-  } finally {
-    setIsLoading({
-      step: "",
-      isLoading: false,
-    });
   }
 }

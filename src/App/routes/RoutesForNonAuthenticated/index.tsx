@@ -8,6 +8,7 @@ import AccessDenied from "../ProtectedRoutes/AccessDenied";
 import { useUser } from "../../../context/UserProvider";
 import { hasSession } from "../../../utils/getCookie";
 import InitialLoader from "../InitialLoader";
+import ChangePassword from "../../../Pages/no-auth/ChangePassword";
 
 export default function RoutesForNonAuthenticated() {
   const { user } = useUser();
@@ -16,6 +17,7 @@ export default function RoutesForNonAuthenticated() {
     { path: "/", element: <Login /> },
     { path: "register", element: <Register /> },
     { path: "forgotpassword", element: <ForgotPassword /> },
+    { path: "changepassword", element: <ChangePassword /> },
     { path: "*", element: <Error404 /> },
     {
       path: "/:id",

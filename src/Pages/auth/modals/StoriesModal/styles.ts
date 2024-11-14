@@ -21,6 +21,12 @@ export const Content = styled.section`
   min-width: 400px;
   max-height: 600px;
 
+  img {
+    border-radius: 0px !important;
+    border-top-right-radius: 4px !important;
+    border-top-left-radius: 4px !important;
+  }
+
   .userActions {
     background-color: ${({ theme }) => theme.neutral.c1};
 

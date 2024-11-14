@@ -5,9 +5,9 @@ import { Container, Content, Form } from "./styles";
 import { Input } from "../../../components/input";
 import { Button } from "../../../components/Button";
 import { isEmailValid } from "../../../utils/isEmailValid";
-import axios from "axios";
 
 import { Toast } from "../../../components/Toast";
+import EMAIL_API from "../../../api/email/EMAIL_API";
 
 export default function ForgotPassword() {
   const [toast, setToast] = useState({
@@ -33,9 +33,7 @@ export default function ForgotPassword() {
     event.preventDefault();
 
     try {
-      const request = await axios.post(
-        `${import.meta.env.VITE_API}/email/send/${email}`
-      );
+      const request = await EMAIL_API.forgotPassword(email);
       return request.data;
     } catch (error) {}
   }
@@ -45,7 +43,7 @@ export default function ForgotPassword() {
       <Content>
         <h1>Problemas com o Login?</h1>
 
-        <p>Insira o seu email para que possamos redefinir a sua senha.</p>
+        <p>Insira o seu email para redefinir a sua senha.</p>
 
         <Form onSubmit={sendEmailToUser}>
           <FormGroup error={error}>

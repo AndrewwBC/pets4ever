@@ -3,7 +3,8 @@ import { Container } from "./styles";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { ImCheckboxChecked } from "react-icons/im";
 import Confetti from "../../../../../components/Confetti";
-import { MyButton } from "../../../../../components/Button/style";
+import { Button } from "../../../../../components/Button";
+import { LuLoader } from "react-icons/lu";
 
 interface ValidationImageModalProps {
   isLoadingData: {
@@ -28,7 +29,8 @@ export default function ValidatingImageModal({
     return createPortal(
       <Container>
         <div className="content">
-          <p>Estamos validando a sua imagem.</p>
+          <LuLoader size={28} color="rgb(255, 9, 202)" />
+          <p className="validating">Estamos validando a sua imagem.</p>
         </div>
       </Container>,
       document.getElementById("validatingImageModal")!
@@ -38,12 +40,21 @@ export default function ValidatingImageModal({
     return createPortal(
       <Container>
         <div className="content">
-          <p style={{ color: "red", fontWeight: 700 }}>
-            Sua imagem foi negada!
-          </p>
-          <p style={{ color: "red", fontWeight: 700 }}>
-            Nosso sistema detectou que a imagem não é de um animal.
-          </p>
+          <div className="text">
+            <p className="alert">Imagem recusada!</p>
+            <p>Detectamos que a imagem não é de um animal.</p>
+          </div>
+
+          <Button
+            onClick={() =>
+              setModal({
+                step: "",
+                isLoading: false,
+              })
+            }
+            size="low"
+            label="Tente novamente"
+          />
         </div>
       </Container>,
       document.getElementById("validatingImageModal")!
@@ -53,10 +64,10 @@ export default function ValidatingImageModal({
     return createPortal(
       <Container>
         <div className="content">
-          <p style={{ color: "green", fontWeight: 700 }}>
+          <p style={{ color: "#01C200", fontWeight: 700 }}>
             Sua imagem foi aceita!
           </p>
-          <p style={{ color: "green", fontWeight: 700 }}>
+          <p style={{ color: "#01C200", fontWeight: 700 }}>
             Estamos registrando a sua postagem.
           </p>
         </div>
@@ -69,23 +80,22 @@ export default function ValidatingImageModal({
       <Container>
         <Confetti />
         <div className="content">
-          <ImCheckboxChecked size={30} color="green" />
+          <ImCheckboxChecked size={30} color="#01C200" />
 
-          <p style={{ color: "green", fontWeight: 700 }}>
+          <p style={{ color: "#01C200", fontWeight: 700 }}>
             Postagem realizada com sucesso!
           </p>
 
-          <MyButton
-            size="medium"
+          <Button
+            label="Finalizar"
+            size="low"
             onClick={() =>
               setModal({
-                step: "",
+                step: "successClose",
                 isLoading: false,
               })
             }
-          >
-            Finalizar
-          </MyButton>
+          />
         </div>
       </Container>,
       document.getElementById("validatingImageModal")!

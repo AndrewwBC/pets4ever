@@ -14,7 +14,7 @@ export const Container = styled.main`
 
   .content {
     z-index: 1000;
-    background-color: #f1f1f1;
+    background-color: ${({ theme }) => theme.neutral.c2};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,5 +22,26 @@ export const Container = styled.main`
     padding: 16px;
     border-radius: 8px;
     gap: 24px;
+
+    p {
+      font-weight: 500;
+      color: ${({ theme }) => theme.neutral.c8};
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+
+      .alert {
+        font-size: 18px;
+        color: #cd2222;
+      }
+    }
+
+    button {
+      margin: 0px;
+    }
   }
 `;

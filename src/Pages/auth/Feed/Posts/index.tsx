@@ -15,7 +15,7 @@ import PostOptionsModal from "./components/PostOptionsModal";
 import { RxDotsVertical } from "react-icons/rx";
 import { getPosts } from "../api";
 import { FullDogLoader } from "../../../../components/FullDogLoader";
-import VideoOrImage from "./components/VideoOrImage";
+import Image from "./components/Image";
 
 export default function Posts() {
   const { user } = useUser();
@@ -140,7 +140,7 @@ export default function Posts() {
                   }
                 />
               </header>
-              <VideoOrImage
+              <Image
                 onClick={() => handlePostModal(item.postId)}
                 postUrl={item.imageUrl}
               />

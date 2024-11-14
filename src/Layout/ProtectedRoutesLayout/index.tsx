@@ -2,16 +2,24 @@ import { FormEvent, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Container, Content, SideMenu, SideMenuContent } from "./styles";
 import CreatePostModal from "../../Pages/auth/modals/CreatePostModal";
-import { CgLogOut, CgProfile, CgSun, CgToolbox } from "react-icons/cg";
-import { IoCreateOutline, IoHomeOutline } from "react-icons/io5";
+import { CgLogOut, CgProfile } from "react-icons/cg";
+import {
+  IoCreateOutline,
+  IoHomeOutline,
+  IoMoonOutline,
+  IoSearchOutline,
+  IoSunnyOutline,
+} from "react-icons/io5";
 
 import { useTheme } from "../../context/MyThemeProvider";
 import LogoutModal from "./LogoutModal";
 import { useUser } from "../../context/UserProvider";
+import { MdOutlineWorkOutline } from "react-icons/md";
 
 const ProtectedRoutesLayout = () => {
-  const { setSystemTheme } = useTheme();
+  const { systemTheme, setSystemTheme } = useTheme();
 
+  const [search, setSearch] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
   const [createPostModal, setCreatePostModal] = useState(false);
 
@@ -32,37 +40,54 @@ const ProtectedRoutesLayout = () => {
     setSystemTheme();
   }
 
+  function handleSearch(e: FormEvent) {
+    setSearch(e.isTrusted);
+  }
+
+  const iconSize: any = 26 + "px";
+
   const menuItems = [
     {
       to: "/",
-      icon: <IoHomeOutline size={28} />,
+      icon: <IoHomeOutline size={iconSize} />,
       label: "Postagens",
     },
     {
       to: "",
-      icon: <IoCreateOutline size={28} />,
+      icon: <IoSearchOutline size={iconSize} />,
+      label: "Pesquisar",
+      onClick: (e: any) => handleSearch(e),
+    },
+    {
+      to: "",
+      icon: <IoCreateOutline size={iconSize} />,
       label: "Postar",
       onClick: (e: any) => handleClick(e),
     },
     {
       to: `/${user?.username}`,
-      icon: <CgProfile size={28} />,
+      icon: <CgProfile fontWeight={400} size={iconSize} />,
       label: "Meu Perfil",
     },
     {
       to: "",
-      icon: <CgSun size={28} />,
+      icon:
+        systemTheme === "darkTheme" ? (
+          <IoSunnyOutline size={iconSize} />
+        ) : (
+          <IoMoonOutline size={iconSize} />
+        ),
       label: "Mudar Tema",
       onClick: (e: any) => handleTheme(e),
     },
     {
       to: "/config",
-      icon: <CgToolbox size={28} />,
+      icon: <MdOutlineWorkOutline size={iconSize} />,
       label: "Configurações",
     },
     {
       to: "",
-      icon: <CgLogOut size={28} />,
+      icon: <CgLogOut size={iconSize} />,
       label: "Encerrar sessão",
       onClick: (e: any) => handleLogout(e),
     },
@@ -79,7 +104,7 @@ const ProtectedRoutesLayout = () => {
           <SideMenuContent>
             <div>
               <Link className="pets4EverTitle" to={"/"}>
-                <p>Pets4Ever</p>
+                {search ? <p>Pets4Ever</p> : <p>Pets4Ever</p>}
               </Link>
             </div>
 
