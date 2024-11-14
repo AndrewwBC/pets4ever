@@ -4,7 +4,7 @@ import { Input } from "../../../../components/input";
 import { VscHeart } from "react-icons/vsc";
 import { StoriesProps } from "../../../../api/storie/types";
 import { Dispatch, SetStateAction } from "react";
-import VideoOrImage from "../../Feed/Posts/components/VideoOrImage";
+import Image from "../../Feed/Posts/components/Image";
 
 interface StoriesModal {
   modal: {
@@ -32,10 +32,7 @@ const StoriesModal = ({ modal, setModal }: StoriesModal) => {
     return createPortal(
       <Modal id="storieModal">
         <Content>
-          <VideoOrImage
-            onClick={() => undefined}
-            postUrl={modal.storie!.fileUrl}
-          />
+          <Image onClick={() => undefined} postUrl={modal.storie!.fileUrl} />
 
           <div className="userActions">
             <Input placeholder="Responda este story..." />

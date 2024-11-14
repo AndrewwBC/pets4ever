@@ -10,11 +10,11 @@ export const ImageContainer = styled.div`
     padding-bottom: 75%; /* Alterar a proporção para telas menores */
   }
 
-  img,
-  video {
+  img {
     position: absolute;
     border-radius: 4px;
     cursor: pointer;
+    max-height: 100vh;
 
     top: 0;
     left: 0;

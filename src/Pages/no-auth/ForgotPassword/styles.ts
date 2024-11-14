@@ -14,7 +14,7 @@ export const Content = styled.div`
   grid-template-columns: 1fr;
   align-items: center;
   text-align: center;
-  margin: 160px 0px 80px;
+  margin: 40px 0px 80px;
   padding: 8px;
   border-radius: 8px;
   padding: 32px 12px;

@@ -81,6 +81,13 @@ class UserHttpService {
     );
   }
 
+  async patchPasswordWithoutSession(data: any) {
+    return this.handleRequest(
+      () => this.API.patch(`/user/forgotpassword`, data),
+      "PATCH_FORGOTPASSWORD_ERROR"
+    );
+  }
+
   async updateEmail(
     data: { email: string },
     userId: string

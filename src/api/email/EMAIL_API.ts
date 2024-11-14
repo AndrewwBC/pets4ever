@@ -29,6 +29,19 @@ class EMAIL_API {
       return response;
     } catch (err) {}
   }
+
+  async forgotPassword(email: any): Promise<any> {
+    try {
+      const request = await this.API.post(
+        `/email/send/forgotPassword/${email}`
+      );
+      const response = await request.data;
+      console.log(response);
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default new EMAIL_API();

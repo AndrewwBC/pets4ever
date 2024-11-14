@@ -130,6 +130,21 @@ export const SideMenuContent = styled.div`
     }
   }
 
+  .activeSearchMenuStyle {
+    margin: 0;
+    width: 100vw;
+
+    flex-direction: row;
+    gap: 4px;
+    li {
+      width: max-content !important;
+    }
+
+    p {
+      display: none;
+    }
+  }
+
   .menuContent {
     display: flex;
     align-items: flex-start;
@@ -185,7 +200,7 @@ export const SideMenuContent = styled.div`
       gap: 12px;
       color: ${({ theme }) => theme.neutral.c9} !important;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 400;
       transition: all 0.3s;
       width: 100%;
 
