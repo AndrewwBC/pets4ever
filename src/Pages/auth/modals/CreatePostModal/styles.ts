@@ -32,6 +32,10 @@ export const Content = styled.section`
   justify-content: center;
   position: relative;
 
+  @media (max-width: 1100px) {
+    margin-top: -100px;
+  }
+
   .absoluteButtons {
     position: absolute;
     display: flex;
@@ -58,12 +62,12 @@ export const Content = styled.section`
     }
 
     @media (max-width: 768px) {
-      bottom: 220px;
+      bottom: 60px;
       margin: 0px 12px;
     }
 
     @media (max-width: 500px) {
-      bottom: 200px;
+      bottom: 80px;
       margin: 0px 12px;
     }
 
@@ -110,9 +114,14 @@ export const Content = styled.section`
     height: 100%;
     max-height: 100%;
     min-width: 200px;
+    max-width: 40vw;
     background-color: ${({ theme }) => theme.neutral.c2};
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
   }
 
   .feedPhoto {
@@ -218,7 +227,6 @@ export const InputFileModal = styled.div`
   justify-content: center;
   text-align: center;
   position: relative;
-  flex-grow: 1;
   height: 100%;
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
