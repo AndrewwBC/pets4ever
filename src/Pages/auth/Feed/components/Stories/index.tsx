@@ -23,6 +23,7 @@ const Stories = () => {
   const [createStatus, setCreateStatus] = useState<CreateStatusProps>({
     isLoading: false,
     success: undefined,
+    iaError: false,
   });
 
   useEffect(() => {
@@ -120,6 +121,28 @@ const Stories = () => {
           {true && (
             <div className="content">
               <p className="message">Estamos registrando o seu storie</p>
+            </div>
+          )}
+        </CreateStatusContainer>
+      )}
+      {!createStatus.isLoading && createStatus.iaError && (
+        <CreateStatusContainer>
+          {true && (
+            <div
+              onClick={() =>
+                setCreateStatus({
+                  isLoading: false,
+                  success: false,
+                  iaError: false,
+                })
+              }
+              className="content denied"
+            >
+              <p className="message denied">
+                Imagem recusada. Detectamos que não é um Pet
+              </p>
+
+              <span>Clique para fechar</span>
             </div>
           )}
         </CreateStatusContainer>

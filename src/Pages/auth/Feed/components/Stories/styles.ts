@@ -68,7 +68,7 @@ export const Container = styled.div`
       max-width: max-content;
 
       span {
-        font-size: 14px;
+        font-size: 12px;
         color: ${({ theme }) => theme.neutral.c9};
 
         @media (max-width: 500px) {
@@ -123,6 +123,19 @@ export const CreateStatusContainer = styled.div`
   .message {
     font-size: 16px;
     color: ${({ theme }) => theme.neutral.c2};
+  }
+
+  .denied {
+    color: #fff;
+    background-color: #cc0000 !important;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-size: 14px;
+      color: #f9f9f9;
+    }
   }
 `;
 
