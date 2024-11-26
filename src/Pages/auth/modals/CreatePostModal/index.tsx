@@ -65,7 +65,7 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
     const timer = setTimeout(() => {
       setCreatePostModal(false);
       clearTimeout(timer);
-    }, 600);
+    }, 500);
   }
 
   async function handleSubmit(e: FormEvent) {

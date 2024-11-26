@@ -5,6 +5,7 @@ import { Content, PreviewContainer, InputFileModalStorie } from "./styles";
 import { Modal } from "../../../../modals/CreatePostModal/styles";
 import { createPortal } from "react-dom";
 import { CreateStorieModalProps } from "./types";
+import axios from "axios";
 
 function CreateStorieModal({
   setModal,
@@ -36,6 +37,40 @@ function CreateStorieModal({
     return () => URL.revokeObjectURL(objectUrl);
   }, [file]);
 
+  async function iaPreview(e: FormEvent) {
+    try {
+      setModal(false);
+      setCreateStatus({
+        isLoading: true,
+        success: false,
+        iaError: false,
+      });
+      const formData = new FormData();
+      formData.append("file", file!);
+      const requestPy = await axios({
+        url: "https://iapython-dccdb8299722.herokuapp.com/validate",
+        method: "POST",
+        data: formData,
+      });
+
+      const previsao = await requestPy.data.previsao;
+      console.log(previsao, requestPy);
+      if (previsao === "Animal") {
+        await handleSubmit(e);
+      }
+
+      if (previsao === "Não é Animal") {
+        setCreateStatus({
+          isLoading: false,
+          success: false,
+          iaError: true,
+        });
+      }
+
+      return previsao;
+    } catch (err) {}
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const userId = user?.userId!;
@@ -51,6 +86,7 @@ function CreateStorieModal({
         setCreateStatus({
           isLoading: true,
           success: undefined,
+          iaError: false,
         });
         const uploadResponse = await STORIE_API.create(formData);
 
@@ -58,6 +94,7 @@ function CreateStorieModal({
           setCreateStatus({
             isLoading: true,
             success: true,
+            iaError: false,
           });
         }
         console.log(uploadResponse);
@@ -65,17 +102,20 @@ function CreateStorieModal({
         setCreateStatus({
           isLoading: true,
           success: false,
+          iaError: false,
         });
         console.log(err);
       } finally {
         setCreateStatus({
           isLoading: false,
           success: true,
+          iaError: false,
         });
         const timer = setTimeout(() => {
           setCreateStatus({
             isLoading: false,
             success: undefined,
+            iaError: false,
           });
           clearTimeout(timer);
         }, 3000);
@@ -115,14 +155,7 @@ function CreateStorieModal({
           </div>
         ) : (
           <PreviewContainer>
-            {preview.type.includes("mp4") ? (
-              <video controls preload="metadata" playsInline>
-                <source src={preview.file} type="video/mp4" />
-                Seu navegador não suporta a tag de vídeo.
-              </video>
-            ) : (
-              <img className="feedPhoto" src={preview.file} />
-            )}
+            <img className="feedPhoto" src={preview.file} />
 
             <div className="buttons">
               <button
@@ -133,7 +166,7 @@ function CreateStorieModal({
               </button>
 
               <button
-                onClick={(e: FormEvent) => handleSubmit(e)}
+                onClick={(e: FormEvent) => iaPreview(e)}
                 className="postButton"
               >
                 Enviar
