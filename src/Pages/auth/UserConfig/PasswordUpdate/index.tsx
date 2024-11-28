@@ -67,6 +67,13 @@ export default function PasswordUpdate({ hasSession }: PasswordUpdateProps) {
     const hasOneLower = /[a-z]/.test(password);
     const hasOneUpper = /[A-Z]/.test(password);
 
+    const timer = setTimeout(() => {
+      if (password.length === 0) {
+        setFocusedPassword(false);
+      }
+      clearTimeout(timer);
+    }, 2000);
+
     setPasswordErros({
       numberOfChars: password.length >= 8,
       hasNumber,
@@ -109,7 +116,7 @@ export default function PasswordUpdate({ hasSession }: PasswordUpdateProps) {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    if (!forgotPassword.isAble) {
+    if (!hasSession && !forgotPassword.isAble) {
       setToast({
         message: "As senhas devem ser iguais",
         status: "error",
@@ -133,15 +140,18 @@ export default function PasswordUpdate({ hasSession }: PasswordUpdateProps) {
       newPassword: forgotPassword.password,
     };
 
-    const callAPI: any = hasSession
-      ? await USER_API.patchPassword(user?.username!, data)
-      : await USER_API.patchPasswordWithoutSession(forgotPasswordData);
-
     try {
-      console.log("trye");
-      const response = await callAPI();
+      console.log(responseErrors);
+      setResponseErrors(
+        responseErrors.filter((error) => error.fieldName !== "actualPassword")
+      );
+      const response = hasSession
+        ? await USER_API.patchPassword(user?.username!, data)
+        : await USER_API.patchPasswordWithoutSession(forgotPasswordData);
 
+      console.log(response);
       if (response) {
+        setFocusedPassword(false);
         setData({
           actualPassword: "",
           newPassword: "",
@@ -177,7 +187,6 @@ export default function PasswordUpdate({ hasSession }: PasswordUpdateProps) {
     if (fieldName === "newPassword" && data.newPassword.length > 2)
       return findFalse === false ? "Verifique as condições!" : "";
   }
-  console.log(forgotPassword);
 
   return (
     <section>
@@ -231,7 +240,7 @@ export default function PasswordUpdate({ hasSession }: PasswordUpdateProps) {
             }
           />
         </FormGroup>
-        {focusedPassword && (
+        {focusedPassword && data.newPassword.length > 0 && (
           <PasswordValidations passwordErrors={passwordErrors} />
         )}
         <Button

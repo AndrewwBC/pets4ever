@@ -60,11 +60,12 @@ export async function uploadFile(
     }
 
     return previsao;
-  } catch (err) {}
-
-  if (isLoading.step === "isNotAnimal") {
-    console.log("Cancelando post");
-    return;
+  } catch (err) {
+  } finally {
+    if (isLoading.step === "isNotAnimal") {
+      console.log("Cancelando post");
+      return;
+    }
   }
 }
 
