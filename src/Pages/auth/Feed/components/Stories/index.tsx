@@ -28,7 +28,7 @@ const Stories = () => {
 
   useEffect(() => {
     getStories();
-  }, []);
+  }, [createStatus.success]);
 
   async function getStories() {
     try {

@@ -106,11 +106,10 @@ function CreateStorieModal({
         });
         console.log(err);
       } finally {
-        setCreateStatus({
+        setCreateStatus((prevState) => ({
+          ...prevState,
           isLoading: false,
-          success: true,
-          iaError: false,
-        });
+        }));
         const timer = setTimeout(() => {
           setCreateStatus({
             isLoading: false,
