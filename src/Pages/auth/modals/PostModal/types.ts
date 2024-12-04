@@ -2,13 +2,9 @@ import { Dispatch, SetStateAction } from "react";
 import { PostProps } from "../../../../types/post";
 
 export interface PostModalProps {
-  getPosts: () => Promise<any>;
-  editDescription: boolean;
-  setEditPost: Dispatch<SetStateAction<boolean>>;
-  setShowModal: Dispatch<SetStateAction<boolean>>;
-  modalPostData: PostProps | null;
-  setModalPostData: Dispatch<SetStateAction<PostProps | null>>;
-  handlePostLikePut: (postId: string) => Promise<void>;
+  getPosts?: () => Promise<any>;
+  editDescription?: boolean;
+  setEditPost?: Dispatch<SetStateAction<boolean>>;
 }
 
 export function isPostProps(obj: any): obj is PostProps {

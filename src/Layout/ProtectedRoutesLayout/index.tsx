@@ -1,7 +1,6 @@
 import { FormEvent, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Container, Content, SideMenu, SideMenuContent } from "./styles";
-import CreatePostModal from "../../Pages/auth/modals/CreatePostModal";
 import { CgLogOut, CgProfile } from "react-icons/cg";
 import {
   IoCreateOutline,
@@ -21,13 +20,12 @@ const ProtectedRoutesLayout = () => {
 
   const [search, setSearch] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
-  const [createPostModal, setCreatePostModal] = useState(false);
+  const [pathname, setPathname] = useState("");
 
   const { user } = useUser();
 
-  function handleClick(e: FormEvent) {
-    e.preventDefault();
-    setCreatePostModal(true);
+  function changePathname() {
+    setPathname(window.location.pathname.replace("/p/create", ""));
   }
 
   function handleLogout(e: FormEvent) {
@@ -48,7 +46,7 @@ const ProtectedRoutesLayout = () => {
 
   const menuItems = [
     {
-      to: "/",
+      to: "/feed",
       icon: <IoHomeOutline size={iconSize} />,
       label: "Postagens",
     },
@@ -59,10 +57,9 @@ const ProtectedRoutesLayout = () => {
       onClick: (e: any) => handleSearch(e),
     },
     {
-      to: "",
+      to: `${pathname}/p/create`,
       icon: <IoCreateOutline size={iconSize} />,
       label: "Postar",
-      onClick: (e: any) => handleClick(e),
     },
     {
       to: `/${user?.username}`,
@@ -95,9 +92,6 @@ const ProtectedRoutesLayout = () => {
 
   return (
     <Container>
-      {createPostModal && (
-        <CreatePostModal setCreatePostModal={setCreatePostModal} />
-      )}
       <LogoutModal logoutModal={logoutModal} setLogoutModal={setLogoutModal} />
       <Content>
         <SideMenu>
@@ -110,7 +104,7 @@ const ProtectedRoutesLayout = () => {
 
             <nav className="menuContent">
               {menuItems.map((item) => (
-                <li key={Math.random()}>
+                <li onClick={() => changePathname()} key={Math.random()}>
                   <Link onClick={item.onClick} to={item.to}>
                     {item.icon}
                     <p>{item.label}</p>

@@ -41,7 +41,7 @@ export default function Login() {
       if (response) {
         useInterceptor();
         retrieveUser(true);
-        nav(`/`);
+        nav(`/feed`);
       }
     } catch (err) {
       if (err instanceof MyError) {

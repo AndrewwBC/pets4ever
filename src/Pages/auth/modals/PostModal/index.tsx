@@ -10,7 +10,7 @@ import { timeSince } from "../../../../utils/timeSince";
 import POST_API from "../../../../api/post/POST_API";
 import { useUser } from "../../../../context/UserProvider";
 import QuantityOfLikes from "../../Feed/components/QuantityOfLikes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import EditDescriptionModal from "../../Feed/Posts/components/EditDescriptionModal";
 import { PostProps } from "../../../../types/post";
 import PostOptionsModal from "../../Feed/Posts/components/PostOptionsModal";
@@ -18,13 +18,11 @@ import { RxDotsVertical } from "react-icons/rx";
 
 const PostModal = ({
   getPosts,
-  setShowModal,
-  modalPostData,
-  setModalPostData,
   editDescription,
   setEditPost,
 }: PostModalProps) => {
   const { user } = useUser();
+  const [modalPostData, setModalPostData] = useState<PostProps | null>();
   const [modalPostOptions, setPostOptionsModal] = useState<{
     state: boolean;
     post: PostProps | undefined;
@@ -33,21 +31,30 @@ const PostModal = ({
     post: undefined,
   });
 
+  const navigate = useNavigate();
+  const params = useParams();
+
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    if (!modalPostData) getData();
+
     return () => {
-      document.body.style.overflow = "auto";
+      setModalPostData(null);
     };
-  }, [modalPostData]);
+  }, []);
+
+  async function getData() {
+    await getPost();
+  }
 
   async function getPost() {
     const data = {
       username: user?.username,
-      postId: modalPostData?.postId,
+      postId: params.id,
     };
 
     try {
       const post = await POST_API.show(data);
+      console.log(post);
 
       if (post) {
         setModalPostData(post);
@@ -57,14 +64,12 @@ const PostModal = ({
 
   window.addEventListener("click", (e: any) => {
     if (e.target?.id === "container") {
-      setShowModal(false);
-      setModalPostData(null);
+      navigate(`/feed`);
     }
   });
 
   function editPostDescription() {
-    setEditPost(true);
-    setShowModal(true);
+    setEditPost!(true);
     setModalPostData(modalPostData);
   }
 
@@ -76,7 +81,6 @@ const PostModal = ({
             getPosts={getPosts}
             modal={modalPostOptions}
             setModal={setPostOptionsModal}
-            setPostModal={setShowModal}
             editPostDescriptionFunction={editPostDescription}
           />
         )}
@@ -84,7 +88,7 @@ const PostModal = ({
           <EditDescriptionModal
             postId={modalPostData.postId}
             getPost={getPost}
-            setModal={setEditPost}
+            setModal={setEditPost!}
           />
         )}
         <Content>

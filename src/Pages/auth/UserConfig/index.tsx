@@ -3,6 +3,7 @@ import PasswordUpdate from "./PasswordUpdate";
 import EmailUpdate from "./EmailUpdate";
 import PatchProfile from "./PatchProfile";
 import Delete from "./Delete";
+import { Outlet } from "react-router-dom";
 
 const Config = () => {
   return (
@@ -11,6 +12,7 @@ const Config = () => {
       <EmailUpdate />
       <PasswordUpdate hasSession={true} />
       <Delete />
+      <Outlet />
     </Content>
   );
 };

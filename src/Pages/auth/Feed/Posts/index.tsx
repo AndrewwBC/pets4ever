@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { PostsContainer } from "./styles";
 
 import PostModal from "../../modals/PostModal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IconsToLikeCommentAndShare from "../components/IconsToLikeCommentAndShare";
 import QuantityOfLikes from "../components/QuantityOfLikes";
 import LastComment from "../components/LastComment";
@@ -32,6 +32,7 @@ export default function Posts() {
     post: undefined,
   });
 
+  const navigate = useNavigate();
   const [likeLoading, setLikeLoading] = useState(false);
 
   useEffect(() => {
@@ -44,8 +45,7 @@ export default function Posts() {
   }
 
   function handlePostModal(postId: string) {
-    setShowModal(true);
-    setModalPostData(posts?.find((post) => post.postId === postId)!);
+    navigate(`/feed/p/${postId}`);
   }
 
   async function handlePostLikePut(postId: string) {
@@ -93,10 +93,6 @@ export default function Posts() {
             getPosts={api}
             editDescription={editPost}
             setEditPost={setEditPost}
-            setShowModal={setShowModal}
-            modalPostData={modalPostData}
-            setModalPostData={setModalPostData}
-            handlePostLikePut={handlePostLikePut}
           />
         )}
         {modalPostOptions.state && (
