@@ -1,13 +1,6 @@
 import { createPortal } from "react-dom";
 
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { uploadFile } from "./api";
 import { VscComment, VscHeart, VscSend } from "react-icons/vsc";
 import { Content, InputFileModal, Modal } from "./styles";
@@ -17,12 +10,9 @@ import { useUser } from "../../../../context/UserProvider";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { IoMdPhotos } from "react-icons/io";
 import { Toast } from "../../../../components/Toast";
+import { useNavigate } from "react-router-dom";
 
-interface CreatePostModalProps {
-  setCreatePostModal: Dispatch<SetStateAction<boolean>>;
-}
-
-const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
+const CreatePostModal = () => {
   const [file, setFile] = useState<File | null | undefined>();
   const [description, setDescription] = useState("");
   const [setUploadResponse] = useState<any>(null);
@@ -42,6 +32,8 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
     type: "",
   });
   const { user } = useUser();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!file) {
@@ -63,7 +55,7 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
 
   if (isLoading.step === "successClose") {
     const timer = setTimeout(() => {
-      setCreatePostModal(false);
+      closeModal();
       clearTimeout(timer);
     }, 500);
   }
@@ -93,10 +85,15 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
 
   window.addEventListener("click", (e: any) => {
     if (e.target?.id === "createPostModalContainer") {
-      setCreatePostModal(false);
+      closeModal();
     }
   });
-  console.log(preview);
+
+  function closeModal() {
+    const pathname = window.location.pathname;
+    navigate(`${pathname.replace("/p/create", "")}`);
+  }
+
   return createPortal(
     <Modal
       style={
@@ -113,7 +110,7 @@ const CreatePostModal = ({ setCreatePostModal }: CreatePostModalProps) => {
             <IoMdPhotos size={28} color="grey" />
             <p>Trocar imagem</p>
           </div>
-          <div className="cancel" onClick={() => setCreatePostModal(false)}>
+          <div className="cancel" onClick={() => closeModal()}>
             <GiCancel size={28} color="red" />
             <p>Cancelar</p>
           </div>

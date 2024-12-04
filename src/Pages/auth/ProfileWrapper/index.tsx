@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { useUser } from "../../../context/UserProvider";
 import SectionUser from "./SectionUser";
 import OtherUser from "./OtherUser";
@@ -8,8 +8,14 @@ export default function ProfileWrapper() {
   const params = useParams();
 
   return user?.username === params.username ? (
-    <SectionUser user={user!} />
+    <div>
+      <SectionUser user={user!} />
+      <Outlet />
+    </div>
   ) : (
-    <OtherUser username={params.username!} />
+    <div>
+      <OtherUser username={params.username!} />
+      <Outlet />
+    </div>
   );
 }

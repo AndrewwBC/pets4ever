@@ -3,6 +3,7 @@ import { Container, Content } from "./styles";
 import Stories from "./components/Stories";
 
 import Posts from "./Posts";
+import { Outlet } from "react-router-dom";
 
 export const Feed = () => {
   return (
@@ -10,6 +11,7 @@ export const Feed = () => {
       <Content>
         <Stories />
         <Posts />
+        <Outlet />
       </Content>
     </Container>
   );
