@@ -10,17 +10,19 @@ import { timeSince } from "../../../../utils/timeSince";
 import POST_API from "../../../../api/post/POST_API";
 import { useUser } from "../../../../context/UserProvider";
 import QuantityOfLikes from "../../Feed/components/QuantityOfLikes";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import EditDescriptionModal from "../../Feed/Posts/components/EditDescriptionModal";
 import { PostProps } from "../../../../types/post";
 import PostOptionsModal from "../../Feed/Posts/components/PostOptionsModal";
 import { RxDotsVertical } from "react-icons/rx";
 
-const PostModal = ({
-  getPosts,
-  editDescription,
-  setEditPost,
-}: PostModalProps) => {
+const PostModal = ({ getPosts }: PostModalProps) => {
   const { user } = useUser();
   const [modalPostData, setModalPostData] = useState<PostProps | null>();
   const [modalPostOptions, setPostOptionsModal] = useState<{
@@ -30,6 +32,8 @@ const PostModal = ({
     state: false,
     post: undefined,
   });
+
+  const { pathname } = useLocation();
 
   const navigate = useNavigate();
   const params = useParams();
@@ -56,9 +60,7 @@ const PostModal = ({
       const post = await POST_API.show(data);
       console.log(post);
 
-      if (post) {
-        setModalPostData(post);
-      }
+      if (post) setModalPostData(post);
     } catch (err) {}
   }
 
@@ -69,7 +71,6 @@ const PostModal = ({
   });
 
   function editPostDescription() {
-    setEditPost!(true);
     setModalPostData(modalPostData);
   }
 
@@ -84,13 +85,14 @@ const PostModal = ({
             editPostDescriptionFunction={editPostDescription}
           />
         )}
-        {editDescription && (
+
+        {pathname.endsWith("/edit") && (
           <EditDescriptionModal
             postId={modalPostData.postId}
             getPost={getPost}
-            setModal={setEditPost!}
           />
         )}
+
         <Content>
           <div className="imageContainer">
             <img
@@ -151,6 +153,7 @@ const PostModal = ({
             />
           </div>
         </Content>
+        <Outlet />
       </Modal>,
       document.getElementById("feedPostModal")!
     );

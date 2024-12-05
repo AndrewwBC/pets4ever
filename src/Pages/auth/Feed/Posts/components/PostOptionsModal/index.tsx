@@ -1,9 +1,9 @@
 import { createPortal } from "react-dom";
 import { Content, Modal } from "./styles";
-import { useEffect } from "react";
 import { useUser } from "../../../../../../context/UserProvider";
 import { PostOptionsModalProps } from "./types";
 import POST_API from "../../../../../../api/post/POST_API";
+import { useNavigate } from "react-router-dom";
 
 function PostOptionsModal({
   modal,
@@ -13,13 +13,7 @@ function PostOptionsModal({
   editPostDescriptionFunction,
 }: PostOptionsModalProps) {
   const { user } = useUser();
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+  const navigate = useNavigate();
 
   async function deletePost() {
     try {
@@ -43,6 +37,7 @@ function PostOptionsModal({
       state: false,
       post: undefined,
     });
+    navigate(`/feed/p/${modal.post?.postId}/edit`);
   }
 
   if (modal.state) {

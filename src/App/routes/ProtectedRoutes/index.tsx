@@ -24,14 +24,18 @@ export default function ProtectedRoutes() {
         <Route path="/" element={<ProtectedRoutesLayout />}>
           <Route path="/feed" element={<Feed />}>
             <Route path="/feed/p/:id" element={<PostModal />} />
+            <Route path="/feed/p/:id/edit" element={<PostModal />} />
             <Route path="/feed/p/create" element={<CreatePostModal />} />
           </Route>
+
           <Route path="/config" element={<Config />}>
             <Route path="/config/p/create" element={<CreatePostModal />} />
           </Route>
+
           <Route path="/:username" element={<ProfileWrapper />}>
             <Route path="/:username/p/create" element={<CreatePostModal />} />
           </Route>
+
           <Route path="*" element={<Error404 />} />
         </Route>
       </Routes>

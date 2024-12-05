@@ -1,36 +1,21 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Content, Modal } from "../PostOptionsModal/styles";
 import { Input } from "../../../../../../components/input";
 import { Form, InputContainer } from "./styles";
 import { Button } from "../../../../../../components/Button";
 import POST_API from "../../../../../../api/post/POST_API";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface EditDescriptionModalProps {
   getPost: () => Promise<any>;
-  setModal: Dispatch<SetStateAction<boolean>>;
   postId: string;
 }
 
-function EditDescriptionModal({
-  getPost,
-  setModal,
-  postId,
-}: EditDescriptionModalProps) {
+function EditDescriptionModal({ getPost, postId }: EditDescriptionModalProps) {
   const [description, setDescription] = useState("");
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -44,14 +29,14 @@ function EditDescriptionModal({
       await POST_API.patchPostDescription(data);
     } catch (err) {
     } finally {
-      setModal(false);
       getPost();
+      navigate(pathname.replace("/edit", ""));
     }
   }
 
   window.addEventListener("click", (e: any) => {
     if (e.target?.id === "editDescriptionModal") {
-      setModal(false);
+      navigate(pathname.replace("/edit", ""));
     }
   });
 
