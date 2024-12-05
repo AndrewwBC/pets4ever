@@ -1,10 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
 import { PostProps } from "../../../../types/post";
 
 export interface PostModalProps {
   getPosts?: () => Promise<any>;
   editDescription?: boolean;
-  setEditPost?: Dispatch<SetStateAction<boolean>>;
 }
 
 export function isPostProps(obj: any): obj is PostProps {

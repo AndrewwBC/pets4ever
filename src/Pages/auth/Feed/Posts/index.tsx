@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { PostsContainer } from "./styles";
 
-import PostModal from "../../modals/PostModal";
 import { Link, useNavigate } from "react-router-dom";
 import IconsToLikeCommentAndShare from "../components/IconsToLikeCommentAndShare";
 import QuantityOfLikes from "../components/QuantityOfLikes";
@@ -20,9 +19,6 @@ import Image from "./components/Image";
 export default function Posts() {
   const { user } = useUser();
   const [posts, setPosts] = useState<PostProps[]>();
-  const [editPost, setEditPost] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [modalPostData, setModalPostData] = useState<PostProps | null>(null);
 
   const [modalPostOptions, setPostOptionsModal] = useState<{
     state: boolean;
@@ -37,7 +33,7 @@ export default function Posts() {
 
   useEffect(() => {
     api();
-  }, [modalPostData]);
+  }, []);
 
   async function api() {
     const posts = await getPosts(user?.username!);
@@ -74,9 +70,7 @@ export default function Posts() {
   }
 
   function editPostDescription(postId: string) {
-    setEditPost(true);
-    setShowModal(true);
-    setModalPostData(posts?.find((post) => post.postId === postId)!);
+    navigate(`/feed/p/${postId}/edit`);
   }
 
   if (!posts)
@@ -88,13 +82,6 @@ export default function Posts() {
   if (posts)
     return (
       <PostsContainer>
-        {showModal && (
-          <PostModal
-            getPosts={api}
-            editDescription={editPost}
-            setEditPost={setEditPost}
-          />
-        )}
         {modalPostOptions.state && (
           <PostOptionsModal
             getPosts={api}
