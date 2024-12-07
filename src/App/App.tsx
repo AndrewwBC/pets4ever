@@ -6,6 +6,7 @@ import ChangeThemeProvider, { useTheme } from "../context/MyThemeProvider";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import RoutesForNonAuthenticated from "./routes/RoutesForNonAuthenticated";
 import UserProvider from "../context/UserProvider";
+import PostsProvider from "../context/PostsProvider";
 
 function AppContent() {
   const { systemTheme } = useTheme();
@@ -13,10 +14,12 @@ function AppContent() {
   return (
     <ThemeProvider theme={systemTheme === "light" ? theme : darkTheme}>
       <UserProvider>
-        <Router>
-          <RoutesForNonAuthenticated />
-          <ProtectedRoutes />
-        </Router>
+        <PostsProvider>
+          <Router>
+            <RoutesForNonAuthenticated />
+            <ProtectedRoutes />
+          </Router>
+        </PostsProvider>
       </UserProvider>
     </ThemeProvider>
   );

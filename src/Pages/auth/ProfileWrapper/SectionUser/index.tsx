@@ -11,6 +11,8 @@ interface Props {
 }
 
 const UserProfile = ({ user }: Props) => {
+  console.log(user);
+
   if (user)
     return (
       <Container>
