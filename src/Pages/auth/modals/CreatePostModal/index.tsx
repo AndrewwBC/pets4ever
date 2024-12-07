@@ -11,6 +11,7 @@ import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { IoMdPhotos } from "react-icons/io";
 import { Toast } from "../../../../components/Toast";
 import { useNavigate } from "react-router-dom";
+import { usePosts } from "../../../../context/PostsProvider";
 
 const CreatePostModal = () => {
   const [file, setFile] = useState<File | null | undefined>();
@@ -32,6 +33,7 @@ const CreatePostModal = () => {
     type: "",
   });
   const { user } = useUser();
+  const { getPosts } = usePosts();
 
   const navigate = useNavigate();
 
@@ -54,10 +56,19 @@ const CreatePostModal = () => {
   }, [file]);
 
   if (isLoading.step === "successClose") {
+    setIsLoading({
+      isLoading: false,
+      step: "",
+    });
     const timer = setTimeout(() => {
+      getData();
       closeModal();
       clearTimeout(timer);
-    }, 500);
+    }, 1000);
+  }
+
+  async function getData() {
+    if (user) await getPosts(user?.username);
   }
 
   async function handleSubmit(e: FormEvent) {

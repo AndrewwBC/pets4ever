@@ -12,13 +12,13 @@ import { timeSince } from "../../../../utils/timeSince";
 import { PostProps } from "../../../../types/post";
 import PostOptionsModal from "./components/PostOptionsModal";
 import { RxDotsVertical } from "react-icons/rx";
-import { getPosts } from "../api";
 import { FullDogLoader } from "../../../../components/FullDogLoader";
 import Image from "./components/Image";
+import { usePosts } from "../../../../context/PostsProvider";
 
 export default function Posts() {
   const { user } = useUser();
-  const [posts, setPosts] = useState<PostProps[]>();
+  const { posts, setPosts, getPosts, isLoading } = usePosts();
 
   const [modalPostOptions, setPostOptionsModal] = useState<{
     state: boolean;
@@ -32,12 +32,11 @@ export default function Posts() {
   const [likeLoading, setLikeLoading] = useState(false);
 
   useEffect(() => {
-    api();
+    getData();
   }, []);
 
-  async function api() {
-    const posts = await getPosts(user?.username!);
-    setPosts(posts);
+  async function getData() {
+    if (user) await getPosts(user.username);
   }
 
   function handlePostModal(postId: string) {
@@ -73,10 +72,10 @@ export default function Posts() {
     navigate(`/feed/p/${postId}/edit`);
   }
 
-  if (!posts)
+  if (isLoading)
     return <FullDogLoader text="Carregando Postagens..." transparent={false} />;
 
-  if (posts.length < 1)
+  if (posts && posts.length < 1)
     return <NoPosts small="Não há postagens." paragraph="Seja o primeiro!" />;
 
   if (posts)
@@ -84,7 +83,7 @@ export default function Posts() {
       <PostsContainer>
         {modalPostOptions.state && (
           <PostOptionsModal
-            getPosts={api}
+            getPosts={getData}
             modal={modalPostOptions}
             setModal={setPostOptionsModal}
             editPostDescriptionFunction={editPostDescription}
