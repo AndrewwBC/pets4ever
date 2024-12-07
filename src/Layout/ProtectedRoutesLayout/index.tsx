@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Container, Content, SideMenu, SideMenuContent } from "./styles";
 import { CgLogOut, CgProfile } from "react-icons/cg";
 import {
@@ -20,12 +20,13 @@ const ProtectedRoutesLayout = () => {
 
   const [search, setSearch] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
-  const [pathname, setPathname] = useState("");
 
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { user } = useUser();
 
-  function changePathname() {
-    setPathname(window.location.pathname.replace("/p/create", ""));
+  function postPathname() {
+    navigate(`${pathname}/p/create`);
   }
 
   function handleLogout(e: FormEvent) {
@@ -60,6 +61,7 @@ const ProtectedRoutesLayout = () => {
       to: `${pathname}/p/create`,
       icon: <IoCreateOutline size={iconSize} />,
       label: "Postar",
+      onClick: () => postPathname(),
     },
     {
       to: `/${user?.username}`,
@@ -104,7 +106,7 @@ const ProtectedRoutesLayout = () => {
 
             <nav className="menuContent">
               {menuItems.map((item) => (
-                <li onClick={() => changePathname()} key={Math.random()}>
+                <li key={Math.random()}>
                   <Link onClick={item.onClick} to={item.to}>
                     {item.icon}
                     <p>{item.label}</p>
