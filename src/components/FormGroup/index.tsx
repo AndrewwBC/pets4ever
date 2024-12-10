@@ -5,11 +5,17 @@ interface FormGroupProps {
   error?: string | undefined;
   children: ReactNode;
   label?: string;
+  visible?: boolean;
 }
 
-export default function FormGroup({ error, children, label }: FormGroupProps) {
+export default function FormGroup({
+  error,
+  children,
+  label,
+  visible = true,
+}: FormGroupProps) {
   return (
-    <Content error={error}>
+    <Content style={{ display: visible ? "block" : "none" }} error={error}>
       <label>
         <p>{label}</p>
         {children}

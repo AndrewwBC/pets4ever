@@ -11,6 +11,8 @@ interface Props {
 }
 
 const UserProfile = ({ user }: Props) => {
+  console.log(user);
+
   if (user)
     return (
       <Container>
@@ -21,14 +23,20 @@ const UserProfile = ({ user }: Props) => {
                 profileImgUrl={user.profileImgUrl}
                 username={user.username}
               />
-
-              <div className="fullnameAndNumbers">
-                <FullnameAndButtonToEditProfile fullname={user.fullname} />
-                <QuantityOfPostFollowersAndFollowing
-                  postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
-                  followers={user?.followers}
-                  following={user?.following}
-                />
+              <div className="userData">
+                <div className="fullnameAndNumbers">
+                  <QuantityOfPostFollowersAndFollowing
+                    postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
+                    followers={user?.followers}
+                    following={user?.following}
+                  />
+                  <FullnameAndButtonToEditProfile fullname={user.fullname} />
+                </div>
+                <div className="bio">
+                  <div className="textContainer">
+                    <p>{user.bio}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

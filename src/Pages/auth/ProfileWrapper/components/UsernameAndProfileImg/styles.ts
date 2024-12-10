@@ -4,7 +4,8 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
+  margin-bottom: 12px;
 
   img {
     height: 120px;
@@ -21,6 +22,7 @@ export const Content = styled.div`
 
   span {
     font-weight: 500;
+    font-size: 18px;
     font-family: "Poppins";
   }
 `;

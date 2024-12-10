@@ -42,7 +42,7 @@ function QuantityOfPostFollowersAndFollowing({
       {toast.message && <Toast setToast={setToast} toast={toast} />}
       <div>
         <p>{postQuantity}</p>
-        <small>Posts</small>
+        <small>Postagens</small>
       </div>
 
       <div>

@@ -65,7 +65,7 @@ class UserHttpService {
   }
 
   async patchProfile(
-    data: { fullname: string; username: string },
+    data: { fullname: string; username: string; bio: string },
     userId: string
   ): Promise<{ message: string }> {
     return this.handleRequest<{ message: string }>(
