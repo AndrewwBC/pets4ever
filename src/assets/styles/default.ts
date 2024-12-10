@@ -28,7 +28,4 @@ export const defaultStyle = css`
     display: block;
     max-width: 100%;
   }
-  input {
-    all: unset;
-  }
 `;

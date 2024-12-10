@@ -18,6 +18,7 @@ export interface FollowingProps {
 export interface UserProps {
   fullname: string;
   username: string;
+  bio: string;
   userId: string;
   email: string;
   routeTest?: string;

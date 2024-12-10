@@ -5,7 +5,7 @@ export const Container = styled.div`
   align-items: start;
   justify-content: start;
 
-  gap: 24px;
+  gap: 44px;
 
   small,
   p {
@@ -20,7 +20,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    gap: 8px;
+    gap: 6px;
     cursor: pointer;
 
     p {

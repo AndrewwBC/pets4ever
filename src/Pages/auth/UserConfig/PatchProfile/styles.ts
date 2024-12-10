@@ -7,6 +7,16 @@ export const UpdateSection = styled.section`
     font-weight: 500;
   }
 
+  .editAdvice {
+    background-color: ${({ theme }) => theme.purple.medium};
+    color: ${({ theme }) => theme.neutral.c2};
+    padding: 2px;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+    border-radius: 8px;
+  }
+
   form {
     display: flex;
     flex-direction: column;

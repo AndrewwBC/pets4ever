@@ -40,7 +40,7 @@ function ProfileFeed({ posts }: ProfileFeedProps) {
         <div className="profileFeedContent">
           {groupsOf3posts.length > 0 ? (
             groupsOf3posts.map(({ group }) => (
-              <EachRow>
+              <EachRow key={Math.random()}>
                 {group.map((post, index) => (
                   <ImageContainer
                     className="imageContainer"

@@ -33,13 +33,13 @@ export const Content = styled.section`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 120px;
-    flex-grow: 1;
+    max-width: 400px;
 
     .user {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 80px;
+      justify-content: center;
 
       @media (max-width: 768px) {
         flex-direction: column;
@@ -49,7 +49,28 @@ export const Content = styled.section`
       .fullnameAndNumbers {
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 24px;
+      }
+
+      .bio {
+        margin-top: 12px;
+        display: flex;
+        background-color: #aaffbb;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        border-radius: 4px;
+        cursor: pointer;
+        max-height: 80px;
+
+        .textContainer {
+          word-wrap: break-word;
+          flex-wrap: wrap;
+          word-break: break-all;
+          font-size: 14px;
+          font-weight: 400;
+        }
       }
     }
 
@@ -63,7 +84,6 @@ export const Content = styled.section`
 
   .userImageAndName {
     gap: 8px;
-
     display: flex;
     align-items: center;
     flex-direction: column;

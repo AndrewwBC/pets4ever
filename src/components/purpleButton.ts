@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PurpleButton = styled.button`
   background-color: ${({ theme }) => theme.purple.medium};
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   padding: 4px 16px;
   border-radius: 4px;

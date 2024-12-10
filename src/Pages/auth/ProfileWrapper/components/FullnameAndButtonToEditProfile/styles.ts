@@ -9,6 +9,6 @@ export const Content = styled.div`
   .fullname {
     color: ${({ theme }) => theme.neutral.c9};
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
