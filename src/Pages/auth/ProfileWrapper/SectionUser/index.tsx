@@ -32,11 +32,13 @@ const UserProfile = ({ user }: Props) => {
                   />
                   <FullnameAndButtonToEditProfile fullname={user.fullname} />
                 </div>
-                <div className="bio">
-                  <div className="textContainer">
-                    <p>{user.bio}</p>
+                {user.bio && (
+                  <div className="bio">
+                    <div className="textContainer">
+                      <p>{user.bio}</p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

@@ -37,20 +37,25 @@ function OtherUser({ username }: OtherUserProps) {
               />
 
               <FullnameNumbersAndButton>
-                <div className="fullname">
-                  <p>{user.fullname}</p>
-                </div>
                 <FollowButtonAndNumbers>
                   <QuantityOfPostFollowersAndFollowing
                     postQuantity={user?.userPostsAndQuantityOfPosts.quantity}
                     followers={user?.followers}
                     following={user?.following}
                   />
-                  <FollowOrUnfollow
-                    getData={getData}
-                    usernameOfUserToBeFollowed={user.username}
-                    userFollowersList={user.followers}
-                  />
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div className="fullname">
+                      <p>{user.fullname}</p>
+                    </div>
+
+                    <FollowOrUnfollow
+                      getData={getData}
+                      usernameOfUserToBeFollowed={user.username}
+                      userFollowersList={user.followers}
+                    />
+                  </div>
                 </FollowButtonAndNumbers>
               </FullnameNumbersAndButton>
             </div>

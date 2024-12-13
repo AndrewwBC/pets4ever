@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import userApi from "../../../../api/user/USER_API";
 import { Button } from "../../../../components/Button";
-import { UpdateSection } from "./styles";
+import { UpdateSection, Options } from "./styles";
 import { Input } from "../../../../components/input";
 import { Toast } from "../../../../components/Toast";
 import FormGroup from "../../../../components/FormGroup";
@@ -11,7 +11,6 @@ import { useUser } from "../../../../context/UserProvider";
 import { useForm } from "react-hook-form";
 import { patchProfileSchema, PatchProfileSchema } from "./zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Options } from "../../ProfileWrapper/SectionUser/styles";
 
 function PatchProfile() {
   const { user, retrieveUser } = useUser();
