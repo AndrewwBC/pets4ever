@@ -45,20 +45,14 @@ function QuantityOfPostFollowersAndFollowing({
         <small>Postagens</small>
       </div>
 
-      <div>
+      <div onClick={() => handleClick(following.followingList, "Seguindo")}>
         <p>{following.quantity}</p>
-        <small onClick={() => handleClick(following.followingList, "Seguindo")}>
-          Seguindo
-        </small>
+        <small>Seguindo</small>
       </div>
 
-      <div>
+      <div onClick={() => handleClick(followers.followersList, "Seguidores")}>
         <p>{followers.quantity}</p>
-        <small
-          onClick={() => handleClick(followers.followersList, "Seguidores")}
-        >
-          Seguidores
-        </small>
+        <small>Seguidores</small>
       </div>
     </Container>
   );
