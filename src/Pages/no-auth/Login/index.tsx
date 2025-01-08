@@ -17,6 +17,7 @@ import { Helmet } from "react-helmet";
 
 export default function Login() {
   const nav = useNavigate();
+
   const { retrieveUser } = useUser();
 
   const [toast, setToast] = useState({
