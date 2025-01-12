@@ -80,14 +80,6 @@ export default function Login() {
   return (
     <Container>
       <Content>
-        <Helmet>
-          <title>Página de Login</title>
-          <meta
-            name="description"
-            content="Pets4Ever é uma rede social para você compartilhar imagens lindas do seu pet."
-          />
-        </Helmet>
-
         <h1>Log in</h1>
 
         <Form onSubmit={handleSubmit(Login)}>
