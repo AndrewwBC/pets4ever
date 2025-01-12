@@ -13,7 +13,6 @@ import { loginFormSchema, LoginFormSchema } from "./zodSchema";
 import USER_API from "../../../api/user/USER_API";
 import { useUser } from "../../../context/UserProvider";
 import { useInterceptor } from "../../../context/utils/myInterceptor";
-import { Helmet } from "react-helmet";
 
 export default function Login() {
   const nav = useNavigate();
