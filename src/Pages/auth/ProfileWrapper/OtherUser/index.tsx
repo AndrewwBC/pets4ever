@@ -2,11 +2,10 @@ import { memo, useCallback, useEffect, useState } from "react";
 import { Container, Content } from "../../ProfileWrapper/styles";
 
 import QuantityOfPostFollowersAndFollowing from "../components/QuantityOfPostFollowersAndFollowing";
-import FollowOrUnfollow from "../components/FollowOrUnfollow";
 import ProfileFeed from "../components/ProfileFeed";
 import USER_API from "../../../../api/user/USER_API";
 import { UserProps } from "../../../../types/user";
-import { FollowButtonAndNumbers, FullnameNumbersAndButton } from "./styles";
+
 import UsernameAndProfileImg from "../components/UsernameAndProfileImg";
 import FullnameAndButtonToEditProfile from "../components/FullnameAndButtonToEditProfile";
 
