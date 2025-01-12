@@ -13,7 +13,6 @@ import { loginFormSchema, LoginFormSchema } from "./zodSchema";
 import USER_API from "../../../api/user/USER_API";
 import { useUser } from "../../../context/UserProvider";
 import { useInterceptor } from "../../../context/utils/myInterceptor";
-import { Helmet } from "react-helmet";
 
 export default function Login() {
   const nav = useNavigate();
@@ -80,14 +79,6 @@ export default function Login() {
   return (
     <Container>
       <Content>
-        <Helmet>
-          <title>Página de Login</title>
-          <meta
-            name="description"
-            content="Pets4Ever é uma rede social para você compartilhar imagens lindas do seu pet."
-          />
-        </Helmet>
-
         <h1>Log in</h1>
 
         <Form onSubmit={handleSubmit(Login)}>
