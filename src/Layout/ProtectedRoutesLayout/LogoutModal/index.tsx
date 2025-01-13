@@ -25,9 +25,10 @@ export default function LogoutModal({
       setConfirmLogout(true);
 
       const timer = setTimeout(() => {
-        setLogoutModal(false);
-        clearTimeout(timer);
         clearUser();
+        setLogoutModal(false);
+        setConfirmLogout(false);
+        clearTimeout(timer);
         nav("");
       }, 2000);
       setLogoutModal(false);
