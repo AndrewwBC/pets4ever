@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Feed from "../../../Pages/auth/Feed";
 import Config from "../../../Pages/auth/UserConfig";
 
@@ -10,9 +10,20 @@ import InitialLoader from "../InitialLoader";
 import ProfileWrapper from "../../../Pages/auth/ProfileWrapper";
 import CreatePostModal from "../../../Pages/auth/modals/CreatePostModal";
 import PostModal from "../../../Pages/auth/modals/PostModal";
+import { useEffect } from "react";
 
 export default function ProtectedRoutes() {
   const { user } = useUser();
+
+  const { pathname } = useLocation();
+  const navigation = useNavigate();
+  console.log(pathname);
+
+  useEffect(() => {
+    if (user && pathname === "/") {
+      navigation("/feed");
+    }
+  });
 
   if (user === null && hasSession) {
     return <InitialLoader />;
