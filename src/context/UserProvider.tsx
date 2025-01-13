@@ -15,13 +15,13 @@ interface UserContextProps {
   user: UserProps | null;
   setUser: Dispatch<SetStateAction<UserProps | null>>;
   retrieveUser: (loading: boolean) => Promise<void>;
-  clearUser: () => Promise<void>;
+  clearUser: () => Promise<boolean | undefined>;
 }
 
 const UserContext = createContext<UserContextProps>({
   user: null,
   retrieveUser: async () => {},
-  clearUser: async () => {},
+  clearUser: async () => false,
   setUser: () => {},
 });
 
@@ -47,8 +47,11 @@ function UserProvider({ children }: { children: ReactNode }) {
     try {
       const response = await USER_API.logout();
       if (response) {
+        console.log("Anulando user");
         setUser(null);
+        return true;
       }
+      return false;
     } catch (error) {}
   }
 

@@ -21,9 +21,10 @@ export default function ProtectedRoutes() {
 
   useEffect(() => {
     if (user && pathname === "/") {
+      console.log("navegacao interna para feed");
       navigation("/feed");
     }
-  });
+  }, [user]);
 
   if (user === null && hasSession) {
     return <InitialLoader />;
