@@ -104,7 +104,7 @@ const PostModal = ({ getPosts }: PostModalProps) => {
           <div className="postInfo">
             <div className="nameDescriptionAndDots">
               <div className="nameAndPostOptions">
-                <Link to={modalPostData.username}>
+                <Link to={`/${modalPostData.username}`}>
                   <p>@{modalPostData.username}</p>
                 </Link>
 
