@@ -19,6 +19,7 @@ export interface UserProps {
   fullname: string;
   username: string;
   bio: string;
+  raca: string;
   userId: string;
   email: string;
   routeTest?: string;
