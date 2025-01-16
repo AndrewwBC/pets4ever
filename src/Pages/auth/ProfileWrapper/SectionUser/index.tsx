@@ -32,6 +32,13 @@ const UserProfile = ({ user }: Props) => {
                   />
                   <FullnameAndButtonToEditProfile fullname={user.fullname} />
                 </div>
+                {user.raca && (
+                  <div style={{ backgroundColor: "yellow" }} className="bio">
+                    <div className="textContainer">
+                      <p>{user.raca}</p>
+                    </div>
+                  </div>
+                )}
                 {user.bio && (
                   <div className="bio">
                     <div className="textContainer">

@@ -19,7 +19,7 @@ export function Toast({ toast, setToast }: ToastProps) {
     }, 4000);
 
     return;
-  });
+  }, []);
 
   return (
     <Modal>

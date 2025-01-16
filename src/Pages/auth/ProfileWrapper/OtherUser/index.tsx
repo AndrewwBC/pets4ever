@@ -58,6 +58,13 @@ function OtherUser({ username }: OtherUserProps) {
                   </div>
                 </FollowButtonAndNumbers>
               </FullnameNumbersAndButton>
+              {user.raca && (
+                <div style={{ backgroundColor: "yellow" }} className="bio">
+                  <div className="textContainer">
+                    <p>{user.raca}</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
