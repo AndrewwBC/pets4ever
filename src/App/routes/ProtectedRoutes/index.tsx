@@ -17,11 +17,9 @@ export default function ProtectedRoutes() {
 
   const { pathname } = useLocation();
   const navigation = useNavigate();
-  console.log(pathname);
 
   useEffect(() => {
     if (user && pathname === "/") {
-      console.log("navegacao interna para feed");
       navigation("/feed");
     }
   }, [user]);

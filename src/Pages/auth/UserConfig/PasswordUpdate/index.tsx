@@ -141,7 +141,6 @@ export default function PasswordUpdate({ hasSession }: PasswordUpdateProps) {
     };
 
     try {
-      console.log(responseErrors);
       setResponseErrors(
         responseErrors.filter((error) => error.fieldName !== "actualPassword")
       );
@@ -149,7 +148,6 @@ export default function PasswordUpdate({ hasSession }: PasswordUpdateProps) {
         ? await USER_API.patchPassword(user?.username!, data)
         : await USER_API.patchPasswordWithoutSession(forgotPasswordData);
 
-      console.log(response);
       if (response) {
         setFocusedPassword(false);
         setData({

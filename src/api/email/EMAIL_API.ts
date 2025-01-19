@@ -36,11 +36,8 @@ class EMAIL_API {
         `/email/send/forgotPassword/${email}`
       );
       const response = await request.data;
-      console.log(response);
       return response;
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }
 }
 

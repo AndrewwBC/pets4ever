@@ -36,7 +36,6 @@ function PostsProvider({ children }: any) {
       setPosts(response);
       return response;
     } catch (err) {
-      console.log(err);
     } finally {
       setIsLoading(false);
     }
