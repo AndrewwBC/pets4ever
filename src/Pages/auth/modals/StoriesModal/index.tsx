@@ -26,8 +26,6 @@ const StoriesModal = ({ modal, setModal }: StoriesModal) => {
     }
   });
 
-  console.log(modal);
-
   if (modal.modalState)
     return createPortal(
       <Modal id="storieModal">

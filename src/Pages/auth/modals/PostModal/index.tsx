@@ -58,8 +58,6 @@ const PostModal = ({ getPosts }: PostModalProps) => {
 
     try {
       const post = await POST_API.show(data);
-      console.log(post);
-
       if (post) setModalPostData(post);
     } catch (err) {}
   }

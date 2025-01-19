@@ -20,7 +20,6 @@ function PostOptionsModal({
       const response = await POST_API.delete(modal.post!.postId);
 
       if (response) {
-        console.log("deletou");
         await getPosts!();
         setModal({
           state: false,

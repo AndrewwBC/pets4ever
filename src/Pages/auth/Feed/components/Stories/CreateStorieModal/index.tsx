@@ -54,7 +54,6 @@ function CreateStorieModal({
       });
 
       const previsao = await requestPy.data.previsao;
-      console.log(previsao, requestPy);
       if (previsao === "Animal") {
         await handleSubmit(e);
       }
@@ -97,14 +96,12 @@ function CreateStorieModal({
             iaError: false,
           });
         }
-        console.log(uploadResponse);
       } catch (err) {
         setCreateStatus({
           isLoading: true,
           success: false,
           iaError: false,
         });
-        console.log(err);
       } finally {
         setCreateStatus((prevState) => ({
           ...prevState,

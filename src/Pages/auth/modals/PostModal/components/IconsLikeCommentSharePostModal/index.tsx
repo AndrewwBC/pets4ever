@@ -31,7 +31,6 @@ function IconsLikeCommentSharePostModal({
       try {
         setLikeLoading(true);
         const newPost = await POST_API.patchPostLike(data);
-        console.log(newPost);
 
         if (newPost) {
           setUserLiked(newPost.userLikedThisPost);

@@ -42,7 +42,6 @@ export async function uploadFile(
     });
 
     const previsao = await requestPy.data.previsao;
-    console.log(previsao, requestPy);
     if (previsao === "Animal") {
       setIsLoading({
         step: "isAnimal",
@@ -63,7 +62,6 @@ export async function uploadFile(
   } catch (err) {
   } finally {
     if (isLoading.step === "isNotAnimal") {
-      console.log("Cancelando post");
       return;
     }
   }
@@ -75,8 +73,6 @@ async function post(setIsLoading: any, formData: any) {
       step: "Posting",
       isLoading: true,
     });
-
-    console.log("Postando");
 
     const r = await API.post(`/post`, formData);
 

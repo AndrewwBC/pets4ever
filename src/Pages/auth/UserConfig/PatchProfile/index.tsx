@@ -45,8 +45,6 @@ function PatchProfile() {
       patchResponseError.filter((error) => !error.fieldName)
     );
 
-    console.log(user, data);
-
     if (
       data.bio === user?.bio &&
       data.fullname === user.fullname &&
@@ -73,7 +71,6 @@ function PatchProfile() {
     } catch (err: any) {
       setPatchResponseError(err.data);
     } finally {
-      console.log(user);
     }
   }
 
@@ -107,7 +104,6 @@ function PatchProfile() {
   ];
 
   function handleOptionChange(value: "fullname" | "username" | "bio") {
-    console.log(value);
     setOptions(
       (prevState: { fullname: boolean; username: boolean; bio: boolean }) => ({
         ...prevState,

@@ -47,7 +47,6 @@ function UserProvider({ children }: { children: ReactNode }) {
     try {
       const response = await USER_API.logout();
       if (response) {
-        console.log("Anulando user");
         setUser(null);
         return true;
       }

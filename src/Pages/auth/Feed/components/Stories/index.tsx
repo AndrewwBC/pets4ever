@@ -34,9 +34,7 @@ const Stories = () => {
     try {
       const response = await STORIE_API.index();
       if (response) setStories(response);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }
 
   const responsive = {
