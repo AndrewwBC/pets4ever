@@ -61,7 +61,7 @@ function ProfileFeed({ posts }: ProfileFeedProps) {
                   ))}
                 </EachRow>
               ))
-            : user?.username === location.pathname && (
+            : user?.username === pathname && (
                 <NoPosts
                   small="Você ainda não fez nenhuma postagem."
                   paragraph="Comece agora!"
