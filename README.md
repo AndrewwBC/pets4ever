@@ -1,11 +1,18 @@
-# Pets4Ever
+# Pets4Ever - A brief documentation
 
 Link: https://pets4ever.site/
 
 In this project I've used React with TypeScript, React Router Dom, Axios and Styled-Components. Other minors libs were used too, 
-like react-icons and carousel. 
+like react-icons and carousel. Was deployed on Vercel.
 
-## Using TypeScrit
+## Using Axios Interceptors
+
+Some exceptions can occur across multiple requests. So, how can we catch these exceptions whenever they happen? The answer is: using interceptors.
+
+![code4](https://github.com/user-attachments/assets/5d641464-1cb5-4fcc-97d1-82de4896c44f)
+
+
+## Using Styled-Components with TypeScript
 
 In order to be able to use custom props in some Components, I had to build some custom componenets like this:
 
@@ -13,11 +20,12 @@ In order to be able to use custom props in some Components, I had to build some 
 
 This is a typical aproach in Styled-Components, given that Styled-Components brings the logic interface directly to CSS.
 
+
 ## Using Classes
 
 ![code1](https://github.com/user-attachments/assets/faafaf2f-9d73-442c-866a-c6999429ec2b)
 
-This class was build to centralize all endpoint of each feature in one class, like user, post, storie, etc. 
+This class was build to centralize all endpoints of each feature in one class, like user, post, storie, etc. 
 
 ## Using React Router
 
@@ -29,9 +37,9 @@ So, all theses modals will be displayed in this Outlet, as a children of Feed.
 
 ![code3](https://github.com/user-attachments/assets/8cc9ebdf-5470-4f9b-9432-2ef3394191a3)
 
-So this is the result:
+This is the result:
 
-https://github.com/user-attachments/assets/b5e26a4c-6897-4c64-ac36-24c8bc6662a9
+https://github.com/user-attachments/assets/5730153e-8fb6-43a4-895a-aec2887dc46b
 
 
 
