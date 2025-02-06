@@ -29,7 +29,9 @@ So, all theses modals will be displayed in this Outlet, as a children of Feed.
 
 ![code3](https://github.com/user-attachments/assets/8cc9ebdf-5470-4f9b-9432-2ef3394191a3)
 
+So this is the result:
 
+https://github.com/user-attachments/assets/b5e26a4c-6897-4c64-ac36-24c8bc6662a9
 
 
 
