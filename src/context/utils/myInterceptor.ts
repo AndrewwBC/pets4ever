@@ -8,6 +8,14 @@ export function useInterceptor() {
     API.interceptors.request.eject(myInterceptor);
   }
 
+  API.interceptors.request.use((config) => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  });
+
   myInterceptor = API.interceptors.response.use(
     (response) => {
       return response;
