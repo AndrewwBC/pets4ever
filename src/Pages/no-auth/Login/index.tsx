@@ -40,6 +40,8 @@ export default function Login() {
       const response = await USER_API.signIn(data);
 
       if (response) {
+        localStorage.setItem("jwt", response.jwt);
+
         useInterceptor();
         retrieveUser(true);
         nav(`/feed`);
