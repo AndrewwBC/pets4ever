@@ -11,7 +11,6 @@ export function useInterceptor() {
   API.interceptors.request.use((config) => {
     const token = localStorage.getItem("jwt");
     if (token) {
-      alert(token);
       config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;

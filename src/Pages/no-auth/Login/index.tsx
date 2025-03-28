@@ -41,7 +41,6 @@ export default function Login() {
 
       if (response) {
         localStorage.setItem("jwt", response.jwt);
-
         useInterceptor();
         retrieveUser(true);
         nav(`/feed`);

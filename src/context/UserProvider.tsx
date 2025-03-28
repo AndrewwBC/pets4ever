@@ -33,7 +33,6 @@ function UserProvider({ children }: { children: ReactNode }) {
     try {
       loading && setIsLoading(true);
       const data = await USER_API.user();
-      console.log(data);
       setUser(data);
     } catch (error) {
     } finally {
